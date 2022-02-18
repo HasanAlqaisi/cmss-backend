@@ -1,0 +1,461 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "CMSS API",
+    "version": "1.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/api/users/signup": {
+      "parameters": [],
+      "post": {
+        "summary": "postapi-users-signup",
+        "operationId": "postapi-users-signup",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "id": "79dbe247-88a4-400f-a896-9f259c69d33f",
+                      "email": "user@example.com",
+                      "username": "string"
+                    }
+                  },
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "email": {
+                      "type": "string",
+                      "format": "email"
+                    },
+                    "username": {
+                      "type": "string",
+                      "pattern": "/^(\\w|\\d){5,}$/i",
+                      "description": "username sholud be at least 5 characters and from this set (a-z,0-9,_)\n"
+                    }
+                  },
+                  "required": ["id", "email", "username"]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "object",
+                      "properties": {
+                        "email": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": ["email"]
+                    }
+                  },
+                  "required": ["errors"],
+                  "x-examples": {
+                    "example-1": {
+                      "errors": {
+                        "email": "Email field must be valid"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "details error": {
+                    "value": {
+                      "details": "string"
+                    }
+                  },
+                  "fields error": {
+                    "value": {
+                      "errors": {
+                        "email": "Email field must be valid"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "username": "Hasan",
+                    "email": "hasan.alqaisi2000@gmail.com",
+                    "password": "H4404004000",
+                    "role": "admin"
+                  }
+                },
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "pattern": "/^(\\w|\\d){5,}$/i",
+                    "minLength": 5,
+                    "description": "username \nsholud be at least 5 characters and from this set (a-z,0-9,_)"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password",
+                    "minLength": 8
+                  },
+                  "role": {
+                    "type": "string",
+                    "enum": [
+                      "admin",
+                      "timetable_manager",
+                      "registration_manager",
+                      "attendance_manager",
+                      "inventory_manager"
+                    ]
+                  }
+                },
+                "required": ["username", "email", "password", "role"]
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "username": "string",
+                    "email": "user@example.com",
+                    "password": "pa$$word",
+                    "role": "admin"
+                  }
+                }
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    },
+    "/api/users/login": {
+      "post": {
+        "summary": "",
+        "operationId": "post-api-users-login",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZjFmNjlhLTI3MmUtNDZhNS1iNDE5LWYwNGRlMGZkZjQ5YyIsImlhdCI6MTY0NTE5MTIzOX0.fYjQRKhuMcbGqJbKPqgtwQpDKtPmp4wCVcndxAWR8bE",
+                      "user": {
+                        "id": "62f1f69a-272e-46a5-b419-f04de0fdf49c",
+                        "email": "hasan.alqaisi2000@gmail.com",
+                        "username": "Hasan"
+                      }
+                    }
+                  },
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    },
+                    "user": {
+                      "type": "object",
+                      "required": ["id", "email", "username"],
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "email": {
+                          "type": "string",
+                          "format": "email"
+                        },
+                        "username": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "required": ["token", "user"]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "token": "string",
+                      "user": {
+                        "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                        "email": "user@example.com",
+                        "username": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "details": "Incorrect email and/or password"
+                    }
+                  },
+                  "properties": {
+                    "details": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["details"]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "details": "Incorrect email and/or password"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "email": "hasan.alqaisi2000@gmail.com",
+                    "password": "H4404004000"
+                  }
+                },
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password"
+                  }
+                },
+                "required": ["email", "password"]
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "email": "user@example.com",
+                    "password": "pa$$word"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/forget-password": {
+      "post": {
+        "summary": "",
+        "operationId": "post-api-users-forget-password",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "details": "A message with link sent to the email, check it to reset your password"
+                    }
+                  },
+                  "properties": {
+                    "details": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["details"]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "details": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "This endpoint will send an email to the user with link to reset his password if he provided an existed email",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "email": "user@example.com"
+                  }
+                },
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  }
+                },
+                "required": ["email"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/reset-password/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "uuid"
+        }
+      ],
+      "post": {
+        "summary": "",
+        "operationId": "post-api-users-reset-password-id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "id": "62f1f69a-272e-46a5-b419-f04de0fdf49c",
+                      "email": "hasan.alqaisi2000@gmail.com",
+                      "username": "Hasan"
+                    }
+                  },
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "username": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["id", "email", "username"]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "details": "Provided credintials are not valid"
+                    }
+                  },
+                  "properties": {
+                    "details": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["details"]
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "new_password": "H4404004000",
+                    "confirm_password": "H4404004000"
+                  }
+                },
+                "properties": {
+                  "new_password": {
+                    "type": "string",
+                    "minLength": 8,
+                    "format": "password"
+                  },
+                  "confirm_password": {
+                    "type": "string",
+                    "minLength": 8,
+                    "format": "password"
+                  }
+                },
+                "required": ["new_password", "confirm_password"]
+              }
+            }
+          },
+          "description": "new_password & confirm_password field should match"
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
