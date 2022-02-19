@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import bycrypt from "bcrypt";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import * as validator from "./validator";
+import * as generalValidator from "../../utils/general-validator";
 // import { ForbiddenError, subject } from "@casl/ability";
 import { BadRequestError, BadTokenError } from "../../utils/api/api-error";
 import { CreatedResponse, OkResponse } from "../../utils/api/api-response";
@@ -10,8 +11,9 @@ import UserService from "./service";
 import getIdFromPayload from "../../utils/get-id-from-payload";
 import sendEmail from "../../utils/send-email";
 import { unAuthorizedMessage } from "../../utils/constants";
+import { reshapeUser } from "../../utils/reshape-user";
 
-const createToken = (id: string): string =>
+const createToken = (id: number): string =>
   jwt.sign({ id }, process.env.TOKEN_SECRET as string, { expiresIn: "1d" });
 
 export const signupPost = async (req: Request, res: Response) => {
@@ -19,12 +21,13 @@ export const signupPost = async (req: Request, res: Response) => {
 
   const user = await UserService.createUser(
     data.username,
+    data.fullname,
     data.role,
     data.email,
     data.password
   );
 
-  return new CreatedResponse(UserService.reshapeUser(user)).send(res);
+  return new CreatedResponse(reshapeUser(user)).send(res);
 };
 
 export const loginPost = async (req: Request, res: Response) => {
@@ -41,15 +44,13 @@ export const loginPost = async (req: Request, res: Response) => {
 
   const token = createToken(user.id);
 
-  return new OkResponse({ token, user: UserService.reshapeUser(user) }).send(
-    res
-  );
+  return new OkResponse({ token, user: reshapeUser(user) }).send(res);
 };
 
 export const changePassPut = async (req: Request, res: Response) => {
   const { new_password: newPassword } = await validator.updatePasswordBody(req);
 
-  const { id } = await validator.id(req);
+  const { id } = await generalValidator.id(req);
 
   const { authorization } = req.headers;
 
@@ -63,7 +64,7 @@ export const changePassPut = async (req: Request, res: Response) => {
   //   const ability = defineAbilityFor(userRequester!);
 
   // Get the user targeted to change his password
-  const userTarget = await UserService.findById(id);
+  const userTarget = await UserService.findById(Number(id));
 
   // check if the user requester can change password of the user target
   //   ForbiddenError.from(ability).throwUnlessCan(
@@ -72,9 +73,9 @@ export const changePassPut = async (req: Request, res: Response) => {
   //   );
 
   // Change the user password
-  const updatedUser = await UserService.changePassword(id, newPassword);
+  const updatedUser = await UserService.changePassword(Number(id), newPassword);
 
-  return new OkResponse(UserService.reshapeUser(updatedUser)).send(res);
+  return new OkResponse(reshapeUser(updatedUser)).send(res);
 };
 
 export const forgetPasswordPost = async (req: Request, res: Response) => {
@@ -133,7 +134,7 @@ export const resetPasswordPost = async (req: Request, res: Response) => {
   if (user) {
     const updatedUser = await UserService.changePassword(id, newPassword);
 
-    return new OkResponse(UserService.reshapeUser(updatedUser)).send(res);
+    return new OkResponse(reshapeUser(updatedUser)).send(res);
   }
 
   throw new BadRequestError("User not found");

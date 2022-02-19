@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
 
 export default async (
-  id: string,
+  id: number,
   email: string,
   token: string,
   url: string,
