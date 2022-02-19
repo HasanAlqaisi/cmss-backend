@@ -4,10 +4,9 @@ import prisma from "../../prisma";
 import { BadRequestError } from "../../utils/api/api-error";
 
 export default class UserService {
-  static reshapeUser = (user: User) => _.omit(user, ["password", "role_id"]);
-
   static createUser = async (
-    name: string,
+    username: string,
+    fullName: string,
     roleName: string,
     email: string,
     hashedPass: string
@@ -18,7 +17,8 @@ export default class UserService {
 
     return prisma.user.create({
       data: {
-        username: name,
+        username,
+        fullName,
         email,
         password: hashedPass,
         role: { connect: { id: role.id } },
@@ -26,7 +26,7 @@ export default class UserService {
     });
   };
 
-  static changePassword = async (id: string, newHashedPaswword: string) => {
+  static changePassword = async (id: number, newHashedPaswword: string) => {
     const user = await prisma.user.update({
       where: { id },
       data: {
@@ -38,14 +38,14 @@ export default class UserService {
   };
 
   static findByEmail = async (email: string): Promise<User | null> => {
-    const user = prisma.user.findUnique({
+    const user = prisma.user.findUnique({ // Change to findUnique
       where: { email },
     });
 
     return user;
   };
 
-  static findById = async (id: string): Promise<User | null> => {
+  static findById = async (id: number): Promise<User | null> => {
     const user = prisma.user.findUnique({
       where: { id },
     });
