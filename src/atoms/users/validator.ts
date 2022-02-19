@@ -19,6 +19,7 @@ export const register = async (req: Request) => {
         /^(\w|\d){5,}$/i,
         "sholud be at least 5 characters and from this set (a-z,0-9,_) "
       ),
+    fullname: z.string(),
     email: z.string().email({ message: "Email field must be valid" }),
     password: z
       .string()
@@ -58,12 +59,6 @@ export const resetPass = async (req: Request) => {
 
   return schema.parseAsync(req.body);
 };
-export const id = async (req: Request) => {
-  const schema = z.object({
-    id: z.string(),
-  });
-  return schema.parseAsync(req.params);
-};
 
 export const email = async (req: Request) => {
   const schema = z.object({
@@ -71,4 +66,3 @@ export const email = async (req: Request) => {
   });
   return schema.parseAsync(req.body);
 };
-

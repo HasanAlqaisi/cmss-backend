@@ -30,6 +30,16 @@ export default (
       res
     );
 
+  if (err.code === "P2003")
+    return ApiError.handle(
+      new BadRequestError(`one of provided ids does not exist`),
+      res
+    );
+
+  if (err.code === "P2025") {
+    return ApiError.handle(new BadRequestError(err.meta.cause), res);
+  }
+
   if (err instanceof ZodError) {
     const formattedError = {
       errors: {},
