@@ -8,12 +8,14 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(uuid())
-  email    String @unique
-  username String @unique
+  id       Int       @id @default(autoincrement())
+  email    String    @unique
+  username String    @unique
+  fullName String
   password String
-  role_id  String
-  role     Role   @relation(fields: [role_id], references: [id])
+  roleId   String
+  role     Role      @relation(fields: [roleId], references: [id])
+  lectures Lecture[]
 }
 
 model Role {
@@ -27,6 +29,106 @@ model Permission {
   id      String @id @default(uuid())
   action  String
   subject String
-  role_id String
-  role    Role   @relation(fields: [role_id], references: [id])
+  roleId  String
+  role    Role   @relation(fields: [roleId], references: [id])
+}
+
+model Room {
+  id     Int     @id @default(autoincrement())
+  number Int     @unique
+  name   String?
+  halls  Hall[]
+}
+
+model Subject {
+  id           Int     @id @default(autoincrement())
+  classId      Int
+  Class        Class   @relation(fields: [classId], references: [id])
+  name         String
+  isElectronic Boolean
+  isLab        Boolean
+  halls        Hall[]
+}
+
+model Branch {
+  id          Int     @id @default(autoincrement())
+  name        String
+  maxCapacity Int?
+  Classes     Class[]
+}
+
+model Program {
+  id      Int     @id @default(autoincrement())
+  name    String
+  Classes Class[]
+}
+
+model Stage {
+  id            Int     @id @default(autoincrement())
+  number        Int
+  forbiddenDays Int[]
+  Classes       Class[]
+}
+
+model Class {
+  id        Int       @id @default(autoincrement())
+  branchId  Int
+  programId Int
+  stageId   Int
+  branch    Branch    @relation(fields: [branchId], references: [id])
+  program   Program   @relation(fields: [programId], references: [id])
+  stage     Stage     @relation(fields: [stageId], references: [id])
+  subjects  Subject[]
+}
+
+model Hall {
+  id        Int       @unique @default(autoincrement())
+  roomId    Int
+  subjectId Int
+  room      Room      @relation(fields: [roomId], references: [id])
+  subject   Subject   @relation(fields: [subjectId], references: [id])
+  lectures  Lecture[]
+
+  @@id([roomId, subjectId])
+}
+
+model Lecture {
+  id        Int        @unique @default(autoincrement())
+  hallId    Int
+  teacherId Int
+  teacher   User       @relation(fields: [teacherId], references: [id])
+  hall      Hall       @relation(fields: [hallId], references: [id])
+  schedules Schedule[]
+
+  @@id([hallId, teacherId])
+}
+
+model Hour {
+  id       Int       @id @default(autoincrement())
+  start    String
+  dayHours DayHour[]
+}
+
+model Day {
+  id       Int       @id @default(autoincrement())
+  number   Int
+  dayHours DayHour[]
+}
+
+model DayHour {
+  id     Int  @id @default(autoincrement())
+  hourId Int
+  hour   Hour @relation(fields: [hourId], references: [id])
+  dayId  Int
+  day    Day  @relation(fields: [dayId], references: [id])
+
+  schedules Schedule[]
+}
+
+model Schedule {
+  id        Int     @id @default(autoincrement())
+  dayHourId Int
+  dayHour   DayHour @relation(fields: [dayHourId], references: [id])
+  lectureId Int
+  lecture   Lecture @relation(fields: [lectureId], references: [id])
 }
