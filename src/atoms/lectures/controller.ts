@@ -8,7 +8,6 @@ import LectureService from "./service";
 
 export const getLectures = async (req: Request, res: Response) => {
   const lectures = await LectureService.getLectures();
-
   return new OkResponse(lectures).send(res);
 };
 

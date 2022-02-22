@@ -1,4 +1,4 @@
-import { Lecture, User } from "@prisma/client";
+import { Class, Day, Hour, Lecture, Room, User } from "@prisma/client";
 import _ from "lodash";
 import prisma from "../../prisma";
 import { reshapeUser } from "../../utils/reshape-user";
@@ -10,7 +10,16 @@ const includeTeacherAndHall = {
       room: { select: { name: true, number: true } },
       subject: {
         select: {
-          Class: true,
+          Class: {
+            select: {
+              id: true,
+              branchId: true,
+              stageId: true,
+              programId: true,
+              program: { select: { name: true } },
+              stage: true,
+            },
+          },
           name: true,
           isElectronic: true,
           isLab: true,
@@ -45,11 +54,10 @@ export default class LectureService {
     return lecture;
   };
 
-  static getLectures = async (): Promise<Lecture[]> => {
+  static getLectures = async () => {
     const lectures = await prisma.lecture.findMany({
       include: includeTeacherAndHall,
     });
-
     return lectures;
   };
 
@@ -81,5 +89,32 @@ export default class LectureService {
     });
 
     return lecture;
+  };
+
+  static getDays = async (): Promise<Day[]> => {
+    const days = await prisma.day.findMany();
+    return days;
+  };
+
+  static gethours = async (): Promise<Hour[]> => {
+    const hours = await prisma.hour.findMany();
+    return hours;
+  };
+
+  static getClasses = async (): Promise<Class[]> => {
+    const classes = await prisma.class.findMany();
+    return classes;
+  };
+
+  static getRooms = async (): Promise<Room[]> => {
+    const rooms = await prisma.room.findMany();
+    return rooms;
+  };
+
+  static getTeachers = async (): Promise<User[]> => {
+    const teachers = await prisma.user.findMany({
+      where: { role: { name: "attendance_manager" } },
+    });
+    return teachers;
   };
 }

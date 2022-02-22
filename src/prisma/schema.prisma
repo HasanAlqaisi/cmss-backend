@@ -8,14 +8,15 @@ datasource db {
 }
 
 model User {
-  id       Int       @id @default(autoincrement())
-  email    String    @unique
-  username String    @unique
+  id       Int        @id @default(autoincrement())
+  email    String     @unique
+  username String     @unique
   fullName String
   password String
   roleId   String
-  role     Role      @relation(fields: [roleId], references: [id])
+  role     Role       @relation(fields: [roleId], references: [id])
   lectures Lecture[]
+  Schedule Schedule[]
 }
 
 model Role {
@@ -34,10 +35,11 @@ model Permission {
 }
 
 model Room {
-  id     Int     @id @default(autoincrement())
-  number Int     @unique
-  name   String?
-  halls  Hall[]
+  id       Int        @id @default(autoincrement())
+  number   Int        @unique
+  name     String?
+  halls    Hall[]
+  Schedule Schedule[]
 }
 
 model Subject {
@@ -71,14 +73,15 @@ model Stage {
 }
 
 model Class {
-  id        Int       @id @default(autoincrement())
+  id        Int        @id @default(autoincrement())
   branchId  Int
   programId Int
   stageId   Int
-  branch    Branch    @relation(fields: [branchId], references: [id])
-  program   Program   @relation(fields: [programId], references: [id])
-  stage     Stage     @relation(fields: [stageId], references: [id])
+  branch    Branch     @relation(fields: [branchId], references: [id])
+  program   Program    @relation(fields: [programId], references: [id])
+  stage     Stage      @relation(fields: [stageId], references: [id])
   subjects  Subject[]
+  Schedule  Schedule[]
 }
 
 model Hall {
@@ -93,42 +96,57 @@ model Hall {
 }
 
 model Lecture {
-  id        Int        @unique @default(autoincrement())
+  id        Int  @unique @default(autoincrement())
   hallId    Int
   teacherId Int
-  teacher   User       @relation(fields: [teacherId], references: [id])
-  hall      Hall       @relation(fields: [hallId], references: [id])
-  schedules Schedule[]
+  teacher   User @relation(fields: [teacherId], references: [id])
+  hall      Hall @relation(fields: [hallId], references: [id])
+  // schedules Schedule[]
 
   @@id([hallId, teacherId])
+  Schedule Schedule[]
 }
 
 model Hour {
-  id       Int       @id @default(autoincrement())
+  id       Int        @id @default(autoincrement())
   start    String
-  dayHours DayHour[]
+  // dayHours DayHour[]
+  Schedule Schedule[]
 }
 
 model Day {
-  id       Int       @id @default(autoincrement())
+  id       Int        @id @default(autoincrement())
   number   Int
-  dayHours DayHour[]
+  // dayHours DayHour[]
+  Schedule Schedule[]
 }
 
-model DayHour {
-  id     Int  @id @default(autoincrement())
-  hourId Int
-  hour   Hour @relation(fields: [hourId], references: [id])
-  dayId  Int
-  day    Day  @relation(fields: [dayId], references: [id])
+// model DayHour {
+//   id     Int  @id @default(autoincrement())
+//   hourId Int
+//   hour   Hour @relation(fields: [hourId], references: [id])
+//   dayId  Int
+//   day    Day  @relation(fields: [dayId], references: [id])
 
-  schedules Schedule[]
-}
+//   schedules Schedule[]
+// }
 
 model Schedule {
   id        Int     @id @default(autoincrement())
-  dayHourId Int
-  dayHour   DayHour @relation(fields: [dayHourId], references: [id])
+  // dayHourId Int
+  // dayHour   DayHour @relation(fields: [dayHourId], references: [id])
+  // lectureId Int
+  // lecture   Lecture @relation(fields: [lectureId], references: [id])
+  dayId     Int
+  day       Day     @relation(fields: [dayId], references: [id])
+  hourId    Int
+  hour      Hour    @relation(fields: [hourId], references: [id])
+  roomId    Int
+  room      Room    @relation(fields: [roomId], references: [id])
+  teacherId Int
+  teacher   User    @relation(fields: [teacherId], references: [id])
   lectureId Int
   lecture   Lecture @relation(fields: [lectureId], references: [id])
+  classId   Int
+  class     Class   @relation(fields: [classId], references: [id])
 }
