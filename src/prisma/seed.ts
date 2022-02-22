@@ -479,7 +479,7 @@ async function createDaysAndHours() {
 const main = async () => {
   await createRoles();
   await createClasses();
-  await createLectures(); // TEMP: for testing only - will be deleted later
+  // await createLectures(); // TEMP: for testing only - will be deleted later
   await createDaysAndHours();
 };
 
