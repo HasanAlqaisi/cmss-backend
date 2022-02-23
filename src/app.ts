@@ -14,8 +14,8 @@ const app: Application = express();
 
 app.use(express.json());
 
-app.listen(3000, () => {
-  logger.debug("Server running at port 3000");
+app.listen(process.env.PORT, () => {
+  logger.debug(`Server running at port ${process.env.PORT}`);
 });
 
 // Log http requests info
