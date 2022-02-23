@@ -1,3 +1,6 @@
+-- CreateEnum
+CREATE TYPE "Gender" AS ENUM ('MALE', 'FEMALE');
+
 -- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
@@ -5,14 +8,14 @@ CREATE TABLE "User" (
     "username" TEXT NOT NULL,
     "fullName" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "roleId" TEXT NOT NULL,
+    "roleId" INTEGER NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Role" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
 
     CONSTRAINT "Role_pkey" PRIMARY KEY ("id")
@@ -20,10 +23,10 @@ CREATE TABLE "Role" (
 
 -- CreateTable
 CREATE TABLE "Permission" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "action" TEXT NOT NULL,
     "subject" TEXT NOT NULL,
-    "roleId" TEXT NOT NULL,
+    "roleId" INTEGER NOT NULL,
 
     CONSTRAINT "Permission_pkey" PRIMARY KEY ("id")
 );
@@ -131,6 +134,93 @@ CREATE TABLE "Schedule" (
     CONSTRAINT "Schedule_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "Channel" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+
+    CONSTRAINT "Channel_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Specialty" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "capacity" INTEGER NOT NULL,
+
+    CONSTRAINT "Specialty_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Material" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "customPercentage" INTEGER NOT NULL DEFAULT 0,
+    "specialtyId" INTEGER NOT NULL,
+
+    CONSTRAINT "Material_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Year" (
+    "id" SERIAL NOT NULL,
+    "range" TEXT NOT NULL,
+
+    CONSTRAINT "Year_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Applicant" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "age" INTEGER,
+    "schoolName" TEXT,
+    "channelId" INTEGER NOT NULL,
+    "daor" INTEGER NOT NULL,
+    "note" TEXT,
+    "gender" "Gender",
+    "email" TEXT,
+    "city" TEXT,
+    "moderia" TEXT,
+    "examNumber" TEXT,
+    "highSchoolYearId" INTEGER NOT NULL,
+    "nationalId" TEXT,
+    "religion" TEXT,
+    "specialtyId" INTEGER NOT NULL,
+
+    CONSTRAINT "Applicant_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Student" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "age" INTEGER NOT NULL,
+    "gender" "Gender" NOT NULL,
+    "email" TEXT NOT NULL,
+    "classId" INTEGER NOT NULL,
+    "dateAcceptedId" INTEGER NOT NULL,
+    "chnnaelId" INTEGER NOT NULL,
+
+    CONSTRAINT "Student_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Degree" (
+    "id" SERIAL NOT NULL,
+    "materialId" INTEGER NOT NULL,
+    "applicantId" INTEGER NOT NULL,
+    "score" INTEGER NOT NULL,
+
+    CONSTRAINT "Degree_pkey" PRIMARY KEY ("materialId","applicantId")
+);
+
+-- CreateTable
+CREATE TABLE "_ApplicantToBranch" (
+    "A" INTEGER NOT NULL,
+    "B" INTEGER NOT NULL
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
@@ -141,10 +231,46 @@ CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
 CREATE UNIQUE INDEX "Room_number_key" ON "Room"("number");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Branch_name_key" ON "Branch"("name");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Hall_id_key" ON "Hall"("id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Lecture_id_key" ON "Lecture"("id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Channel_name_key" ON "Channel"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Specialty_name_key" ON "Specialty"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Material_name_key" ON "Material"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Year_range_key" ON "Year"("range");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Applicant_email_key" ON "Applicant"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Applicant_examNumber_key" ON "Applicant"("examNumber");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Applicant_nationalId_key" ON "Applicant"("nationalId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Student_email_key" ON "Student"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Degree_id_key" ON "Degree"("id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "_ApplicantToBranch_AB_unique" ON "_ApplicantToBranch"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_ApplicantToBranch_B_index" ON "_ApplicantToBranch"("B");
 
 -- AddForeignKey
 ALTER TABLE "User" ADD CONSTRAINT "User_roleId_fkey" FOREIGN KEY ("roleId") REFERENCES "Role"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -193,3 +319,36 @@ ALTER TABLE "Schedule" ADD CONSTRAINT "Schedule_hourId_fkey" FOREIGN KEY ("hourI
 
 -- AddForeignKey
 ALTER TABLE "Schedule" ADD CONSTRAINT "Schedule_dayId_fkey" FOREIGN KEY ("dayId") REFERENCES "Day"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Material" ADD CONSTRAINT "Material_specialtyId_fkey" FOREIGN KEY ("specialtyId") REFERENCES "Specialty"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Applicant" ADD CONSTRAINT "Applicant_channelId_fkey" FOREIGN KEY ("channelId") REFERENCES "Channel"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Applicant" ADD CONSTRAINT "Applicant_specialtyId_fkey" FOREIGN KEY ("specialtyId") REFERENCES "Specialty"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Applicant" ADD CONSTRAINT "Applicant_highSchoolYearId_fkey" FOREIGN KEY ("highSchoolYearId") REFERENCES "Year"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Student" ADD CONSTRAINT "Student_classId_fkey" FOREIGN KEY ("classId") REFERENCES "Class"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Student" ADD CONSTRAINT "Student_chnnaelId_fkey" FOREIGN KEY ("chnnaelId") REFERENCES "Channel"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Student" ADD CONSTRAINT "Student_dateAcceptedId_fkey" FOREIGN KEY ("dateAcceptedId") REFERENCES "Year"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Degree" ADD CONSTRAINT "Degree_materialId_fkey" FOREIGN KEY ("materialId") REFERENCES "Material"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Degree" ADD CONSTRAINT "Degree_applicantId_fkey" FOREIGN KEY ("applicantId") REFERENCES "Applicant"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_ApplicantToBranch" ADD FOREIGN KEY ("A") REFERENCES "Applicant"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_ApplicantToBranch" ADD FOREIGN KEY ("B") REFERENCES "Branch"("id") ON DELETE CASCADE ON UPDATE CASCADE;

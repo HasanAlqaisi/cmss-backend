@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -8,38 +9,38 @@ datasource db {
 }
 
 model User {
-  id       Int        @id @default(autoincrement())
-  email    String     @unique
-  username String     @unique
-  fullName String
-  password String
-  roleId   String
-  role     Role       @relation(fields: [roleId], references: [id])
-  lectures Lecture[]
-  Schedule Schedule[]
+  id        Int        @id @default(autoincrement())
+  email     String     @unique
+  username  String     @unique
+  fullName  String
+  password  String
+  roleId    Int
+  role      Role       @relation(fields: [roleId], references: [id])
+  lectures  Lecture[]
+  schedules Schedule[]
 }
 
 model Role {
-  id          String       @id @default(uuid())
+  id          Int          @id @default(autoincrement())
   name        String
   permissions Permission[]
   users       User[]
 }
 
 model Permission {
-  id      String @id @default(uuid())
+  id      Int    @id @default(autoincrement())
   action  String
   subject String
-  roleId  String
+  roleId  Int
   role    Role   @relation(fields: [roleId], references: [id])
 }
 
 model Room {
-  id       Int        @id @default(autoincrement())
-  number   Int        @unique
-  name     String?
-  halls    Hall[]
-  Schedule Schedule[]
+  id        Int        @id @default(autoincrement())
+  number    Int        @unique
+  name      String?
+  halls     Hall[]
+  schedules Schedule[]
 }
 
 model Subject {
@@ -53,10 +54,11 @@ model Subject {
 }
 
 model Branch {
-  id          Int     @id @default(autoincrement())
-  name        String
+  id          Int         @id @default(autoincrement())
+  name        String      @unique
   maxCapacity Int?
   Classes     Class[]
+  applicants  Applicant[]
 }
 
 model Program {
@@ -81,7 +83,8 @@ model Class {
   program   Program    @relation(fields: [programId], references: [id])
   stage     Stage      @relation(fields: [stageId], references: [id])
   subjects  Subject[]
-  Schedule  Schedule[]
+  schedules Schedule[]
+  students  Student[]
 }
 
 model Hall {
@@ -103,22 +106,22 @@ model Lecture {
   hall      Hall @relation(fields: [hallId], references: [id])
   // schedules Schedule[]
 
+  schedules Schedule[]
   @@id([hallId, teacherId])
-  Schedule Schedule[]
 }
 
 model Hour {
-  id       Int        @id @default(autoincrement())
-  start    String
+  id        Int        @id @default(autoincrement())
+  start     String
   // dayHours DayHour[]
-  Schedule Schedule[]
+  schedules Schedule[]
 }
 
 model Day {
-  id       Int        @id @default(autoincrement())
-  number   Int
+  id        Int        @id @default(autoincrement())
+  number    Int
   // dayHours DayHour[]
-  Schedule Schedule[]
+  schedules Schedule[]
 }
 
 // model DayHour {
@@ -149,4 +152,89 @@ model Schedule {
   lecture   Lecture @relation(fields: [lectureId], references: [id])
   classId   Int
   class     Class   @relation(fields: [classId], references: [id])
+}
+
+model Channel {
+  id         Int         @id @default(autoincrement())
+  name       String      @unique
+  applicants Applicant[]
+  students   Student[]
+}
+
+model Specialty {
+  id         Int         @id @default(autoincrement())
+  name       String      @unique
+  capacity   Int
+  materials  Material[]
+  applicants Applicant[]
+}
+
+model Material {
+  id               Int       @id @default(autoincrement())
+  name             String    @unique
+  customPercentage Int       @default(0)
+  specialtyId      Int
+  specialty        Specialty @relation(fields: [specialtyId], references: [id])
+  degress          Degree[]
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+model Year {
+  id         Int         @id @default(autoincrement())
+  range      String      @unique
+  applicants Applicant[]
+  students   Student[]
+}
+
+model Applicant {
+  id               Int       @id @default(autoincrement())
+  name             String
+  age              Int?
+  schoolName       String?
+  channelId        Int
+  channel          Channel   @relation(fields: [channelId], references: [id])
+  daor             Int
+  note             String?
+  gender           Gender?
+  email            String?   @unique
+  city             String?
+  moderia          String?
+  examNumber       String?   @unique
+  highSchoolYearId Int
+  year             Year      @relation(fields: [highSchoolYearId], references: [id])
+  nationalId       String?   @unique
+  religion         String?
+  specialtyId      Int
+  specialty        Specialty @relation(fields: [specialtyId], references: [id])
+  branches         Branch[]
+  degrees          Degree[]
+}
+
+model Student {
+  id             Int     @id @default(autoincrement())
+  name           String
+  age            Int
+  gender         Gender
+  email          String  @unique
+  classId        Int
+  Class          Class   @relation(fields: [classId], references: [id])
+  dateAcceptedId Int
+  year           Year    @relation(fields: [dateAcceptedId], references: [id])
+  chnnaelId      Int
+  channel        Channel @relation(fields: [chnnaelId], references: [id])
+}
+
+model Degree {
+  id          Int       @unique @default(autoincrement())
+  materialId  Int
+  material    Material  @relation(fields: [materialId], references: [id])
+  applicantId Int
+  applicant   Applicant @relation(fields: [applicantId], references: [id])
+  score       Int
+
+  @@id([materialId, applicantId])
 }
