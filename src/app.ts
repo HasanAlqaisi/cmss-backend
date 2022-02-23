@@ -1,6 +1,7 @@
 import express, { Application } from "express";
 import morgan from "morgan";
 import passport from "passport";
+import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import { NotFoundError } from "./utils/api/api-error";
 import jwtConfig from "./utils/auth/jwt";
@@ -11,6 +12,8 @@ import mainRoute from "./index";
 import specs from "../openapi.json";
 
 const app: Application = express();
+
+app.use(cors());
 
 app.use(express.json());
 
