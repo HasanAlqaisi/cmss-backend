@@ -48,9 +48,20 @@
                                         "fullname": {
                                             "type": "string"
                                         },
-                                        "roleId": {
-                                            "type": "string",
-                                            "format": "uuid"
+                                        "role": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "id",
+                                                "name"
+                                            ]
                                         }
                                     },
                                     "required": [
@@ -66,7 +77,10 @@
                                             "email": "user@example.com",
                                             "username": "string",
                                             "fullname": "string",
-                                            "roleId": "7382d58e-652a-4905-b7c9-bcca1e0e5391"
+                                            "role": {
+                                                "id": 0,
+                                                "name": "string"
+                                            }
                                         }
                                     }
                                 }
@@ -247,9 +261,21 @@
                                                 "fullname": {
                                                     "type": "string"
                                                 },
-                                                "roleId": {
-                                                    "type": "string",
-                                                    "format": "uuid"
+                                                "role": {
+                                                    "format": "uuid",
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer"
+                                                        },
+                                                        "name": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "id",
+                                                        "name"
+                                                    ]
                                                 }
                                             }
                                         }
@@ -268,7 +294,10 @@
                                                 "email": "user@example.com",
                                                 "username": "string",
                                                 "fullname": "string",
-                                                "roleId": "7382d58e-652a-4905-b7c9-bcca1e0e5391"
+                                                "roleId": {
+                                                    "id": 0,
+                                                    "name": "string"
+                                                }
                                             }
                                         }
                                     }
@@ -457,9 +486,20 @@
                                         "fullname": {
                                             "type": "string"
                                         },
-                                        "roleId": {
-                                            "type": "string",
-                                            "format": "uuid"
+                                        "role": {
+                                            "format": "uuid",
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "id"
+                                            ]
                                         }
                                     },
                                     "required": [
@@ -469,13 +509,16 @@
                                     ]
                                 },
                                 "examples": {
-                                    "example-2": {
+                                    "example-1": {
                                         "value": {
                                             "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
                                             "email": "string",
                                             "username": "string",
                                             "fullname": "string",
-                                            "roleId": "7382d58e-652a-4905-b7c9-bcca1e0e5391"
+                                            "role": {
+                                                "id": 0,
+                                                "name": "string"
+                                            }
                                         }
                                     }
                                 }
