@@ -41,18 +41,7 @@ export default (
   }
 
   if (err instanceof ZodError) {
-    const formattedError = {
-      errors: {},
-    };
-
-    const keys = err.issues.map((issue) => issue.path[0]);
-    const messages = err.issues.map((issue) => issue.message);
-
-    keys.forEach((key, index) => {
-      (formattedError as any).errors[key] = messages[index];
-    });
-
-    return ApiError.handle(new BadRequestError(formattedError), res);
+    return res.status(400).json(err);
   }
 
   return ApiError.handle(new InternalError(err.message), res);
