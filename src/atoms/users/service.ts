@@ -23,6 +23,7 @@ export default class UserService {
         password: hashedPass,
         role: { connect: { id: role.id } },
       },
+      include: { role: true },
     });
   };
 
@@ -32,23 +33,32 @@ export default class UserService {
       data: {
         password: newHashedPaswword,
       },
+      include: { role: true },
     });
 
     return user;
   };
 
   static findByEmail = async (email: string): Promise<User | null> => {
-    const user = prisma.user.findUnique({ // Change to findUnique
+    const user = prisma.user.findUnique({
+      // Change to findUnique
       where: { email },
+      include: { role: true },
     });
 
     return user;
   };
 
   static findById = async (id: number): Promise<User | null> => {
-    const user = prisma.user.findUnique({
+    const user =await prisma.user.findUnique({
       where: { id },
+      include: { role: true },
     });
     return user;
+  };
+
+  static findAll = async (): Promise<User[]> => {
+    const users = await prisma.user.findMany({ include: { role: true } });
+    return users;
   };
 }

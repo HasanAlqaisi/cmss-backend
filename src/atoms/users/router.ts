@@ -19,4 +19,8 @@ router.post("/forget-password/", controller.forgetPasswordPost);
 
 router.post("/reset-password/:id/:token", controller.resetPasswordPost);
 
+router.get("/", controller.getUsers);
+
+router.get("/:id", controller.getUserById);
+
 export default router;

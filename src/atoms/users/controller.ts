@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import bycrypt from "bcrypt";
 import jwt, { JwtPayload } from "jsonwebtoken";
+import { User } from "@prisma/client";
 import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
 // import { ForbiddenError, subject } from "@casl/ability";
@@ -11,7 +12,7 @@ import UserService from "./service";
 import getIdFromPayload from "../../utils/get-id-from-payload";
 import sendEmail from "../../utils/send-email";
 import { unAuthorizedMessage } from "../../utils/constants";
-import { reshapeUser } from "../../utils/reshape-user";
+import { reshapeData } from "../../utils/reshape-data";
 
 const createToken = (id: number): string =>
   jwt.sign({ id }, process.env.TOKEN_SECRET as string, { expiresIn: "1d" });
@@ -27,7 +28,9 @@ export const signupPost = async (req: Request, res: Response) => {
     data.password
   );
 
-  return new CreatedResponse(reshapeUser(user)).send(res);
+  const reshapedUser = reshapeData(user, ["password", "roleId"]) as User;
+
+  return new CreatedResponse(reshapedUser).send(res);
 };
 
 export const loginPost = async (req: Request, res: Response) => {
@@ -44,7 +47,9 @@ export const loginPost = async (req: Request, res: Response) => {
 
   const token = createToken(user.id);
 
-  return new OkResponse({ token, user: reshapeUser(user) }).send(res);
+  const reshapedUser = reshapeData(user, ["password", "roleId"]) as User;
+
+  return new OkResponse({ token, user: reshapedUser }).send(res);
 };
 
 export const changePassPut = async (req: Request, res: Response) => {
@@ -75,7 +80,9 @@ export const changePassPut = async (req: Request, res: Response) => {
   // Change the user password
   const updatedUser = await UserService.changePassword(Number(id), newPassword);
 
-  return new OkResponse(reshapeUser(updatedUser)).send(res);
+  const reshapedUser = reshapeData(updatedUser, ["password", "roleId"]) as User;
+
+  return new OkResponse(reshapedUser).send(res);
 };
 
 export const forgetPasswordPost = async (req: Request, res: Response) => {
@@ -134,8 +141,31 @@ export const resetPasswordPost = async (req: Request, res: Response) => {
   if (user) {
     const updatedUser = await UserService.changePassword(id, newPassword);
 
-    return new OkResponse(reshapeUser(updatedUser)).send(res);
+    const reshapedUser = reshapeData(updatedUser, [
+      "password",
+      "roleId",
+    ]) as User;
+
+    return new OkResponse(reshapedUser).send(res);
   }
 
   throw new BadRequestError("User not found");
+};
+
+export const getUserById = async (req: Request, res: Response) => {
+  const { id } = await generalValidator.id(req);
+
+  const user = await UserService.findById(Number(id));
+
+  const reshapedUser = reshapeData(user!, ["password", "roleId"]) as User;
+
+  return new OkResponse(reshapedUser).send(res);
+};
+
+export const getUsers = async (req: Request, res: Response) => {
+  const users = await UserService.findAll();
+
+  const reshapedUsers = reshapeData(users, ["password", "roleId"]) as User[];
+
+  return new OkResponse(reshapedUsers).send(res);
 };
