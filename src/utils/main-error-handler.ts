@@ -44,10 +44,13 @@ export default (
     const formattedError = {
       errors: {},
     };
-    const key = err.issues[0].path[0];
-    const { message } = err.issues[0];
 
-    (formattedError as any).errors[key] = message;
+    const keys = err.issues.map((issue) => issue.path[0]);
+    const messages = err.issues.map((issue) => issue.message);
+
+    keys.forEach((key, index) => {
+      (formattedError as any).errors[key] = messages[index];
+    });
 
     return ApiError.handle(new BadRequestError(formattedError), res);
   }
