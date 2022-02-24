@@ -14,7 +14,7 @@
         "/api/users/signup": {
             "parameters": [],
             "post": {
-                "summary": "postapi-users-signup",
+                "summary": "",
                 "operationId": "postapi-users-signup",
                 "responses": {
                     "201": {
@@ -33,8 +33,8 @@
                                     },
                                     "properties": {
                                         "id": {
-                                            "type": "string",
-                                            "format": "uuid"
+                                            "format": "uuid",
+                                            "type": "integer"
                                         },
                                         "email": {
                                             "type": "string",
@@ -73,7 +73,7 @@
                                 "examples": {
                                     "example-1": {
                                         "value": {
-                                            "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                                            "id": 0,
                                             "email": "user@example.com",
                                             "username": "string",
                                             "fullname": "string",
@@ -122,9 +122,17 @@
                                 "examples": {
                                     "fields error": {
                                         "value": {
-                                            "errors": {
-                                                "email": "Email field must be valid"
-                                            }
+                                            "issues": [
+                                                {
+                                                    "validation": "regex",
+                                                    "code": "invalid_string",
+                                                    "message": "sholud be at least 5 characters and from this set (a-z,0-9,_) ",
+                                                    "path": [
+                                                        "username"
+                                                    ]
+                                                }
+                                            ],
+                                            "name": "ZodError"
                                         }
                                     },
                                     "details error": {
@@ -248,8 +256,8 @@
                                             ],
                                             "properties": {
                                                 "id": {
-                                                    "type": "string",
-                                                    "format": "uuid"
+                                                    "format": "uuid",
+                                                    "type": "integer"
                                                 },
                                                 "email": {
                                                     "type": "string",
@@ -290,11 +298,11 @@
                                         "value": {
                                             "token": "string",
                                             "user": {
-                                                "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                                                "id": 0,
                                                 "email": "user@example.com",
                                                 "username": "string",
                                                 "fullname": "string",
-                                                "roleId": {
+                                                "role": {
                                                     "id": 0,
                                                     "name": "string"
                                                 }
@@ -445,13 +453,12 @@
             "parameters": [
                 {
                     "schema": {
-                        "type": "string",
+                        "type": "integer",
                         "format": "uuid"
                     },
                     "name": "id",
                     "in": "path",
-                    "required": true,
-                    "description": "uuid"
+                    "required": true
                 }
             ],
             "post": {
@@ -474,7 +481,7 @@
                                     },
                                     "properties": {
                                         "id": {
-                                            "type": "string",
+                                            "type": "integer",
                                             "format": "uuid"
                                         },
                                         "email": {
@@ -511,7 +518,7 @@
                                 "examples": {
                                     "example-1": {
                                         "value": {
-                                            "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                                            "id": 0,
                                             "email": "string",
                                             "username": "string",
                                             "fullname": "string",
@@ -583,6 +590,223 @@
                     },
                     "description": "new_password & confirm_password field should match"
                 }
+            }
+        },
+        "/api/users/": {
+            "parameters": [],
+            "get": {
+                "summary": "",
+                "tags": [],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "description": "",
+                                    "minItems": 1,
+                                    "uniqueItems": true,
+                                    "items": {
+                                        "type": "object",
+                                        "required": [
+                                            "id",
+                                            "email",
+                                            "username",
+                                            "fullName",
+                                            "role"
+                                        ],
+                                        "properties": {
+                                            "id": {
+                                                "type": "number"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "minLength": 1
+                                            },
+                                            "username": {
+                                                "type": "string",
+                                                "minLength": 1
+                                            },
+                                            "fullName": {
+                                                "type": "string",
+                                                "minLength": 1
+                                            },
+                                            "role": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "minLength": 1
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "name"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "x-examples": {
+                                        "example-1": [
+                                            {
+                                                "id": 1,
+                                                "email": "hasan.alqaisi@2000gmail.com",
+                                                "username": "hasan",
+                                                "fullName": "Hasan AlQAisi",
+                                                "role": {
+                                                    "id": 1,
+                                                    "name": "admin"
+                                                }
+                                            },
+                                            {
+                                                "id": 2,
+                                                "email": "ali.ali@ali.com",
+                                                "username": "AliEmad",
+                                                "fullName": "ALI ALI",
+                                                "role": {
+                                                    "id": 1,
+                                                    "name": "admin"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": [
+                                            {
+                                                "id": 1,
+                                                "email": "hasan.alqaisi@2000gmail.com",
+                                                "username": "hasan",
+                                                "fullName": "Hasan AlQAisi",
+                                                "role": {
+                                                    "id": 1,
+                                                    "name": "admin"
+                                                }
+                                            },
+                                            {
+                                                "id": 2,
+                                                "email": "ali@gmail.com",
+                                                "username": "Ali1234",
+                                                "fullName": "ALI",
+                                                "role": {
+                                                    "id": 1,
+                                                    "name": "admin"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "operationId": "get-api-users-id",
+                "description": "Get all users, should be accessed only by a user who has admin as a role"
+            }
+        },
+        "/api/users/{id}": {
+            "parameters": [
+                {
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "name": "id",
+                    "in": "path",
+                    "required": true
+                }
+            ],
+            "get": {
+                "summary": "",
+                "tags": [],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "",
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "number"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "minLength": 1
+                                        },
+                                        "username": {
+                                            "type": "string",
+                                            "minLength": 1
+                                        },
+                                        "fullname": {
+                                            "type": "string",
+                                            "minLength": 1
+                                        },
+                                        "role": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "minLength": 1
+                                                }
+                                            },
+                                            "required": [
+                                                "id",
+                                                "name"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "email",
+                                        "username",
+                                        "fullname",
+                                        "role"
+                                    ],
+                                    "x-examples": {
+                                        "example-1": {
+                                            "id": 0,
+                                            "email": "user@example.com",
+                                            "username": "string",
+                                            "fullname": "string",
+                                            "role": {
+                                                "id": 0,
+                                                "name": "string"
+                                            }
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "example-1": {
+                                        "value": {
+                                            "id": 1,
+                                            "email": "hasan.alqaisi@2000gmail.com",
+                                            "username": "hasan",
+                                            "fullName": "Hasan AlQAisi",
+                                            "role": {
+                                                "id": 1,
+                                                "name": "admin"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "operationId": "get-api-users-id",
+                "description": "Get a specific user by his id"
             }
         }
     },
