@@ -10,6 +10,8 @@ import "./utils/config/general";
 import mainErrorHandler from "./utils/main-error-handler";
 import mainRoute from "./index";
 import specs from "../openapi.json";
+import prisma from "./prisma";
+
 
 const app: Application = express();
 
@@ -33,6 +35,12 @@ if (process.env.NODE_ENV === "development") {
   app.get("/docs", swaggerUi.setup(specs));
 }
 
+// prisma.$use(async (params, next) => {
+//   if (params.model === "Applicant" && params.action === "create") {
+//     const result = await next(params);
+//     logger.debug(`result is ${result}`);
+//   }
+// });
 // Main app route
 app.use("/", mainRoute);
 

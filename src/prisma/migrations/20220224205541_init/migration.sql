@@ -55,7 +55,7 @@ CREATE TABLE "Subject" (
 CREATE TABLE "Branch" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
-    "maxCapacity" INTEGER,
+    "maxCapacity" INTEGER NOT NULL,
 
     CONSTRAINT "Branch_pkey" PRIMARY KEY ("id")
 );
@@ -147,6 +147,7 @@ CREATE TABLE "Specialty" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "capacity" INTEGER NOT NULL,
+    "isDependent" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "Specialty_pkey" PRIMARY KEY ("id")
 );
@@ -177,6 +178,8 @@ CREATE TABLE "Applicant" (
     "schoolName" TEXT,
     "channelId" INTEGER NOT NULL,
     "daor" INTEGER NOT NULL,
+    "totalDegree" DECIMAL(65,30),
+    "average" DECIMAL(65,30),
     "note" TEXT,
     "gender" "Gender",
     "email" TEXT,
@@ -187,8 +190,18 @@ CREATE TABLE "Applicant" (
     "nationalId" TEXT,
     "religion" TEXT,
     "specialtyId" INTEGER NOT NULL,
+    "branchId" INTEGER,
 
     CONSTRAINT "Applicant_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "ApplicantBranch" (
+    "id" SERIAL NOT NULL,
+    "applicantId" INTEGER NOT NULL,
+    "branchId" INTEGER NOT NULL,
+
+    CONSTRAINT "ApplicantBranch_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -210,15 +223,9 @@ CREATE TABLE "Degree" (
     "id" SERIAL NOT NULL,
     "materialId" INTEGER NOT NULL,
     "applicantId" INTEGER NOT NULL,
-    "score" INTEGER NOT NULL,
+    "score" DOUBLE PRECISION NOT NULL DEFAULT 0,
 
     CONSTRAINT "Degree_pkey" PRIMARY KEY ("materialId","applicantId")
-);
-
--- CreateTable
-CREATE TABLE "_ApplicantToBranch" (
-    "A" INTEGER NOT NULL,
-    "B" INTEGER NOT NULL
 );
 
 -- CreateIndex
@@ -265,12 +272,6 @@ CREATE UNIQUE INDEX "Student_email_key" ON "Student"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Degree_id_key" ON "Degree"("id");
-
--- CreateIndex
-CREATE UNIQUE INDEX "_ApplicantToBranch_AB_unique" ON "_ApplicantToBranch"("A", "B");
-
--- CreateIndex
-CREATE INDEX "_ApplicantToBranch_B_index" ON "_ApplicantToBranch"("B");
 
 -- AddForeignKey
 ALTER TABLE "User" ADD CONSTRAINT "User_roleId_fkey" FOREIGN KEY ("roleId") REFERENCES "Role"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -324,6 +325,9 @@ ALTER TABLE "Schedule" ADD CONSTRAINT "Schedule_dayId_fkey" FOREIGN KEY ("dayId"
 ALTER TABLE "Material" ADD CONSTRAINT "Material_specialtyId_fkey" FOREIGN KEY ("specialtyId") REFERENCES "Specialty"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "Applicant" ADD CONSTRAINT "Applicant_branchId_fkey" FOREIGN KEY ("branchId") REFERENCES "Branch"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Applicant" ADD CONSTRAINT "Applicant_channelId_fkey" FOREIGN KEY ("channelId") REFERENCES "Channel"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -331,6 +335,12 @@ ALTER TABLE "Applicant" ADD CONSTRAINT "Applicant_specialtyId_fkey" FOREIGN KEY 
 
 -- AddForeignKey
 ALTER TABLE "Applicant" ADD CONSTRAINT "Applicant_highSchoolYearId_fkey" FOREIGN KEY ("highSchoolYearId") REFERENCES "Year"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ApplicantBranch" ADD CONSTRAINT "ApplicantBranch_branchId_fkey" FOREIGN KEY ("branchId") REFERENCES "Branch"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ApplicantBranch" ADD CONSTRAINT "ApplicantBranch_applicantId_fkey" FOREIGN KEY ("applicantId") REFERENCES "Applicant"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Student" ADD CONSTRAINT "Student_classId_fkey" FOREIGN KEY ("classId") REFERENCES "Class"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -346,9 +356,3 @@ ALTER TABLE "Degree" ADD CONSTRAINT "Degree_materialId_fkey" FOREIGN KEY ("mater
 
 -- AddForeignKey
 ALTER TABLE "Degree" ADD CONSTRAINT "Degree_applicantId_fkey" FOREIGN KEY ("applicantId") REFERENCES "Applicant"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "_ApplicantToBranch" ADD FOREIGN KEY ("A") REFERENCES "Applicant"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "_ApplicantToBranch" ADD FOREIGN KEY ("B") REFERENCES "Branch"("id") ON DELETE CASCADE ON UPDATE CASCADE;

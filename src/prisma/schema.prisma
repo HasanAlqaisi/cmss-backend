@@ -54,11 +54,13 @@ model Subject {
 }
 
 model Branch {
-  id          Int         @id @default(autoincrement())
-  name        String      @unique
-  maxCapacity Int?
-  Classes     Class[]
-  applicants  Applicant[]
+  id                 Int               @id @default(autoincrement())
+  name               String            @unique
+  maxCapacity        Int
+  Classes            Class[]
+  // applicants         Applicant[]
+  acceptedApplicants Applicant[]       @relation("acceptedBranch")
+  selectedBranches   ApplicantBranch[]
 }
 
 model Program {
@@ -162,11 +164,12 @@ model Channel {
 }
 
 model Specialty {
-  id         Int         @id @default(autoincrement())
-  name       String      @unique
-  capacity   Int
-  materials  Material[]
-  applicants Applicant[]
+  id          Int         @id @default(autoincrement())
+  name        String      @unique
+  capacity    Int
+  isDependent Boolean     @default(false)
+  materials   Material[]
+  applicants  Applicant[]
 }
 
 model Material {
@@ -191,27 +194,43 @@ model Year {
 }
 
 model Applicant {
-  id               Int       @id @default(autoincrement())
+  id               Int               @id @default(autoincrement())
   name             String
   age              Int?
   schoolName       String?
   channelId        Int
-  channel          Channel   @relation(fields: [channelId], references: [id])
+  channel          Channel           @relation(fields: [channelId], references: [id])
   daor             Int
+  totalDegree      Decimal?
+  average          Decimal?
   note             String?
   gender           Gender?
-  email            String?   @unique
+  email            String?           @unique
   city             String?
   moderia          String?
-  examNumber       String?   @unique
+  examNumber       String?           @unique
   highSchoolYearId Int
-  year             Year      @relation(fields: [highSchoolYearId], references: [id])
-  nationalId       String?   @unique
+  year             Year              @relation(fields: [highSchoolYearId], references: [id])
+  nationalId       String?           @unique
   religion         String?
   specialtyId      Int
-  specialty        Specialty @relation(fields: [specialtyId], references: [id])
-  branches         Branch[]
+  specialty        Specialty         @relation(fields: [specialtyId], references: [id])
+  // selectedBranches Branch[]
+  branchId         Int?
+  acceptedBranch   Branch?           @relation(fields: [branchId], references: [id], name: "acceptedBranch")
   degrees          Degree[]
+  selectedBranches ApplicantBranch[]
+}
+
+model ApplicantBranch {
+  id          Int       @unique @default(autoincrement())
+  applicantId Int
+  applicant   Applicant @relation(fields: [applicantId], references: [id])
+  branchId    Int
+  branch      Branch    @relation(fields: [branchId], references: [id])
+  priority    Int
+
+  @@id([applicantId, branchId])
 }
 
 model Student {
@@ -234,7 +253,7 @@ model Degree {
   material    Material  @relation(fields: [materialId], references: [id])
   applicantId Int
   applicant   Applicant @relation(fields: [applicantId], references: [id])
-  score       Int
+  score       Float     @default(0)
 
   @@id([materialId, applicantId])
 }

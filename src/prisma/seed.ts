@@ -47,10 +47,10 @@ async function createClasses() {
   const stageFour = await prisma.stage.create({ data: { number: 4 } });
 
   const infromationBranch = await prisma.branch.create({
-    data: { name: "Information" },
+    data: { name: "Information", maxCapacity: 100 },
   });
   const networkBranch = await prisma.branch.create({
-    data: { name: "Network" },
+    data: { name: "Network", maxCapacity: 100 },
   });
 
   await prisma.class.create({

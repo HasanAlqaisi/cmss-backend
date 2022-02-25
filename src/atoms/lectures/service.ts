@@ -1,7 +1,7 @@
 import { Class, Day, Hour, Lecture, Room, User } from "@prisma/client";
 import _ from "lodash";
 import prisma from "../../prisma";
-import { reshapeUser } from "../../utils/reshape-user";
+import { reshapeData } from "../../utils/reshape-data";
 
 const includeTeacherAndHall = {
   teacher: { select: { email: true, username: true, fullName: true } },
