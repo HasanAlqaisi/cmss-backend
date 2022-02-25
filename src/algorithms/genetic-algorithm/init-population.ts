@@ -10,7 +10,7 @@ export default (
 ): Chromosome[] => {
   const chromosomes: Chromosome[] = [];
 
-  // eslint-disable-next-line no-plusplus
+   
   for (let index = 0; index < populationSize; index++) {
     chromosomes.push(createChromosome(lectures, days, hours));
   }

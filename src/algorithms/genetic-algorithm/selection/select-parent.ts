@@ -15,7 +15,7 @@ import logger from "../../../utils/config/logger";
 //   const randomNumber = getRandomInt(totalFitness);
 //   let partialSum = 0;
 
-//   // eslint-disable-next-line no-plusplus
+//    
 //   for (let index = 0; index < previousGeneration.length; index++) {
 //     const element = previousGeneration[index];
 //     partialSum += element.fitness;
@@ -35,7 +35,7 @@ export function getBestChromosome(
 ) {
   let bestChromosomeIndex = -1;
   let bestFitness = -1;
-  // eslint-disable-next-line no-plusplus
+   
   for (let i = leftIndex; i < rightIndex; i++) {
     const currentFitness = previousGeneration[i].fitness;
     if (currentFitness > bestFitness) {
@@ -49,7 +49,7 @@ export function getBestChromosome(
 export function getSecondFittest(previousGeneration: Chromosome[]) {
   let maxFit1 = 0;
   let maxFit2 = 0;
-  // eslint-disable-next-line no-plusplus
+   
   for (let i = 0; i < previousGeneration.length; i++) {
     if (previousGeneration[i].fitness > previousGeneration[maxFit1].fitness) {
       maxFit2 = maxFit1;
@@ -66,7 +66,7 @@ export function getSecondFittest(previousGeneration: Chromosome[]) {
 export function getLeastFittestChromosome(previousGeneration: Chromosome[]) {
   let minFitVal = 1;
   let minFitIndex = -1;
-  // eslint-disable-next-line no-plusplus
+   
   for (let i = 0; i < previousGeneration.length; i++) {
     if (minFitVal >= previousGeneration[i].fitness) {
       minFitVal = previousGeneration[i].fitness;
@@ -91,7 +91,7 @@ export default (previousGeneration: Chromosome[]) => {
   let bestFitness = 0;
   let bestOne: Chromosome;
 
-  // eslint-disable-next-line no-plusplus
+   
   for (let index = 0; index < tournamentSize; index++) {
     const randomIndex = getRandomInt(previousGeneration.length);
     const chromosome = previousGeneration[randomIndex];

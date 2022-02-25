@@ -16,7 +16,7 @@ export default (
   days: Day[],
   hours: Hour[]
 ): Chromosome => {
-  // eslint-disable-next-line no-plusplus
+   
   const randomIndex = getRandomInt(
     chromosome.genes.length,
     chromosome.genes.length / 2

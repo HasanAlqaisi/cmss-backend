@@ -25,7 +25,7 @@ export default (
   );
   nextGeneration.push(previousGeneration[bestChromoIndex]);
 
-  // eslint-disable-next-line no-plusplus
+   
   for (let i = 0; i < populationSize - 1; i++) {
     const firstParent = selectParent(previousGeneration);
     const secondParent = selectParent(previousGeneration);

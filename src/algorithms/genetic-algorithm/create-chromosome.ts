@@ -9,7 +9,7 @@ export default (
 ): Chromosome => {
   const genes: Gene[] = [];
 
-  // eslint-disable-next-line no-plusplus
+   
   for (let index = 0; index < lectures.length; index++) {
     genes.push(createGene(index, lectures, days, hours));
   }

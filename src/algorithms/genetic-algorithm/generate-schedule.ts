@@ -30,7 +30,7 @@ export default async () => {
   while (generationCount < maxGeneration) {
     generationCount += 1;
 
-    // eslint-disable-next-line no-plusplus
+     
     for (let i = 0; i < populationSize; i++) {
       computeFitness(
         nextGeneration[i],
