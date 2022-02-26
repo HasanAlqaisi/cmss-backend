@@ -10,7 +10,8 @@
     "prepare": "husky install"
   },
   "prisma": {
-    "seed": "ts-node ./src/prisma/seed.ts"
+    "seed": "ts-node ./src/prisma/seed.ts",
+    "schema": "src/prisma/schema.prisma"
   },
   "author": "Hasan Al-Qaisi",
   "license": "ISC",
