@@ -18,6 +18,7 @@ export default class RoleService {
             ? { createMany: { data: data.permissions } }
             : undefined,
       },
+      include: { permissions: true },
     });
 
     return role;
@@ -43,6 +44,7 @@ export default class RoleService {
             ? { deleteMany: {}, createMany: { data: data.permissions } }
             : undefined,
       },
+      include: { permissions: true },
     });
 
     return role;
