@@ -45,4 +45,11 @@ router.get(
   controller.getUserProfile
 );
 
+router.put(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  permissions("manage", "User"),
+  controller.updateUser
+);
+
 export default router;

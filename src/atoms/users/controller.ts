@@ -161,3 +161,23 @@ export const getUsers = async (req: Request, res: Response) => {
 
   return new OkResponse(reshapedUsers).send(res);
 };
+
+export const updateUser = async (req: Request, res: Response) => {
+  const { id } = await generalValidator.id(req);
+
+  const idNumber = Number(id);
+
+  const data = await validator.updateUser(req);
+
+  const user = await UserService.updateUser(
+    idNumber,
+    data.username,
+    data.fullname,
+    data.roleId,
+    data.email
+  );
+
+  const reshapedUser = reshapeData(user, ["password"]) as User;
+
+  return new OkResponse(reshapedUser).send(res);
+};

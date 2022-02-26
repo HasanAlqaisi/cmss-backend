@@ -51,6 +51,27 @@ export default class UserService {
     });
   };
 
+  static updateUser = async (
+    id: number,
+    username: string,
+    fullName: string,
+    roleId: number,
+    email: string
+  ): Promise<User> => {
+    const user = await prisma.user.update({
+      where: { id },
+      data: {
+        username,
+        fullName,
+        email,
+        role: { connect: { id: roleId } },
+      },
+      include: { role: true },
+    });
+
+    return user;
+  };
+
   static changePassword = async (id: number, newHashedPaswword: string) => {
     const user = await prisma.user.update({
       where: { id },
