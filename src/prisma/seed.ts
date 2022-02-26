@@ -6,10 +6,10 @@ import UserService from "../atoms/users/service";
 async function createAdminAccount() {
   await UserService.createAdminAccount(
     "admin",
-    "theAdmin",
+    "admin",
     "admin",
     "admin@example.com",
-    bcrypt.hashSync("0000", 10)
+    bcrypt.hashSync("password", 10)
   );
 }
 
