@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import bycrypt from "bcrypt";
+import bcrypt from "bcrypt";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { User } from "@prisma/client";
 import * as validator from "./validator";
@@ -38,7 +38,7 @@ export const loginPost = async (req: Request, res: Response) => {
 
   if (!user) throw new BadRequestError("Incorrect email and/or password");
 
-  const passwordMatch = await bycrypt.compare(data.password, user.password);
+  const passwordMatch = await bcrypt.compare(data.password, user.password);
 
   if (!passwordMatch)
     throw new BadRequestError("Incorrect email and/or password");
