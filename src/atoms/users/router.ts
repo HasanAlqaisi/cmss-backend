@@ -8,6 +8,12 @@ router.post("/signup", controller.signupPost);
 
 router.post("/login", controller.loginPost);
 
+router.post(
+  "/logout",
+  passport.authenticate("jwt", { session: false }),
+  controller.logoutPost
+);
+
 // Only root can changes password of his account and other accounts
 router.put(
   "/change-password/:id",
@@ -20,6 +26,12 @@ router.post("/forget-password/", controller.forgetPasswordPost);
 router.post("/reset-password/:id/:token", controller.resetPasswordPost);
 
 router.get("/", controller.getUsers);
+
+router.get(
+  "/profile",
+  passport.authenticate("jwt", { session: false }),
+  controller.getUserProfile
+);
 
 router.get("/:id", controller.getUserById);
 

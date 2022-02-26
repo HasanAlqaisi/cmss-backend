@@ -13,6 +13,7 @@ import getIdFromPayload from "../../utils/get-id-from-payload";
 import sendEmail from "../../utils/send-email";
 import { unAuthorizedMessage } from "../../utils/constants";
 import { reshapeData } from "../../utils/reshape-data";
+import logger from "../../utils/config/logger";
 
 const createToken = (id: number): string =>
   jwt.sign({ id }, process.env.TOKEN_SECRET as string, { expiresIn: "1d" });
@@ -49,7 +50,13 @@ export const loginPost = async (req: Request, res: Response) => {
 
   const reshapedUser = reshapeData(user, ["password", "roleId"]) as User;
 
-  return new OkResponse({ token, user: reshapedUser }).send(res);
+  res.cookie("jwt", token, { path: "/", httpOnly: true });
+  return new OkResponse({ user: reshapedUser }).send(res);
+};
+
+export const logoutPost = async (req: Request, res: Response) => {
+  res.clearCookie("jwt");
+  return new OkResponse("Logged out").send(res);
 };
 
 export const changePassPut = async (req: Request, res: Response) => {
@@ -159,6 +166,11 @@ export const getUserById = async (req: Request, res: Response) => {
 
   const reshapedUser = reshapeData(user!, ["password", "roleId"]) as User;
 
+  return new OkResponse(reshapedUser).send(res);
+};
+
+export const getUserProfile = async (req: Request, res: Response) => {
+  const reshapedUser = reshapeData(req.user!, ["role.permissions"]) as object;
   return new OkResponse(reshapedUser).send(res);
 };
 

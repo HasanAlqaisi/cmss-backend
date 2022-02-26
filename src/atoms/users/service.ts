@@ -2,6 +2,7 @@ import { User } from "@prisma/client";
 import _ from "lodash";
 import prisma from "../../prisma";
 import { BadRequestError } from "../../utils/api/api-error";
+import logger from "../../utils/config/logger";
 
 export default class UserService {
   static createUser = async (
@@ -50,9 +51,9 @@ export default class UserService {
   };
 
   static findById = async (id: number): Promise<User | null> => {
-    const user =await prisma.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: { id },
-      include: { role: true },
+      include: { role: { include: { permissions: true } } },
     });
     return user;
   };
