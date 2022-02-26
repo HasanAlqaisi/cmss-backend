@@ -2,6 +2,7 @@ import express, { Application } from "express";
 import morgan from "morgan";
 import passport from "passport";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import swaggerUi from "swagger-ui-express";
 import { NotFoundError } from "./utils/api/api-error";
 import jwtConfig from "./utils/auth/jwt";
@@ -10,14 +11,14 @@ import "./utils/config/general";
 import mainErrorHandler from "./utils/main-error-handler";
 import mainRoute from "./index";
 import specs from "../openapi.json";
-import prisma from "./prisma";
-
 
 const app: Application = express();
 
 app.use(cors());
 
 app.use(express.json());
+
+app.use(cookieParser());
 
 app.listen(process.env.PORT, () => {
   logger.debug(`Server running at port ${process.env.PORT}`);
@@ -35,12 +36,6 @@ if (process.env.NODE_ENV === "development") {
   app.get("/docs", swaggerUi.setup(specs));
 }
 
-// prisma.$use(async (params, next) => {
-//   if (params.model === "Applicant" && params.action === "create") {
-//     const result = await next(params);
-//     logger.debug(`result is ${result}`);
-//   }
-// });
 // Main app route
 app.use("/", mainRoute);
 
