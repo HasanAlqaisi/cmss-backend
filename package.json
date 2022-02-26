@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "description": "A graduation project that focuses on the management of the college sections using latest technologies",
   "scripts": {
-    "start": "node dist/app.js",
-    "build": "tsc --watch",
     "dev": "nodemon src/app.ts",
+    "build": "tsc",
+    "start": "node dist/app.js",
     "lint": "./node_modules/.bin/eslint src/app.ts",
     "prepare": "husky install"
   },
   "prisma": {
-    "seed": "ts-node ./src/prisma/seed.ts"
+    "seed": "ts-node ./src/prisma/seed.ts",
+    "schema": "src/prisma/schema.prisma"
   },
   "author": "Hasan Al-Qaisi",
   "license": "ISC",

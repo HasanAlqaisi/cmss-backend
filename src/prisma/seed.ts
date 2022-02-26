@@ -1,15 +1,15 @@
 import { Role } from "@prisma/client";
-import bycrypt from "bcrypt";
+import bcrypt from "bcrypt";
 import prisma from ".";
 import UserService from "../atoms/users/service";
 
 async function createAdminAccount() {
   await UserService.createAdminAccount(
     "admin",
-    "theAdmin",
+    "admin",
     "admin",
     "admin@example.com",
-    bycrypt.hashSync("0000", 10)
+    bcrypt.hashSync("password", 10)
   );
 }
 

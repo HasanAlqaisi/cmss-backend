@@ -20,10 +20,6 @@ app.use(express.json());
 
 app.use(cookieParser());
 
-app.listen(process.env.PORT, () => {
-  logger.debug(`Server running at port ${process.env.PORT}`);
-});
-
 // Log http requests info
 app.use(morgan("dev"));
 
@@ -44,3 +40,9 @@ app.use((_req, _res, next) => next(new NotFoundError()));
 
 // Handle errors
 app.use(mainErrorHandler);
+
+app.listen(process.env.PORT, () => {
+  logger.debug(
+    `Application running checkout http://localhost:${process.env.PORT}/docs`
+  );
+});
