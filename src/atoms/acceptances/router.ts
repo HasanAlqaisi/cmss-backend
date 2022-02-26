@@ -6,7 +6,7 @@ const router = Router();
 
 router.post(
   "/:channelId",
-  passport.authenticate("jwt", { session: false }),
+   
   controller.computeAcceptances
 );
 

@@ -6,7 +6,7 @@ const router = Router();
 
 router.post(
   "/",
-  passport.authenticate("jwt", { session: false }),
+   
   controller.createSchedule
 );
 
