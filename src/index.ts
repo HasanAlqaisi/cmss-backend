@@ -1,4 +1,5 @@
 import { Router } from "express";
+import passport from "passport";
 import usersRoutes from "./atoms/users/router";
 import subjectsRoutes from "./atoms/subjects/router";
 import roomsRoutes from "./atoms/rooms/router";
@@ -16,26 +17,70 @@ const router = Router();
 
 router.use("/api/users", usersRoutes);
 
-router.use("/api/subjects", subjectsRoutes);
+router.use(
+  "/api/subjects",
+  passport.authenticate("jwt", { session: false }),
+  subjectsRoutes
+);
 
-router.use("/api/rooms", roomsRoutes);
+router.use(
+  "/api/rooms",
+  passport.authenticate("jwt", { session: false }),
+  roomsRoutes
+);
 
-router.use("/api/lectures", lecturesRoutes);
+router.use(
+  "/api/lectures",
+  passport.authenticate("jwt", { session: false }),
+  lecturesRoutes
+);
 
-router.use("/api/schedules", schedulesRoutes);
+router.use(
+  "/api/schedules",
+  passport.authenticate("jwt", { session: false }),
+  schedulesRoutes
+);
 
-router.use("/api/specialties", specialtiesRoutes);
+router.use(
+  "/api/specialties",
+  passport.authenticate("jwt", { session: false }),
+  specialtiesRoutes
+);
 
-router.use("/api/branches", branchesRoutes);
+router.use(
+  "/api/branches",
+  passport.authenticate("jwt", { session: false }),
+  branchesRoutes
+);
 
-router.use("/api/materials", materialsRoutes);
+router.use(
+  "/api/materials",
+  passport.authenticate("jwt", { session: false }),
+  materialsRoutes
+);
 
-router.use("/api/channels", channelsRoutes);
+router.use(
+  "/api/channels",
+  passport.authenticate("jwt", { session: false }),
+  channelsRoutes
+);
 
-router.use("/api/applicants", applicantsRoutes);
+router.use(
+  "/api/applicants",
+  passport.authenticate("jwt", { session: false }),
+  applicantsRoutes
+);
 
-router.use("/api/years", yearsRoutes);
+router.use(
+  "/api/years",
+  passport.authenticate("jwt", { session: false }),
+  yearsRoutes
+);
 
-router.use("/api/acceptances", acceptancesRoutes);
+router.use(
+  "/api/acceptances",
+  passport.authenticate("jwt", { session: false }),
+  acceptancesRoutes
+);
 
 export default router;
