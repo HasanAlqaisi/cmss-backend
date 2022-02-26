@@ -17,52 +17,40 @@ import permissions from "./middlewares/permissions";
 
 const router = Router();
 
-router.use("/api/users", usersRoutes);
+router.use("/users", usersRoutes);
 
 router.use(passport.authenticate("jwt", { session: false }));
 
-router.use("/api/roles", permissions("manage", "Role"), rolesRoutes);
+router.use("/roles", permissions("manage", "Role"), rolesRoutes);
 
-router.use("/api/subjects", permissions("manage", "Subject"), subjectsRoutes);
+router.use("/subjects", permissions("manage", "Subject"), subjectsRoutes);
 
-router.use("/api/subjects", permissions("manage", "Subject"), subjectsRoutes);
+router.use("/subjects", permissions("manage", "Subject"), subjectsRoutes);
 
-router.use("/api/rooms", permissions("manage", "Room"), roomsRoutes);
+router.use("/rooms", permissions("manage", "Room"), roomsRoutes);
 
-router.use("/api/lectures", permissions("manage", "Lecture"), lecturesRoutes);
+router.use("/lectures", permissions("manage", "Lecture"), lecturesRoutes);
 
-router.use(
-  "/api/schedules",
-  permissions("manage", "Schedule"),
-  schedulesRoutes
-);
+router.use("/schedules", permissions("manage", "Schedule"), schedulesRoutes);
 
 router.use(
-  "/api/specialties",
+  "/specialties",
   permissions("manage", "Specialty"),
   specialtiesRoutes
 );
 
-router.use("/api/branches", permissions("manage", "Branch"), branchesRoutes);
+router.use("/branches", permissions("manage", "Branch"), branchesRoutes);
+
+router.use("/materials", permissions("manage", "Material"), materialsRoutes);
+
+router.use("/channels", permissions("manage", "Channel"), channelsRoutes);
+
+router.use("/applicants", permissions("manage", "Applicant"), applicantsRoutes);
+
+router.use("/years", permissions("manage", "Year"), yearsRoutes);
 
 router.use(
-  "/api/materials",
-  permissions("manage", "Material"),
-  materialsRoutes
-);
-
-router.use("/api/channels", permissions("manage", "Channel"), channelsRoutes);
-
-router.use(
-  "/api/applicants",
-  permissions("manage", "Applicant"),
-  applicantsRoutes
-);
-
-router.use("/api/years", permissions("manage", "Year"), yearsRoutes);
-
-router.use(
-  "/api/acceptances",
+  "/acceptances",
   permissions("manage", "Applicant"),
   acceptancesRoutes
 );
