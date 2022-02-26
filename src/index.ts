@@ -1,6 +1,7 @@
 import { Router } from "express";
 import passport from "passport";
 import usersRoutes from "./atoms/users/router";
+import rolesRoutes from "./atoms/roles/router";
 import subjectsRoutes from "./atoms/subjects/router";
 import roomsRoutes from "./atoms/rooms/router";
 import lecturesRoutes from "./atoms/lectures/router";
@@ -17,6 +18,13 @@ import permissions from "./middlewares/permissions";
 const router = Router();
 
 router.use("/api/users", usersRoutes);
+
+router.use(
+  "/api/roles",
+  passport.authenticate("jwt", { session: false }),
+  permissions("manage", "Role"),
+  rolesRoutes
+);
 
 router.use(
   "/api/subjects",
