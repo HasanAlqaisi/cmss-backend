@@ -1,5 +1,5 @@
-import { User } from "@prisma/client";
-import _ from "lodash";
+import { Prisma, User } from "@prisma/client";
+import _, { has } from "lodash";
 import prisma from "../../prisma";
 import { BadRequestError } from "../../utils/api/api-error";
 import logger from "../../utils/config/logger";
@@ -25,6 +25,29 @@ export default class UserService {
         role: { connect: { id: role.id } },
       },
       include: { role: true },
+    });
+  };
+
+  static createAdminAccount = async (
+    username: string,
+    fullName: string,
+    roleName: string,
+    email: string,
+    password: string
+  ) => {
+    await prisma.user.create({
+      data: {
+        username,
+        fullName,
+        role: {
+          create: {
+            name: roleName,
+            permissions: { create: { action: "manage", subject: "all" } },
+          },
+        },
+        email,
+        password,
+      },
     });
   };
 

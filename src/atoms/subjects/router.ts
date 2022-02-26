@@ -1,31 +1,14 @@
 import { Router } from "express";
-import passport from "passport";
 import * as controller from "./controller";
 
 const router = Router();
 
-router.get(
-  "/",
+router.get("/", controller.getSubjects);
 
-  controller.getSubjects
-);
+router.post("/", controller.createSubject);
 
-router.post(
-  "/",
+router.put("/:id", controller.updateSubject);
 
-  controller.createSubject
-);
-
-router.put(
-  "/:id",
-
-  controller.updateSubject
-);
-
-router.delete(
-  "/:id",
-
-  controller.deleteSubject
-);
+router.delete("/:id", controller.deleteSubject);
 
 export default router;

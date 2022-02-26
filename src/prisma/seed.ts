@@ -1,36 +1,16 @@
 import { Role } from "@prisma/client";
+import bycrypt from "bcrypt";
 import prisma from ".";
+import UserService from "../atoms/users/service";
 
-async function createRoles() {
-  const adminRole = await prisma.role.create({
-    data: {
-      name: "admin",
-    },
-  });
-
-  const timetableRole = await prisma.role.create({
-    data: {
-      name: "timetable_manager",
-    },
-  });
-
-  const registrationRole = await prisma.role.create({
-    data: {
-      name: "registration_manager",
-    },
-  });
-
-  const attendanceRole = await prisma.role.create({
-    data: {
-      name: "attendance_manager",
-    },
-  });
-
-  const inventoryRole = await prisma.role.create({
-    data: {
-      name: "inventory_manager",
-    },
-  });
+async function createAdminAccount() {
+  await UserService.createAdminAccount(
+    "admin",
+    "theAdmin",
+    "admin",
+    "admin@example.com",
+    bycrypt.hashSync("0000", 10)
+  );
 }
 
 async function createClasses() {
@@ -298,7 +278,7 @@ async function createYears() {
 }
 
 const main = async () => {
-  await createRoles();
+  await createAdminAccount();
   await createClasses();
   // await createLectures(); // TEMP: for testing only - will be deleted later
   await createDaysAndHours();

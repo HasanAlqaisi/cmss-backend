@@ -1,10 +1,12 @@
 // import { ForbiddenError } from "@casl/ability";
+import { ForbiddenError as CaslError } from "@casl/ability";
 import { Request, Response, NextFunction } from "express";
 import { ZodError } from "zod";
 import {
   ApiError,
   BadRequestError,
   BadTokenError,
+  ForbiddenError,
   InternalError,
 } from "./api/api-error";
 import logger from "./config/logger";
@@ -19,9 +21,9 @@ export default (
 
   if (err instanceof ApiError) return ApiError.handle(err, res);
 
-  //   if (err instanceof ForbiddenError) {
-  //     return ApiError.handle(new BadTokenError(err.message), res);
-  //   }
+  if (err instanceof CaslError) {
+    return ApiError.handle(new ForbiddenError(err.message), res);
+  }
 
   // Checking for unique constraints
   if (err.code === "P2002")

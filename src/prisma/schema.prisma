@@ -27,12 +27,39 @@ model Role {
   users       User[]
 }
 
+enum Table {
+  User
+  Role
+  Permission
+  Room
+  Subject
+  Branch
+  Program
+  Stage
+  Class
+  Hall
+  Lecture
+  Hour
+  Day
+  Schedule
+  Channel
+  Specialty
+  Material
+  Year
+  Applicant
+  ApplicantBranch
+  Student
+  Degree
+  all
+}
+
 model Permission {
-  id      Int    @id @default(autoincrement())
-  action  String
-  subject String
-  roleId  Int
-  role    Role   @relation(fields: [roleId], references: [id])
+  id         Int    @id @default(autoincrement())
+  action     String
+  subject    Table
+  conditions Json?
+  roleId     Int
+  role       Role   @relation(fields: [roleId], references: [id])
 }
 
 model Room {

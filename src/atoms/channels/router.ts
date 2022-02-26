@@ -1,31 +1,14 @@
 import { Router } from "express";
-import passport from "passport";
 import * as controller from "./controller";
 
 const router = Router();
 
-router.get(
-  "/",
-   
-  controller.getChannels
-);
+router.get("/", controller.getChannels);
 
-router.post(
-  "/",
-   
-  controller.createChannel
-);
+router.post("/", controller.createChannel);
 
-router.put(
-  "/:id",
-   
-  controller.updateChannel
-);
+router.put("/:id", controller.updateChannel);
 
-router.delete(
-  "/:id",
-   
-  controller.deleteChannel
-);
+router.delete("/:id", controller.deleteChannel);
 
 export default router;

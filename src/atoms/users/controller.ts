@@ -4,16 +4,13 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 import { User } from "@prisma/client";
 import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
-// import { ForbiddenError, subject } from "@casl/ability";
 import { BadRequestError, BadTokenError } from "../../utils/api/api-error";
 import { CreatedResponse, OkResponse } from "../../utils/api/api-response";
 import UserService from "./service";
-// import defineAbilityFor from "../../utils/permissions";
 import getIdFromPayload from "../../utils/get-id-from-payload";
 import sendEmail from "../../utils/send-email";
 import { unAuthorizedMessage } from "../../utils/constants";
 import { reshapeData } from "../../utils/reshape-data";
-import logger from "../../utils/config/logger";
 
 const createToken = (id: number): string =>
   jwt.sign({ id }, process.env.TOKEN_SECRET as string, { expiresIn: "1d" });
@@ -64,25 +61,8 @@ export const changePassPut = async (req: Request, res: Response) => {
 
   const { id } = await generalValidator.id(req);
 
-  const { authorization } = req.headers;
-
-  // Extract id of the user who made the request
-  const userRequesterId = getIdFromPayload(authorization!);
-
-  // Get the user requester information
-  const userRequester = await UserService.findById(userRequesterId);
-
-  // Define ability for the user to check his permissions
-  //   const ability = defineAbilityFor(userRequester!);
-
   // Get the user targeted to change his password
   const userTarget = await UserService.findById(Number(id));
-
-  // check if the user requester can change password of the user target
-  //   ForbiddenError.from(ability).throwUnlessCan(
-  //     "update",
-  //     subject("User", userTarget!)
-  //   );
 
   // Change the user password
   const updatedUser = await UserService.changePassword(Number(id), newPassword);
