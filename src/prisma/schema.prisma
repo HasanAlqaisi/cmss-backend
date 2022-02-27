@@ -18,11 +18,12 @@ model User {
   role      Role       @relation(fields: [roleId], references: [id])
   lectures  Lecture[]
   schedules Schedule[]
+  lists     List[]
 }
 
 model Role {
   id          Int          @id @default(autoincrement())
-  name        String
+  name        String       @unique
   permissions Permission[]
   users       User[]
 }
@@ -68,6 +69,8 @@ model Room {
   name      String?
   halls     Hall[]
   schedules Schedule[]
+  lists     List[]
+  items     RoomItem[]
 }
 
 model Subject {
@@ -283,4 +286,78 @@ model Degree {
   score       Float     @default(0)
 
   @@id([materialId, applicantId])
+}
+
+model Category {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  items Item[]
+}
+
+model Item {
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  quantity    Int           @default(0)
+  description String?
+  image       String?
+  categoryId  Int
+  category    Category      @relation(fields: [categoryId], references: [id])
+  inventory   Inventory?
+  broken      BrokenItem?
+  exported    ExportedItem?
+  lists       ListItem[]
+  rooms       RoomItem[]
+}
+
+model Inventory {
+  id           Int      @id @default(autoincrement())
+  itemId       Int      @unique
+  item         Item     @relation(fields: [itemId], references: [id])
+  quantity     Int
+  dateReceived DateTime
+}
+
+model BrokenItem {
+  id        Int      @id @default(autoincrement())
+  itemId    Int      @unique
+  item      Item     @relation(fields: [itemId], references: [id])
+  quantity  Int
+  dateBroke DateTime
+}
+
+model ExportedItem {
+  id           Int      @id @default(autoincrement())
+  itemId       Int      @unique
+  item         Item     @relation(fields: [itemId], references: [id])
+  quantity     Int
+  dateExported DateTime
+}
+
+model List {
+  id            Int        @id @default(autoincrement())
+  roomId        Int
+  room          Room       @relation(fields: [roomId], references: [id])
+  responsibleId Int
+  responsible   User       @relation(fields: [responsibleId], references: [id])
+  dateInuse     DateTime
+  items         ListItem[]
+}
+
+model ListItem {
+  id         Int    @id @default(autoincrement())
+  listId     Int
+  list       List   @relation(fields: [listId], references: [id])
+  itemId     Int
+  item       Item   @relation(fields: [itemId], references: [id])
+  quantity   Int
+  orderImage String
+}
+
+model RoomItem {
+  id       Int  @id @default(autoincrement())
+  roomId   Int
+  room     Room @relation(fields: [roomId], references: [id])
+  itemId   Int
+  item     Item @relation(fields: [itemId], references: [id])
+  quantity Int
 }
