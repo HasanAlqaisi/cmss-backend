@@ -1,13 +1,24 @@
+import { Request } from "express";
 import { PassportStatic } from "passport";
-import { ExtractJwt, StrategyOptions } from "passport-jwt";
+import { StrategyOptions } from "passport-jwt";
 import UserService from "../../atoms/users/service";
-import prisma from "../../prisma";
 
 const JwtStrategy = require("passport-jwt").Strategy;
 
+const extractor = (req: Request) => {
+  let token = req.headers.authorization;
+  token = token?.replace("Bearer ", "");
+
+  if (req && req.cookies) {
+    token = req.cookies.token || token;
+  }
+
+  return token || "";
+};
+
 export default function jwtConfig(passport: PassportStatic) {
   const jwtOptions: StrategyOptions = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    jwtFromRequest: extractor,
     secretOrKey: process.env.TOKEN_SECRET,
   };
 
