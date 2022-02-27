@@ -6,7 +6,7 @@ import * as controller from "./controller";
 const router = Router();
 
 router.post(
-  "/signup",
+  "/registration",
   passport.authenticate("jwt", { session: false }),
   permissions("create", "User"),
   controller.signupPost
