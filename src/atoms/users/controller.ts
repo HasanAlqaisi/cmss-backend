@@ -149,7 +149,10 @@ export const getUserById = async (req: Request, res: Response) => {
 };
 
 export const getUserProfile = async (req: Request, res: Response) => {
-  const reshapedUser = reshapeData(req.user!, ["role.permissions"]) as object;
+  const reshapedUser = reshapeData(req.user!, [
+    "role.permissions",
+    "password",
+  ]) as object;
   return new OkResponse(reshapedUser).send(res);
 };
 

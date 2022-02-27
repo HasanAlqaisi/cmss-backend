@@ -13,6 +13,8 @@ import channelsRoutes from "./atoms/channels/router";
 import applicantsRoutes from "./atoms/applicants/router";
 import yearsRoutes from "./atoms/years/router";
 import acceptancesRoutes from "./atoms/acceptances/router";
+import itemsRoutes from "./atoms/items/router";
+import categoriesRoutes from "./atoms/categories/router";
 import permissions from "./middlewares/permissions";
 
 const router = Router();
@@ -54,5 +56,9 @@ router.use(
   permissions("manage", "Applicant"),
   acceptancesRoutes
 );
+
+router.use("/items", permissions("manage", "Item"), itemsRoutes);
+
+router.use("/categories", permissions("manage", "Category"), categoriesRoutes);
 
 export default router;
