@@ -19,6 +19,8 @@ model User {
   lectures  Lecture[]
   schedules Schedule[]
   lists     List[]
+  roomId    Int?       @unique
+  room      Room?      @relation(fields: [roomId], references: [id])
 }
 
 model Role {
@@ -64,13 +66,14 @@ model Permission {
 }
 
 model Room {
-  id        Int        @id @default(autoincrement())
-  number    Int        @unique
-  name      String?
-  halls     Hall[]
-  schedules Schedule[]
-  lists     List[]
-  items     RoomItem[]
+  id          Int        @id @default(autoincrement())
+  number      Int        @unique
+  name        String?
+  halls       Hall[]
+  schedules   Schedule[]
+  lists       List[]
+  items       RoomItem[]
+  responsible User?
 }
 
 model Subject {
@@ -295,69 +298,61 @@ model Category {
 }
 
 model Item {
-  id          Int           @id @default(autoincrement())
-  name        String        @unique
-  quantity    Int           @default(0)
-  description String?
-  image       String?
-  categoryId  Int
-  category    Category      @relation(fields: [categoryId], references: [id])
-  inventory   Inventory?
-  broken      BrokenItem?
-  exported    ExportedItem?
-  lists       ListItem[]
-  rooms       RoomItem[]
-}
-
-model Inventory {
-  id           Int      @id @default(autoincrement())
-  itemId       Int      @unique
-  item         Item     @relation(fields: [itemId], references: [id])
-  quantity     Int
-  dateReceived DateTime
+  id           Int        @id @default(autoincrement())
+  name         String     @unique
+  quantity     Int        @default(0)
+  description  String?
+  image        String?
+  categoryId   Int?
+  category     Category?  @relation(fields: [categoryId], references: [id])
+  dateReceived DateTime   @default(now())
+  rooms        RoomItem[]
 }
 
 model BrokenItem {
-  id        Int      @id @default(autoincrement())
-  itemId    Int      @unique
-  item      Item     @relation(fields: [itemId], references: [id])
-  quantity  Int
-  dateBroke DateTime
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  image       String?
+  quantity    Int
+  dateBroke   DateTime @default(now())
 }
 
 model ExportedItem {
   id           Int      @id @default(autoincrement())
-  itemId       Int      @unique
-  item         Item     @relation(fields: [itemId], references: [id])
+  name         String
+  description  String?
+  image        String?
   quantity     Int
-  dateExported DateTime
+  dateExported DateTime @default(now())
 }
 
 model List {
   id            Int        @id @default(autoincrement())
-  roomId        Int
-  room          Room       @relation(fields: [roomId], references: [id])
   responsibleId Int
-  responsible   User       @relation(fields: [responsibleId], references: [id])
-  dateInuse     DateTime
+  responsible   User       @relation(fields: [responsibleId], references: [id], onDelete: Cascade)
+  dateInuse     DateTime   @default(now())
   items         ListItem[]
+  Room          Room       @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  roomId        Int
+  orderImage    String
 }
 
 model ListItem {
-  id         Int    @id @default(autoincrement())
-  listId     Int
-  list       List   @relation(fields: [listId], references: [id])
-  itemId     Int
-  item       Item   @relation(fields: [itemId], references: [id])
-  quantity   Int
-  orderImage String
+  id          Int     @id @default(autoincrement())
+  listId      Int
+  list        List    @relation(fields: [listId], references: [id], onDelete: Cascade)
+  name        String
+  description String?
+  image       String?
+  quantity    Int
 }
 
 model RoomItem {
   id       Int  @id @default(autoincrement())
   roomId   Int
-  room     Room @relation(fields: [roomId], references: [id])
+  room     Room @relation(fields: [roomId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   itemId   Int
-  item     Item @relation(fields: [itemId], references: [id])
+  item     Item @relation(fields: [itemId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   quantity Int
 }
