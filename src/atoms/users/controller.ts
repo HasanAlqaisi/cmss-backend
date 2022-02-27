@@ -47,8 +47,7 @@ export const loginPost = async (req: Request, res: Response) => {
 
   const reshapedUser = reshapeData(user, ["password", "roleId"]) as User;
 
-  res.cookie("jwt", token, { path: "/", httpOnly: true });
-  return new OkResponse({ user: reshapedUser }).send(res);
+  return new OkResponse({ token, user: reshapedUser }).send(res);
 };
 
 export const logoutPost = async (req: Request, res: Response) => {
