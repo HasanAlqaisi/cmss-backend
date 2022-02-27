@@ -44,7 +44,10 @@ export const loginPost = async (req: Request, res: Response) => {
     throw new BadRequestError("Incorrect email and/or password");
 
   const token = createToken(user.id);
-  res.cookie("token", token, { path: "/" });
+  res.cookie("token", token, {
+    path: "/",
+    httpOnly: true,
+  });
 
   const reshapedUser = reshapeData(user, ["password", "roleId"]) as User;
 
