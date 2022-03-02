@@ -12,10 +12,16 @@ import "./utils/config/general";
 import mainErrorHandler from "./utils/main-error-handler";
 import mainRoute from "./index";
 import specs from "../openapi.json";
+import setZodErrors from "./middlewares/set-zod-errors";
 
 const app: Application = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.CLIENT_DOMAIN,
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -35,6 +41,8 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use("/public", express.static(path.join(__dirname, "public")));
+
+app.use(setZodErrors);
 
 // Main app route
 app.use("/", mainRoute);
