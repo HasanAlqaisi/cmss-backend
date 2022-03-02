@@ -1,4 +1,4 @@
-import { BrokenItem } from "@prisma/client";
+import { BrokenItem, Prisma } from "@prisma/client";
 import prisma from "../../prisma";
 import { BadRequestError } from "../../utils/api/api-error";
 import {
@@ -9,27 +9,36 @@ import {
 import { InputBrokenItem, InputExportedItem, InputItem } from "./types";
 
 export default class ItemService {
-  static getInventoryItems = async () => {
-    const items = await prisma.item.findMany();
-    return items;
-  };
-
-  static getRoomItems = async (roomId: number) => {
-    const items = await prisma.room.findUnique({
-      where: { id: roomId },
-      include: { items: true },
+  static getInventoryItems = async (
+    order: Prisma.SortOrder,
+    searchQuery?: string
+  ) => {
+    const items = await prisma.item.findMany({
+      orderBy: [{ quantity: order }],
+      where: { name: { search: searchQuery } },
     });
-
     return items;
   };
 
-  static getExportedItems = async () => {
-    const items = await prisma.exportedItem.findMany();
+  static getExportedItems = async (
+    order: Prisma.SortOrder,
+    searchQuery?: string
+  ) => {
+    const items = await prisma.exportedItem.findMany({
+      orderBy: [{ quantity: order }],
+      where: { name: { search: searchQuery } },
+    });
     return items;
   };
 
-  static getBrokenItems = async () => {
-    const items = await prisma.brokenItem.findMany();
+  static getBrokenItems = async (
+    order: Prisma.SortOrder,
+    searchQuery?: string
+  ) => {
+    const items = await prisma.brokenItem.findMany({
+      orderBy: [{ quantity: order }],
+      where: { name: { search: searchQuery } },
+    });
     return items;
   };
 
@@ -43,13 +52,13 @@ export default class ItemService {
     return item;
   };
 
-  static createItem = async (inputItem: InputItem) => {
+  static createItem = async (inputItem: InputItem, imageUrl?: string) => {
     const item = await prisma.item.create({
       data: {
         name: inputItem.name,
         quantity: inputItem.quantity,
         description: inputItem.description,
-        image: inputItem.image,
+        image: imageUrl,
         category: inputItem.categoryId
           ? { connect: { id: inputItem.categoryId } }
           : undefined,
@@ -70,7 +79,10 @@ export default class ItemService {
     return item;
   };
 
-  static createBrokenItem = async (inputItem: InputBrokenItem) => {
+  static createBrokenItem = async (
+    inputItem: InputBrokenItem,
+    imageUrl?: string
+  ) => {
     const originalItem = await ItemService.findItemByName(inputItem.name);
 
     const createOperation = prisma.brokenItem.create({
@@ -78,7 +90,7 @@ export default class ItemService {
         name: inputItem.name,
         quantity: inputItem.quantity,
         description: inputItem.description,
-        image: inputItem.image,
+        image: imageUrl,
         dateBroke: inputItem.dateBroke
           ? inputItem.dateBroke.toISOString()
           : undefined,
@@ -104,7 +116,10 @@ export default class ItemService {
     return brokenItem;
   };
 
-  static createExportedItem = async (inputItem: InputExportedItem) => {
+  static createExportedItem = async (
+    inputItem: InputExportedItem,
+    imageUrl?: string
+  ) => {
     const originalItem = await ItemService.findItemByName(inputItem.name);
 
     const createOperation = prisma.exportedItem.create({
@@ -112,7 +127,7 @@ export default class ItemService {
         name: inputItem.name,
         quantity: inputItem.quantity,
         description: inputItem.description,
-        image: inputItem.image,
+        image: imageUrl,
         dateExported: inputItem.dateExported
           ? inputItem.dateExported.toISOString()
           : undefined,
@@ -138,14 +153,18 @@ export default class ItemService {
     return exportedItem;
   };
 
-  static updateItem = async (itemId: number, inputItem: InputItem) => {
+  static updateItem = async (
+    itemId: number,
+    inputItem: InputItem,
+    imageUrl?: string
+  ) => {
     const item = await prisma.item.update({
       where: { id: itemId },
       data: {
         name: inputItem.name,
         quantity: inputItem.quantity,
         description: inputItem.description,
-        image: inputItem.image,
+        image: imageUrl,
         category: inputItem.categoryId
           ? { connect: { id: inputItem.categoryId } }
           : undefined,
@@ -160,7 +179,8 @@ export default class ItemService {
 
   static updateExportedItem = async (
     id: number,
-    inputItem: InputExportedItem
+    inputItem: InputExportedItem,
+    imageUrl?: string
   ) => {
     const originalItem = await ItemService.findItemByName(inputItem.name);
     const oldExportedItem = await this.getExportedItemById(id);
@@ -171,7 +191,7 @@ export default class ItemService {
         name: inputItem.name,
         quantity: inputItem.quantity,
         description: inputItem.description,
-        image: inputItem.image,
+        image: imageUrl,
         dateExported: inputItem.dateExported
           ? inputItem.dateExported.toISOString()
           : undefined,
@@ -199,7 +219,11 @@ export default class ItemService {
     return updatedItem;
   };
 
-  static updateBrokenItem = async (id: number, inputItem: InputBrokenItem) => {
+  static updateBrokenItem = async (
+    id: number,
+    inputItem: InputBrokenItem,
+    imageUrl?: string
+  ) => {
     const originalItem = await ItemService.findItemByName(inputItem.name);
 
     const oldBrokenItem = await this.getBrokenItemById(id);
@@ -210,7 +234,7 @@ export default class ItemService {
         name: inputItem.name,
         quantity: inputItem.quantity,
         description: inputItem.description,
-        image: inputItem.image,
+        image: imageUrl,
         dateBroke: inputItem.dateBroke
           ? inputItem.dateBroke.toISOString()
           : undefined,
@@ -237,20 +261,6 @@ export default class ItemService {
     );
     return updatedItem;
   };
-
-  // static createList = async (roomId: number, responsibleId: number) => {
-  //   // Need to dec quantity original items
-  //   const list = await prisma.list.create({
-  //     data: {
-  //       Room: { connect: { id: roomId } },
-  //       responsible: { connect: { id: responsibleId } },
-  //       orderImage: "",
-  //       items: { create: [{ itemId: 1, quantity: 2 }] },
-  //     },
-  //     include: { items: true, responsible: true, Room: true },
-  //   });
-  //   return list;
-  // };
 
   static getItem = async (itemId: number) => {
     const item = await prisma.item.findUnique({
@@ -307,31 +317,4 @@ export default class ItemService {
       }
     );
   };
-
-  // static getRoomLists = async (roomId: number) => {
-  //   const lists = await prisma.room.findUnique({
-  //     where: { id: roomId },
-  //     include: { lists: { include: { items: true, responsible: true } } },
-  //   });
-
-  //   return lists;
-  // };
-
-  // static getResponsibleLists = async (responsibleId: number) => {
-  //   const lists = await prisma.user.findUnique({
-  //     where: { id: responsibleId },
-  //     include: { lists: { include: { items: true, Room: true } } },
-  //   });
-
-  //   return lists;
-  // };
-
-  // static getList = async (listId: number) => {
-  //   const list = await prisma.list.findUnique({
-  //     where: { id: listId },
-  //     include: { items: true, Room: true, responsible: true },
-  //   });
-
-  //   return list;
-  // };
 }

@@ -1,4 +1,6 @@
 import { BrokenItem, ExportedItem, Item, Prisma } from "@prisma/client";
+import multer from "multer";
+import path from "path";
 import prisma from "../../prisma";
 import { BadRequestError } from "../../utils/api/api-error";
 import { InputBrokenItem, InputExportedItem } from "./types";
@@ -68,3 +70,18 @@ export const validateQuantityOnDelete = async (
 
   return onValid(updatedOriginalItem);
 };
+
+export const uploadOnMemory = multer({ storage: multer.memoryStorage() });
+
+export const uploadOnDisk = multer({
+  storage: multer.diskStorage({
+    destination: (req, file, cb) =>
+      cb(null, path.join(__dirname, "../../public")),
+    filename: (req, file, cb) => {
+      cb(
+        null,
+        new Date().getTime().toString() + path.extname(file.originalname)
+      );
+    },
+  }),
+});
