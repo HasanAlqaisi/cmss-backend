@@ -13,7 +13,7 @@ enum StatusResponse {
 
 abstract class ApiResponse {
   constructor(protected statusCode: StatusResponse, protected json: Object) {
-    if (typeof this.json === "string") this.json = { details: this.json };
+    if (typeof this.json === "string") this.json = { detail: this.json };
   }
 
   send(res: Response) {
