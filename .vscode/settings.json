@@ -1,3 +1,12 @@
 {
-  "cSpell.words": ["middlewares"]
+  "cSpell.words": ["middlewares"],
+  "cSpell.ignorePaths": [
+    "package-lock.json",
+    "node_modules",
+    "vscode-extension",
+    ".git/objects",
+    ".vscode",
+    ".vscode-insiders",
+    "src/utils/i18n/translations/ar.ts"
+  ]
 }
