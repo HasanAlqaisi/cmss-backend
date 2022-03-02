@@ -11,6 +11,7 @@ import "./utils/config/general";
 import mainErrorHandler from "./utils/main-error-handler";
 import mainRoute from "./index";
 import specs from "../openapi.json";
+import setZodErrors from "./middlewares/set-zod-errors";
 
 const app: Application = express();
 
@@ -36,6 +37,8 @@ if (process.env.NODE_ENV === "development") {
   app.use("/docs", swaggerUi.serve);
   app.get("/docs", swaggerUi.setup(specs));
 }
+
+app.use(setZodErrors);
 
 // Main app route
 app.use("/", mainRoute);
