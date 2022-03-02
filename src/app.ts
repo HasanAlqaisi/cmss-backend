@@ -4,6 +4,7 @@ import passport from "passport";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import swaggerUi from "swagger-ui-express";
+import path from "path";
 import { NotFoundError } from "./utils/api/api-error";
 import jwtConfig from "./utils/auth/jwt";
 import logger from "./utils/config/logger";
@@ -17,6 +18,7 @@ const app: Application = express();
 app.use(cors());
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 
@@ -31,6 +33,8 @@ if (process.env.NODE_ENV === "development") {
   app.use("/docs", swaggerUi.serve);
   app.get("/docs", swaggerUi.setup(specs));
 }
+
+app.use("/public", express.static(path.join(__dirname, "public")));
 
 // Main app route
 app.use("/", mainRoute);
