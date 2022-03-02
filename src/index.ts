@@ -57,8 +57,10 @@ router.use(
   acceptancesRoutes
 );
 
+router.use("/categories", permissions("manage", "Category"), categoriesRoutes);
+
 router.use("/items", permissions("manage", "Item"), itemsRoutes);
 
-router.use("/categories", permissions("manage", "Category"), categoriesRoutes);
+router.use("/lists", permissions("manage", "List"), categoriesRoutes);
 
 export default router;
