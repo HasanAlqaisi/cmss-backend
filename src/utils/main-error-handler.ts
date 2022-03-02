@@ -2,6 +2,7 @@
 import { ForbiddenError as CaslError } from "@casl/ability";
 import { Request, Response, NextFunction } from "express";
 import { ZodError } from "zod";
+import multer from "multer";
 import {
   ApiError,
   BadRequestError,
@@ -25,6 +26,10 @@ export default (
     return ApiError.handle(new ForbiddenError(err.message), res);
   }
 
+  if (err instanceof multer.MulterError) {
+    return ApiError.handle(new BadRequestError(err), res);
+  }
+
   // Checking for unique constraints
   if (err.code === "P2002")
     return ApiError.handle(
@@ -43,7 +48,7 @@ export default (
   }
 
   if (err instanceof ZodError) {
-    return res.status(400).json(err);
+    return ApiError.handle(new BadRequestError(err), res);
   }
 
   return ApiError.handle(new InternalError(err.message), res);
