@@ -15,7 +15,7 @@ model User {
   fullName  String
   password  String
   roleId    Int
-  role      Role       @relation(fields: [roleId], references: [id])
+  role      Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
   lectures  Lecture[]
   schedules Schedule[]
   lists     List[]
@@ -72,7 +72,6 @@ model Room {
   halls       Hall[]
   schedules   Schedule[]
   lists       List[]
-  items       RoomItem[]
   responsible User?
 }
 
@@ -298,15 +297,14 @@ model Category {
 }
 
 model Item {
-  id           Int        @id @default(autoincrement())
-  name         String     @unique
-  quantity     Int        @default(0)
+  id           Int       @id @default(autoincrement())
+  name         String    @unique
+  quantity     Int       @default(0)
   description  String?
   image        String?
   categoryId   Int?
-  category     Category?  @relation(fields: [categoryId], references: [id])
-  dateReceived DateTime   @default(now())
-  rooms        RoomItem[]
+  category     Category? @relation(fields: [categoryId], references: [id])
+  dateReceived DateTime  @default(now())
 }
 
 model BrokenItem {
@@ -335,7 +333,7 @@ model List {
   items         ListItem[]
   Room          Room       @relation(fields: [roomId], references: [id], onDelete: Cascade)
   roomId        Int
-  orderImage    String
+  orderImage    String?
 }
 
 model ListItem {
@@ -346,13 +344,4 @@ model ListItem {
   description String?
   image       String?
   quantity    Int
-}
-
-model RoomItem {
-  id       Int  @id @default(autoincrement())
-  roomId   Int
-  room     Room @relation(fields: [roomId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  itemId   Int
-  item     Item @relation(fields: [itemId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  quantity Int
 }
