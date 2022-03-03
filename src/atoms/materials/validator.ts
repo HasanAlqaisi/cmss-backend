@@ -5,8 +5,8 @@ import { z } from "zod";
 export const upsertMaterial = async (req: Request) => {
   const schema = z.object({
     name: z.string(),
-    custom_percentage: z.number().nonnegative().default(0),
-    specialty_id: z.number(),
+    customPercentage: z.number().nonnegative().default(0),
+    specialtyId: z.number(),
   });
 
   return schema.parseAsync(req.body);
