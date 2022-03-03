@@ -277,12 +277,41 @@ async function createYears() {
   });
 }
 
+async function createSpecialties() {
+  await prisma.specialty.createMany({
+    data: [
+      { name: "First", capacity: 3, isDependent: true },
+      { name: "Second", capacity: 3, isDependent: true },
+      { name: "Third", capacity: 3, isDependent: true },
+      { name: "Forth", capacity: 3, isDependent: true },
+    ],
+  });
+}
+
+async function createChannels() {
+  await prisma.channel.createMany({
+    data: [
+      { name: "Hello" },
+      { name: "Hi" },
+      { name: "David" },
+      { name: "Alice" },
+    ],
+  });
+}
+
 const main = async () => {
-  await createAdminAccount();
-  await createClasses();
   // await createLectures(); // TEMP: for testing only - will be deleted later
-  await createDaysAndHours();
-  await createYears();
+
+  const promises = [
+    createAdminAccount(),
+    createClasses(),
+    createDaysAndHours(),
+    createYears(),
+    createSpecialties(),
+    createChannels(),
+  ];
+
+  await Promise.all(promises);
 };
 
 main()

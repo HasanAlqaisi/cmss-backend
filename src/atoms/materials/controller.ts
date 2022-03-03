@@ -22,11 +22,8 @@ export const getMaterials = async (req: Request, res: Response) => {
 };
 
 export const createMaterials = async (req: Request, res: Response) => {
-  const {
-    name,
-    specialty_id: specialtyId,
-    custom_percentage: customPercentage,
-  } = await validator.upsertMaterial(req);
+  const { name, customPercentage, specialtyId } =
+    await validator.upsertMaterial(req);
 
   const material = await MaterialService.createMaterial(
     name,
@@ -51,11 +48,8 @@ export const deleteMaterial = async (req: Request, res: Response) => {
 
 export const updateMaterial = async (req: Request, res: Response) => {
   const { id } = await generalValidator.id(req);
-  const {
-    name,
-    specialty_id: specialtyId,
-    custom_percentage: customPercentage,
-  } = await validator.upsertMaterial(req);
+  const { name, customPercentage, specialtyId } =
+    await validator.upsertMaterial(req);
 
   const idNumber = Number(id);
 

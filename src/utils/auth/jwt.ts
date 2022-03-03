@@ -6,14 +6,8 @@ import UserService from "../../atoms/users/service";
 const JwtStrategy = require("passport-jwt").Strategy;
 
 const extractor = (req: Request) => {
-  let token = req.headers.authorization;
-  token = token?.replace("Bearer ", "");
-
-  if (req && req.cookies) {
-    token = req.cookies.token || token;
-  }
-
-  return token || "";
+  const token = req.headers.authorization?.replace("Bearer ", "");
+  return token || req.cookies["access-token"];
 };
 
 export default function jwtConfig(passport: PassportStatic) {
