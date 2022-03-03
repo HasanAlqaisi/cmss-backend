@@ -15,6 +15,7 @@ import yearsRoutes from "./atoms/years/router";
 import acceptancesRoutes from "./atoms/acceptances/router";
 import itemsRoutes from "./atoms/items/router";
 import categoriesRoutes from "./atoms/categories/router";
+import listsRoutes from "./atoms/lists/router";
 import permissions from "./middlewares/permissions";
 
 const router = Router();
@@ -61,6 +62,6 @@ router.use("/categories", permissions("manage", "Category"), categoriesRoutes);
 
 router.use("/items", permissions("manage", "Item"), itemsRoutes);
 
-router.use("/lists", permissions("manage", "List"), categoriesRoutes);
+router.use("/lists", permissions("manage", "List"), listsRoutes);
 
 export default router;
