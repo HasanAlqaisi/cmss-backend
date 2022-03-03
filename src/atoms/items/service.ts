@@ -16,6 +16,7 @@ export default class ItemService {
     const items = await prisma.item.findMany({
       orderBy: [{ quantity: order }],
       where: { name: { search: searchQuery } },
+      include: { category: true },
     });
     return items;
   };
@@ -74,6 +75,7 @@ export default class ItemService {
   static findItemByName = async (name: string) => {
     const item = await prisma.item.findUnique({
       where: { name },
+      include: { category: true },
     });
 
     return item;

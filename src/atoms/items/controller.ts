@@ -1,11 +1,10 @@
 import { Request, Response } from "express";
-import fs from "fs";
-import path from "path";
 import { DeletedResponse, OkResponse } from "../../utils/api/api-response";
 import ItemService from "./service";
 import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
-import logger from "../../utils/config/logger";
+import saveImageInServer from "../../utils/save-image-in-server";
+import deleteImageFromServer from "../../utils/delete-image-from-server";
 
 export const getItems = async (req: Request, res: Response) => {
   const itemQuery = await validator.itemsQuery(req);
@@ -65,23 +64,7 @@ export const createItem = async (req: Request, res: Response) => {
   const isExported = type.exported === "true";
   const isBroken = type.broken === "true";
 
-  let imageUrl: string | undefined;
-
-  if (req.file) {
-    const fileName = new Date().getTime().toString() + req.file.originalname;
-
-    imageUrl = path.join(
-      process.env.CLIENT_DOMAIN as string,
-      `public/images/${fileName}`
-    );
-
-    const dirPath = path.join(
-      process.env.PWD as string,
-      `src/public/images/${fileName}`
-    );
-
-    fs.writeFileSync(dirPath, req.file.buffer);
-  }
+  const imageUrl = saveImageInServer(req);
 
   if (isExported) {
     const item = await ItemService.createExportedItem(inputItem, imageUrl);
@@ -109,14 +92,7 @@ export const deleteItem = async (req: Request, res: Response) => {
   const oldItem = await ItemService.getItem(idNumber);
 
   if (oldItem?.image) {
-    const imagePath = path.join(process.env.PWD as string, `src`);
-
-    const oldImageUrl = oldItem.image.replace(
-      process.env.CLIENT_DOMAIN as string,
-      imagePath
-    );
-
-    fs.unlinkSync(oldImageUrl);
+    deleteImageFromServer(oldItem.image);
   }
 
   if (isExported) {
@@ -143,33 +119,10 @@ export const updateItem = async (req: Request, res: Response) => {
   const oldItem = await ItemService.getItem(idNumber);
 
   if (oldItem?.image) {
-    const imagePath = path.join(process.env.PWD as string, `src`);
-
-    const oldImageUrl = oldItem.image.replace(
-      process.env.CLIENT_DOMAIN as string,
-      imagePath
-    );
-
-    fs.unlinkSync(oldImageUrl);
+    deleteImageFromServer(oldItem.image);
   }
 
-  let imageUrl: string | undefined;
-
-  if (req.file) {
-    const fileName = new Date().getTime().toString() + req.file.originalname;
-
-    imageUrl = path.join(
-      process.env.CLIENT_DOMAIN as string,
-      `public/images/${fileName}`
-    );
-
-    const dirPath = path.join(
-      process.env.PWD as string,
-      `src/public/images/${fileName}`
-    );
-
-    fs.writeFileSync(dirPath, req.file.buffer);
-  }
+  const imageUrl = saveImageInServer(req);
 
   const type = await validator.itemQuery(req);
   const isExported = type.exported === "true";
