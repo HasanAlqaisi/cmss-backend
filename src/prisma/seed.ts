@@ -288,6 +288,17 @@ async function createSpecialties() {
   });
 }
 
+async function createChannels() {
+  await prisma.channel.createMany({
+    data: [
+      { name: "Hello" },
+      { name: "Hi" },
+      { name: "David" },
+      { name: "Alice" },
+    ],
+  });
+}
+
 const main = async () => {
   // await createLectures(); // TEMP: for testing only - will be deleted later
 
@@ -297,6 +308,7 @@ const main = async () => {
     createDaysAndHours(),
     createYears(),
     createSpecialties(),
+    createChannels(),
   ];
 
   await Promise.all(promises);
