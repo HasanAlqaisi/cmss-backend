@@ -8,6 +8,9 @@ import ItemService from "../items/service";
 import { validateQuantityOnCreate } from "./helpers";
 import { BadRequestError } from "../../utils/api/api-error";
 import { reshapeData } from "../../utils/reshape-data";
+import logger from "../../utils/config/logger";
+import saveImageInServer from "../../utils/save-image-in-server";
+import deleteImageFromServer from "../../utils/delete-image-from-server";
 
 export const getLists = async (req: Request, res: Response) => {
   const listQuery = await validator.getLists(req);
@@ -56,10 +59,11 @@ export const createList = async (req: Request, res: Response) => {
   const inputList = await validator.createList(req);
   const prismaOperations = [];
 
+  const imageUrl = saveImageInServer(req);
+
   // eslint-disable-next-line no-restricted-syntax
   for await (const item of inputList.items) {
     const originalItem = await ItemService.findItemByName(item.name);
-
     if (!originalItem)
       throw new BadRequestError(`couldn't find item ${item.name}`);
 
@@ -68,7 +72,11 @@ export const createList = async (req: Request, res: Response) => {
     );
   }
 
-  const list = await ListService.createList(inputList, prismaOperations);
+  const list = await ListService.createList(
+    inputList,
+    prismaOperations,
+    imageUrl
+  );
 
   return new OkResponse(list).send(res);
 };
@@ -77,6 +85,12 @@ export const deleteList = async (req: Request, res: Response) => {
   const { id } = await generalValidator.id(req);
 
   const idNumber = Number(id);
+
+  const oldList = await ListService.getList(idNumber);
+
+  if (oldList?.orderImage) {
+    deleteImageFromServer(oldList.orderImage);
+  }
 
   await ListService.deleteList(idNumber);
 

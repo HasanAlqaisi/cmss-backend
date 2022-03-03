@@ -1,11 +1,16 @@
 import { Router } from "express";
+import uploadImageOnMemory from "../../utils/upload-image-on-memory";
 import * as controller from "./controller";
 
 const router = Router();
 
 router.get("/", controller.getLists);
 
-router.post("/", controller.createList);
+router.post(
+  "/",
+  uploadImageOnMemory.single("orderImage"),
+  controller.createList
+);
 
 router.get("/:id", controller.getList);
 

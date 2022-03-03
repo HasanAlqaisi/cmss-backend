@@ -5,13 +5,14 @@ import { InputList } from "./types";
 export default class ListService {
   static createList = async (
     inputList: InputList,
-    updateOriginalItemsQUantity: Prisma.Prisma__ItemClient<any>[]
+    updateOriginalItemsQUantity: Prisma.Prisma__ItemClient<any>[],
+    orderImage?: string
   ) => {
     const list = prisma.list.create({
       data: {
         Room: { connect: { id: inputList.roomId } },
         responsible: { connect: { id: inputList.responsibleId } },
-        orderImage: inputList.orderImage,
+        orderImage,
         dateInuse: inputList.dateInUse,
         items: {
           create: inputList.items,
