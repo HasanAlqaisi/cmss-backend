@@ -280,22 +280,16 @@ async function createYears() {
 async function createSpecialties() {
   await prisma.specialty.createMany({
     data: [
-      { name: "First", capacity: 3, isDependent: true },
-      { name: "Second", capacity: 3, isDependent: true },
-      { name: "Third", capacity: 3, isDependent: true },
-      { name: "Forth", capacity: 3, isDependent: true },
+      { name: "احيائي", minAvg: 70, isDependent: false },
+      { name: "تطبيقي", minAvg: 70, isDependent: false },
+      { name: "مهني", minAvg: 70, isDependent: true },
     ],
   });
 }
 
 async function createChannels() {
   await prisma.channel.createMany({
-    data: [
-      { name: "Hello" },
-      { name: "Hi" },
-      { name: "David" },
-      { name: "Alice" },
-    ],
+    data: [{ name: "القناة العامة" }, { name: "قناة اوائل المعهد" }],
   });
 }
 
