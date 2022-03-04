@@ -196,12 +196,13 @@ model Channel {
 }
 
 model Specialty {
-  id          Int         @id @default(autoincrement())
-  name        String      @unique
-  capacity    Int
-  isDependent Boolean     @default(false)
-  materials   Material[]
-  applicants  Applicant[]
+  id               Int         @id @default(autoincrement())
+  name             String      @unique
+  minAvg           Int
+  isDependent      Boolean     @default(false)
+  customPercentage Int         @default(0)
+  materials        Material[]
+  applicants       Applicant[]
 }
 
 model Material {
@@ -233,8 +234,8 @@ model Applicant {
   channelId        Int
   channel          Channel           @relation(fields: [channelId], references: [id])
   daor             Int
-  totalDegree      Decimal?
-  average          Decimal?
+  totalDegree      Float?
+  average          Float?
   note             String?
   gender           Gender?
   email            String?           @unique
