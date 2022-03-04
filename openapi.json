@@ -1616,25 +1616,6 @@
                   "description": "",
                   "minItems": 1,
                   "uniqueItems": true,
-                  "items": {
-                    "type": "object",
-                    "required": ["id", "name", "capacity", "isDependent"],
-                    "properties": {
-                      "id": {
-                        "type": "number"
-                      },
-                      "name": {
-                        "type": "string",
-                        "minLength": 1
-                      },
-                      "capacity": {
-                        "type": "number"
-                      },
-                      "isDependent": {
-                        "type": "boolean"
-                      }
-                    }
-                  },
                   "x-examples": {
                     "example-1": [
                       {
@@ -1662,6 +1643,28 @@
                         "isDependent": false
                       }
                     ]
+                  },
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "name": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "minAvg": {
+                        "type": "number"
+                      },
+                      "isDependent": {
+                        "type": "boolean"
+                      },
+                      "customPercentage": {
+                        "type": "number"
+                      }
+                    },
+                    "required": ["id", "name", "minAvg", "isDependent"]
                   }
                 },
                 "examples": {
@@ -1670,8 +1673,9 @@
                       {
                         "id": 0,
                         "name": "string",
-                        "capacity": 0,
-                        "isDependent": true
+                        "minAvg": 0,
+                        "isDependent": true,
+                        "customPercentage": 0
                       }
                     ]
                   }
@@ -1709,6 +1713,14 @@
                 "schema": {
                   "description": "",
                   "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "id": 7,
+                      "name": "ادبي",
+                      "capacity": 10,
+                      "isDependent": false
+                    }
+                  },
                   "properties": {
                     "id": {
                       "type": "number"
@@ -1717,30 +1729,26 @@
                       "type": "string",
                       "minLength": 1
                     },
-                    "capacity": {
+                    "minAvg": {
                       "type": "number"
                     },
                     "isDependent": {
                       "type": "boolean"
+                    },
+                    "customPercentage": {
+                      "type": "number"
                     }
                   },
-                  "required": ["id", "name", "capacity", "isDependent"],
-                  "x-examples": {
-                    "example-1": {
-                      "id": 7,
-                      "name": "ادبي",
-                      "capacity": 10,
-                      "isDependent": false
-                    }
-                  }
+                  "required": ["id", "name", "minAvg", "isDependent"]
                 },
                 "examples": {
                   "example-1": {
                     "value": {
-                      "id": 1,
-                      "name": "مهني",
-                      "capacity": 10,
-                      "isDependent": true
+                      "id": 0,
+                      "name": "string",
+                      "minAvg": 0,
+                      "isDependent": true,
+                      "customPercentage": 0
                     }
                   }
                 }
@@ -1802,29 +1810,35 @@
                     "type": "string",
                     "minLength": 1
                   },
-                  "capacity": {
+                  "minAvg": {
                     "type": "number",
                     "description": "How many applicants will this specialty have"
                   },
                   "isDependent": {
                     "type": "boolean",
                     "default": false,
-                    "description": "If true, this specialty depends on others. So capacity will be considered as a percentage of other specialties capacity."
+                    "description": "If true, this specialty depends on others. So customPercentage will decide how much percentage of other specialties should accept."
+                  },
+                  "customPercentage": {
+                    "type": "number",
+                    "default": 0
                   }
                 },
-                "required": ["name", "capacity"]
+                "required": ["name", "minAvg"]
               },
               "examples": {
                 "example-1": {
                   "value": {
-                    "name": "مهني",
-                    "capacity": 10,
-                    "isDependent": true
+                    "name": "string",
+                    "minAvg": 0,
+                    "isDependent": false,
+                    "customPercentage": 0
                   }
                 }
               }
             }
-          }
+          },
+          "description": "if isDependent is true, customPercentage is required"
         },
         "parameters": [
           {
@@ -1861,6 +1875,14 @@
                 "schema": {
                   "description": "",
                   "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "id": 2,
+                      "name": "st10ring",
+                      "capacity": 10,
+                      "isDependent": false
+                    }
+                  },
                   "properties": {
                     "id": {
                       "type": "number"
@@ -1869,30 +1891,26 @@
                       "type": "string",
                       "minLength": 1
                     },
-                    "capacity": {
+                    "minAvg": {
                       "type": "number"
                     },
                     "isDependent": {
                       "type": "boolean"
+                    },
+                    "customPercentage": {
+                      "type": "number"
                     }
                   },
-                  "required": ["id", "name", "capacity", "isDependent"],
-                  "x-examples": {
-                    "example-1": {
-                      "id": 2,
-                      "name": "st10ring",
-                      "capacity": 10,
-                      "isDependent": false
-                    }
-                  }
+                  "required": ["id", "name", "minAvg", "isDependent"]
                 },
                 "examples": {
                   "example-1": {
                     "value": {
                       "id": 0,
                       "name": "string",
-                      "capacity": 0,
-                      "isDependent": true
+                      "minAvg": 0,
+                      "isDependent": true,
+                      "customPercentage": 0
                     }
                   }
                 }
@@ -1956,22 +1974,27 @@
                     "type": "string",
                     "minLength": 1
                   },
-                  "capacity": {
+                  "minAvg": {
                     "type": "number"
                   },
                   "isDependent": {
                     "type": "boolean",
                     "default": false
+                  },
+                  "customPercentage": {
+                    "type": "number",
+                    "default": 0
                   }
                 },
-                "required": ["name", "capacity"]
+                "required": ["name", "minAvg"]
               },
               "examples": {
                 "example-1": {
                   "value": {
                     "name": "string",
-                    "capacity": 0,
-                    "isDependent": false
+                    "minAvg": 0,
+                    "isDependent": false,
+                    "customPercentage": 0
                   }
                 }
               }
@@ -2622,41 +2645,6 @@
                   "description": "",
                   "minItems": 1,
                   "uniqueItems": true,
-                  "items": {
-                    "type": "object",
-                    "required": ["id", "name", "customPercentage", "specialty"],
-                    "properties": {
-                      "id": {
-                        "type": "number"
-                      },
-                      "name": {
-                        "type": "string",
-                        "minLength": 1
-                      },
-                      "customPercentage": {
-                        "type": "number"
-                      },
-                      "specialty": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "number"
-                          },
-                          "name": {
-                            "type": "string",
-                            "minLength": 1
-                          },
-                          "capacity": {
-                            "type": "number"
-                          },
-                          "isDependent": {
-                            "type": "boolean"
-                          }
-                        },
-                        "required": ["id", "name", "capacity", "isDependent"]
-                      }
-                    }
-                  },
                   "x-examples": {
                     "example-1": [
                       {
@@ -2748,6 +2736,50 @@
                         }
                       }
                     ]
+                  },
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "name": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "customPercentage": {
+                        "type": "number"
+                      },
+                      "specialty": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "name",
+                          "minAvg",
+                          "isDependent",
+                          "customPercentage"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "name": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "minAvg": {
+                            "type": "number"
+                          },
+                          "isDependent": {
+                            "type": "boolean"
+                          },
+                          "customPercentage": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "required": ["id", "name", "customPercentage", "specialty"]
                   }
                 },
                 "examples": {
@@ -2760,8 +2792,9 @@
                         "specialty": {
                           "id": 0,
                           "name": "string",
-                          "capacity": 0,
-                          "isDependent": true
+                          "minAvg": 0,
+                          "isDependent": true,
+                          "customPercentage": 0
                         }
                       }
                     ]
@@ -2806,6 +2839,19 @@
                 "schema": {
                   "description": "",
                   "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "id": 12,
+                      "name": "l",
+                      "customPercentage": 8,
+                      "specialty": {
+                        "id": 2,
+                        "name": "st10ring",
+                        "capacity": 10,
+                        "isDependent": false
+                      }
+                    }
+                  },
                   "properties": {
                     "id": {
                       "type": "number"
@@ -2819,6 +2865,13 @@
                     },
                     "specialty": {
                       "type": "object",
+                      "required": [
+                        "id",
+                        "name",
+                        "minAvg",
+                        "isDependent",
+                        "customPercentage"
+                      ],
                       "properties": {
                         "id": {
                           "type": "number"
@@ -2827,30 +2880,19 @@
                           "type": "string",
                           "minLength": 1
                         },
-                        "capacity": {
+                        "minAvg": {
                           "type": "number"
                         },
                         "isDependent": {
                           "type": "boolean"
+                        },
+                        "customPercentage": {
+                          "type": "number"
                         }
-                      },
-                      "required": ["id", "name", "capacity", "isDependent"]
-                    }
-                  },
-                  "required": ["id", "name", "customPercentage", "specialty"],
-                  "x-examples": {
-                    "example-1": {
-                      "id": 12,
-                      "name": "l",
-                      "customPercentage": 8,
-                      "specialty": {
-                        "id": 2,
-                        "name": "st10ring",
-                        "capacity": 10,
-                        "isDependent": false
                       }
                     }
-                  }
+                  },
+                  "required": ["id", "name", "customPercentage", "specialty"]
                 },
                 "examples": {
                   "example-1": {
@@ -2925,17 +2967,17 @@
                     "type": "string",
                     "minLength": 1
                   },
-                  "custom_percentage": {
+                  "customPercentage": {
                     "type": "number",
                     "default": 0,
                     "minimum": 0,
                     "description": "Material with custom percentage, later will be calculated in a special way in computing average"
                   },
-                  "specialty_id": {
+                  "specialtyId": {
                     "type": "number"
                   }
                 },
-                "required": ["name", "specialty_id"]
+                "required": ["name", "specialtyId"]
               },
               "examples": {
                 "example-1": {
@@ -2984,6 +3026,19 @@
                 "schema": {
                   "description": "",
                   "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "id": 2,
+                      "name": "oi",
+                      "customPercentage": 1,
+                      "specialty": {
+                        "id": 2,
+                        "name": "st10ring",
+                        "capacity": 10,
+                        "isDependent": false
+                      }
+                    }
+                  },
                   "properties": {
                     "id": {
                       "type": "number"
@@ -2997,6 +3052,13 @@
                     },
                     "specialty": {
                       "type": "object",
+                      "required": [
+                        "id",
+                        "name",
+                        "minAvg",
+                        "isDependent",
+                        "customPercentage"
+                      ],
                       "properties": {
                         "id": {
                           "type": "number"
@@ -3005,30 +3067,19 @@
                           "type": "string",
                           "minLength": 1
                         },
-                        "capacity": {
+                        "minAvg": {
                           "type": "number"
                         },
                         "isDependent": {
                           "type": "boolean"
+                        },
+                        "customPercentage": {
+                          "type": "number"
                         }
-                      },
-                      "required": ["id", "name", "capacity", "isDependent"]
-                    }
-                  },
-                  "required": ["id", "name", "customPercentage", "specialty"],
-                  "x-examples": {
-                    "example-1": {
-                      "id": 2,
-                      "name": "oi",
-                      "customPercentage": 1,
-                      "specialty": {
-                        "id": 2,
-                        "name": "st10ring",
-                        "capacity": 10,
-                        "isDependent": false
                       }
                     }
-                  }
+                  },
+                  "required": ["id", "name", "customPercentage", "specialty"]
                 },
                 "examples": {
                   "example-1": {
@@ -3105,14 +3156,14 @@
                     "type": "string",
                     "minLength": 1
                   },
-                  "custom_percentage": {
+                  "customPercentage": {
                     "type": "number"
                   },
-                  "specialty_id": {
+                  "specialtyId": {
                     "type": "number"
                   }
                 },
-                "required": ["name", "specialty_id"]
+                "required": ["name", "specialtyId"]
               },
               "examples": {
                 "example-1": {
