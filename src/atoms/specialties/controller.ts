@@ -11,9 +11,9 @@ export const getSpecialties = async (req: Request, res: Response) => {
 };
 
 export const createSpecialty = async (req: Request, res: Response) => {
-  const { name, capacity } = await validator.upsertSpecialty(req);
+  const inputSpecialty = await validator.upsertSpecialty(req);
 
-  const specialty = await SpecialtyService.createSpecialty(name, capacity);
+  const specialty = await SpecialtyService.createSpecialty(inputSpecialty);
 
   return new OkResponse(specialty).send(res);
 };
@@ -30,14 +30,13 @@ export const deleteSpecialty = async (req: Request, res: Response) => {
 
 export const updateSpecialty = async (req: Request, res: Response) => {
   const { id } = await generalValidator.id(req);
-  const { name, capacity } = await validator.upsertSpecialty(req);
+  const inputSpecialty = await validator.upsertSpecialty(req);
 
   const idNumber = Number(id);
 
   const specialty = await SpecialtyService.updateSpecialty(
     idNumber,
-    name,
-    capacity
+    inputSpecialty
   );
 
   return new OkResponse(specialty).send(res);

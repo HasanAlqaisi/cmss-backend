@@ -31,7 +31,7 @@ export const computeAcceptances = async (req: Request, res: Response) => {
   });
 
   applicants.forEach((applicant) => {
-    if (!applicant.average && !applicant.totalDegree) {
+    if (!applicant.average) {
       computeAverage(applicant);
     }
 
@@ -46,8 +46,7 @@ export const computeAcceptances = async (req: Request, res: Response) => {
       if (
         selectedBranch.maxCapacity >
           acceptedCountBranches.get(selectedBranch.id)! &&
-        applicant.specialty.capacity >
-          acceptedCountBranches.get(selectedBranch.id)!
+        applicant.average! >= applicant.specialty.minAvg
       ) {
         AcceptancesService.acceptApplicant(applicant.id, selectedBranch.id);
 
@@ -69,7 +68,7 @@ export const computeAcceptances = async (req: Request, res: Response) => {
     for (let index = 0; index < applicant.selectedBranches.length; index++) {
       const selectedBranch = applicant.selectedBranches[index];
       const acceptCapacity = Math.trunc(
-        (acceptedCount * applicant.specialty.capacity) / 100
+        (acceptedCount * applicant.specialty.customPercentage) / 100
       );
 
       if (

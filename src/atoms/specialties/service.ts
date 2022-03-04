@@ -1,5 +1,6 @@
 import { Specialty } from "@prisma/client";
 import prisma from "../../prisma";
+import { InputSpecialty } from "./types";
 
 export default class SpecialtyService {
   static getSpecialties = async (): Promise<Specialty[]> => {
@@ -8,13 +9,14 @@ export default class SpecialtyService {
   };
 
   static createSpecialty = async (
-    name: string,
-    capacity: number
+    inputSpecialty: InputSpecialty
   ): Promise<Specialty> => {
     const specialty = await prisma.specialty.create({
       data: {
-        name,
-        capacity,
+        name: inputSpecialty.name,
+        minAvg: inputSpecialty.minAvg,
+        isDependent: inputSpecialty.isDependent,
+        customPercentage: inputSpecialty.customPercentage,
       },
     });
 
@@ -27,12 +29,16 @@ export default class SpecialtyService {
 
   static updateSpecialty = async (
     id: number,
-    name: string,
-    capacity: number
+    inputSpecialty: InputSpecialty
   ): Promise<Specialty> => {
     const specialty = await prisma.specialty.update({
       where: { id },
-      data: { name, capacity },
+      data: {
+        name: inputSpecialty.name,
+        minAvg: inputSpecialty.minAvg,
+        isDependent: inputSpecialty.isDependent,
+        customPercentage: inputSpecialty.customPercentage,
+      },
     });
 
     return specialty;
