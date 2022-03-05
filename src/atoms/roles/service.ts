@@ -12,7 +12,7 @@ export default class RoleService {
   static createRole = async (data: RoleWithPermissions) => {
     const role = await prisma.role.create({
       data: {
-        name: data.roleName,
+        name: data.name,
         permissions:
           data.permissions !== undefined
             ? { createMany: { data: data.permissions } }
@@ -38,7 +38,7 @@ export default class RoleService {
     const role = await prisma.role.update({
       where: { id },
       data: {
-        name: data.roleName,
+        name: data.name,
         permissions:
           data.permissions !== undefined
             ? { deleteMany: {}, createMany: { data: data.permissions } }

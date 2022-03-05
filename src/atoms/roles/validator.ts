@@ -5,7 +5,7 @@ import { z } from "zod";
 // eslint-disable-next-line import/prefer-default-export
 export const upsertRole = async (req: Request) => {
   const schema = z.object({
-    roleName: z.string(),
+    name: z.string(),
     permissions: z
       .array(
         z.object({

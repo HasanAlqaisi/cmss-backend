@@ -15,6 +15,6 @@ type CustomPermission = {
 };
 
 export type RoleWithPermissions = {
-  roleName: string;
+  name: string;
   permissions?: CustomPermission[];
 };
