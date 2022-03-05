@@ -48,7 +48,7 @@ export const loginPost = async (req: Request, res: Response) => {
   const reshapedUser = reshapeData(user, ["password", "roleId"]) as User;
 
   // Set user cookie
-  res.cookie("user", reshapedUser, {
+  res.cookie("user", JSON.stringify(reshapedUser), {
     path: "/",
     httpOnly: false,
   });
