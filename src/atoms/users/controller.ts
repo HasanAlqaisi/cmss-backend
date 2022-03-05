@@ -44,12 +44,20 @@ export const loginPost = async (req: Request, res: Response) => {
     throw new BadRequestError("Incorrect email and/or password");
 
   const token = createToken(user.id);
+
+  const reshapedUser = reshapeData(user, ["password", "roleId"]) as User;
+
+  // Set user cookie
+  res.cookie("user", reshapedUser, {
+    path: "/",
+    httpOnly: false,
+  });
+
+  // Set access-token cookie
   res.cookie("access-token", token, {
     path: "/",
     httpOnly: true,
   });
-
-  const reshapedUser = reshapeData(user, ["password", "roleId"]) as User;
 
   return new OkResponse({ token, user: reshapedUser }).send(res);
 };
