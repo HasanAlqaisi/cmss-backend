@@ -63,7 +63,8 @@ export const loginPost = async (req: Request, res: Response) => {
 };
 
 export const logoutPost = async (req: Request, res: Response) => {
-  res.clearCookie("jwt");
+  res.clearCookie("access-token");
+  res.clearCookie("user");
   return new OkResponse("Logged out").send(res);
 };
 
