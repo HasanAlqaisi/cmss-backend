@@ -15,7 +15,7 @@ import { reshapeData } from "../../utils/reshape-data";
 const createToken = (id: number): string =>
   jwt.sign({ id }, process.env.TOKEN_SECRET as string, { expiresIn: "1d" });
 
-export const signupPost = async (req: Request, res: Response) => {
+export const registrationPost = async (req: Request, res: Response) => {
   const data = await validator.register(req);
 
   const user = await UserService.createUser(
