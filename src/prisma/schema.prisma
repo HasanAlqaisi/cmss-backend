@@ -140,7 +140,9 @@ model Lecture {
   hall      Hall @relation(fields: [hallId], references: [id])
   // schedules Schedule[]
 
-  schedules Schedule[]
+  schedules   Schedule[]
+  attendances Attendance[]
+
   @@id([hallId, teacherId])
 }
 
@@ -267,17 +269,18 @@ model ApplicantBranch {
 }
 
 model Student {
-  id             Int     @id @default(autoincrement())
+  id             Int          @id @default(autoincrement())
   name           String
   age            Int
   gender         Gender
-  email          String  @unique
+  email          String       @unique
   classId        Int
-  Class          Class   @relation(fields: [classId], references: [id])
+  Class          Class        @relation(fields: [classId], references: [id])
   dateAcceptedId Int
-  year           Year    @relation(fields: [dateAcceptedId], references: [id])
+  year           Year         @relation(fields: [dateAcceptedId], references: [id])
   chnnaelId      Int
-  channel        Channel @relation(fields: [chnnaelId], references: [id])
+  channel        Channel      @relation(fields: [chnnaelId], references: [id])
+  attendances    Attendance[]
 }
 
 model Degree {
@@ -345,4 +348,17 @@ model ListItem {
   description String?
   image       String?
   quantity    Int
+}
+
+model Attendance {
+  id        Int      @unique @default(autoincrement())
+  lectureId Int
+  lecture   Lecture  @relation(fields: [lectureId], references: [id], onDelete: Cascade)
+  studentId Int
+  student   Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  date      DateTime @default(now())
+  note      String?
+  attended  Boolean  @default(false)
+
+  @@id([lectureId, studentId])
 }
