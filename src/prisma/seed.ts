@@ -3,12 +3,12 @@ import bcrypt from "bcrypt";
 import prisma from ".";
 import UserService from "../atoms/users/service";
 
-async function createAdminAccount() {
-  await UserService.createAdminAccount(
-    "admin",
-    "admin",
-    "admin",
-    "admin@example.com",
+async function createRootAccount() {
+  await UserService.createRootAccount(
+    "root",
+    "root",
+    "root",
+    "root@example.com",
     bcrypt.hashSync("password", 10)
   );
 }
@@ -297,7 +297,7 @@ const main = async () => {
   // await createLectures(); // TEMP: for testing only - will be deleted later
 
   const promises = [
-    createAdminAccount(),
+    createRootAccount(),
     createClasses(),
     createDaysAndHours(),
     createYears(),

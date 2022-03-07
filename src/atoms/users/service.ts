@@ -27,7 +27,7 @@ export default class UserService {
     });
   };
 
-  static createAdminAccount = async (
+  static createRootAccount = async (
     username: string,
     fullName: string,
     roleName: string,
