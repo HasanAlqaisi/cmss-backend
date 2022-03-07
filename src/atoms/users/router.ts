@@ -1,5 +1,6 @@
 import { Router } from "express";
 import passport from "passport";
+import checkRequester from "../../middlewares/check-requester";
 import permissions from "../../middlewares/permissions";
 import * as controller from "./controller";
 
@@ -48,7 +49,7 @@ router.get(
 router.put(
   "/:id",
   passport.authenticate("jwt", { session: false }),
-  permissions("manage", "User"),
+  checkRequester,
   controller.updateUser
 );
 
