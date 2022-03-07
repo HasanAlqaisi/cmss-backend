@@ -7,7 +7,6 @@ import * as generalValidator from "../../utils/general-validator";
 import { BadRequestError, BadTokenError } from "../../utils/api/api-error";
 import { CreatedResponse, OkResponse } from "../../utils/api/api-response";
 import UserService from "./service";
-import getIdFromPayload from "../../utils/get-id-from-payload";
 import sendEmail from "../../utils/send-email";
 import { unAuthorizedMessage } from "../../utils/constants";
 import { reshapeData } from "../../utils/reshape-data";
