@@ -5,11 +5,7 @@
     "version": "1.0",
     "description": ""
   },
-  "servers": [
-    {
-      "url": "http://localhost:3000"
-    }
-  ],
+
   "paths": {
     "/users/registration": {
       "parameters": [],
