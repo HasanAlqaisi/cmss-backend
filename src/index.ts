@@ -16,6 +16,8 @@ import acceptancesRoutes from "./atoms/acceptances/router";
 import itemsRoutes from "./atoms/items/router";
 import categoriesRoutes from "./atoms/categories/router";
 import listsRoutes from "./atoms/lists/router";
+import attendancesRoutes from "./atoms/attendances/router";
+import studentsRoutes from "./atoms/students/router";
 import permissions from "./middlewares/permissions";
 
 const router = Router();
@@ -63,5 +65,13 @@ router.use("/categories", permissions("manage", "Category"), categoriesRoutes);
 router.use("/items", permissions("manage", "Item"), itemsRoutes);
 
 router.use("/lists", permissions("manage", "List"), listsRoutes);
+
+router.use(
+  "/attendances",
+  permissions("manage", "Attendance"),
+  attendancesRoutes
+);
+
+router.use("/students", permissions("manage", "Student"), studentsRoutes);
 
 export default router;
