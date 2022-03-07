@@ -1,8 +1,7 @@
-import { Prisma, User } from "@prisma/client";
-import _, { has } from "lodash";
+import { User } from "@prisma/client";
+import _ from "lodash";
 import prisma from "../../prisma";
 import { BadRequestError } from "../../utils/api/api-error";
-import logger from "../../utils/config/logger";
 
 export default class UserService {
   static createUser = async (
@@ -55,7 +54,7 @@ export default class UserService {
     id: number,
     username: string,
     fullName: string,
-    roleId: number,
+    role: string,
     email: string
   ): Promise<User> => {
     const user = await prisma.user.update({
@@ -64,7 +63,7 @@ export default class UserService {
         username,
         fullName,
         email,
-        role: { connect: { id: roleId } },
+        role: { connect: { name: role } },
       },
       include: { role: true },
     });

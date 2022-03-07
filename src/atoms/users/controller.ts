@@ -7,7 +7,6 @@ import * as generalValidator from "../../utils/general-validator";
 import { BadRequestError, BadTokenError } from "../../utils/api/api-error";
 import { CreatedResponse, OkResponse } from "../../utils/api/api-response";
 import UserService from "./service";
-import getIdFromPayload from "../../utils/get-id-from-payload";
 import sendEmail from "../../utils/send-email";
 import { unAuthorizedMessage } from "../../utils/constants";
 import { reshapeData } from "../../utils/reshape-data";
@@ -15,12 +14,12 @@ import { reshapeData } from "../../utils/reshape-data";
 const createToken = (id: number): string =>
   jwt.sign({ id }, process.env.TOKEN_SECRET as string, { expiresIn: "1d" });
 
-export const signupPost = async (req: Request, res: Response) => {
+export const registrationPost = async (req: Request, res: Response) => {
   const data = await validator.register(req);
 
   const user = await UserService.createUser(
     data.username,
-    data.fullname,
+    data.fullName,
     data.role,
     data.email,
     data.password
@@ -63,7 +62,8 @@ export const loginPost = async (req: Request, res: Response) => {
 };
 
 export const logoutPost = async (req: Request, res: Response) => {
-  res.clearCookie("jwt");
+  res.clearCookie("access-token");
+  res.clearCookie("user");
   return new OkResponse("Logged out").send(res);
 };
 
@@ -186,8 +186,8 @@ export const updateUser = async (req: Request, res: Response) => {
   const user = await UserService.updateUser(
     idNumber,
     data.username,
-    data.fullname,
-    data.roleId,
+    data.fullName,
+    data.role,
     data.email
   );
 

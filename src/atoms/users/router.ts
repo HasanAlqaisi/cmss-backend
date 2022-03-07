@@ -9,7 +9,7 @@ router.post(
   "/registration",
   passport.authenticate("jwt", { session: false }),
   permissions("create", "User"),
-  controller.signupPost
+  controller.registrationPost
 );
 
 router.post("/login", controller.loginPost);

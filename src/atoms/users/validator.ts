@@ -1,6 +1,6 @@
 import { Request } from "express";
 import { z } from "zod";
-import bycrypt from "bcrypt";
+import bcrypt from "bcrypt";
 
 export const login = async (req: Request) => {
   const schema = z.object({
@@ -17,14 +17,14 @@ export const register = async (req: Request) => {
       .string()
       .regex(
         /^(\w|\d){5,}$/i,
-        "sholud be at least 5 characters and from this set (a-z,0-9,_) "
+        "should be at least 5 characters and from this set (a-z,0-9,_) "
       ),
-    fullname: z.string(),
+    fullName: z.string(),
     email: z.string().email({ message: "Email field must be valid" }),
     password: z
       .string()
       .min(8)
-      .transform((value) => bycrypt.hashSync(value, 10)),
+      .transform((value) => bcrypt.hashSync(value, 10)),
     role: z.string(),
   });
 
@@ -36,7 +36,7 @@ export const updatePasswordBody = async (req: Request) => {
     new_password: z
       .string()
       .min(8)
-      .transform((value) => bycrypt.hashSync(value, 10)),
+      .transform((value) => bcrypt.hashSync(value, 10)),
   });
 
   return schema.parseAsync(req.body);
@@ -53,7 +53,7 @@ export const resetPass = async (req: Request) => {
       path: ["confirm"], // path of error
     })
     .transform((value) => ({
-      new_password: bycrypt.hashSync(value.new_password, 10),
+      new_password: bcrypt.hashSync(value.new_password, 10),
       confirm_password: value.confirm_password,
     }));
 
@@ -73,11 +73,11 @@ export const updateUser = async (req: Request) => {
       .string()
       .regex(
         /^(\w|\d){5,}$/i,
-        "sholud be at least 5 characters and from this set (a-z,0-9,_) "
+        "should be at least 5 characters and from this set (a-z,0-9,_) "
       ),
-    fullname: z.string(),
+    fullName: z.string(),
     email: z.string().email({ message: "Email field must be valid" }),
-    roleId: z.number(),
+    role: z.string(),
   });
 
   return schema.parseAsync(req.body);
