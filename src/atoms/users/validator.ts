@@ -77,7 +77,7 @@ export const updateUser = async (req: Request) => {
       ),
     fullName: z.string(),
     email: z.string().email({ message: "Email field must be valid" }),
-    roleId: z.number(),
+    role: z.string(),
   });
 
   return schema.parseAsync(req.body);

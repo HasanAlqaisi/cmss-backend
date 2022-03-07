@@ -187,7 +187,7 @@ export const updateUser = async (req: Request, res: Response) => {
     idNumber,
     data.username,
     data.fullName,
-    data.roleId,
+    data.role,
     data.email
   );
 

@@ -55,7 +55,7 @@ export default class UserService {
     id: number,
     username: string,
     fullName: string,
-    roleId: number,
+    role: string,
     email: string
   ): Promise<User> => {
     const user = await prisma.user.update({
@@ -64,7 +64,7 @@ export default class UserService {
         username,
         fullName,
         email,
-        role: { connect: { id: roleId } },
+        role: { connect: { name: role } },
       },
       include: { role: true },
     });
