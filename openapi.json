@@ -11,7 +11,7 @@
     }
   ],
   "paths": {
-    "/users/signup": {
+    "/users/registration": {
       "parameters": [],
       "post": {
         "summary": "",
