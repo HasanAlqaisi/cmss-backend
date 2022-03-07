@@ -20,7 +20,7 @@ export const registrationPost = async (req: Request, res: Response) => {
 
   const user = await UserService.createUser(
     data.username,
-    data.fullname,
+    data.fullName,
     data.role,
     data.email,
     data.password
@@ -187,7 +187,7 @@ export const updateUser = async (req: Request, res: Response) => {
   const user = await UserService.updateUser(
     idNumber,
     data.username,
-    data.fullname,
+    data.fullName,
     data.roleId,
     data.email
   );

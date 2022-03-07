@@ -45,7 +45,7 @@
                       "pattern": "/^(\\w|\\d){5,}$/i",
                       "description": "username sholud be at least 5 characters and from this set (a-z,0-9,_)\n"
                     },
-                    "fullname": {
+                    "fullName": {
                       "type": "string"
                     },
                     "role": {
@@ -69,7 +69,7 @@
                       "id": 0,
                       "email": "user@example.com",
                       "username": "string",
-                      "fullname": "string",
+                      "fullName": "string",
                       "role": {
                         "id": 0,
                         "name": "string"
@@ -160,7 +160,7 @@
                     "minLength": 5,
                     "description": "username \nsholud be at least 5 characters and from this set (a-z,0-9,_)"
                   },
-                  "fullname": {
+                  "fullName": {
                     "type": "string"
                   },
                   "email": {
@@ -185,7 +185,7 @@
                 },
                 "required": [
                   "username",
-                  "fullname",
+                  "fullName",
                   "email",
                   "password",
                   "role"
@@ -195,7 +195,7 @@
                 "example-1": {
                   "value": {
                     "username": "string",
-                    "fullname": "string",
+                    "fullName": "string",
                     "email": "user@example.com",
                     "password": "pa$$word",
                     "role": "admin"
@@ -253,7 +253,7 @@
                         "username": {
                           "type": "string"
                         },
-                        "fullname": {
+                        "fullName": {
                           "type": "string"
                         },
                         "role": {
@@ -282,7 +282,7 @@
                         "id": 0,
                         "email": "user@example.com",
                         "username": "string",
-                        "fullname": "string",
+                        "fullName": "string",
                         "role": {
                           "id": 0,
                           "name": "string"
@@ -474,7 +474,7 @@
                     "username": {
                       "type": "string"
                     },
-                    "fullname": {
+                    "fullName": {
                       "type": "string"
                     },
                     "role": {
@@ -499,7 +499,7 @@
                       "id": 0,
                       "email": "string",
                       "username": "string",
-                      "fullname": "string",
+                      "fullName": "string",
                       "role": {
                         "id": 0,
                         "name": "string"
@@ -842,7 +842,7 @@
                 "x-examples": {
                   "example-1": {
                     "username": "Hasan",
-                    "fullname": "hashashas",
+                    "fullName": "hashashas",
                     "email": "hasan.alqaisi@2000gmail.com",
                     "roleId": 1
                   }
@@ -852,7 +852,7 @@
                     "type": "string",
                     "minLength": 1
                   },
-                  "fullname": {
+                  "fullName": {
                     "type": "string",
                     "minLength": 1
                   },
@@ -865,13 +865,13 @@
                     "type": "number"
                   }
                 },
-                "required": ["username", "fullname", "email", "roleId"]
+                "required": ["username", "fullName", "email", "roleId"]
               },
               "examples": {
                 "example-1": {
                   "value": {
                     "username": "string",
-                    "fullname": "string",
+                    "fullName": "string",
                     "email": "user@example.com",
                     "roleId": 0
                   }
@@ -908,7 +908,7 @@
                       "type": "string",
                       "minLength": 1
                     },
-                    "fullname": {
+                    "fullName": {
                       "type": "string",
                       "minLength": 1
                     },
@@ -926,13 +926,13 @@
                       "required": ["id", "name"]
                     }
                   },
-                  "required": ["id", "email", "username", "fullname", "role"],
+                  "required": ["id", "email", "username", "fullName", "role"],
                   "x-examples": {
                     "example-1": {
                       "id": 0,
                       "email": "user@example.com",
                       "username": "string",
-                      "fullname": "string",
+                      "fullName": "string",
                       "role": {
                         "id": 0,
                         "name": "string"

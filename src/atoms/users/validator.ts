@@ -19,7 +19,7 @@ export const register = async (req: Request) => {
         /^(\w|\d){5,}$/i,
         "sholud be at least 5 characters and from this set (a-z,0-9,_) "
       ),
-    fullname: z.string(),
+    fullName: z.string(),
     email: z.string().email({ message: "Email field must be valid" }),
     password: z
       .string()
@@ -75,7 +75,7 @@ export const updateUser = async (req: Request) => {
         /^(\w|\d){5,}$/i,
         "sholud be at least 5 characters and from this set (a-z,0-9,_) "
       ),
-    fullname: z.string(),
+    fullName: z.string(),
     email: z.string().email({ message: "Email field must be valid" }),
     roleId: z.number(),
   });
