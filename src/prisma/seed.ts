@@ -293,6 +293,12 @@ async function createChannels() {
   });
 }
 
+async function createAbsences() {
+  await prisma.absence.create({
+    data: {},
+  });
+}
+
 const main = async () => {
   // await createLectures(); // TEMP: for testing only - will be deleted later
 
@@ -303,6 +309,7 @@ const main = async () => {
     createYears(),
     createSpecialties(),
     createChannels(),
+    createAbsences(),
   ];
 
   await Promise.all(promises);
