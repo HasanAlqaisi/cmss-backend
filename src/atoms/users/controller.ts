@@ -98,12 +98,12 @@ export const forgetPasswordPost = async (req: Request, res: Response) => {
 
     const baseUrl = "localhost:3000/api/users/reset-password";
 
+    const link = `${baseUrl}/${user.id}/${token}`;
+
     await sendEmail(
-      user.id,
       user.email,
-      token,
-      baseUrl,
       "Reset Password Request",
+      `<p>Please click this link: <a href="${link}">${link}</a></p>`,
       "Reset your password"
     );
 
