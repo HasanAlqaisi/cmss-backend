@@ -60,6 +60,7 @@ enum Table {
   List
   ListItem
   Attendance
+  Absence
   all
 }
 
@@ -363,9 +364,16 @@ model Attendance {
   lecture   Lecture  @relation(fields: [lectureId], references: [id], onDelete: Cascade)
   studentId Int
   student   Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
-  date      DateTime @db.Date @default(now())
+  date      DateTime @default(now()) @db.Date
   note      String?
   attended  Boolean  @default(false)
 
   @@id([lectureId, studentId, date])
+}
+
+model Absence {
+  id            Int @id @default(autoincrement())
+  firstWarning  Int @default(3)
+  secondWarning Int @default(4)
+  thirdWarning  Int @default(5)
 }
