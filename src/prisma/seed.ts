@@ -26,7 +26,7 @@ async function createClasses() {
   const stageThree = await prisma.stage.create({ data: { number: 3 } });
   const stageFour = await prisma.stage.create({ data: { number: 4 } });
 
-  const infromationBranch = await prisma.branch.create({
+  const informationBranch = await prisma.branch.create({
     data: { name: "Information", maxCapacity: 100 },
   });
   const networkBranch = await prisma.branch.create({
@@ -36,7 +36,7 @@ async function createClasses() {
   await prisma.class.create({
     data: {
       stage: { connect: { id: stageOne.id } },
-      branch: { connect: { id: infromationBranch.id } },
+      branch: { connect: { id: informationBranch.id } },
       program: { connect: { id: morningProgram.id } },
     },
   });
@@ -52,7 +52,7 @@ async function createClasses() {
   await prisma.class.create({
     data: {
       stage: { connect: { id: stageTwo.id } },
-      branch: { connect: { id: infromationBranch.id } },
+      branch: { connect: { id: informationBranch.id } },
       program: { connect: { id: morningProgram.id } },
     },
   });
@@ -68,7 +68,7 @@ async function createClasses() {
   await prisma.class.create({
     data: {
       stage: { connect: { id: stageThree.id } },
-      branch: { connect: { id: infromationBranch.id } },
+      branch: { connect: { id: informationBranch.id } },
       program: { connect: { id: morningProgram.id } },
     },
   });
@@ -84,7 +84,7 @@ async function createClasses() {
   await prisma.class.create({
     data: {
       stage: { connect: { id: stageFour.id } },
-      branch: { connect: { id: infromationBranch.id } },
+      branch: { connect: { id: informationBranch.id } },
       program: { connect: { id: morningProgram.id } },
     },
   });
@@ -100,7 +100,7 @@ async function createClasses() {
   await prisma.class.create({
     data: {
       stage: { connect: { id: stageOne.id } },
-      branch: { connect: { id: infromationBranch.id } },
+      branch: { connect: { id: informationBranch.id } },
       program: { connect: { id: eveningProgram.id } },
     },
   });
@@ -116,7 +116,7 @@ async function createClasses() {
   await prisma.class.create({
     data: {
       stage: { connect: { id: stageTwo.id } },
-      branch: { connect: { id: infromationBranch.id } },
+      branch: { connect: { id: informationBranch.id } },
       program: { connect: { id: eveningProgram.id } },
     },
   });
@@ -132,7 +132,7 @@ async function createClasses() {
   await prisma.class.create({
     data: {
       stage: { connect: { id: stageThree.id } },
-      branch: { connect: { id: infromationBranch.id } },
+      branch: { connect: { id: informationBranch.id } },
       program: { connect: { id: eveningProgram.id } },
     },
   });
@@ -148,7 +148,7 @@ async function createClasses() {
   await prisma.class.create({
     data: {
       stage: { connect: { id: stageFour.id } },
-      branch: { connect: { id: infromationBranch.id } },
+      branch: { connect: { id: informationBranch.id } },
       program: { connect: { id: eveningProgram.id } },
     },
   });
