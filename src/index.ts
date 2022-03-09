@@ -18,7 +18,7 @@ import categoriesRoutes from "./atoms/categories/router";
 import listsRoutes from "./atoms/lists/router";
 import attendancesRoutes from "./atoms/attendances/router";
 import studentsRoutes from "./atoms/students/router";
-import warningRoutes from "./atoms/warnings/router";
+import warningRoutes from "./atoms/reports/router";
 import absencesRoutes from "./atoms/absences/router";
 import permissions from "./middlewares/permissions";
 

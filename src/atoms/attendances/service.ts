@@ -35,6 +35,16 @@ export default class AttendanceService {
         date: input.date,
         attended: input.attended,
       },
+      include: {
+        student: { include: { Class: true } },
+        lecture: {
+          include: {
+            hall: {
+              include: { room: true, subject: { include: { Class: true } } },
+            },
+          },
+        },
+      },
     });
 
     return attendance;
