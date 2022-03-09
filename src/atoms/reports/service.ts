@@ -1,8 +1,8 @@
 import prisma from "../../prisma";
 
-export default class WarningService {
-  static getWarnings = async (classId: number) => {
-    const warnings = await prisma.attendance.findMany({
+export default class ReportService {
+  static getReports = async (classId: number) => {
+    const reports = await prisma.attendance.findMany({
       where: { attended: false, student: { classId } },
       select: {
         student: { select: { name: true, email: true, id: true } },
@@ -14,6 +14,6 @@ export default class WarningService {
         },
       },
     });
-    return warnings;
+    return reports;
   };
 }

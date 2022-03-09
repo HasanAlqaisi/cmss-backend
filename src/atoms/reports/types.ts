@@ -1,13 +1,13 @@
 import { Prisma } from "@prisma/client";
 
-export type FullWarning = {
+export type FullReport = {
   id: number;
   name: string;
   email: string;
   lectures: { id: number; name: string; absence: number }[];
 };
 
-const warningAndLecture = Prisma.validator<Prisma.AttendanceArgs>()({
+const reportAndLecture = Prisma.validator<Prisma.AttendanceArgs>()({
   select: {
     student: { select: { name: true, email: true, id: true } },
     lecture: {
@@ -19,6 +19,6 @@ const warningAndLecture = Prisma.validator<Prisma.AttendanceArgs>()({
   },
 });
 
-export type WarningAndLecture = Prisma.AttendanceGetPayload<
-  typeof warningAndLecture
+export type ReportAndLecture = Prisma.AttendanceGetPayload<
+  typeof reportAndLecture
 >;

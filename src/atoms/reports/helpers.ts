@@ -1,12 +1,12 @@
-import { WarningAndLecture, FullWarning } from "./types";
+import { ReportAndLecture, FullReport } from "./types";
 
 // eslint-disable-next-line import/prefer-default-export
 export const getEachStudentWithLecturesAbsences = (
-  announcements: WarningAndLecture[]
+  reports: ReportAndLecture[]
 ) => {
-  const results: FullWarning[] = [];
+  const results: FullReport[] = [];
 
-  announcements.forEach((announcement) => {
+  reports.forEach((announcement) => {
     if (!results.find((result) => result.id === announcement.student.id)) {
       results.push({
         id: announcement.student.id,

@@ -3,8 +3,8 @@ import * as controller from "./controller";
 
 const router = Router();
 
-router.get("/:classId", controller.getWarnings);
+router.get("/:classId", controller.getReports);
 
-router.post("/:classId", controller.createWarning);
+router.post("/:classId", controller.createReport);
 
 export default router;

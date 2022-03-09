@@ -1,35 +1,34 @@
 import { Request, Response } from "express";
 import { OkResponse } from "../../utils/api/api-response";
-import WarningService from "./service";
+import ReportService from "./service";
 import * as validator from "./validator";
 import { getEachStudentWithLecturesAbsences } from "./helpers";
-import { FullWarning } from "./types";
+import { FullReport } from "./types";
 import AbsenceService from "../absences/service";
 import sendEmail from "../../utils/send-email";
 
-// eslint-disable-next-line import/prefer-default-export
-export const getWarnings = async (req: Request, res: Response) => {
-  const { classId } = await validator.getWarnings(req);
+export const getReports = async (req: Request, res: Response) => {
+  const { classId } = await validator.getReports(req);
 
-  const warnings = await WarningService.getWarnings(classId);
+  const warnings = await ReportService.getReports(classId);
 
-  const results: FullWarning[] = getEachStudentWithLecturesAbsences(warnings);
+  const results: FullReport[] = getEachStudentWithLecturesAbsences(warnings);
 
   return new OkResponse(results).send(res);
 };
 
-export const createWarning = async (req: Request, res: Response) => {
-  const { classId } = await validator.getWarnings(req);
+export const createReport = async (req: Request, res: Response) => {
+  const { classId } = await validator.getReports(req);
 
   const operations = await Promise.all([
-    WarningService.getWarnings(classId),
+    ReportService.getReports(classId),
     AbsenceService.getAbsences(),
   ]);
 
   const warnings = operations[0];
   const absence = operations[1];
 
-  const results: FullWarning[] = getEachStudentWithLecturesAbsences(warnings);
+  const results: FullReport[] = getEachStudentWithLecturesAbsences(warnings);
 
   results.forEach((result) => {
     result.lectures.forEach((lec) => {
