@@ -1,7 +1,5 @@
 /* eslint-disable no-restricted-syntax */
 import { Day, Hour, Room } from "@prisma/client";
-import logger from "../../../utils/config/logger";
-import { lecturesLength } from "../constants";
 import { FullLectures, Gene } from "../../../atoms/schedules/types";
 
 export default (
@@ -44,7 +42,6 @@ export default (
       addedRoomsLengthForSubject[currentSubjectIndex] += 1;
     }
 
-    // console.log(addedRoomsLengthForSubject);
     dayAndTimeLabRooms[dayIndex][timeIndex].push(geneRoom!);
 
     if (

@@ -1,5 +1,5 @@
 import { Day, Hour } from "@prisma/client";
-import { daysLength, hoursLength } from "./constants";
+import { daysLength, hoursLength } from "./utils/constants";
 import { FullLectures, Gene } from "../../atoms/schedules/types";
 import getRandomInt from "../../utils/get-random-int";
 

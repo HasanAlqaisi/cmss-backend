@@ -1,20 +1,16 @@
-import { Class, Day, Hour, Lecture, Room, User } from "@prisma/client";
+import { Class, Day, Hour, Room } from "@prisma/client";
 import {
   Chromosome,
-  FullLecture,
   FullLectures,
   TeacherLectureRoom,
-} from "../../../atoms/schedules/types";
-import initEmpty3dArray from "../../../utils/init-empty-3d-array";
-import checkForElectronicWithAttendance from "./check-for-electronic-with-attendance";
-// import checkForLabMultipleRoomsNotInSameTimeSlot from "./check-for-lab-multiple-rooms-not-in-same-time-slot";
-import checkForSubjectsSameRoomAndTime from "./check-for-lectures-same-room-and-time";
-import checkForTeacherWithSubjectsAtSameTime from "./check-for-teacher-with-lectures-at-same-time";
-import logger from "../../../utils/config/logger";
-import checkForForbiddenDays from "./check-for-forbidden-days";
-import writeChromosomesToFile from "../write-chromosomes-to-file";
-import checkForLabMultipleRoomsNotInSameTimeSlot from "./check-for-lab-multiple-rooms-not-in-same-time-slot";
-import { lecturesLength } from "../constants";
+} from "../../atoms/schedules/types";
+import initEmpty3dArray from "../../utils/init-empty-3d-array";
+import checkForElectronicWithAttendance from "./utils/check-for-electronic-with-attendance";
+import checkForSubjectsSameRoomAndTime from "./utils/check-for-lectures-same-room-and-time";
+import checkForTeacherWithSubjectsAtSameTime from "./utils/check-for-teacher-with-lectures-at-same-time";
+import checkForForbiddenDays from "./utils/check-for-forbidden-days";
+import checkForLabMultipleRoomsNotInSameTimeSlot from "./utils/check-for-lab-multiple-rooms-not-in-same-time-slot";
+import { lecturesLength } from "./utils/constants";
 
 export default (
   chromosome: Chromosome,
@@ -22,8 +18,8 @@ export default (
   days: Day[],
   hours: Hour[],
   classes: Class[],
-  rooms: Room[],
-  teachers: User[]
+  rooms: Room[]
+  // teachers: User[]
 ) => {
   // Counter for number of conflicts of electronic lecture with attendance lecture at the same day
   let vioElectronicWithAttendanceSameDay: number = 0;
@@ -80,7 +76,6 @@ export default (
       foundBefore2
     );
 
-    // // Success
     vioTeacherWithLecturesSameTime += checkForTeacherWithSubjectsAtSameTime(
       gene,
       days,
@@ -118,12 +113,10 @@ export default (
     vioTeacherWithLecturesSameTime +
     vioStageHasLectureInForbiddenDay;
 
-  // const fitness = (1 / (hardConstraints + 1)) ** 2; // Closer to 1 means better solution
   const fitness = 1 / (hardConstraints + 1);
 
   // eslint-disable-next-line no-param-reassign
   chromosome.fitness = fitness;
 
-  // if (hardConstraints === 0)
-  // writeChromosomesToFile(`./best.json`, chromosome.genes);
+  return fitness;
 };

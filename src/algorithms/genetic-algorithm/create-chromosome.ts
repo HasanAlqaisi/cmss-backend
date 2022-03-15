@@ -9,7 +9,6 @@ export default (
 ): Chromosome => {
   const genes: Gene[] = [];
 
-   
   for (let index = 0; index < lectures.length; index++) {
     genes.push(createGene(index, lectures, days, hours));
   }

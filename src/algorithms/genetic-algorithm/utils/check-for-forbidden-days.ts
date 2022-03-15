@@ -1,10 +1,6 @@
-import { Class, Day, Lecture } from "@prisma/client";
+import { Day } from "@prisma/client";
 import logger from "../../../utils/config/logger";
-import {
-  FullLecture,
-  FullLectures,
-  Gene,
-} from "../../../atoms/schedules/types";
+import { FullLectures, Gene } from "../../../atoms/schedules/types";
 
 export default (
   gene: Gene,
@@ -24,11 +20,11 @@ export default (
     !foundBefore.includes(stage.id)
   ) {
     foundBefore.push(stage.id);
-    logger.debug(
-      `conflict found! day number ${day!.number} is a forbidden day for stage ${
-        stage.number
-      }`
-    );
+    // logger.debug(
+    //   `conflict found! day number ${day!.number} is a forbidden day for stage ${
+    //     stage.number
+    //   }`
+    // );
     conflictCount += 1;
   }
   return conflictCount;

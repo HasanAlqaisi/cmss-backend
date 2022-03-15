@@ -1,4 +1,4 @@
-import { daysLength } from "../algorithms/genetic-algorithm/constants";
+import { daysLength } from "../algorithms/genetic-algorithm/utils/constants";
 
 export default <T>(): T[][][] =>
   Array.from({ length: 20 }, () =>

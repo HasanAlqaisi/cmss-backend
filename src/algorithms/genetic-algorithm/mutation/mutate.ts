@@ -1,31 +1,24 @@
 /* eslint-disable no-param-reassign */
 import { Day, Hour } from "@prisma/client";
-import { daysLength, hoursLength, mutationRate } from "../constants";
-import { Chromosome, FullLectures } from "../../../atoms/schedules/types";
+import { mutationRate } from "../utils/constants";
+import { Chromosome } from "../../../atoms/schedules/types";
 import getRandomInt from "../../../utils/get-random-int";
-import createChromosome from "../create-chromosome";
 
-// export default (
-//   lectures: FullLectures,
-//   days: Day[],
-//   hours: Hour[]
-// ): Chromosome => createChromosome(lectures, days, hours);
+export default (chromosome: Chromosome, days: Day[], hours: Hour[]) => {
+  for (let index = 0; index < chromosome.genes.length; index++) {
+    if (getRandomInt(1000) + 1 < mutationRate) {
+      const randomIndex1 = getRandomInt(chromosome.genes.length, 0);
+      const randomIndex2 = getRandomInt(chromosome.genes.length, 0);
 
-export default (
-  chromosome: Chromosome,
-  days: Day[],
-  hours: Hour[]
-): Chromosome => {
-   
-  const randomIndex = getRandomInt(
-    chromosome.genes.length,
-    chromosome.genes.length / 2
-  );
-
-  const randomDayId = getRandomInt(daysLength) + 1;
-  const dayId = days.find((element) => element.id === randomDayId)!.id;
-
-  chromosome.genes[randomIndex].dayId = dayId;
+      [
+        chromosome.genes[randomIndex1].hourId,
+        chromosome.genes[randomIndex1].dayId,
+      ] = [
+        chromosome.genes[randomIndex2].hourId,
+        chromosome.genes[randomIndex2].dayId,
+      ];
+    }
+  }
 
   return chromosome;
 };

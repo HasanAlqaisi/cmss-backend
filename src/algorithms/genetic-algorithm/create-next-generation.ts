@@ -1,50 +1,58 @@
 import { Day, Hour } from "@prisma/client";
 import getRandomInt from "../../utils/get-random-int";
-import { crossoverRate, mutationRate, populationSize } from "./constants";
-import { Chromosome, FullLectures } from "../../atoms/schedules/types";
-import doCrossover from "./crossover/do-crossover";
+import { crossoverRate, populationSize } from "./utils/constants";
+import { Chromosome } from "../../atoms/schedules/types";
 import mutate from "./mutation/mutate";
-import selectParent, {
-  getBestChromosome,
-  getLeastFittestChromosome,
-} from "./selection/select-parent";
-import logger from "../../utils/config/logger";
+import getFittestChromosome from "./utils/get-fittest-chromosome";
+import getSecondFittestChromosome from "./utils/get-second-fittest-chromosome";
+import tournamentSelect from "./selection/tournament-select";
+import onePointCrossover from "./crossover/one-point-crossover";
+import twoPointCrossover from "./crossover/two-point-crossover";
+import uniformCrossover from "./crossover/uniform-crossover";
 
 export default (
   previousGeneration: Chromosome[],
   days: Day[],
-  hours: Hour[],
-  lectures: FullLectures
+  hours: Hour[]
 ): Chromosome[] => {
   const nextGeneration: Chromosome[] = [];
 
-  const bestChromoIndex = getBestChromosome(
+  const fittestChromosome = getFittestChromosome(
     0,
     previousGeneration.length,
     previousGeneration
   );
-  nextGeneration.push(previousGeneration[bestChromoIndex]);
 
-   
-  for (let i = 0; i < populationSize - 1; i++) {
-    const firstParent = selectParent(previousGeneration);
-    const secondParent = selectParent(previousGeneration);
+  const secondFittestChromosome =
+    getSecondFittestChromosome(previousGeneration);
 
-    let newChromosome: Chromosome;
+  nextGeneration.push(fittestChromosome);
+  nextGeneration.push(secondFittestChromosome);
+
+  // let totalFitness = 0;
+  // previousGeneration.forEach((chromosome) => {
+  //   totalFitness += chromosome.fitness;
+  // });
+
+  for (let i = 0; i < populationSize / 2 - 1; i++) {
+    const firstParent = tournamentSelect(previousGeneration);
+    const secondParent = tournamentSelect(previousGeneration);
+
+    let offspring1: Chromosome;
+    let offspring2: Chromosome;
 
     const crossOverProb = getRandomInt(100) + 1;
-    const shouldCross = crossOverProb <= crossoverRate; // 90%
+    const shouldCross = crossOverProb <= crossoverRate;
+
     if (shouldCross) {
-      newChromosome = doCrossover(firstParent, secondParent);
+      [offspring1, offspring2] = uniformCrossover(firstParent, secondParent);
     } else {
-      newChromosome = firstParent;
+      offspring1 = mutate(firstParent, days, hours);
+      offspring2 = mutate(secondParent, days, hours);
     }
-    const mutateProbability = getRandomInt(100) + 1;
-    const shouldMutate = mutateProbability <= mutationRate; // 1%
-    if (shouldMutate) {
-      newChromosome = mutate(newChromosome, days, hours);
-    }
-    nextGeneration.push(newChromosome);
+
+    nextGeneration.push(offspring1);
+    nextGeneration.push(offspring2);
   }
   return nextGeneration;
 };

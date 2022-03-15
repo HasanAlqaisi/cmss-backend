@@ -1,10 +1,5 @@
-import { Class, Day, Lecture } from "@prisma/client";
-import logger from "../../../utils/config/logger";
-import {
-  FullLecture,
-  FullLectures,
-  Gene,
-} from "../../../atoms/schedules/types";
+import { Class, Day } from "@prisma/client";
+import { FullLectures, Gene } from "../../../atoms/schedules/types";
 
 export default (
   gene: Gene,
@@ -37,7 +32,6 @@ export default (
       isElectronic !== isFirstSubjectElectronic &&
       !foundBefore.includes(dayIndex + klassIndex)
     ) {
-      // logger.debug(`I AM IN`);
       foundBefore.push(dayIndex + klassIndex);
       // const str: string = lec.hall.subject.isElectronic
       //   ? "electronic"

@@ -1,7 +1,5 @@
-/* eslint-disable no-plusplus */
 /* eslint-disable no-param-reassign */
-import { Day, Hour, Room, User } from "@prisma/client";
-import logger from "../../../utils/config/logger";
+import { Day, Hour } from "@prisma/client";
 import {
   FullLectures,
   Gene,

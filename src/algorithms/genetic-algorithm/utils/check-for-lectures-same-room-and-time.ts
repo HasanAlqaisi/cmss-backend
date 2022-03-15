@@ -1,6 +1,5 @@
 import { Day, Hour, Room } from "@prisma/client";
-import logger from "../../../utils/config/logger";
-import { electronicRoomNumber } from "../constants";
+import { electronicRoomNumber } from "./constants";
 import { Gene } from "../../../atoms/schedules/types";
 
 export default (

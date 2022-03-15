@@ -1,6 +1,6 @@
 import { Day, Hour } from "@prisma/client";
-import { Chromosome, FullLectures, Gene } from "../../atoms/schedules/types";
-import { populationSize } from "./constants";
+import { Chromosome, FullLectures } from "../../atoms/schedules/types";
+import { populationSize } from "./utils/constants";
 import createChromosome from "./create-chromosome";
 
 export default (
@@ -10,7 +10,6 @@ export default (
 ): Chromosome[] => {
   const chromosomes: Chromosome[] = [];
 
-   
   for (let index = 0; index < populationSize; index++) {
     chromosomes.push(createChromosome(lectures, days, hours));
   }
