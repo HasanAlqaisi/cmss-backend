@@ -8,7 +8,7 @@ export default (
   hours: Hour[],
   rooms: Room[],
   dayAndTimeRooms: number[][][],
-  foundBefore: number[]
+  foundBefore: string[]
 ): number => {
   let conflictCount: number = 0;
   const dayIndex: number = days.findIndex((day) => day.id === gene.dayId);
@@ -28,9 +28,9 @@ export default (
 
   if (
     roomsSet.size !== roomsCurrentTimeSlot.length &&
-    !foundBefore.includes(dayIndex + timeIndex)
+    !foundBefore.includes(`${dayIndex}${timeIndex}`)
   ) {
-    foundBefore.push(dayIndex + timeIndex);
+    foundBefore.push(`${dayIndex}${timeIndex}`);
     // logger.debug(
     //   `conflict found! on day ${dayIndex + 1} at time ${
     //     timeIndex + 1

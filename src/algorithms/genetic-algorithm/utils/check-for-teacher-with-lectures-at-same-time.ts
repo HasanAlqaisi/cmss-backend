@@ -12,7 +12,7 @@ export default (
   hours: Hour[],
   lectures: FullLectures,
   dayAndTimeTeachers: TeacherLectureRoom[][][],
-  foundBefore: number[]
+  foundBefore: string[]
 ): number => {
   let conflictCount: number = 0;
 
@@ -48,9 +48,9 @@ export default (
 
   if (
     sameTeacherDifferentSubjectOrRoom.length > 0 &&
-    !foundBefore.includes(dayIndex + timeIndex)
+    !foundBefore.includes(`${dayIndex}${timeIndex}`)
   ) {
-    foundBefore.push(dayIndex + timeIndex);
+    foundBefore.push(`${dayIndex}${timeIndex}`);
     // logger.debug(
     //   `conflict found! on day ${dayIndex + 1} at time ${
     //     timeIndex + 1

@@ -1,5 +1,6 @@
 import { Class, Day } from "@prisma/client";
 import { FullLectures, Gene } from "../../../atoms/schedules/types";
+import logger from "../../../utils/config/logger";
 
 export default (
   gene: Gene,
@@ -7,7 +8,7 @@ export default (
   classes: Class[],
   days: Day[],
   dayAndKlassLectures: boolean[][][],
-  foundBefore: number[]
+  foundBefore: string[]
 ): number => {
   let conflictCount: number = 0;
 
@@ -30,9 +31,9 @@ export default (
   for (const isElectronic of lectureArray) {
     if (
       isElectronic !== isFirstSubjectElectronic &&
-      !foundBefore.includes(dayIndex + klassIndex)
+      !foundBefore.includes(`${dayIndex}${klassIndex}`)
     ) {
-      foundBefore.push(dayIndex + klassIndex);
+      foundBefore.push(`${dayIndex}${klassIndex}`);
       // const str: string = lec.hall.subject.isElectronic
       //   ? "electronic"
       //   : "not electronic";
