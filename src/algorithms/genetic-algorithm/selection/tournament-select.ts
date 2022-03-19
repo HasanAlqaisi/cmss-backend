@@ -1,8 +1,9 @@
 import { Chromosome } from "../../../atoms/schedules/types";
 import getRandomInt from "../../../utils/get-random-int";
-import { tournamentSize } from "../utils/constants";
+import { getTunes } from "../utils/constants";
 
-export default (previousGeneration: Chromosome[]) => {
+export default (previousGeneration: Chromosome[], leasters: Chromosome[]) => {
+  const { tournamentSize } = getTunes();
   const selectedChromosomes: Chromosome[] = [];
   let bestFitness = 0;
   let worstFitness = 1;
@@ -10,8 +11,14 @@ export default (previousGeneration: Chromosome[]) => {
   let worstOne: Chromosome;
 
   for (let index = 0; index < tournamentSize; index++) {
-    const randomIndex = getRandomInt(previousGeneration.length);
-    const chromosome = previousGeneration[randomIndex];
+    let randomIndex = getRandomInt(previousGeneration.length);
+    let chromosome: Chromosome = previousGeneration[randomIndex];
+
+    while (leasters.includes(chromosome)) {
+      randomIndex = getRandomInt(previousGeneration.length);
+      chromosome = previousGeneration[randomIndex];
+    }
+
     selectedChromosomes.push(chromosome);
 
     const currentFitness = selectedChromosomes[index].fitness;
