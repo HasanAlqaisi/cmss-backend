@@ -10,12 +10,26 @@ export default class ScheduleService {
     const generatedSchedule = await generateSchedule();
 
     await prisma.schedule.createMany({
-      data: generatedSchedule!.genes,
+      data: generatedSchedule!.bestChromosome.genes,
     });
 
     const schedule = await this.getSchedules();
 
-    return { conflicts: 1 / generatedSchedule.fitness, schedule };
+    return {
+      conflicts: 1 / generatedSchedule.bestChromosome.fitness - 1,
+      voElectronicWithAttendanceSameDay:
+        generatedSchedule.voElectronicWithAttendanceSameDay,
+      voLabMultipleRoomsNotInSameTimeSlot:
+        generatedSchedule.voLabMultipleRoomsNotInSameTimeSlot,
+      voLecturesSameRoomSameTime: generatedSchedule.voLecturesSameRoomSameTime,
+      voStageHasLectureInForbiddenDay:
+        generatedSchedule.voStageHasLectureInForbiddenDay,
+      voTeacherWithLecturesSameTime:
+        generatedSchedule.voTeacherWithLecturesSameTime,
+      voLecturesSameClassSameTime:
+        generatedSchedule.voLecturesSameClassSameTime,
+      schedule,
+    };
   };
 
   static deleteSchedule = async () => {
