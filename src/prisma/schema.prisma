@@ -91,6 +91,8 @@ model Subject {
   isElectronic Boolean
   isLab        Boolean
   halls        Hall[]
+
+  @@unique([classId, name])
 }
 
 model Branch {
