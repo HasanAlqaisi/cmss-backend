@@ -1,4 +1,4 @@
-import { Chromosome } from "../../atoms/schedules/types";
+import { Chromosome, Gene } from "../../atoms/schedules/types";
 import createNextGeneration from "./create-next-generation";
 import computeFitness from "./compute-fitness";
 import initPopulation from "./init-population";
@@ -17,14 +17,42 @@ export default async () => {
 
   let generationCount: number = 0;
   const bestChromosome: Chromosome = new Chromosome([], 0);
+  let voElectronicWithAttendanceSameDay = 0;
+  let voLabMultipleRoomsNotInSameTimeSlot = 0;
+  let voLecturesSameRoomSameTime = 0;
+  let voStageHasLectureInForbiddenDay = 0;
+  let voTeacherWithLecturesSameTime = 0;
+  let voLecturesSameClassSameTime = 0;
   let bestFitness = 0;
   let bestGenerationFitness = 0;
 
   while (generationCount < maxGeneration && bestFitness < 1) {
     generationCount += 1;
+    const worstGenes: { worstGene: Gene; isDayConflict: number }[] = [];
 
     for (let i = 0; i < populationSize; i++) {
-      computeFitness(nextGeneration[i], lectures, days, hours, classes, rooms);
+      const {
+        worstGene,
+        isDayConflictForWorst,
+        vioElectronicWithAttendanceSameDay,
+        vioLabMultipleRoomsNotInSameTimeSlot,
+        vioLecturesSameRoomSameTime,
+        vioStageHasLectureInForbiddenDay,
+        vioTeacherWithLecturesSameTime,
+        vioLecturesSameClassSameTime,
+      } = computeFitness(
+        nextGeneration[i],
+        lectures,
+        days,
+        hours,
+        classes,
+        rooms
+      );
+
+      worstGenes.push({
+        worstGene: worstGene!,
+        isDayConflict: isDayConflictForWorst!,
+      });
 
       if (bestGenerationFitness < nextGeneration[i].fitness) {
         bestGenerationFitness = nextGeneration[i].fitness;
@@ -34,6 +62,13 @@ export default async () => {
         bestFitness = nextGeneration[i].fitness;
         bestChromosome.genes = nextGeneration[i].genes;
         bestChromosome.fitness = nextGeneration[i].fitness;
+        voElectronicWithAttendanceSameDay = vioElectronicWithAttendanceSameDay;
+        voLabMultipleRoomsNotInSameTimeSlot =
+          vioLabMultipleRoomsNotInSameTimeSlot;
+        voLecturesSameRoomSameTime = vioLecturesSameRoomSameTime;
+        voStageHasLectureInForbiddenDay = vioStageHasLectureInForbiddenDay;
+        voTeacherWithLecturesSameTime = vioTeacherWithLecturesSameTime;
+        voLecturesSameClassSameTime = vioLecturesSameClassSameTime;
       }
 
       if (bestFitness === 1) break;
@@ -51,9 +86,10 @@ export default async () => {
       nextGeneration = createNextGeneration(
         nextGeneration,
         days,
-        hours
+        hours,
+        generationCount,
+        worstGenes
         // lectures,
-        // generationCount
       );
     }
   }
@@ -62,5 +98,13 @@ export default async () => {
     `bestFitness ${bestFitness}, bestChromosome.fitness ${bestChromosome.fitness}`
   );
 
-  return bestChromosome;
+  return {
+    bestChromosome,
+    voElectronicWithAttendanceSameDay,
+    voLabMultipleRoomsNotInSameTimeSlot,
+    voLecturesSameRoomSameTime,
+    voStageHasLectureInForbiddenDay,
+    voTeacherWithLecturesSameTime,
+    voLecturesSameClassSameTime,
+  };
 };

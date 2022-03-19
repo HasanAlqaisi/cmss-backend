@@ -1,7 +1,14 @@
+/* eslint-disable no-import-assign */
 import { Day, Hour } from "@prisma/client";
 import getRandomInt from "../../utils/get-random-int";
-import { crossoverRate, populationSize } from "./utils/constants";
-import { Chromosome } from "../../atoms/schedules/types";
+import {
+  changeTunes,
+  // crossoverRate,
+  getTunes,
+  // mutationRate,
+  populationSize,
+} from "./utils/constants";
+import { Chromosome, Gene } from "../../atoms/schedules/types";
 import mutate from "./mutation/mutate";
 import getFittestChromosome from "./utils/get-fittest-chromosome";
 import getSecondFittestChromosome from "./utils/get-second-fittest-chromosome";
@@ -9,34 +16,47 @@ import tournamentSelect from "./selection/tournament-select";
 import onePointCrossover from "./crossover/one-point-crossover";
 import twoPointCrossover from "./crossover/two-point-crossover";
 import uniformCrossover from "./crossover/uniform-crossover";
+import logger from "../../utils/config/logger";
+import getNFittestChromosome from "./utils/get-n-fittest-chromosomes";
+import getNLeastChromosomes from "./utils/get-n-least-chromosomes";
 
 export default (
   previousGeneration: Chromosome[],
   days: Day[],
-  hours: Hour[]
+  hours: Hour[],
+  generationCount: number,
+  worstGenes: { worstGene: Gene; isDayConflict: number }[]
 ): Chromosome[] => {
   const nextGeneration: Chromosome[] = [];
 
-  const fittestChromosome = getFittestChromosome(
-    0,
-    previousGeneration.length,
-    previousGeneration
-  );
+  // const fittestChromosome = getFittestChromosome(
+  //   0,
+  //   previousGeneration.length,
+  //   previousGeneration
+  // );
 
-  const secondFittestChromosome =
-    getSecondFittestChromosome(previousGeneration);
+  // const secondFittestChromosome =
+  //   getSecondFittestChromosome(previousGeneration);
 
-  nextGeneration.push(fittestChromosome);
-  nextGeneration.push(secondFittestChromosome);
+  const fitters = getNFittestChromosome(previousGeneration, 10);
+
+  const leasters = getNLeastChromosomes(previousGeneration, 10);
+
+  fitters.forEach((fitter) => nextGeneration.push(fitter));
 
   // let totalFitness = 0;
   // previousGeneration.forEach((chromosome) => {
   //   totalFitness += chromosome.fitness;
   // });
 
-  for (let i = 0; i < populationSize / 2 - 1; i++) {
-    const firstParent = tournamentSelect(previousGeneration);
-    const secondParent = tournamentSelect(previousGeneration);
+  const { crossoverRate, mutationRate } = getTunes();
+  // if (generationCount > 60) {
+  //   changeTunes(98, 2, 350);
+  // }
+
+  for (let i = 0; i < populationSize / 2 - 5; i++) {
+    const firstParent = tournamentSelect(previousGeneration, leasters);
+    const secondParent = tournamentSelect(previousGeneration, leasters);
 
     let offspring1: Chromosome;
     let offspring2: Chromosome;
@@ -46,9 +66,12 @@ export default (
 
     if (shouldCross) {
       [offspring1, offspring2] = uniformCrossover(firstParent, secondParent);
+    } else if (getRandomInt(2) === 1) {
+      offspring1 = mutate(firstParent, days, hours, mutationRate, worstGenes);
+      offspring2 = secondParent;
     } else {
-      offspring1 = mutate(firstParent, days, hours);
-      offspring2 = mutate(secondParent, days, hours);
+      offspring2 = mutate(secondParent, days, hours, mutationRate, worstGenes);
+      offspring1 = firstParent;
     }
 
     nextGeneration.push(offspring1);
