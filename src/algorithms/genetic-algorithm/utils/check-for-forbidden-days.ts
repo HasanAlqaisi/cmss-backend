@@ -1,13 +1,7 @@
 import { Day } from "@prisma/client";
-import logger from "../../../utils/config/logger";
 import { FullLectures, Gene } from "../../../atoms/schedules/types";
 
-export default (
-  gene: Gene,
-  lectures: FullLectures,
-  days: Day[],
-  foundBefore: number[]
-): number => {
+export default (gene: Gene, lectures: FullLectures, days: Day[]): number => {
   let conflictCount: number = 0;
 
   const day = days.find((element) => element.id === gene.dayId);
@@ -15,16 +9,7 @@ export default (
   const { stage } = lecture!.hall.subject.Class;
   const forbiddenDays = stage.forbiddenDays!;
 
-  if (
-    forbiddenDays?.includes(day!.number!) &&
-    !foundBefore.includes(stage.id)
-  ) {
-    foundBefore.push(stage.id);
-    // logger.debug(
-    //   `conflict found! day number ${day!.number} is a forbidden day for stage ${
-    //     stage.number
-    //   }`
-    // );
+  if (forbiddenDays?.includes(day!.number!)) {
     conflictCount += 1;
   }
   return conflictCount;

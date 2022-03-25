@@ -1,14 +1,12 @@
 import { Class, Day } from "@prisma/client";
 import { FullLectures, Gene } from "../../../atoms/schedules/types";
-import logger from "../../../utils/config/logger";
 
 export default (
   gene: Gene,
   lectures: FullLectures,
   classes: Class[],
   days: Day[],
-  dayAndKlassLectures: boolean[][][],
-  foundBefore: string[]
+  dayAndKlassLectures: boolean[][][]
 ): number => {
   let conflictCount: number = 0;
 
@@ -29,19 +27,7 @@ export default (
 
   // eslint-disable-next-line no-restricted-syntax
   for (const isElectronic of lectureArray) {
-    if (
-      isElectronic !== isFirstSubjectElectronic &&
-      !foundBefore.includes(`${dayIndex}${klassIndex}`)
-    ) {
-      foundBefore.push(`${dayIndex}${klassIndex}`);
-      // const str: string = lec.hall.subject.isElectronic
-      //   ? "electronic"
-      //   : "not electronic";
-      // logger.debug(
-      //   `conflict found! on day ${dayIndex}, class id ${
-      //     lec.hall.subject.Class.id
-      //   } because of a subject ${lec.hall.subject.name} is ${str}`
-      // );
+    if (isElectronic !== isFirstSubjectElectronic) {
       conflictCount += 1;
       break;
     }

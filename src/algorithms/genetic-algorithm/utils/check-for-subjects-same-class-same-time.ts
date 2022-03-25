@@ -1,6 +1,5 @@
-import { Class, Day, Hour, Room } from "@prisma/client";
+import { Class, Day, Hour } from "@prisma/client";
 import { FullLectures, Gene } from "../../../atoms/schedules/types";
-import logger from "../../../utils/config/logger";
 
 export default (
   gene: Gene,
@@ -9,7 +8,6 @@ export default (
   classes: Class[],
   lectures: FullLectures,
   dayAndTimeClasses: number[][][],
-  foundBefore: string[],
   currentLectures: string[]
 ): number => {
   let conflictCount: number = 0;
@@ -36,16 +34,7 @@ export default (
   // Make a set of classes to check for duplication with the original array
   const classesSet = new Set(currentClasses);
 
-  if (
-    classesSet.size !== currentClasses.length &&
-    !foundBefore.includes(`${dayIndex}${timeIndex}`)
-  ) {
-    foundBefore.push(`${dayIndex}${timeIndex}`);
-    // logger.debug(
-    //   `conflict found! on day ${dayIndex + 1} at time ${
-    //     timeIndex + 1
-    //   } with rooms ${roomsCurrentTimeSlot}`
-    // );
+  if (classesSet.size !== currentClasses.length) {
     conflictCount += 1;
   }
 

@@ -1,4 +1,3 @@
-import logger from "../../../utils/config/logger";
 import { Chromosome } from "../../../atoms/schedules/types";
 
 export default (previousGeneration: Chromosome[], n: number): Chromosome[] => {

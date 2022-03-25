@@ -1,6 +1,4 @@
-import { Subject } from "@prisma/client";
 import prisma from "../../prisma";
-import { Chromosome, Gene } from "./types";
 import generateSchedule from "../../algorithms/genetic-algorithm/generate-schedule";
 
 export default class ScheduleService {
@@ -10,25 +8,14 @@ export default class ScheduleService {
     const generatedSchedule = await generateSchedule();
 
     await prisma.schedule.createMany({
-      data: generatedSchedule!.bestChromosome.genes,
+      data: generatedSchedule!.genes,
     });
 
-    const schedule = await this.getSchedules();
+    const schedules = await this.getSchedules();
 
     return {
-      conflicts: 1 / generatedSchedule.bestChromosome.fitness - 1,
-      voElectronicWithAttendanceSameDay:
-        generatedSchedule.voElectronicWithAttendanceSameDay,
-      voLabMultipleRoomsNotInSameTimeSlot:
-        generatedSchedule.voLabMultipleRoomsNotInSameTimeSlot,
-      voLecturesSameRoomSameTime: generatedSchedule.voLecturesSameRoomSameTime,
-      voStageHasLectureInForbiddenDay:
-        generatedSchedule.voStageHasLectureInForbiddenDay,
-      voTeacherWithLecturesSameTime:
-        generatedSchedule.voTeacherWithLecturesSameTime,
-      voLecturesSameClassSameTime:
-        generatedSchedule.voLecturesSameClassSameTime,
-      schedule,
+      conflicts: 1 / generatedSchedule.fitness - 1,
+      schedules,
     };
   };
 
@@ -39,18 +26,25 @@ export default class ScheduleService {
   static getSchedules = async () => {
     const schedules = await prisma.schedule.findMany({
       select: {
-        class: { select: { id: true } },
-        day: { select: { number: true } },
-        hour: { select: { start: true } },
+        class: {
+          select: {
+            id: true,
+            stage: true,
+            branch: true,
+            program: true,
+          },
+        },
+        day: { select: { id: true, number: true } },
+        hour: { select: { id: true, start: true } },
         lecture: {
           select: {
             hall: {
               select: {
-                subject: { select: { name: true } },
-                room: { select: { number: true } },
+                subject: { select: { id: true, name: true } },
+                room: { select: { id: true, number: true } },
               },
             },
-            teacher: { select: { username: true } },
+            teacher: { select: { id: true, fullName: true, username: true } },
           },
         },
       },

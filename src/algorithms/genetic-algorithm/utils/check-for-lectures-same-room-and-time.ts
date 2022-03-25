@@ -7,8 +7,7 @@ export default (
   days: Day[],
   hours: Hour[],
   rooms: Room[],
-  dayAndTimeRooms: number[][][],
-  foundBefore: string[]
+  dayAndTimeRooms: number[][][]
 ): number => {
   let conflictCount: number = 0;
   const dayIndex: number = days.findIndex((day) => day.id === gene.dayId);
@@ -26,16 +25,7 @@ export default (
   // Make a set of rooms to check for duplication with the original array
   const roomsSet = new Set(roomsCurrentTimeSlot);
 
-  if (
-    roomsSet.size !== roomsCurrentTimeSlot.length &&
-    !foundBefore.includes(`${dayIndex}${timeIndex}`)
-  ) {
-    foundBefore.push(`${dayIndex}${timeIndex}`);
-    // logger.debug(
-    //   `conflict found! on day ${dayIndex + 1} at time ${
-    //     timeIndex + 1
-    //   } with rooms ${roomsCurrentTimeSlot}`
-    // );
+  if (roomsSet.size !== roomsCurrentTimeSlot.length) {
     conflictCount += 1;
   }
 

@@ -1,20 +1,17 @@
 import { Chromosome } from "../../../atoms/schedules/types";
 import getRandomInt from "../../../utils/get-random-int";
-import { getTunes } from "../utils/constants";
+import { tournamentSize } from "../utils/constants";
 
-export default (previousGeneration: Chromosome[], leasters: Chromosome[]) => {
-  const { tournamentSize } = getTunes();
+export default (previousGeneration: Chromosome[], fitters: Chromosome[]) => {
   const selectedChromosomes: Chromosome[] = [];
   let bestFitness = 0;
-  let worstFitness = 1;
-  let bestOne: Chromosome;
-  let worstOne: Chromosome;
+  let bestOne = new Chromosome([], 0);
 
   for (let index = 0; index < tournamentSize; index++) {
     let randomIndex = getRandomInt(previousGeneration.length);
     let chromosome: Chromosome = previousGeneration[randomIndex];
 
-    while (leasters.includes(chromosome)) {
+    while (fitters.includes(chromosome)) {
       randomIndex = getRandomInt(previousGeneration.length);
       chromosome = previousGeneration[randomIndex];
     }
@@ -26,18 +23,7 @@ export default (previousGeneration: Chromosome[], leasters: Chromosome[]) => {
       bestFitness = currentFitness;
       bestOne = selectedChromosomes[index];
     }
-    if (currentFitness < worstFitness) {
-      worstFitness = currentFitness;
-      worstOne = selectedChromosomes[index];
-    }
   }
 
-  let theOne: Chromosome;
-  const probForTheBest = getRandomInt(100) + 1;
-  if (probForTheBest <= 100) {
-    theOne = bestOne!;
-  } else {
-    theOne = worstOne!;
-  }
-  return theOne;
+  return bestOne;
 };
