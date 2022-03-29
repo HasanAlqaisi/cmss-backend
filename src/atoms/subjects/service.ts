@@ -36,13 +36,14 @@ export default class SubjectService {
 
   static updateSubject = async (
     id: number,
+    classId: number,
     name: string,
     isElectronic: boolean,
     isLab: boolean
   ): Promise<Subject> => {
     const subject = await prisma.subject.update({
       where: { id },
-      data: { name, isElectronic, isLab },
+      data: { classId, name, isElectronic, isLab },
     });
 
     return subject;
