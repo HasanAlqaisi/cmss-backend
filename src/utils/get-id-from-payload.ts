@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 export default (authorization: string): number => {
-  const token = authorization.replace("bearer ", "");
+  const token = authorization.replace("Bearer ", "");
 
   const payload = jwt.decode(token);
 
