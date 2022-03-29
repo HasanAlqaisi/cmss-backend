@@ -3,9 +3,9 @@ import { z } from "zod";
 
 export const createLecture = async (req: Request) => {
   const schema = z.object({
-    teacher_id: z.number(),
-    room_id: z.number(),
-    subject_id: z.number(),
+    teacherId: z.number(),
+    roomId: z.number(),
+    subjectId: z.number(),
   });
 
   return schema.parseAsync(req.body);
@@ -13,9 +13,9 @@ export const createLecture = async (req: Request) => {
 
 export const updateLecture = async (req: Request) => {
   const schema = z.object({
-    teacher_id: z.number(),
-    room_id: z.number(),
-    subject_id: z.number(),
+    teacherId: z.number(),
+    roomId: z.number(),
+    subjectId: z.number(),
   });
 
   return schema.parseAsync(req.body);

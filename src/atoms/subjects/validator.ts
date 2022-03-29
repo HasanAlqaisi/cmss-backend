@@ -3,7 +3,7 @@ import { z } from "zod";
 
 export const getSubjects = async (req: Request) => {
   const schema = z.object({
-    class_id: z.string().optional(),
+    classId: z.string().optional(),
   });
 
   return schema.parseAsync(req.query);
@@ -11,10 +11,10 @@ export const getSubjects = async (req: Request) => {
 
 export const createSubject = async (req: Request) => {
   const schema = z.object({
-    class_id: z.number(),
+    classId: z.number(),
     name: z.string(),
-    is_electronic: z.boolean(),
-    is_lab: z.boolean(),
+    isElectronic: z.boolean(),
+    isLab: z.boolean(),
   });
 
   return schema.parseAsync(req.body);
@@ -22,9 +22,10 @@ export const createSubject = async (req: Request) => {
 
 export const updateSubject = async (req: Request) => {
   const schema = z.object({
+    classId: z.number(),
     name: z.string(),
-    is_electronic: z.boolean(),
-    is_lab: z.boolean(),
+    isElectronic: z.boolean(),
+    isLab: z.boolean(),
   });
 
   return schema.parseAsync(req.body);

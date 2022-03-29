@@ -1,13 +1,12 @@
 import { Subject } from "@prisma/client";
 import { Request, Response } from "express";
-import { BadRequestError } from "../../utils/api/api-error";
 import { DeletedResponse, OkResponse } from "../../utils/api/api-response";
 import SubjectService from "./service";
 import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
 
 export const getSubjects = async (req: Request, res: Response) => {
-  const { class_id: classId } = await validator.getSubjects(req);
+  const { classId } = await validator.getSubjects(req);
   let subjects: Subject[];
 
   if (classId) {
@@ -20,12 +19,9 @@ export const getSubjects = async (req: Request, res: Response) => {
 };
 
 export const createSubject = async (req: Request, res: Response) => {
-  const {
-    name,
-    class_id: classId,
-    is_electronic: isElectronic,
-    is_lab: isLab,
-  } = await validator.createSubject(req);
+  const { name, classId, isElectronic, isLab } = await validator.createSubject(
+    req
+  );
 
   const subject = await SubjectService.createSubject(
     classId,
@@ -49,16 +45,15 @@ export const deleteSubject = async (req: Request, res: Response) => {
 
 export const updateSubject = async (req: Request, res: Response) => {
   const { id } = await generalValidator.id(req);
-  const {
-    name,
-    is_electronic: isElectronic,
-    is_lab: isLab,
-  } = await validator.updateSubject(req);
+  const { name, isElectronic, isLab, classId } = await validator.updateSubject(
+    req
+  );
 
   const idNumber = Number(id);
 
   const subject = await SubjectService.updateSubject(
     idNumber,
+    classId,
     name,
     isElectronic,
     isLab

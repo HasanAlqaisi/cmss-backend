@@ -12,19 +12,13 @@ export const getLectures = async (req: Request, res: Response) => {
 };
 
 export const createLecture = async (req: Request, res: Response) => {
-  const {
-    teacher_id: teacherId,
-    room_id: roomId,
-    subject_id: subjectId,
-  } = await validator.createLecture(req);
+  const { teacherId, roomId, subjectId } = await validator.createLecture(req);
 
   const lecture = await LectureService.createLecture(
     teacherId,
     roomId,
     subjectId
   );
-
-  
 
   return new OkResponse(lecture).send(res);
 };
@@ -41,11 +35,7 @@ export const deleteLecture = async (req: Request, res: Response) => {
 
 export const updateLecture = async (req: Request, res: Response) => {
   const { id } = await generalValidator.id(req);
-  const {
-    teacher_id: teacherId,
-    room_id: roomId,
-    subject_id: subjectId,
-  } = await validator.createLecture(req);
+  const { teacherId, roomId, subjectId } = await validator.createLecture(req);
 
   const idNumber = Number(id);
 
