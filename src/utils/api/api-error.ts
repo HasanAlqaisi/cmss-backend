@@ -1,4 +1,6 @@
-import { Response } from "express";
+import { Request, Response } from "express";
+import logger from "../config/logger";
+import { translate } from "../i18n";
 import {
   AuthFailureResponse,
   InternalErrorResponse,
@@ -20,22 +22,22 @@ export abstract class ApiError extends Error {
     super(message);
   }
 
-  public static handle(err: ApiError, res: Response): Response {
+  public static handle(err: ApiError, req: Request, res: Response): Response {
+    let { message } = err;
     switch (err.type) {
       case ErrorType.BAD_TOKEN:
-        return new AuthFailureResponse(err.message).send(res);
+        return new AuthFailureResponse(translate(req, "loginFailed")).send(res);
       case ErrorType.INTERNAL:
-        return new InternalErrorResponse(err.message).send(res);
+        return new InternalErrorResponse(message).send(res);
       case ErrorType.NOT_FOUND:
-        return new NotFoundResponse(err.message).send(res);
+        return new NotFoundResponse(message).send(res);
       case ErrorType.BAD_REQUEST:
-        return new BadRequestResponse(err.message).send(res);
+        return new BadRequestResponse(message).send(res);
       case ErrorType.FORBIDDEN:
-        return new ForbiddenResponse(err.message).send(res);
+        return new ForbiddenResponse(message).send(res);
       default: {
-        let { message } = err;
         if (process.env.NODE_ENV === "production")
-          message = "Something wrong happened.";
+          message = translate(req, "serverError");
 
         return new InternalErrorResponse(message).send(res);
       }
