@@ -35,12 +35,11 @@ export const loginPost = async (req: Request, res: Response) => {
 
   const user = await UserService.findByEmail(data.email);
 
-  if (!user) throw new BadRequestError("Incorrect email and/or password");
+  if (!user) throw new BadTokenError();
 
   const passwordMatch = await bcrypt.compare(data.password, user.password);
 
-  if (!passwordMatch)
-    throw new BadRequestError("Incorrect email and/or password");
+  if (!passwordMatch) throw new BadTokenError();
 
   const token = createToken(user.id);
 
