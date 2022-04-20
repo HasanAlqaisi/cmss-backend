@@ -1,7 +1,9 @@
 import { Role } from "@prisma/client";
 import bcrypt from "bcrypt";
 import prisma from ".";
+import RoleService from "../atoms/roles/service";
 import UserService from "../atoms/users/service";
+import { RoleWithPermissions } from "../atoms/roles/types";
 
 async function createRootAccount() {
   await UserService.createRootAccount(
@@ -11,6 +13,56 @@ async function createRootAccount() {
     "root@example.com",
     bcrypt.hashSync("password", 10)
   );
+}
+
+async function createRoles() {
+  const timetableManager: RoleWithPermissions = {
+    name: "timetableManager",
+    permissions: [
+      { action: "manage", subject: "Class" },
+      { action: "manage", subject: "Schedule" },
+      { action: "manage", subject: "Lecture" },
+      { action: "manage", subject: "Room" },
+      { action: "manage", subject: "Subject" },
+    ],
+  };
+
+  const attendanceManager: RoleWithPermissions = {
+    name: "attendanceManager",
+    permissions: [
+      { action: "manage", subject: "Attendance" },
+      { action: "manage", subject: "Lecture" },
+      { action: "manage", subject: "Student" },
+    ],
+  };
+
+  const registrationManager: RoleWithPermissions = {
+    name: "registrationManager",
+    permissions: [
+      { action: "manage", subject: "Applicant" },
+      { action: "manage", subject: "Material" },
+      { action: "manage", subject: "Specialty" },
+      { action: "manage", subject: "Year" },
+      { action: "manage", subject: "Channel" },
+    ],
+  };
+
+  const inventoryManager: RoleWithPermissions = {
+    name: "inventoryManager",
+    permissions: [
+      { action: "manage", subject: "Item" },
+      { action: "manage", subject: "ExportedItem" },
+      { action: "manage", subject: "BrokenItem" },
+      { action: "manage", subject: "Category" },
+      { action: "manage", subject: "List" },
+    ],
+  };
+  await Promise.all([
+    RoleService.createRole(timetableManager),
+    RoleService.createRole(attendanceManager),
+    RoleService.createRole(registrationManager),
+    RoleService.createRole(inventoryManager),
+  ]);
 }
 
 async function createClasses() {
@@ -2298,6 +2350,7 @@ const main = async () => {
 
   await Promise.all(promises);
   await createLectures(); // TEMP: for testing only - will be deleted later
+  await createRoles();
 };
 
 main()
