@@ -20,6 +20,7 @@ import attendancesRoutes from "./atoms/attendances/router";
 import studentsRoutes from "./atoms/students/router";
 import warningRoutes from "./atoms/reports/router";
 import absencesRoutes from "./atoms/absences/router";
+import classesRoutes from "./atoms/classes/router";
 import permissions from "./middlewares/permissions";
 
 const router = Router();
@@ -79,5 +80,7 @@ router.use("/students", permissions("manage", "Student"), studentsRoutes);
 router.use("/warnings", permissions("manage", "Attendance"), warningRoutes);
 
 router.use("/absences", permissions("manage", "Absence"), absencesRoutes);
+
+router.use("/classes", permissions("manage", "Class"), classesRoutes);
 
 export default router;
