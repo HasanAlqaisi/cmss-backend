@@ -8529,213 +8529,6 @@
       },
       "parameters": []
     },
-    "/lectures/{id}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "number"
-          },
-          "name": "id",
-          "in": "path",
-          "required": true
-        }
-      ],
-      "put": {
-        "summary": "",
-        "operationId": "",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OutputLecture"
-                },
-                "examples": {
-                  "example-1": {
-                    "value": {
-                      "id": 0,
-                      "hallId": 0,
-                      "teacherId": 0,
-                      "teacher": {
-                        "email": "string",
-                        "username": "string",
-                        "fullName": "string"
-                      },
-                      "hall": {
-                        "id": 0,
-                        "roomId": 0,
-                        "subjectId": 0,
-                        "room": {
-                          "name": "string",
-                          "number": 0
-                        },
-                        "subject": {
-                          "Class": {
-                            "id": 0,
-                            "branchId": 0,
-                            "stageId": 0,
-                            "programId": 0,
-                            "program": {
-                              "name": "string"
-                            },
-                            "stage": {
-                              "id": 0,
-                              "number": 0,
-                              "forbiddenDays": [
-                                0
-                              ]
-                            }
-                          },
-                          "name": "string",
-                          "isElectronic": true,
-                          "isLab": true
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "type": "object",
-                  "properties": {
-                    "details": {
-                      "type": "string",
-                      "minLength": 1
-                    }
-                  },
-                  "required": [
-                    "details"
-                  ],
-                  "x-examples": {
-                    "example-1": {
-                      "details": "name is already exists"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        },
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "Authorization",
-            "required": true
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/InputLecture"
-              },
-              "examples": {
-                "example-1": {
-                  "value": {
-                    "teacherId": 0,
-                    "roomId": 0,
-                    "subjectId": 0
-                  }
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "lectures"
-        ]
-      },
-      "delete": {
-        "summary": "",
-        "operationId": "",
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "",
-                  "type": "object",
-                  "properties": {
-                    "details": {
-                      "type": "string",
-                      "minLength": 1
-                    }
-                  },
-                  "required": [
-                    "details"
-                  ],
-                  "x-examples": {
-                    "example-1": {
-                      "details": "one of provided ids does not exist"
-                    }
-                  }
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "description": "",
-                  "type": "object",
-                  "properties": {
-                    "details": {
-                      "type": "string",
-                      "minLength": 1
-                    }
-                  },
-                  "required": [
-                    "details"
-                  ],
-                  "x-examples": {
-                    "example-1": {
-                      "details": "Record to delete does not exist."
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        },
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "header",
-            "name": "Authorization",
-            "required": true
-          }
-        ],
-        "tags": [
-          "lectures"
-        ]
-      }
-    },
     "/schedules": {
       "post": {
         "summary": "",
@@ -9246,6 +9039,404 @@
             "name": "Authorization",
             "required": true
           }
+        ]
+      }
+    },
+    "/students": {
+      "get": {
+        "summary": "",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "x-examples": {
+                    "example-1": [
+                      {
+                        "id": 1,
+                        "name": "القناة العامة"
+                      },
+                      {
+                        "id": 2,
+                        "name": "القناة الزايدة "
+                      }
+                    ]
+                  },
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OutputStudent"
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": [
+                      {
+                        "id": 0,
+                        "name": "string",
+                        "age": 0,
+                        "gender": "string",
+                        "email": "string",
+                        "classId": 0,
+                        "dateAcceptedId": 0,
+                        "chnnaelId": 0,
+                        "Class": {
+                          "id": 0,
+                          "branchId": 0,
+                          "programId": 0,
+                          "stageId": 0
+                        },
+                        "channel": {
+                          "id": 0,
+                          "name": "string"
+                        },
+                        "year": {
+                          "id": 0,
+                          "range": "string"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "operationId": "",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "required": true
+          }
+        ],
+        "description": "",
+        "tags": [
+          "students"
+        ]
+      },
+      "post": {
+        "summary": "",
+        "operationId": "",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OutputStudent"
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "id": 0,
+                      "name": "string",
+                      "age": 0,
+                      "gender": "string",
+                      "email": "string",
+                      "classId": 0,
+                      "dateAcceptedId": 0,
+                      "chnnaelId": 0,
+                      "Class": {
+                        "id": 0,
+                        "branchId": 0,
+                        "programId": 0,
+                        "stageId": 0
+                      },
+                      "channel": {
+                        "id": 0,
+                        "name": "string"
+                      },
+                      "year": {
+                        "id": 0,
+                        "range": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "details": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "details"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "details": "name is already exists"
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "details": "name is already exists"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InputStudent"
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "name": "string",
+                    "age": 0,
+                    "gender": "MALE",
+                    "email": "user@example.com",
+                    "highSchoolYearRange": "string",
+                    "channelId": 0,
+                    "classId": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "required": true
+          }
+        ],
+        "description": "",
+        "tags": [
+          "students"
+        ]
+      },
+      "parameters": []
+    },
+    "/students/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "number"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "",
+        "operationId": "",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OutputStudent"
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "id": 0,
+                      "name": "string",
+                      "age": 0,
+                      "gender": "string",
+                      "email": "string",
+                      "classId": 0,
+                      "dateAcceptedId": 0,
+                      "chnnaelId": 0,
+                      "Class": {
+                        "id": 0,
+                        "branchId": 0,
+                        "programId": 0,
+                        "stageId": 0
+                      },
+                      "channel": {
+                        "id": 0,
+                        "name": "string"
+                      },
+                      "year": {
+                        "id": 0,
+                        "range": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "details": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "details"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "details": "name is already exists"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InputStudent"
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "name": "string",
+                    "age": 0,
+                    "gender": "MALE",
+                    "email": "user@example.com",
+                    "highSchoolYearRange": "string",
+                    "channelId": 0,
+                    "classId": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "students"
+        ]
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "details": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "details"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "details": "one of provided ids does not exist"
+                    }
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "details": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "details"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "details": "Record to delete does not exist."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "required": true
+          }
+        ],
+        "tags": [
+          "students"
         ]
       }
     }
@@ -19436,6 +19627,227 @@
                 }
               }
             ]
+          }
+        ]
+      },
+      "InputStudent": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "name": "Raghad",
+            "age": 20,
+            "gender": "FEMALE",
+            "email": "raghad.moaed@gmail.com",
+            "highSchoolYearRange": "2020/2021",
+            "channelId": 1,
+            "classId": 2
+          }
+        },
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "age": {
+            "type": "number"
+          },
+          "gender": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "MALE",
+              "FEMALE"
+            ]
+          },
+          "email": {
+            "type": "string",
+            "minLength": 1,
+            "format": "email"
+          },
+          "highSchoolYearRange": {
+            "type": "string",
+            "minLength": 1
+          },
+          "channelId": {
+            "type": "number"
+          },
+          "classId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "name",
+          "age",
+          "gender",
+          "email",
+          "highSchoolYearRange",
+          "channelId",
+          "classId"
+        ],
+        "title": "InputStudent",
+        "examples": [
+          {
+            "name": "string",
+            "age": 0,
+            "gender": "MALE",
+            "email": "user@example.com",
+            "highSchoolYearRange": "string",
+            "channelId": 0,
+            "classId": 0
+          }
+        ]
+      },
+      "OutputStudent": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "age": {
+            "type": "number"
+          },
+          "gender": {
+            "type": "string",
+            "minLength": 1
+          },
+          "email": {
+            "type": "string",
+            "minLength": 1
+          },
+          "classId": {
+            "type": "number"
+          },
+          "dateAcceptedId": {
+            "type": "number"
+          },
+          "chnnaelId": {
+            "type": "number"
+          },
+          "Class": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "branchId": {
+                "type": "number"
+              },
+              "programId": {
+                "type": "number"
+              },
+              "stageId": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "id",
+              "branchId",
+              "programId",
+              "stageId"
+            ]
+          },
+          "channel": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "id",
+              "name"
+            ]
+          },
+          "year": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "range": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "id",
+              "range"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "age",
+          "gender",
+          "email",
+          "classId",
+          "dateAcceptedId",
+          "chnnaelId",
+          "Class",
+          "channel",
+          "year"
+        ],
+        "x-examples": {
+          "example-1": {
+            "id": 1,
+            "name": "Raghad",
+            "age": 20,
+            "gender": "FEMALE",
+            "email": "raghad.moaed@gmail.com",
+            "classId": 2,
+            "dateAcceptedId": 11,
+            "chnnaelId": 1,
+            "Class": {
+              "id": 2,
+              "branchId": 2,
+              "programId": 1,
+              "stageId": 1
+            },
+            "channel": {
+              "id": 1,
+              "name": "القناة العامة"
+            },
+            "year": {
+              "id": 11,
+              "range": "2020/2021"
+            }
+          }
+        },
+        "examples": [
+          {
+            "id": 0,
+            "name": "string",
+            "age": 0,
+            "gender": "string",
+            "email": "string",
+            "classId": 0,
+            "dateAcceptedId": 0,
+            "chnnaelId": 0,
+            "Class": {
+              "id": 0,
+              "branchId": 0,
+              "programId": 0,
+              "stageId": 0
+            },
+            "channel": {
+              "id": 0,
+              "name": "string"
+            },
+            "year": {
+              "id": 0,
+              "range": "string"
+            }
           }
         ]
       }
