@@ -124,49 +124,19 @@ export default class ApplicantService {
   };
 
   static deleteApplicant = async (id: number): Promise<void> => {
-    const deleteDegrees = prisma.applicant.update({
-      where: { id },
-      data: {
-        degrees: { deleteMany: {} },
-        selectedBranches: { deleteMany: {} },
-      },
-    });
-
-    const deletedApplicant = prisma.applicant.delete({ where: { id } });
-
-    await prisma.$transaction([deleteDegrees, deletedApplicant]);
+    await prisma.applicant.delete({ where: { id } });
   };
 
   static deleteApplicantsForChannel = async (
     channelId: number
   ): Promise<void> => {
-    const deleteDegrees = prisma.degree.deleteMany({
-      where: { applicant: { channel: { id: channelId } } },
-    });
-    const deleteSelectedBranches = prisma.applicantBranch.deleteMany({
-      where: { applicant: { channel: { id: channelId } } },
-    });
-    const deletedApplicant = prisma.applicant.deleteMany({
+    await prisma.applicant.deleteMany({
       where: { channel: { id: channelId } },
     });
-
-    await prisma.$transaction([
-      deleteDegrees,
-      deleteSelectedBranches,
-      deletedApplicant,
-    ]);
   };
 
   static deleteApplicants = async (): Promise<void> => {
-    const deleteDegrees = prisma.degree.deleteMany();
-    const deleteSelectedBranches = prisma.applicantBranch.deleteMany();
-    const deletedApplicant = prisma.applicant.deleteMany();
-
-    await prisma.$transaction([
-      deleteDegrees,
-      deleteSelectedBranches,
-      deletedApplicant,
-    ]);
+    await prisma.applicant.deleteMany();
   };
 
   static updateApplicant = async (

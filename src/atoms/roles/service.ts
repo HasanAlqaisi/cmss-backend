@@ -25,13 +25,7 @@ export default class RoleService {
   };
 
   static deleteRole = async (id: number): Promise<void> => {
-    const deletePermissoins = prisma.role.update({
-      where: { id },
-      data: { permissions: { deleteMany: {} } },
-    });
-    const deleteRoles = prisma.role.delete({ where: { id } });
-
-    await prisma.$transaction([deletePermissoins, deleteRoles]);
+    await prisma.role.delete({ where: { id } });
   };
 
   static updateRole = async (id: number, data: RoleWithPermissions) => {

@@ -70,7 +70,7 @@ model Permission {
   subject    Table
   conditions Json?
   roleId     Int
-  role       Role   @relation(fields: [roleId], references: [id])
+  role       Role   @relation(fields: [roleId], references: [id], onDelete: Cascade)
 }
 
 model Room {
@@ -84,15 +84,15 @@ model Room {
 }
 
 model Subject {
-  id           Int     @id @default(autoincrement())
+  id           Int     @unique @default(autoincrement())
   classId      Int
-  Class        Class   @relation(fields: [classId], references: [id])
+  Class        Class   @relation(fields: [classId], references: [id], onDelete: Cascade)
   name         String
   isElectronic Boolean
   isLab        Boolean
   halls        Hall[]
 
-  @@unique([classId, name])
+  @@id([classId, name])
 }
 
 model Branch {
@@ -100,7 +100,6 @@ model Branch {
   name               String            @unique
   maxCapacity        Int
   Classes            Class[]
-  // applicants         Applicant[]
   acceptedApplicants Applicant[]       @relation("acceptedBranch")
   selectedBranches   ApplicantBranch[]
 }
@@ -123,9 +122,9 @@ model Class {
   branchId  Int
   programId Int
   stageId   Int
-  branch    Branch     @relation(fields: [branchId], references: [id])
-  program   Program    @relation(fields: [programId], references: [id])
-  stage     Stage      @relation(fields: [stageId], references: [id])
+  branch    Branch     @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  program   Program    @relation(fields: [programId], references: [id], onDelete: Cascade)
+  stage     Stage      @relation(fields: [stageId], references: [id], onDelete: Cascade)
   subjects  Subject[]
   schedules Schedule[]
   students  Student[]
@@ -135,21 +134,19 @@ model Hall {
   id        Int       @unique @default(autoincrement())
   roomId    Int
   subjectId Int
-  room      Room      @relation(fields: [roomId], references: [id])
-  subject   Subject   @relation(fields: [subjectId], references: [id])
+  room      Room      @relation(fields: [roomId], references: [id], onDelete: SetNull)
+  subject   Subject   @relation(fields: [subjectId], references: [id], onDelete: SetNull)
   lectures  Lecture[]
 
   @@id([roomId, subjectId])
 }
 
 model Lecture {
-  id        Int  @unique @default(autoincrement())
-  hallId    Int
-  teacherId Int
-  teacher   User @relation(fields: [teacherId], references: [id])
-  hall      Hall @relation(fields: [hallId], references: [id])
-  // schedules Schedule[]
-
+  id          Int          @unique @default(autoincrement())
+  hallId      Int
+  teacherId   Int
+  teacher     User         @relation(fields: [teacherId], references: [id], onDelete: SetNull)
+  hall        Hall         @relation(fields: [hallId], references: [id])
   schedules   Schedule[]
   attendances Attendance[]
 
@@ -159,45 +156,29 @@ model Lecture {
 model Hour {
   id        Int        @id @default(autoincrement())
   start     String
-  // dayHours DayHour[]
   schedules Schedule[]
 }
 
 model Day {
   id        Int        @id @default(autoincrement())
   number    Int
-  // dayHours DayHour[]
   schedules Schedule[]
 }
 
-// model DayHour {
-//   id     Int  @id @default(autoincrement())
-//   hourId Int
-//   hour   Hour @relation(fields: [hourId], references: [id])
-//   dayId  Int
-//   day    Day  @relation(fields: [dayId], references: [id])
-
-//   schedules Schedule[]
-// }
-
 model Schedule {
   id        Int     @id @default(autoincrement())
-  // dayHourId Int
-  // dayHour   DayHour @relation(fields: [dayHourId], references: [id])
-  // lectureId Int
-  // lecture   Lecture @relation(fields: [lectureId], references: [id])
   dayId     Int
-  day       Day     @relation(fields: [dayId], references: [id])
+  day       Day     @relation(fields: [dayId], references: [id], onDelete: Cascade)
   hourId    Int
-  hour      Hour    @relation(fields: [hourId], references: [id])
+  hour      Hour    @relation(fields: [hourId], references: [id], onDelete: Cascade)
   roomId    Int
-  room      Room    @relation(fields: [roomId], references: [id])
+  room      Room    @relation(fields: [roomId], references: [id], onDelete: Cascade)
   teacherId Int
-  teacher   User    @relation(fields: [teacherId], references: [id])
+  teacher   User    @relation(fields: [teacherId], references: [id], onDelete: Cascade)
   lectureId Int
-  lecture   Lecture @relation(fields: [lectureId], references: [id])
+  lecture   Lecture @relation(fields: [lectureId], references: [id], onDelete: Cascade)
   classId   Int
-  class     Class   @relation(fields: [classId], references: [id])
+  class     Class   @relation(fields: [classId], references: [id], onDelete: Cascade)
 }
 
 model Channel {
@@ -222,7 +203,7 @@ model Material {
   name             String    @unique
   customPercentage Int       @default(0)
   specialtyId      Int
-  specialty        Specialty @relation(fields: [specialtyId], references: [id])
+  specialty        Specialty @relation(fields: [specialtyId], references: [id], onDelete: Cascade)
   degress          Degree[]
 }
 
@@ -244,7 +225,7 @@ model Applicant {
   age              Int?
   schoolName       String?
   channelId        Int
-  channel          Channel           @relation(fields: [channelId], references: [id])
+  channel          Channel           @relation(fields: [channelId], references: [id], onDelete: SetNull)
   daor             Int
   totalDegree      Float?
   average          Float?
@@ -255,12 +236,11 @@ model Applicant {
   moderia          String?
   examNumber       String?           @unique
   highSchoolYearId Int
-  year             Year              @relation(fields: [highSchoolYearId], references: [id])
+  year             Year              @relation(fields: [highSchoolYearId], references: [id], onDelete: SetNull)
   nationalId       String?           @unique
   religion         String?
   specialtyId      Int
-  specialty        Specialty         @relation(fields: [specialtyId], references: [id])
-  // selectedBranches Branch[]
+  specialty        Specialty         @relation(fields: [specialtyId], references: [id], onDelete: SetNull)
   branchId         Int?
   acceptedBranch   Branch?           @relation(fields: [branchId], references: [id], name: "acceptedBranch")
   degrees          Degree[]
@@ -270,9 +250,9 @@ model Applicant {
 model ApplicantBranch {
   id          Int       @unique @default(autoincrement())
   applicantId Int
-  applicant   Applicant @relation(fields: [applicantId], references: [id])
+  applicant   Applicant @relation(fields: [applicantId], references: [id], onDelete: Cascade)
   branchId    Int
-  branch      Branch    @relation(fields: [branchId], references: [id])
+  branch      Branch    @relation(fields: [branchId], references: [id], onDelete: Cascade)
   priority    Int
 
   @@id([applicantId, branchId])
@@ -285,20 +265,20 @@ model Student {
   gender         Gender?
   email          String?      @unique
   classId        Int
-  Class          Class        @relation(fields: [classId], references: [id])
+  Class          Class        @relation(fields: [classId], references: [id], onDelete: Cascade)
   dateAcceptedId Int
-  year           Year         @relation(fields: [dateAcceptedId], references: [id])
+  year           Year         @relation(fields: [dateAcceptedId], references: [id], onDelete: SetNull)
   chnnaelId      Int
-  channel        Channel      @relation(fields: [chnnaelId], references: [id])
+  channel        Channel      @relation(fields: [chnnaelId], references: [id], onDelete: SetNull)
   attendances    Attendance[]
 }
 
 model Degree {
   id          Int       @unique @default(autoincrement())
   materialId  Int
-  material    Material  @relation(fields: [materialId], references: [id])
+  material    Material  @relation(fields: [materialId], references: [id], onDelete: Cascade)
   applicantId Int
-  applicant   Applicant @relation(fields: [applicantId], references: [id])
+  applicant   Applicant @relation(fields: [applicantId], references: [id], onDelete: Cascade)
   score       Float     @default(0)
 
   @@id([materialId, applicantId])

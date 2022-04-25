@@ -30,13 +30,7 @@ export default class MaterialService {
   };
 
   static deleteMaterial = async (id: number): Promise<void> => {
-    const deleteDegrees = prisma.material.update({
-      where: { id },
-      data: { degress: { deleteMany: {} } },
-    });
-    const deleteMaterial = prisma.material.delete({ where: { id } });
-
-    await prisma.$transaction([deleteDegrees, deleteMaterial]);
+    await prisma.material.delete({ where: { id } });
   };
 
   static updateMaterial = async (
