@@ -60,6 +60,15 @@ export default class LectureService {
     return lectures;
   };
 
+  static getLectureById = async (id: number) => {
+    const lecture = await prisma.lecture.findUnique({
+      where: { id },
+      include: includeTeacherAndHall,
+    });
+
+    return lecture;
+  };
+
   static deleteLecture = async (lectureId: number): Promise<void> => {
     await prisma.lecture.delete({ where: { id: lectureId } });
   };
@@ -112,7 +121,7 @@ export default class LectureService {
 
   static getTeachers = async (): Promise<User[]> => {
     const teachers = await prisma.user.findMany({
-      where: { role: { name: "attendance_manager" } },
+      where: { role: { name: "attendanceManager" } },
     });
     return teachers;
   };

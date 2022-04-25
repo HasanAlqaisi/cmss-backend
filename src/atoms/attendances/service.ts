@@ -24,6 +24,23 @@ export default class AttendanceService {
     return attendance;
   };
 
+  static getAttendance = async (id: number) => {
+    const attendance = await prisma.attendance.findUnique({
+      where: { id },
+      include: {
+        student: { include: { Class: true } },
+        lecture: {
+          include: {
+            hall: {
+              include: { room: true, subject: { include: { Class: true } } },
+            },
+          },
+        },
+      },
+    });
+    return attendance;
+  };
+
   static createAttendance = async (input: InputAttendance) => {
     const attendance = await prisma.attendance.create({
       data: {
