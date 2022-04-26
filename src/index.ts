@@ -33,8 +33,6 @@ router.use("/roles", permissions("manage", "Role"), rolesRoutes);
 
 router.use("/subjects", permissions("manage", "Subject"), subjectsRoutes);
 
-router.use("/subjects", permissions("manage", "Subject"), subjectsRoutes);
-
 router.use("/rooms", permissions("manage", "Room"), roomsRoutes);
 
 router.use("/lectures", permissions("manage", "Lecture"), lecturesRoutes);
