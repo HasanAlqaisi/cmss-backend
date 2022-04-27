@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "title": "CMSS API",
     "version": "1.0",
@@ -8628,6 +8628,511 @@
       },
       "parameters": []
     },
+    "/stages": {
+      "parameters": [],
+      "get": {
+        "summary": "",
+        "operationId": "get-classes",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "x-examples": {
+                    "example-1": [
+                      {
+                        "id": 1,
+                        "branch": {
+                          "id": 1,
+                          "name": "Information",
+                          "maxCapacity": 100
+                        },
+                        "program": {
+                          "id": 1,
+                          "name": "Morning"
+                        },
+                        "stage": {
+                          "id": 1,
+                          "number": 1,
+                          "forbiddenDays": []
+                        }
+                      },
+                      {
+                        "id": 2,
+                        "branch": {
+                          "id": 2,
+                          "name": "Network",
+                          "maxCapacity": 100
+                        },
+                        "program": {
+                          "id": 1,
+                          "name": "Morning"
+                        },
+                        "stage": {
+                          "id": 1,
+                          "number": 1,
+                          "forbiddenDays": []
+                        }
+                      },
+                      {
+                        "id": 3,
+                        "branch": {
+                          "id": 1,
+                          "name": "Information",
+                          "maxCapacity": 100
+                        },
+                        "program": {
+                          "id": 1,
+                          "name": "Morning"
+                        },
+                        "stage": {
+                          "id": 2,
+                          "number": 2,
+                          "forbiddenDays": []
+                        }
+                      },
+                      {
+                        "id": 4,
+                        "branch": {
+                          "id": 2,
+                          "name": "Network",
+                          "maxCapacity": 100
+                        },
+                        "program": {
+                          "id": 1,
+                          "name": "Morning"
+                        },
+                        "stage": {
+                          "id": 2,
+                          "number": 2,
+                          "forbiddenDays": []
+                        }
+                      },
+                      {
+                        "id": 5,
+                        "branch": {
+                          "id": 1,
+                          "name": "Information",
+                          "maxCapacity": 100
+                        },
+                        "program": {
+                          "id": 1,
+                          "name": "Morning"
+                        },
+                        "stage": {
+                          "id": 3,
+                          "number": 3,
+                          "forbiddenDays": []
+                        }
+                      },
+                      {
+                        "id": 6,
+                        "branch": {
+                          "id": 2,
+                          "name": "Network",
+                          "maxCapacity": 100
+                        },
+                        "program": {
+                          "id": 1,
+                          "name": "Morning"
+                        },
+                        "stage": {
+                          "id": 3,
+                          "number": 3,
+                          "forbiddenDays": []
+                        }
+                      },
+                      {
+                        "id": 7,
+                        "branch": {
+                          "id": 1,
+                          "name": "Information",
+                          "maxCapacity": 100
+                        },
+                        "program": {
+                          "id": 1,
+                          "name": "Morning"
+                        },
+                        "stage": {
+                          "id": 4,
+                          "number": 4,
+                          "forbiddenDays": []
+                        }
+                      },
+                      {
+                        "id": 8,
+                        "branch": {
+                          "id": 2,
+                          "name": "Network",
+                          "maxCapacity": 100
+                        },
+                        "program": {
+                          "id": 1,
+                          "name": "Morning"
+                        },
+                        "stage": {
+                          "id": 4,
+                          "number": 4,
+                          "forbiddenDays": []
+                        }
+                      },
+                      {
+                        "id": 9,
+                        "branch": {
+                          "id": 1,
+                          "name": "Information",
+                          "maxCapacity": 100
+                        },
+                        "program": {
+                          "id": 2,
+                          "name": "Evening"
+                        },
+                        "stage": {
+                          "id": 1,
+                          "number": 1,
+                          "forbiddenDays": []
+                        }
+                      },
+                      {
+                        "id": 10,
+                        "branch": {
+                          "id": 2,
+                          "name": "Network",
+                          "maxCapacity": 100
+                        },
+                        "program": {
+                          "id": 2,
+                          "name": "Evening"
+                        },
+                        "stage": {
+                          "id": 1,
+                          "number": 1,
+                          "forbiddenDays": []
+                        }
+                      },
+                      {
+                        "id": 11,
+                        "branch": {
+                          "id": 1,
+                          "name": "Information",
+                          "maxCapacity": 100
+                        },
+                        "program": {
+                          "id": 2,
+                          "name": "Evening"
+                        },
+                        "stage": {
+                          "id": 2,
+                          "number": 2,
+                          "forbiddenDays": []
+                        }
+                      },
+                      {
+                        "id": 12,
+                        "branch": {
+                          "id": 2,
+                          "name": "Network",
+                          "maxCapacity": 100
+                        },
+                        "program": {
+                          "id": 2,
+                          "name": "Evening"
+                        },
+                        "stage": {
+                          "id": 2,
+                          "number": 2,
+                          "forbiddenDays": []
+                        }
+                      },
+                      {
+                        "id": 13,
+                        "branch": {
+                          "id": 1,
+                          "name": "Information",
+                          "maxCapacity": 100
+                        },
+                        "program": {
+                          "id": 2,
+                          "name": "Evening"
+                        },
+                        "stage": {
+                          "id": 3,
+                          "number": 3,
+                          "forbiddenDays": []
+                        }
+                      },
+                      {
+                        "id": 14,
+                        "branch": {
+                          "id": 2,
+                          "name": "Network",
+                          "maxCapacity": 100
+                        },
+                        "program": {
+                          "id": 2,
+                          "name": "Evening"
+                        },
+                        "stage": {
+                          "id": 3,
+                          "number": 3,
+                          "forbiddenDays": []
+                        }
+                      },
+                      {
+                        "id": 15,
+                        "branch": {
+                          "id": 1,
+                          "name": "Information",
+                          "maxCapacity": 100
+                        },
+                        "program": {
+                          "id": 2,
+                          "name": "Evening"
+                        },
+                        "stage": {
+                          "id": 4,
+                          "number": 4,
+                          "forbiddenDays": []
+                        }
+                      },
+                      {
+                        "id": 16,
+                        "branch": {
+                          "id": 2,
+                          "name": "Network",
+                          "maxCapacity": 100
+                        },
+                        "program": {
+                          "id": 2,
+                          "name": "Evening"
+                        },
+                        "stage": {
+                          "id": 4,
+                          "number": 4,
+                          "forbiddenDays": []
+                        }
+                      }
+                    ]
+                  },
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "number": {
+                        "type": "number"
+                      },
+                      "forbiddenDays": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": [
+                      {
+                        "id": 0,
+                        "number": 0,
+                        "forbiddenDays": [
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "required": true
+          }
+        ],
+        "tags": [
+          "stages"
+        ]
+      }
+    },
+    "/stages/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "number"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "",
+        "operationId": "",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "description": "",
+                  "minItems": 1,
+                  "uniqueItems": true,
+                  "x-examples": {
+                    "example-1": [
+                      {
+                        "id": 0,
+                        "number": 0,
+                        "forbiddenDays": [
+                          0
+                        ]
+                      }
+                    ]
+                  },
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "number": {
+                        "type": "number"
+                      },
+                      "forbiddenDays": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "number",
+                      "forbiddenDays"
+                    ]
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": [
+                      {
+                        "id": 0,
+                        "number": 0,
+                        "forbiddenDays": [
+                          0
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "details": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "details"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "details": "name is already exists"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "forbiddenDays": [
+                      1,
+                      2,
+                      3
+                    ]
+                  }
+                },
+                "properties": {
+                  "forbiddenDays": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "required": [
+                  "forbiddenDays"
+                ]
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "forbiddenDays": [
+                      0
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "stages"
+        ]
+      }
+    },
     "/classes": {
       "parameters": [],
       "get": {
@@ -9052,76 +9557,6 @@
                 "schema": {
                   "description": "",
                   "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "number"
-                    },
-                    "branch": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "number"
-                        },
-                        "name": {
-                          "type": "string",
-                          "minLength": 1
-                        },
-                        "maxCapacity": {
-                          "type": "number"
-                        }
-                      },
-                      "required": [
-                        "id",
-                        "name",
-                        "maxCapacity"
-                      ]
-                    },
-                    "program": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "number"
-                        },
-                        "name": {
-                          "type": "string",
-                          "minLength": 1
-                        }
-                      },
-                      "required": [
-                        "id",
-                        "name"
-                      ]
-                    },
-                    "stage": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "number"
-                        },
-                        "number": {
-                          "type": "number"
-                        },
-                        "forbiddenDays": {
-                          "type": "array",
-                          "items": {
-                            "required": [],
-                            "properties": {}
-                          }
-                        }
-                      },
-                      "required": [
-                        "id",
-                        "number",
-                        "forbiddenDays"
-                      ]
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "branch",
-                    "program",
-                    "stage"
-                  ],
                   "x-examples": {
                     "example-1": {
                       "id": 0,
@@ -9142,7 +9577,76 @@
                         ]
                       }
                     }
-                  }
+                  },
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "branch": {
+                      "type": "object",
+                      "required": [
+                        "id",
+                        "name",
+                        "maxCapacity"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "name": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "maxCapacity": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "program": {
+                      "type": "object",
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "name": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      }
+                    },
+                    "stage": {
+                      "type": "object",
+                      "required": [
+                        "id",
+                        "number",
+                        "forbiddenDays"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "number": {
+                          "type": "number"
+                        },
+                        "forbiddenDays": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "branch",
+                    "program",
+                    "stage"
+                  ]
                 },
                 "examples": {
                   "example-1": {
