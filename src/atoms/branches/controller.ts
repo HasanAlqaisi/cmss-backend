@@ -4,7 +4,7 @@ import BranchService from "./service";
 import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
 
-export const getbranches = async (req: Request, res: Response) => {
+export const getbranches = async (_: Request, res: Response) => {
   const branches = await BranchService.getBranches();
 
   return new OkResponse(branches).send(res);

@@ -4,7 +4,7 @@ import SpecialtyService from "./service";
 import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
 
-export const getSpecialties = async (req: Request, res: Response) => {
+export const getSpecialties = async (_: Request, res: Response) => {
   const specialties = await SpecialtyService.getSpecialties();
 
   return new OkResponse(specialties).send(res);

@@ -1,4 +1,4 @@
-import { Class, Hall, Lecture, Stage } from "@prisma/client";
+import { Hall, Lecture, Stage } from "@prisma/client";
 
 export class TeacherLectureRoom {
   teacherId: number;

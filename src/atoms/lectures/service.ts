@@ -1,5 +1,4 @@
-import { Class, Day, Hour, Lecture, Room, User } from "@prisma/client";
-import _ from "lodash";
+import { Class, Day, Hour, Lecture, Room } from "@prisma/client";
 import prisma from "../../prisma";
 
 const includeTeacherAndHall = {
@@ -117,12 +116,5 @@ export default class LectureService {
   static getRooms = async (): Promise<Room[]> => {
     const rooms = await prisma.room.findMany();
     return rooms;
-  };
-
-  static getTeachers = async (): Promise<User[]> => {
-    const teachers = await prisma.user.findMany({
-      where: { role: { name: "attendanceManager" } },
-    });
-    return teachers;
   };
 }

@@ -1,12 +1,4 @@
-import { Permission, Prisma, Table } from "@prisma/client";
-
-// const roleWithPermissions = Prisma.validator<Prisma.RoleArgs>()({
-//   include: { permissions: true },
-// });
-
-// export type RoleWithPermissions = Prisma.RoleGetPayload<
-//   typeof roleWithPermissions
-// >;
+import { Prisma, Table } from "@prisma/client";
 
 type CustomPermission = {
   action: string;

@@ -1,6 +1,4 @@
-import { Subject } from "@prisma/client";
 import { Request, Response } from "express";
-import { BadRequestError } from "../../utils/api/api-error";
 import { DeletedResponse, OkResponse } from "../../utils/api/api-response";
 import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";

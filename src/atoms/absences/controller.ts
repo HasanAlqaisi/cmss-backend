@@ -4,7 +4,7 @@ import AbsenceService from "./service";
 import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
 
-export const getAbsences = async (req: Request, res: Response) => {
+export const getAbsences = async (_: Request, res: Response) => {
   const absences = await AbsenceService.getAbsences();
 
   return new OkResponse(absences).send(res);

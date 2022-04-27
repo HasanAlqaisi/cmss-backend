@@ -1,7 +1,6 @@
-import { Item, Prisma } from "@prisma/client";
+import { Item } from "@prisma/client";
 import prisma from "../../prisma";
 import { BadRequestError } from "../../utils/api/api-error";
-import logger from "../../utils/config/logger";
 
 // eslint-disable-next-line import/prefer-default-export
 export const validateQuantityOnCreate = (

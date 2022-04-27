@@ -4,7 +4,7 @@ import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
 import RoomService from "./service";
 
-export const getRooms = async (req: Request, res: Response) => {
+export const getRooms = async (_: Request, res: Response) => {
   const rooms = await RoomService.getRooms();
 
   return new OkResponse(rooms).send(res);

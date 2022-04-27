@@ -8,7 +8,6 @@ import ItemService from "../items/service";
 import { validateQuantityOnCreate } from "./helpers";
 import { BadRequestError } from "../../utils/api/api-error";
 import { reshapeData } from "../../utils/reshape-data";
-import logger from "../../utils/config/logger";
 import saveImageInServer from "../../utils/save-image-in-server";
 import deleteImageFromServer from "../../utils/delete-image-from-server";
 

@@ -4,7 +4,7 @@ import CategoryService from "./service";
 import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
 
-export const getCategories = async (req: Request, res: Response) => {
+export const getCategories = async (_: Request, res: Response) => {
   const categories = await CategoryService.getCategories();
 
   return new OkResponse(categories).send(res);
