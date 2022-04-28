@@ -16,7 +16,7 @@ export const getLists = async (req: Request, res: Response) => {
 
   if (listQuery.responsible) {
     const lists = await ListService.getResponsibleLists(
-      listQuery.responsible,
+      Number(listQuery.responsible),
       listQuery.order
     );
     return new OkResponse(lists!).send(res);
@@ -24,7 +24,7 @@ export const getLists = async (req: Request, res: Response) => {
 
   if (listQuery.room) {
     const lists = await ListService.getRoomLists(
-      listQuery.room,
+      Number(listQuery.room),
       listQuery.order
     );
     return new OkResponse(lists!).send(res);

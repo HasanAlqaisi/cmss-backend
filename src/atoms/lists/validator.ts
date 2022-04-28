@@ -27,8 +27,8 @@ export const createList = async (req: Request) => {
 
 export const getLists = async (req: Request) => {
   const schema = z.object({
-    responsible: z.number().optional(),
-    room: z.number().optional(),
+    responsible: z.string().optional(),
+    room: z.string().optional(),
     order: z.nativeEnum(Prisma.SortOrder).default("asc"),
   });
 
