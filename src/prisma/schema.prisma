@@ -134,8 +134,8 @@ model Hall {
   id        Int       @unique @default(autoincrement())
   roomId    Int
   subjectId Int
-  room      Room      @relation(fields: [roomId], references: [id], onDelete: SetNull)
-  subject   Subject   @relation(fields: [subjectId], references: [id], onDelete: SetNull)
+  room      Room      @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  subject   Subject   @relation(fields: [subjectId], references: [id], onDelete: Cascade)
   lectures  Lecture[]
 
   @@id([roomId, subjectId])
@@ -145,8 +145,8 @@ model Lecture {
   id          Int          @unique @default(autoincrement())
   hallId      Int
   teacherId   Int
-  teacher     User         @relation(fields: [teacherId], references: [id], onDelete: SetNull)
-  hall        Hall         @relation(fields: [hallId], references: [id])
+  teacher     User         @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  hall        Hall         @relation(fields: [hallId], references: [id], onDelete: Cascade)
   schedules   Schedule[]
   attendances Attendance[]
 
