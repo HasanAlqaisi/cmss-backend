@@ -5,7 +5,14 @@ import * as generalValidator from "../../utils/general-validator";
 import LectureService from "./service";
 
 export const getLectures = async (req: Request, res: Response) => {
-  const lectures = await LectureService.getLectures();
+  const { classId } = await validator.lectureQuery(req);
+
+  let lectures;
+  if (classId) {
+    lectures = await LectureService.getLecturesForClass(Number(classId));
+  } else {
+    lectures = await LectureService.getLectures();
+  }
   return new OkResponse(lectures).send(res);
 };
 

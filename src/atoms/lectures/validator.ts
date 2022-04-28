@@ -1,6 +1,14 @@
 import { Request } from "express";
 import { z } from "zod";
 
+export const lectureQuery = async (req: Request) => {
+  const schema = z.object({
+    classId: z.string().optional(),
+  });
+
+  return schema.parseAsync(req.query);
+};
+
 export const createLecture = async (req: Request) => {
   const schema = z.object({
     teacherId: z.number(),
