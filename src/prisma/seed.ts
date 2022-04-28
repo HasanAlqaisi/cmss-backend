@@ -19,7 +19,7 @@ async function createRoles() {
   const timetableManager: RoleWithPermissions = {
     name: "timetableManager",
     permissions: [
-      { action: "manage", subject: "Class" },
+      { action: "read", subject: "Class" },
       { action: "manage", subject: "Schedule" },
       { action: "manage", subject: "Lecture" },
       { action: "manage", subject: "Room" },
