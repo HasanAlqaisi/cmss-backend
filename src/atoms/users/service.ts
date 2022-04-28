@@ -7,23 +7,25 @@ export default class UserService {
   static createUser = async (
     username: string,
     fullName: string,
-    roleName: string,
+    roleId: number,
     email: string,
-    hashedPass: string
+    hashedPass: string,
+    roomId?: number
   ): Promise<User> => {
-    const role = await prisma.role.findFirst({ where: { name: roleName } });
+    const role = await prisma.role.findFirst({ where: { id: roleId } });
 
-    if (!role) throw new BadRequestError(`role ${roleName} is not exist`);
+    if (!role) throw new BadRequestError(`role ${roleId} is not exist`);
 
     return prisma.user.create({
       data: {
         username,
         fullName,
+        room: roomId ? { connect: { id: roomId } } : undefined,
         email,
         password: hashedPass,
         role: { connect: { id: role.id } },
       },
-      include: { role: true },
+      include: { role: true, room: true },
     });
   };
 
@@ -54,8 +56,9 @@ export default class UserService {
     id: number,
     username: string,
     fullName: string,
-    role: string,
-    email: string
+    roleId: number,
+    email: string,
+    roomId?: number
   ): Promise<User> => {
     const user = await prisma.user.update({
       where: { id },
@@ -63,9 +66,10 @@ export default class UserService {
         username,
         fullName,
         email,
-        role: { connect: { name: role } },
+        room: roomId ? { connect: { id: roomId } } : undefined,
+        role: { connect: { id: roleId } },
       },
-      include: { role: true },
+      include: { role: true, room: true },
     });
 
     return user;
@@ -77,7 +81,7 @@ export default class UserService {
       data: {
         password: newHashedPaswword,
       },
-      include: { role: true },
+      include: { role: true, room: true },
     });
 
     return user;
@@ -87,7 +91,7 @@ export default class UserService {
     const user = prisma.user.findUnique({
       // Change to findUnique
       where: { email },
-      include: { role: true },
+      include: { role: true, room: true },
     });
 
     return user;
@@ -96,13 +100,15 @@ export default class UserService {
   static findById = async (id: number): Promise<User | null> => {
     const user = await prisma.user.findUnique({
       where: { id },
-      include: { role: { include: { permissions: true } } },
+      include: { role: { include: { permissions: true } }, room: true },
     });
     return user;
   };
 
   static findAll = async (): Promise<User[]> => {
-    const users = await prisma.user.findMany({ include: { role: true } });
+    const users = await prisma.user.findMany({
+      include: { role: true, room: true },
+    });
     return users;
   };
 }

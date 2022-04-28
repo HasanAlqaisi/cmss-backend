@@ -24,10 +24,11 @@ export const registrationPost = async (req: Request, res: Response) => {
 
   const user = await UserService.createUser(
     data.username,
-    data.fullName,
-    data.role,
+    data.fullname,
+    data.roleId,
     data.email,
-    data.password
+    data.password,
+    data.roomId
   );
 
   const reshapedUser = reshapeData(user, ["password", "roleId"]) as User;
@@ -115,7 +116,7 @@ export const forgetPasswordPost = async (req: Request, res: Response) => {
       { expiresIn: "1h" }
     );
 
-    const baseUrl = "localhost:3000/api/users/reset-password";
+    const baseUrl = "localhost:3000/users/reset-password";
 
     const link = `${baseUrl}/${user.id}/${token}`;
 
@@ -205,9 +206,10 @@ export const updateUser = async (req: Request, res: Response) => {
   const user = await UserService.updateUser(
     idNumber,
     data.username,
-    data.fullName,
-    data.role,
-    data.email
+    data.fullname,
+    data.roleId,
+    data.email,
+    data.roomId
   );
 
   const reshapedUser = reshapeData(user, ["password"]) as User;

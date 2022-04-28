@@ -19,13 +19,14 @@ export const register = async (req: Request) => {
         /^(\w|\d){5,}$/i,
         "should be at least 5 characters and from this set (a-z,0-9,_) "
       ),
-    fullName: z.string(),
+    fullname: z.string(),
     email: z.string().email({ message: "Email field must be valid" }),
+    roomId: z.number().optional(),
     password: z
       .string()
       .min(8)
       .transform((value) => bcrypt.hashSync(value, 10)),
-    role: z.string(),
+    roleId: z.number(),
   });
 
   return schema.parseAsync(req.body);
@@ -75,9 +76,10 @@ export const updateUser = async (req: Request) => {
         /^(\w|\d){5,}$/i,
         "should be at least 5 characters and from this set (a-z,0-9,_) "
       ),
-    fullName: z.string(),
+    fullname: z.string(),
     email: z.string().email({ message: "Email field must be valid" }),
-    role: z.string(),
+    roomId: z.number().optional(),
+    roleId: z.number(),
   });
 
   return schema.parseAsync(req.body);
