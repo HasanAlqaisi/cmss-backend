@@ -51,4 +51,34 @@ export default class ScheduleService {
     });
     return schedules;
   };
+
+  static getSchedulesForProgram = async (programId: number) => {
+    const schedules = await prisma.schedule.findMany({
+      where: { class: { programId } },
+      select: {
+        class: {
+          select: {
+            id: true,
+            stage: true,
+            branch: true,
+            program: true,
+          },
+        },
+        day: { select: { id: true, number: true } },
+        hour: { select: { id: true, start: true } },
+        lecture: {
+          select: {
+            hall: {
+              select: {
+                subject: { select: { id: true, name: true } },
+                room: { select: { id: true, number: true } },
+              },
+            },
+            teacher: { select: { id: true, fullName: true, username: true } },
+          },
+        },
+      },
+    });
+    return schedules;
+  };
 }

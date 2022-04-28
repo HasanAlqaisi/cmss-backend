@@ -5,4 +5,6 @@ const router = Router();
 
 router.post("/", controller.createSchedule);
 
+router.get("/", controller.getSchedules);
+
 export default router;
