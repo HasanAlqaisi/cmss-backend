@@ -11,7 +11,7 @@
     }
   ],
   "paths": {
-    "/users/signup": {
+    "/users/registration": {
       "parameters": [],
       "post": {
         "summary": "",
@@ -26,59 +26,103 @@
                   "type": "object",
                   "x-examples": {
                     "example-1": {
-                      "id": "79dbe247-88a4-400f-a896-9f259c69d33f",
-                      "email": "user@example.com",
-                      "username": "string"
-                    }
-                  },
-                  "properties": {
-                    "id": {
-                      "format": "uuid",
-                      "type": "integer"
-                    },
-                    "email": {
-                      "type": "string",
-                      "format": "email"
-                    },
-                    "username": {
-                      "type": "string",
-                      "pattern": "/^(\\w|\\d){5,}$/i",
-                      "description": "username sholud be at least 5 characters and from this set (a-z,0-9,_)\n"
-                    },
-                    "fullname": {
-                      "type": "string"
-                    },
-                    "role": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "integer"
-                        },
-                        "name": {
-                          "type": "string"
-                        }
-                      },
-                      "required": [
-                        "id",
-                        "name"
-                      ]
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "email",
-                    "username"
-                  ]
-                },
-                "examples": {
-                  "example-1": {
-                    "value": {
                       "id": 0,
                       "email": "user@example.com",
                       "username": "string",
                       "fullname": "string",
                       "role": {
                         "id": 0,
+                        "name": "string"
+                      },
+                      "room": {
+                        "id": 0,
+                        "number": "string",
+                        "name": null
+                      }
+                    }
+                  },
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "email": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "username": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "fullname": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "role": {
+                      "type": "object",
+                      "required": [
+                        "id",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "name": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      }
+                    },
+                    "room": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "required": [
+                        "id",
+                        "number",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "number": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "name": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "email",
+                    "username",
+                    "fullname",
+                    "role",
+                    "room"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "id": 0,
+                      "email": "string",
+                      "username": "string",
+                      "fullname": "string",
+                      "role": {
+                        "id": 0,
+                        "name": "string"
+                      },
+                      "room": {
+                        "id": 0,
+                        "number": "string",
                         "name": "string"
                       }
                     }
@@ -185,15 +229,18 @@
                     "format": "password",
                     "minLength": 8
                   },
-                  "role": {
-                    "type": "string",
+                  "roleId": {
                     "enum": [
                       "admin",
                       "timetable_manager",
                       "registration_manager",
                       "attendance_manager",
                       "inventory_manager"
-                    ]
+                    ],
+                    "type": "number"
+                  },
+                  "roomId": {
+                    "type": "number"
                   }
                 },
                 "required": [
@@ -201,7 +248,7 @@
                   "fullname",
                   "email",
                   "password",
-                  "role"
+                  "roleId"
                 ]
               },
               "examples": {
@@ -211,7 +258,8 @@
                     "fullname": "string",
                     "email": "user@example.com",
                     "password": "pa$$word",
-                    "role": "admin"
+                    "roleId": 0,
+                    "roomId": 0
                   }
                 }
               }
@@ -244,57 +292,102 @@
                   "type": "object",
                   "x-examples": {
                     "example-1": {
-                      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZjFmNjlhLTI3MmUtNDZhNS1iNDE5LWYwNGRlMGZkZjQ5YyIsImlhdCI6MTY0NTE5MTIzOX0.fYjQRKhuMcbGqJbKPqgtwQpDKtPmp4wCVcndxAWR8bE",
+                      "token": "string",
                       "user": {
-                        "id": "62f1f69a-272e-46a5-b419-f04de0fdf49c",
-                        "email": "hasan.alqaisi2000@gmail.com",
-                        "username": "Hasan"
+                        "id": 0,
+                        "email": "user@example.com",
+                        "username": "string",
+                        "fullname": "string",
+                        "role": {
+                          "id": 0,
+                          "name": "string"
+                        },
+                        "room": {
+                          "id": 0,
+                          "number": 0,
+                          "name": "string"
+                        }
                       }
                     }
                   },
                   "properties": {
+                    "token": {
+                      "type": "string",
+                      "minLength": 1
+                    },
                     "user": {
                       "type": "object",
                       "required": [
                         "id",
                         "email",
-                        "username"
+                        "username",
+                        "fullname",
+                        "role",
+                        "room"
                       ],
                       "properties": {
                         "id": {
-                          "format": "uuid",
-                          "type": "integer"
+                          "type": "number"
                         },
                         "email": {
                           "type": "string",
-                          "format": "email"
+                          "minLength": 1
                         },
                         "username": {
-                          "type": "string"
+                          "type": "string",
+                          "minLength": 1
                         },
                         "fullname": {
-                          "type": "string"
+                          "type": "string",
+                          "minLength": 1
                         },
                         "role": {
-                          "format": "uuid",
                           "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "integer"
-                            },
-                            "name": {
-                              "type": "string"
-                            }
-                          },
                           "required": [
                             "id",
                             "name"
-                          ]
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "name": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          }
+                        },
+                        "room": {
+                          "type": [
+                            "object",
+                            "null"
+                          ],
+                          "required": [
+                            "id",
+                            "number",
+                            "name"
+                          ],
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "number": {
+                              "type": "number"
+                            },
+                            "name": {
+                              "type": [
+                                "string",
+                                "null"
+                              ],
+                              "minLength": 1
+                            }
+                          }
                         }
                       }
                     }
                   },
                   "required": [
+                    "token",
                     "user"
                   ]
                 },
@@ -304,11 +397,16 @@
                       "token": "string",
                       "user": {
                         "id": 0,
-                        "email": "user@example.com",
+                        "email": "string",
                         "username": "string",
                         "fullname": "string",
                         "role": {
                           "id": 0,
+                          "name": "string"
+                        },
+                        "room": {
+                          "id": 0,
+                          "number": 0,
                           "name": "string"
                         }
                       }
@@ -495,45 +593,87 @@
                   "type": "object",
                   "x-examples": {
                     "example-1": {
-                      "id": "62f1f69a-272e-46a5-b419-f04de0fdf49c",
-                      "email": "hasan.alqaisi2000@gmail.com",
-                      "username": "Hasan"
+                      "id": 0,
+                      "email": "string",
+                      "username": "string",
+                      "fullname": "string",
+                      "role": {
+                        "id": 0,
+                        "name": "string"
+                      },
+                      "room": {
+                        "id": 0,
+                        "number": 0,
+                        "name": "string"
+                      }
                     }
                   },
                   "properties": {
                     "id": {
-                      "type": "integer",
-                      "format": "uuid"
+                      "type": "number"
                     },
                     "email": {
-                      "type": "string"
+                      "type": "string",
+                      "minLength": 1
                     },
                     "username": {
-                      "type": "string"
+                      "type": "string",
+                      "minLength": 1
                     },
                     "fullname": {
-                      "type": "string"
+                      "type": "string",
+                      "minLength": 1
                     },
                     "role": {
-                      "format": "uuid",
                       "type": "object",
+                      "required": [
+                        "id",
+                        "name"
+                      ],
                       "properties": {
                         "id": {
-                          "type": "integer"
+                          "type": "number"
                         },
                         "name": {
-                          "type": "string"
+                          "type": "string",
+                          "minLength": 1
                         }
-                      },
+                      }
+                    },
+                    "room": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
                       "required": [
-                        "id"
-                      ]
+                        "id",
+                        "number",
+                        "name"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "number": {
+                          "type": "number"
+                        },
+                        "name": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "minLength": 1
+                        }
+                      }
                     }
                   },
                   "required": [
                     "id",
                     "email",
-                    "username"
+                    "username",
+                    "fullname",
+                    "role",
+                    "room"
                   ]
                 },
                 "examples": {
@@ -545,6 +685,11 @@
                       "fullname": "string",
                       "role": {
                         "id": 0,
+                        "name": "string"
+                      },
+                      "room": {
+                        "id": 0,
+                        "number": 0,
                         "name": "string"
                       }
                     }
@@ -645,15 +790,42 @@
                   "description": "",
                   "minItems": 1,
                   "uniqueItems": true,
+                  "x-examples": {
+                    "example-1": [
+                      {
+                        "id": 1,
+                        "email": "hasan.alqaisi@2000gmail.com",
+                        "username": "hasan",
+                        "fullName": "Hasan AlQAisi",
+                        "role": {
+                          "id": 1,
+                          "name": "admin"
+                        },
+                        "room": {
+                          "id": 0,
+                          "number": 0,
+                          "name": "string"
+                        }
+                      },
+                      {
+                        "id": 2,
+                        "email": "ali@gmail.com",
+                        "username": "Ali1234",
+                        "fullName": "ALI",
+                        "role": {
+                          "id": 1,
+                          "name": "admin"
+                        },
+                        "room": {
+                          "id": 0,
+                          "number": 0,
+                          "name": "string"
+                        }
+                      }
+                    ]
+                  },
                   "items": {
                     "type": "object",
-                    "required": [
-                      "id",
-                      "email",
-                      "username",
-                      "fullName",
-                      "role"
-                    ],
                     "properties": {
                       "id": {
                         "type": "number"
@@ -672,6 +844,10 @@
                       },
                       "role": {
                         "type": "object",
+                        "required": [
+                          "id",
+                          "name"
+                        ],
                         "properties": {
                           "id": {
                             "type": "number"
@@ -680,36 +856,42 @@
                             "type": "string",
                             "minLength": 1
                           }
-                        },
-                        "required": [
-                          "id",
-                          "name"
-                        ]
-                      }
-                    }
-                  },
-                  "x-examples": {
-                    "example-1": [
-                      {
-                        "id": 1,
-                        "email": "hasan.alqaisi@2000gmail.com",
-                        "username": "hasan",
-                        "fullName": "Hasan AlQAisi",
-                        "role": {
-                          "id": 1,
-                          "name": "admin"
                         }
                       },
-                      {
-                        "id": 2,
-                        "email": "ali.ali@ali.com",
-                        "username": "AliEmad",
-                        "fullName": "ALI ALI",
-                        "role": {
-                          "id": 1,
-                          "name": "admin"
+                      "room": {
+                        "type": [
+                          "object",
+                          "null"
+                        ],
+                        "required": [
+                          "id",
+                          "number",
+                          "name"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "number": {
+                            "type": "number"
+                          },
+                          "name": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "minLength": 1
+                          }
                         }
                       }
+                    },
+                    "required": [
+                      "id",
+                      "email",
+                      "username",
+                      "fullName",
+                      "role",
+                      "room"
                     ]
                   }
                 },
@@ -717,23 +899,18 @@
                   "example-1": {
                     "value": [
                       {
-                        "id": 1,
-                        "email": "hasan.alqaisi@2000gmail.com",
-                        "username": "hasan",
-                        "fullName": "Hasan AlQAisi",
+                        "id": 0,
+                        "email": "string",
+                        "username": "string",
+                        "fullName": "string",
                         "role": {
-                          "id": 1,
-                          "name": "admin"
-                        }
-                      },
-                      {
-                        "id": 2,
-                        "email": "ali@gmail.com",
-                        "username": "Ali1234",
-                        "fullName": "ALI",
-                        "role": {
-                          "id": 1,
-                          "name": "admin"
+                          "id": 0,
+                          "name": "string"
+                        },
+                        "room": {
+                          "id": 0,
+                          "number": 0,
+                          "name": "string"
                         }
                       }
                     ]
@@ -784,6 +961,24 @@
                 "schema": {
                   "description": "",
                   "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "id": 0,
+                      "email": "string",
+                      "username": "string",
+                      "fullName": "string",
+                      "roleId": 0,
+                      "role": {
+                        "id": 0,
+                        "name": "string"
+                      },
+                      "room": {
+                        "id": 0,
+                        "number": 0,
+                        "name": "string"
+                      }
+                    }
+                  },
                   "properties": {
                     "id": {
                       "type": "number"
@@ -805,6 +1000,10 @@
                     },
                     "role": {
                       "type": "object",
+                      "required": [
+                        "id",
+                        "name"
+                      ],
                       "properties": {
                         "id": {
                           "type": "number"
@@ -813,11 +1012,33 @@
                           "type": "string",
                           "minLength": 1
                         }
-                      },
+                      }
+                    },
+                    "room": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
                       "required": [
                         "id",
+                        "number",
                         "name"
-                      ]
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "number": {
+                          "type": "number"
+                        },
+                        "name": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "minLength": 1
+                        }
+                      }
                     }
                   },
                   "required": [
@@ -826,21 +1047,9 @@
                     "username",
                     "fullName",
                     "roleId",
-                    "role"
-                  ],
-                  "x-examples": {
-                    "example-1": {
-                      "id": 3,
-                      "email": "hasan.alqaisi@2000gmail.com",
-                      "username": "Hasan",
-                      "fullName": "hashashas",
-                      "roleId": 1,
-                      "role": {
-                        "id": 1,
-                        "name": "admin"
-                      }
-                    }
-                  }
+                    "role",
+                    "room"
+                  ]
                 },
                 "examples": {
                   "example-1": {
@@ -852,6 +1061,11 @@
                       "roleId": 0,
                       "role": {
                         "id": 0,
+                        "name": "string"
+                      },
+                      "room": {
+                        "id": 0,
+                        "number": 0,
                         "name": "string"
                       }
                     }
@@ -929,13 +1143,17 @@
                   },
                   "roleId": {
                     "type": "number"
+                  },
+                  "roomId": {
+                    "type": "number"
                   }
                 },
                 "required": [
                   "username",
                   "fullname",
                   "email",
-                  "roleId"
+                  "roleId",
+                  "roomId"
                 ]
               },
               "examples": {
@@ -944,7 +1162,8 @@
                     "username": "string",
                     "fullname": "string",
                     "email": "user@example.com",
-                    "roleId": 0
+                    "roleId": 0,
+                    "roomId": 0
                   }
                 }
               }
@@ -983,7 +1202,7 @@
                       "type": "string",
                       "minLength": 1
                     },
-                    "fullname": {
+                    "fullName": {
                       "type": "string",
                       "minLength": 1
                     },
@@ -1002,23 +1221,49 @@
                         "id",
                         "name"
                       ]
+                    },
+                    "room": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "number": {
+                          "type": "number"
+                        },
+                        "name": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "number",
+                        "name"
+                      ]
                     }
                   },
                   "required": [
                     "id",
                     "email",
                     "username",
-                    "fullname",
-                    "role"
+                    "fullName",
+                    "role",
+                    "room"
                   ],
                   "x-examples": {
                     "example-1": {
-                      "id": 0,
-                      "email": "user@example.com",
-                      "username": "string",
-                      "fullname": "string",
+                      "id": 1,
+                      "email": "hasan.alqaisi@2000gmail.com",
+                      "username": "hasan",
+                      "fullName": "Hasan AlQAisi",
                       "role": {
+                        "id": 1,
+                        "name": "admin"
+                      },
+                      "room": {
                         "id": 0,
+                        "number": 0,
                         "name": "string"
                       }
                     }
@@ -1027,13 +1272,18 @@
                 "examples": {
                   "example-1": {
                     "value": {
-                      "id": 1,
-                      "email": "hasan.alqaisi@2000gmail.com",
-                      "username": "hasan",
-                      "fullName": "Hasan AlQAisi",
+                      "id": 0,
+                      "email": "string",
+                      "username": "string",
+                      "fullName": "string",
                       "role": {
-                        "id": 1,
-                        "name": "admin"
+                        "id": 0,
+                        "name": "string"
+                      },
+                      "room": {
+                        "id": 0,
+                        "number": 0,
+                        "name": "string"
                       }
                     }
                   }
@@ -7945,7 +8195,7 @@
           }
         ],
         "tags": [
-          "attendances"
+          "rooms"
         ]
       }
     },
@@ -8390,6 +8640,14 @@
             "in": "header",
             "name": "Authorization",
             "required": true
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "classId",
+            "description": "Filter by class id"
           }
         ],
         "description": "",
@@ -8529,6 +8787,213 @@
       },
       "parameters": []
     },
+    "/lectures/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "number"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "",
+        "operationId": "",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OutputLecture"
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "id": 0,
+                      "hallId": 0,
+                      "teacherId": 0,
+                      "teacher": {
+                        "email": "string",
+                        "username": "string",
+                        "fullName": "string"
+                      },
+                      "hall": {
+                        "id": 0,
+                        "roomId": 0,
+                        "subjectId": 0,
+                        "room": {
+                          "name": "string",
+                          "number": 0
+                        },
+                        "subject": {
+                          "Class": {
+                            "id": 0,
+                            "branchId": 0,
+                            "stageId": 0,
+                            "programId": 0,
+                            "program": {
+                              "name": "string"
+                            },
+                            "stage": {
+                              "id": 0,
+                              "number": 0,
+                              "forbiddenDays": [
+                                0
+                              ]
+                            }
+                          },
+                          "name": "string",
+                          "isElectronic": true,
+                          "isLab": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "details": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "details"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "details": "name is already exists"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InputLecture"
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "teacherId": 0,
+                    "roomId": 0,
+                    "subjectId": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "lectures"
+        ]
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "details": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "details"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "details": "one of provided ids does not exist"
+                    }
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "details": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "details"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "details": "Record to delete does not exist."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "required": true
+          }
+        ],
+        "tags": [
+          "lectures"
+        ]
+      }
+    },
     "/schedules": {
       "post": {
         "summary": "",
@@ -8626,7 +9091,97 @@
           "schedules"
         ]
       },
-      "parameters": []
+      "parameters": [],
+      "get": {
+        "summary": "",
+        "operationId": "",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OutputSchedule"
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "conflicts": 0,
+                      "schedules": [
+                        {
+                          "class": {
+                            "id": 0,
+                            "stage": {
+                              "id": 0,
+                              "number": 0,
+                              "forbiddenDays": [
+                                0
+                              ]
+                            },
+                            "branch": {
+                              "id": 0,
+                              "name": "string",
+                              "maxCapacity": 0
+                            },
+                            "program": {
+                              "id": 0,
+                              "name": "string"
+                            }
+                          },
+                          "day": {
+                            "id": 0,
+                            "number": 0
+                          },
+                          "hour": {
+                            "id": 0,
+                            "start": "string"
+                          },
+                          "lecture": {
+                            "hall": {
+                              "subject": {
+                                "id": 0,
+                                "name": "string"
+                              },
+                              "room": {
+                                "id": 0,
+                                "number": 0
+                              }
+                            },
+                            "teacher": {
+                              "id": 0,
+                              "fullName": "string",
+                              "username": "string"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "tags": [
+          "schedules"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "programId",
+            "description": "filter schedules by program Id"
+          }
+        ]
+      }
     },
     "/stages": {
       "parameters": [],
@@ -11157,19 +11712,28 @@
       "InputRoom": {
         "description": "",
         "type": "object",
+        "x-examples": {
+          "example-1": {
+            "number": 404
+          }
+        },
         "properties": {
           "number": {
             "type": "number"
+          },
+          "name": {
+            "type": "string"
           }
         },
         "required": [
           "number"
         ],
-        "x-examples": {
-          "example-1": {
-            "number": 404
+        "examples": [
+          {
+            "number": 0,
+            "name": "string"
           }
-        }
+        ]
       },
       "OutputSubject": {
         "description": "",
