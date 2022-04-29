@@ -5,8 +5,8 @@ const router = Router();
 
 router.get("/", controller.getClasses);
 
-router.get("/", controller.createClass);
+router.post("/", controller.createClass);
 
-router.get("/", controller.deleteClass);
+router.delete("/:id", controller.deleteClass);
 
 export default router;

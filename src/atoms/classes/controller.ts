@@ -1,9 +1,14 @@
 import { Class } from "@prisma/client";
 import { Request, Response } from "express";
-import { DeletedResponse, OkResponse } from "../../utils/api/api-response";
+import {
+  CreatedResponse,
+  DeletedResponse,
+  OkResponse,
+} from "../../utils/api/api-response";
 import { reshapeData } from "../../utils/reshape-data";
 import ClassService from "./service";
 import * as validator from "./validator";
+import * as generalValidator from "../../utils/general-validator";
 
 // eslint-disable-next-line import/prefer-default-export
 export const getClasses = async (req: Request, res: Response) => {
@@ -29,13 +34,13 @@ export const createClass = async (req: Request, res: Response) => {
     "stageId",
   ]) as Class;
 
-  return new OkResponse(reshapedClass).send(res);
+  return new CreatedResponse(reshapedClass).send(res);
 };
 
 export const deleteClass = async (req: Request, res: Response) => {
-  const { classId } = await validator.deleteClass(req);
+  const { id } = await generalValidator.id(req);
 
-  await ClassService.deleteClass(classId);
+  await ClassService.deleteClass(Number(id));
 
   return new DeletedResponse("").send(res);
 };

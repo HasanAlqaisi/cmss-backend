@@ -11,11 +11,3 @@ export const insertClass = async (req: Request) => {
 
   return schema.parseAsync(req.body);
 };
-
-export const deleteClass = async (req: Request) => {
-  const schema = z.object({
-    classId: z.number().positive(),
-  });
-
-  return schema.parseAsync(req.body);
-};
