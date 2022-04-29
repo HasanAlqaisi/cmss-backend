@@ -1,5 +1,9 @@
 import { Request, Response } from "express";
-import { DeletedResponse, OkResponse } from "../../utils/api/api-response";
+import {
+  CreatedResponse,
+  DeletedResponse,
+  OkResponse,
+} from "../../utils/api/api-response";
 import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
 import LectureService from "./service";
@@ -25,7 +29,7 @@ export const createLecture = async (req: Request, res: Response) => {
     subjectId
   );
 
-  return new OkResponse(lecture).send(res);
+  return new CreatedResponse(lecture).send(res);
 };
 
 export const deleteLecture = async (req: Request, res: Response) => {
