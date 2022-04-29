@@ -84,13 +84,16 @@ model Room {
 }
 
 model Subject {
-  id           Int     @unique @default(autoincrement())
-  classId      Int
-  Class        Class   @relation(fields: [classId], references: [id], onDelete: Cascade)
+  id Int @unique @default(autoincrement())
+
   name         String
-  isElectronic Boolean
   isLab        Boolean
-  halls        Hall[]
+  isElectronic Boolean
+
+  classId Int
+  Class   Class @relation(fields: [classId], references: [id], onDelete: Cascade)
+
+  halls Hall[]
 
   @@id([classId, name])
 }
