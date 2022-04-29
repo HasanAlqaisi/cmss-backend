@@ -37,6 +37,7 @@ export const itemsQuery = async (req: Request) => {
     exported: fields.exported,
     broken: fields.broken,
     name: z.string().optional(),
+    categoryId: z.string().optional(),
     order: z.nativeEnum(Prisma.SortOrder).default("asc"),
   });
 
