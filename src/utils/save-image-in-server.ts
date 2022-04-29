@@ -9,7 +9,7 @@ export default (req: Request) => {
     const fileName = new Date().getTime().toString() + req.file.originalname;
 
     imageUrl = path.join(
-      process.env.CLIENT_DOMAIN as string,
+      process.env.CLIENT_ORIGIN as string,
       `public/images/${fileName}`
     );
 

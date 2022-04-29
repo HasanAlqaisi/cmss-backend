@@ -5,7 +5,7 @@ export default (image: string) => {
   const imagePath = path.join(process.env.PWD as string, `src`);
 
   const oldImageUrl = image.replace(
-    process.env.CLIENT_DOMAIN as string,
+    process.env.CLIENT_ORIGIN as string,
     imagePath
   );
 
