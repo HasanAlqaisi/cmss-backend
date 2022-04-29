@@ -1,6 +1,8 @@
-import { BrokenItem, Prisma } from "@prisma/client";
+import { BrokenItem, ExportedItem, Item, Prisma } from "@prisma/client";
+import { isNaN } from "lodash";
 import prisma from "../../prisma";
-import { BadRequestError } from "../../utils/api/api-error";
+import { BadRequestError, NotFoundError } from "../../utils/api/api-error";
+import logger from "../../utils/config/logger";
 import {
   validateQuantityOnCreate,
   validateQuantityOnDelete,
@@ -11,11 +13,15 @@ import { InputBrokenItem, InputExportedItem, InputItem } from "./types";
 export default class ItemService {
   static getInventoryItems = async (
     order: Prisma.SortOrder,
-    searchQuery?: string
+    searchQuery?: string,
+    categoryId?: number
   ) => {
     const items = await prisma.item.findMany({
       orderBy: [{ quantity: order }],
-      where: { name: { search: searchQuery } },
+      where: {
+        name: { search: searchQuery?.split(" ").join(" & ") },
+        category: { id: isNaN(categoryId) ? undefined : categoryId },
+      },
       include: { category: true },
     });
     return items;
@@ -27,7 +33,7 @@ export default class ItemService {
   ) => {
     const items = await prisma.exportedItem.findMany({
       orderBy: [{ quantity: order }],
-      where: { name: { search: searchQuery } },
+      where: { name: { search: searchQuery?.split(" ").join(" & ") } },
     });
     return items;
   };
@@ -38,7 +44,7 @@ export default class ItemService {
   ) => {
     const items = await prisma.brokenItem.findMany({
       orderBy: [{ quantity: order }],
-      where: { name: { search: searchQuery } },
+      where: { name: { search: searchQuery?.split(" ").join(" & ") } },
     });
     return items;
   };
@@ -63,9 +69,7 @@ export default class ItemService {
         category: inputItem.categoryId
           ? { connect: { id: inputItem.categoryId } }
           : undefined,
-        dateReceived: inputItem.dateReceived
-          ? inputItem.dateReceived.toISOString()
-          : undefined,
+        dateReceived: inputItem.date ? inputItem.date.toISOString() : undefined,
       },
       include: { category: true },
     });
@@ -93,9 +97,7 @@ export default class ItemService {
         quantity: inputItem.quantity,
         description: inputItem.description,
         image: imageUrl,
-        dateBroke: inputItem.dateBroke
-          ? inputItem.dateBroke.toISOString()
-          : undefined,
+        dateBroke: inputItem.date ? inputItem.date.toISOString() : undefined,
       },
     });
 
@@ -130,9 +132,7 @@ export default class ItemService {
         quantity: inputItem.quantity,
         description: inputItem.description,
         image: imageUrl,
-        dateExported: inputItem.dateExported
-          ? inputItem.dateExported.toISOString()
-          : undefined,
+        dateExported: inputItem.date ? inputItem.date.toISOString() : undefined,
       },
     });
 
@@ -170,9 +170,7 @@ export default class ItemService {
         category: inputItem.categoryId
           ? { connect: { id: inputItem.categoryId } }
           : undefined,
-        dateReceived: inputItem.dateReceived
-          ? inputItem.dateReceived.toISOString()
-          : undefined,
+        dateReceived: inputItem.date ? inputItem.date.toISOString() : undefined,
       },
       include: { category: true },
     });
@@ -194,9 +192,7 @@ export default class ItemService {
         quantity: inputItem.quantity,
         description: inputItem.description,
         image: imageUrl,
-        dateExported: inputItem.dateExported
-          ? inputItem.dateExported.toISOString()
-          : undefined,
+        dateExported: inputItem.date ? inputItem.date.toISOString() : undefined,
       },
     });
 
@@ -237,9 +233,7 @@ export default class ItemService {
         quantity: inputItem.quantity,
         description: inputItem.description,
         image: imageUrl,
-        dateBroke: inputItem.dateBroke
-          ? inputItem.dateBroke.toISOString()
-          : undefined,
+        dateBroke: inputItem.date ? inputItem.date.toISOString() : undefined,
       },
     });
 
@@ -274,49 +268,65 @@ export default class ItemService {
     return item;
   };
 
-  static deleteItem = async (id: number): Promise<void> => {
-    await prisma.item.delete({ where: { id } });
+  static deleteItem = async (item: Item | null): Promise<void> => {
+    if (item) {
+      await prisma.item.delete({ where: { id: item.id } });
+    } else {
+      throw new BadRequestError("Item not found");
+    }
   };
 
-  static deleteBrokenItem = async (id: number): Promise<void> => {
-    const brokenItem = await ItemService.getBrokenItemById(id);
+  static deleteBrokenItem = async (
+    brokenItem: BrokenItem | null
+  ): Promise<void> => {
+    if (brokenItem) {
+      const originalItem = await ItemService.findItemByName(brokenItem.name);
 
-    const originalItem = await ItemService.findItemByName(brokenItem!.name);
+      const deleteOperation = prisma.brokenItem.delete({
+        where: { id: brokenItem.id },
+      });
 
-    const deleteOperation = prisma.brokenItem.delete({ where: { id } });
-
-    if (!originalItem) {
-      await deleteOperation;
-      return;
-    }
-
-    validateQuantityOnDelete(
-      brokenItem!,
-      originalItem,
-      async (updatedOriginalItem) => {
-        await prisma.$transaction([updatedOriginalItem, deleteOperation]);
+      if (!originalItem) {
+        await deleteOperation;
+        return;
       }
-    );
+
+      validateQuantityOnDelete(
+        brokenItem!,
+        originalItem,
+        async (updatedOriginalItem) => {
+          await prisma.$transaction([updatedOriginalItem, deleteOperation]);
+        }
+      );
+    } else {
+      throw new BadRequestError("Item not found");
+    }
   };
 
-  static deleteExportedItem = async (id: number): Promise<void> => {
-    const exportedItem = await ItemService.getExportedItemById(id);
+  static deleteExportedItem = async (
+    exportedItem: ExportedItem | null
+  ): Promise<void> => {
+    if (exportedItem) {
+      const originalItem = await ItemService.findItemByName(exportedItem!.name);
 
-    const originalItem = await ItemService.findItemByName(exportedItem!.name);
+      const deleteOperation = prisma.exportedItem.delete({
+        where: { id: exportedItem.id },
+      });
 
-    const deleteOperation = prisma.exportedItem.delete({ where: { id } });
-
-    if (!originalItem) {
-      await deleteOperation;
-      return;
-    }
-
-    validateQuantityOnDelete(
-      exportedItem!,
-      originalItem,
-      async (updatedOriginalItem) => {
-        await prisma.$transaction([updatedOriginalItem, deleteOperation]);
+      if (!originalItem) {
+        await deleteOperation;
+        return;
       }
-    );
+
+      validateQuantityOnDelete(
+        exportedItem!,
+        originalItem,
+        async (updatedOriginalItem) => {
+          await prisma.$transaction([updatedOriginalItem, deleteOperation]);
+        }
+      );
+    } else {
+      throw new BadRequestError("Item not found");
+    }
   };
 }

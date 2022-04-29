@@ -9,7 +9,7 @@ export default class ApplicantService {
       orderBy: { average: "desc" },
       where: {
         channel: { id: !Number.isNaN(channelId) ? channelId : undefined },
-        name: { search: name },
+        name: { search: name?.split(" ").join(" & ") },
       },
       include: {
         year: true,
@@ -28,7 +28,7 @@ export default class ApplicantService {
 
   static searchForApplicant = async (query: string) => {
     const applicants = await prisma.applicant.findMany({
-      where: { name: { search: query } },
+      where: { name: { search: query?.split(" ").join(" & ") } },
       include: {
         year: true,
         specialty: true,
