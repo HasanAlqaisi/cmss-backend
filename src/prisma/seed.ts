@@ -50,6 +50,8 @@ async function createRoles() {
   const inventoryManager: RoleWithPermissions = {
     name: "inventoryManager",
     permissions: [
+      { action: "read", subject: "User" },
+      { action: "read", subject: "Room" },
       { action: "manage", subject: "Item" },
       { action: "manage", subject: "ExportedItem" },
       { action: "manage", subject: "BrokenItem" },
