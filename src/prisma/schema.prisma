@@ -118,13 +118,17 @@ model Stage {
 }
 
 model Class {
-  id        Int        @id @default(autoincrement())
-  branchId  Int
+  id Int @id @default(autoincrement())
+
+  branchId Int
+  branch   Branch @relation(fields: [branchId], references: [id], onDelete: Cascade)
+
   programId Int
-  stageId   Int
-  branch    Branch     @relation(fields: [branchId], references: [id], onDelete: Cascade)
-  program   Program    @relation(fields: [programId], references: [id], onDelete: Cascade)
-  stage     Stage      @relation(fields: [stageId], references: [id], onDelete: Cascade)
+  program   Program @relation(fields: [programId], references: [id], onDelete: Cascade)
+
+  stageId Int
+  stage   Stage @relation(fields: [stageId], references: [id], onDelete: Cascade)
+
   subjects  Subject[]
   schedules Schedule[]
   students  Student[]
