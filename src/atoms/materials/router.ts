@@ -7,7 +7,7 @@ router.get("/", controller.getMaterials);
 
 router.post("/", controller.createMaterials);
 
-router.put("/:id", controller.updateMaterial);
+router.patch("/:id", controller.updateMaterial);
 
 router.delete("/:id", controller.deleteMaterial);
 

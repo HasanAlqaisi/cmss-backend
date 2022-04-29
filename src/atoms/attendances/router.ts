@@ -7,7 +7,7 @@ router.get("/", controller.getAttendances);
 
 router.post("/", controller.createAttendance);
 
-router.put("/:id", controller.updateAttendance);
+router.patch("/:id", controller.updateAttendance);
 
 router.delete("/:id", controller.deleteAttendance);
 

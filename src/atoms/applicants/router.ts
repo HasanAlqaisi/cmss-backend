@@ -7,7 +7,7 @@ router.get("/", controller.getApplicants);
 
 router.post("/", controller.createApplicant);
 
-router.put("/:id", controller.updateApplicant);
+router.patch("/:id", controller.updateApplicant);
 
 router.delete("/", controller.deleteApplicants);
 

@@ -7,7 +7,7 @@ router.get("/", controller.getChannels);
 
 router.post("/", controller.createChannel);
 
-router.put("/:id", controller.updateChannel);
+router.patch("/:id", controller.updateChannel);
 
 router.delete("/:id", controller.deleteChannel);
 

@@ -22,7 +22,7 @@ router.post(
 );
 
 // admin can changes password of his account and other accounts
-router.put(
+router.patch(
   "/change-password/:id",
   passport.authenticate("jwt", { session: false }),
   permissions("update", "User"),
@@ -46,7 +46,7 @@ router.get(
   controller.getUserProfile
 );
 
-router.put(
+router.patch(
   "/:id",
   passport.authenticate("jwt", { session: false }),
   checkRequester,

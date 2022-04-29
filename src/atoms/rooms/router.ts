@@ -7,7 +7,7 @@ router.get("/", controller.getRooms);
 
 router.post("/", controller.createRoom);
 
-router.put("/:id", controller.updateRoom);
+router.patch("/:id", controller.updateRoom);
 
 router.delete("/:id", controller.deleteRoom);
 

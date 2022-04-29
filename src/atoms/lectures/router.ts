@@ -7,7 +7,7 @@ router.get("/", controller.getLectures);
 
 router.post("/", controller.createLecture);
 
-router.put("/:id", controller.updateLecture);
+router.patch("/:id", controller.updateLecture);
 
 router.delete("/:id", controller.deleteLecture);
 

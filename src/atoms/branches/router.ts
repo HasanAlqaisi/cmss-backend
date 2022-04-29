@@ -7,7 +7,7 @@ router.get("/", controller.getbranches);
 
 router.post("/", controller.createBranch);
 
-router.put("/:id", controller.updateBranch);
+router.patch("/:id", controller.updateBranch);
 
 router.delete("/:id", controller.deleteBranch);
 

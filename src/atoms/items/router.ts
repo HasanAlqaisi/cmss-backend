@@ -10,7 +10,7 @@ router.get("/:id", controller.getItem);
 
 router.post("/", uploadImageOnMemory.single("image"), controller.createItem);
 
-router.put("/:id", uploadImageOnMemory.single("image"), controller.updateItem);
+router.patch("/:id", uploadImageOnMemory.single("image"), controller.updateItem);
 
 router.delete("/:id", controller.deleteItem);
 

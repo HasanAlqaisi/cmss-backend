@@ -7,7 +7,7 @@ router.get("/", controller.getCategories);
 
 router.post("/", controller.createCategory);
 
-router.put("/:id", controller.updateCategory);
+router.patch("/:id", controller.updateCategory);
 
 router.delete("/:id", controller.deleteCategory);
 

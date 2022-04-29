@@ -5,6 +5,6 @@ const router = Router();
 
 router.get("/", controller.getAbsences);
 
-router.put("/:id", controller.updateAbsence);
+router.patch("/:id", controller.updateAbsence);
 
 export default router;

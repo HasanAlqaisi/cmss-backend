@@ -7,7 +7,7 @@ router.get("/", controller.getSpecialties);
 
 router.post("/", controller.createSpecialty);
 
-router.put("/:id", controller.updateSpecialty);
+router.patch("/:id", controller.updateSpecialty);
 
 router.delete("/:id", controller.deleteSpecialty);
 

@@ -5,6 +5,6 @@ const router = Router();
 
 router.get("/", controller.getStages);
 
-router.put("/:id", controller.updateStage);
+router.patch("/:id", controller.updateStage);
 
 export default router;
