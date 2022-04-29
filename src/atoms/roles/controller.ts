@@ -1,5 +1,9 @@
 import { Request, Response } from "express";
-import { DeletedResponse, OkResponse } from "../../utils/api/api-response";
+import {
+  CreatedResponse,
+  DeletedResponse,
+  OkResponse,
+} from "../../utils/api/api-response";
 import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
 import RoleService from "./service";
@@ -15,7 +19,7 @@ export const createRole = async (req: Request, res: Response) => {
 
   const role = await RoleService.createRole(roleData);
 
-  return new OkResponse(role).send(res);
+  return new CreatedResponse(role).send(res);
 };
 
 export const deleteRole = async (req: Request, res: Response) => {

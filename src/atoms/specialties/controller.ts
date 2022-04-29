@@ -1,5 +1,9 @@
 import { Request, Response } from "express";
-import { DeletedResponse, OkResponse } from "../../utils/api/api-response";
+import {
+  CreatedResponse,
+  DeletedResponse,
+  OkResponse,
+} from "../../utils/api/api-response";
 import SpecialtyService from "./service";
 import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
@@ -15,7 +19,7 @@ export const createSpecialty = async (req: Request, res: Response) => {
 
   const specialty = await SpecialtyService.createSpecialty(inputSpecialty);
 
-  return new OkResponse(specialty).send(res);
+  return new CreatedResponse(specialty).send(res);
 };
 
 export const deleteSpecialty = async (req: Request, res: Response) => {

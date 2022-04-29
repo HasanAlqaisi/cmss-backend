@@ -1,6 +1,10 @@
 import { Subject } from "@prisma/client";
 import { Request, Response } from "express";
-import { DeletedResponse, OkResponse } from "../../utils/api/api-response";
+import {
+  CreatedResponse,
+  DeletedResponse,
+  OkResponse,
+} from "../../utils/api/api-response";
 import SubjectService from "./service";
 import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
@@ -30,7 +34,7 @@ export const createSubject = async (req: Request, res: Response) => {
     isLab
   );
 
-  return new OkResponse(subject).send(res);
+  return new CreatedResponse(subject).send(res);
 };
 
 export const deleteSubject = async (req: Request, res: Response) => {

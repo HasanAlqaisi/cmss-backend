@@ -1,10 +1,15 @@
 import { Request, Response } from "express";
-import { DeletedResponse, OkResponse } from "../../utils/api/api-response";
+import {
+  CreatedResponse,
+  DeletedResponse,
+  OkResponse,
+} from "../../utils/api/api-response";
 import ItemService from "./service";
 import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
 import saveImageInServer from "../../utils/save-image-in-server";
 import deleteImageFromServer from "../../utils/delete-image-from-server";
+import logger from "../../utils/config/logger";
 
 export const getItems = async (req: Request, res: Response) => {
   const itemQuery = await validator.itemsQuery(req);
@@ -29,7 +34,8 @@ export const getItems = async (req: Request, res: Response) => {
 
   const items = await ItemService.getInventoryItems(
     itemQuery.order,
-    itemQuery.name
+    itemQuery.name,
+    Number(itemQuery.categoryId)
   );
   return new OkResponse(items).send(res);
 };
@@ -59,7 +65,6 @@ export const getItem = async (req: Request, res: Response) => {
 
 export const createItem = async (req: Request, res: Response) => {
   const inputItem = await validator.upsertItem(req);
-
   const type = await validator.itemQuery(req);
   const isExported = type.exported === "true";
   const isBroken = type.broken === "true";
@@ -77,35 +82,32 @@ export const createItem = async (req: Request, res: Response) => {
   }
 
   const item = await ItemService.createItem(inputItem, imageUrl);
-  return new OkResponse(item).send(res);
+  return new CreatedResponse(item).send(res);
 };
 
 export const deleteItem = async (req: Request, res: Response) => {
   const { id } = await generalValidator.id(req);
-
   const type = await validator.itemQuery(req);
   const isExported = type.exported === "true";
   const isBroken = type.broken === "true";
 
   const idNumber = Number(id);
 
-  const oldItem = await ItemService.getItem(idNumber);
-
-  if (oldItem?.image) {
-    deleteImageFromServer(oldItem.image);
-  }
+  let oldItem;
 
   if (isExported) {
-    await ItemService.deleteExportedItem(idNumber);
-    return new DeletedResponse("").send(res);
+    oldItem = await ItemService.getExportedItemById(idNumber);
+    await ItemService.deleteExportedItem(oldItem);
+  } else if (isBroken) {
+    oldItem = await ItemService.getBrokenItemById(idNumber);
+    await ItemService.deleteBrokenItem(oldItem);
+  } else {
+    oldItem = await ItemService.getItem(idNumber);
+    await ItemService.deleteItem(oldItem);
   }
 
-  if (isBroken) {
-    await ItemService.deleteBrokenItem(idNumber);
-    return new DeletedResponse("").send(res);
-  }
+  if (oldItem && oldItem.image) deleteImageFromServer(oldItem.image);
 
-  await ItemService.deleteItem(idNumber);
   return new DeletedResponse("").send(res);
 };
 

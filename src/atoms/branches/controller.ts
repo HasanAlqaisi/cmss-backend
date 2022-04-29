@@ -1,5 +1,9 @@
 import { Request, Response } from "express";
-import { DeletedResponse, OkResponse } from "../../utils/api/api-response";
+import {
+  CreatedResponse,
+  DeletedResponse,
+  OkResponse,
+} from "../../utils/api/api-response";
 import BranchService from "./service";
 import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
@@ -15,7 +19,7 @@ export const createBranch = async (req: Request, res: Response) => {
 
   const branch = await BranchService.createBranch(name, maxCapacity);
 
-  return new OkResponse(branch).send(res);
+  return new CreatedResponse(branch).send(res);
 };
 
 export const deleteBranch = async (req: Request, res: Response) => {

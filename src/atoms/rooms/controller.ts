@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { DeletedResponse, OkResponse } from "../../utils/api/api-response";
+import { CreatedResponse, DeletedResponse, OkResponse } from "../../utils/api/api-response";
 import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
 import RoomService from "./service";
@@ -15,7 +15,7 @@ export const createRoom = async (req: Request, res: Response) => {
 
   const room = await RoomService.createRoom(number, name);
 
-  return new OkResponse(room).send(res);
+  return new CreatedResponse(room).send(res);
 };
 
 export const deleteRoom = async (req: Request, res: Response) => {

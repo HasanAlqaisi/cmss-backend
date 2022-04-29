@@ -1,7 +1,11 @@
 import { Request, Response } from "express";
 import _ from "lodash";
 import { Applicant } from "@prisma/client";
-import { DeletedResponse, OkResponse } from "../../utils/api/api-response";
+import {
+  CreatedResponse,
+  DeletedResponse,
+  OkResponse,
+} from "../../utils/api/api-response";
 import ApplicantService from "./service";
 import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
@@ -49,7 +53,7 @@ export const createApplicant = async (req: Request, res: Response) => {
     "channelId",
   ]) as Applicant;
 
-  return new OkResponse(reshapedApplicant).send(res);
+  return new CreatedResponse(reshapedApplicant).send(res);
 };
 
 export const deleteApplicant = async (req: Request, res: Response) => {

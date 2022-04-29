@@ -1,6 +1,10 @@
 import { Request, Response } from "express";
 import { Material } from "@prisma/client";
-import { DeletedResponse, OkResponse } from "../../utils/api/api-response";
+import {
+  CreatedResponse,
+  DeletedResponse,
+  OkResponse,
+} from "../../utils/api/api-response";
 import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
 import MaterialService from "./service";
@@ -33,7 +37,7 @@ export const createMaterials = async (req: Request, res: Response) => {
 
   const reshapedMaterial = reshapeData(material, ["specialtyId"]) as Material;
 
-  return new OkResponse(reshapedMaterial).send(res);
+  return new CreatedResponse(reshapedMaterial).send(res);
 };
 
 export const deleteMaterial = async (req: Request, res: Response) => {

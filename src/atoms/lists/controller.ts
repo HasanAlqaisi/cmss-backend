@@ -1,6 +1,10 @@
 import { Request, Response } from "express";
 import { List } from "@prisma/client";
-import { DeletedResponse, OkResponse } from "../../utils/api/api-response";
+import {
+  CreatedResponse,
+  DeletedResponse,
+  OkResponse,
+} from "../../utils/api/api-response";
 import ListService from "./service";
 import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
@@ -14,25 +18,22 @@ import deleteImageFromServer from "../../utils/delete-image-from-server";
 export const getLists = async (req: Request, res: Response) => {
   const listQuery = await validator.getLists(req);
 
+  let lists;
   if (listQuery.responsible) {
-    const lists = await ListService.getResponsibleLists(
+    lists = await ListService.getResponsibleLists(
       Number(listQuery.responsible),
       listQuery.order
     );
-    return new OkResponse(lists!).send(res);
-  }
-
-  if (listQuery.room) {
-    const lists = await ListService.getRoomLists(
+  } else if (listQuery.room) {
+    lists = await ListService.getRoomLists(
       Number(listQuery.room),
       listQuery.order
     );
-    return new OkResponse(lists!).send(res);
+  } else {
+    lists = await ListService.getlists(listQuery.order);
   }
 
-  const lists = await ListService.getlists(listQuery.order);
-
-  const reshapedlists = reshapeData(lists, [
+  const reshapedlists = reshapeData(lists!, [
     "responsible.password",
     "responsible.roleId",
   ]) as List[];
@@ -48,7 +49,11 @@ export const getList = async (req: Request, res: Response) => {
   const list = await ListService.getList(idNumber);
 
   if (list) {
-    return new OkResponse(list).send(res);
+    const reshapedlist = reshapeData(list, [
+      "responsible.password",
+      "responsible.roleId",
+    ]) as List;
+    return new OkResponse(reshapedlist).send(res);
   }
 
   throw new BadRequestError("list not found");
@@ -77,7 +82,12 @@ export const createList = async (req: Request, res: Response) => {
     imageUrl
   );
 
-  return new OkResponse(list).send(res);
+  const reshapedlist = reshapeData(list, [
+    "responsible.password",
+    "responsible.roleId",
+  ]) as List;
+
+  return new CreatedResponse(reshapedlist).send(res);
 };
 
 export const deleteList = async (req: Request, res: Response) => {

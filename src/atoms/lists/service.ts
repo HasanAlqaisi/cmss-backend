@@ -42,14 +42,13 @@ export default class ListService {
   };
 
   static getRoomLists = async (roomId: number, order: Prisma.SortOrder) => {
-    const lists = await prisma.room.findUnique({
-      where: { id: roomId },
+    const lists = await prisma.list.findMany({
+      where: { Room: { id: roomId } },
       include: {
-        lists: {
-          orderBy: [{ dateInuse: order }],
-          include: { items: true, responsible: true },
-        },
+        items: true,
+        responsible: true,
       },
+      orderBy: [{ dateInuse: order }],
     });
     return lists;
   };
@@ -58,14 +57,13 @@ export default class ListService {
     responsibleId: number,
     order: Prisma.SortOrder
   ) => {
-    const lists = await prisma.user.findUnique({
-      where: { id: responsibleId },
+    const lists = await prisma.list.findMany({
+      where: { responsible: { id: responsibleId } },
       include: {
-        lists: {
-          include: { items: true, Room: true },
-          orderBy: [{ dateInuse: order }],
-        },
+        items: true,
+        Room: true,
       },
+      orderBy: [{ dateInuse: order }],
     });
 
     return lists;

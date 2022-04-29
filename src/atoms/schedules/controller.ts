@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import { OkResponse } from "../../utils/api/api-response";
+import { CreatedResponse, OkResponse } from "../../utils/api/api-response";
 import ScheduleService from "./service";
 import * as validator from "./validator";
 
 export const createSchedule = async (req: Request, res: Response) => {
   const schedule = await ScheduleService.createSchedule();
 
-  return new OkResponse(schedule).send(res);
+  return new CreatedResponse(schedule).send(res);
 };
 
 export const getSchedules = async (req: Request, res: Response) => {

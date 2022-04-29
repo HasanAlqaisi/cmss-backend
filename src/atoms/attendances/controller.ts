@@ -1,5 +1,9 @@
 import { Request, Response } from "express";
-import { DeletedResponse, OkResponse } from "../../utils/api/api-response";
+import {
+  CreatedResponse,
+  DeletedResponse,
+  OkResponse,
+} from "../../utils/api/api-response";
 import AttendanceService from "./service";
 import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
@@ -25,7 +29,7 @@ export const createAttendance = async (req: Request, res: Response) => {
   if (await canTeacherManageAttendance(req, input.lectureId)) {
     const attendance = await AttendanceService.createAttendance(input);
 
-    return new OkResponse(attendance).send(res);
+    return new CreatedResponse(attendance).send(res);
   }
 
   throw new ForbiddenError();
