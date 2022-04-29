@@ -8233,13 +8233,37 @@
                 "examples": {
                   "example-1": {
                     "value": [
-                      {
-                        "id": 0,
-                        "classId": 0,
-                        "name": "string",
-                        "isElectronic": true,
-                        "isLab": true
-                      }
+                      [
+                        {
+                          "id": 0,
+                          "classId": 0,
+                          "name": "string",
+                          "isElectronic": true,
+                          "isLab": true,
+                          "Class": {
+                            "id": 0,
+                            "branchId": 0,
+                            "programId": 0,
+                            "stageId": 0,
+                            "branch": {
+                              "id": 0,
+                              "name": "string",
+                              "maxCapacity": 0
+                            },
+                            "program": {
+                              "id": 0,
+                              "name": "string"
+                            },
+                            "stage": {
+                              "id": 0,
+                              "number": 0,
+                              "forbiddenDays": [
+                                0
+                              ]
+                            }
+                          }
+                        }
+                      ]
                     ]
                   }
                 }
@@ -8290,13 +8314,37 @@
                 },
                 "examples": {
                   "example-1": {
-                    "value": {
-                      "id": 0,
-                      "classId": 0,
-                      "name": "string",
-                      "isElectronic": true,
-                      "isLab": true
-                    }
+                    "value": [
+                      {
+                        "id": 0,
+                        "classId": 0,
+                        "name": "string",
+                        "isElectronic": true,
+                        "isLab": true,
+                        "Class": {
+                          "id": 0,
+                          "branchId": 0,
+                          "programId": 0,
+                          "stageId": 0,
+                          "branch": {
+                            "id": 0,
+                            "name": "string",
+                            "maxCapacity": 0
+                          },
+                          "program": {
+                            "id": 0,
+                            "name": "string"
+                          },
+                          "stage": {
+                            "id": 0,
+                            "number": 0,
+                            "forbiddenDays": [
+                              0
+                            ]
+                          }
+                        }
+                      }
+                    ]
                   }
                 }
               }
@@ -8401,13 +8449,37 @@
                 },
                 "examples": {
                   "example-1": {
-                    "value": {
-                      "id": 0,
-                      "classId": 0,
-                      "name": "string",
-                      "isElectronic": true,
-                      "isLab": true
-                    }
+                    "value": [
+                      {
+                        "id": 0,
+                        "classId": 0,
+                        "name": "string",
+                        "isElectronic": true,
+                        "isLab": true,
+                        "Class": {
+                          "id": 0,
+                          "branchId": 0,
+                          "programId": 0,
+                          "stageId": 0,
+                          "branch": {
+                            "id": 0,
+                            "name": "string",
+                            "maxCapacity": 0
+                          },
+                          "program": {
+                            "id": 0,
+                            "name": "string"
+                          },
+                          "stage": {
+                            "id": 0,
+                            "number": 0,
+                            "forbiddenDays": [
+                              0
+                            ]
+                          }
+                        }
+                      }
+                    ]
                   }
                 }
               }
@@ -11808,50 +11880,3885 @@
         ]
       },
       "OutputSubject": {
+        "type": "array",
         "description": "",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "classId": {
-            "type": "number"
-          },
-          "name": {
-            "type": "string",
-            "minLength": 1
-          },
-          "isElectronic": {
-            "type": "boolean"
-          },
-          "isLab": {
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "id",
-          "classId",
-          "name",
-          "isElectronic",
-          "isLab"
-        ],
+        "minItems": 1,
+        "uniqueItems": true,
         "x-examples": {
-          "example-1": {
-            "id": 12,
-            "classId": 1,
-            "name": "english language",
-            "isElectronic": true,
-            "isLab": false
-          }
+          "example-1": [
+            {
+              "id": 1,
+              "classId": 2,
+              "name": "english language",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 2,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 1,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 1,
+                  "number": 1,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 2,
+              "classId": 2,
+              "name": "human rights",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 2,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 1,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 1,
+                  "number": 1,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 3,
+              "classId": 2,
+              "name": "programming c++ lab",
+              "isElectronic": true,
+              "isLab": true,
+              "Class": {
+                "id": 2,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 1,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 1,
+                  "number": 1,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 4,
+              "classId": 2,
+              "name": "algorithms",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 2,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 1,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 1,
+                  "number": 1,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 5,
+              "classId": 2,
+              "name": "engineering drawing lab",
+              "isElectronic": true,
+              "isLab": true,
+              "Class": {
+                "id": 2,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 1,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 1,
+                  "number": 1,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 6,
+              "classId": 2,
+              "name": "mathematics 1",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 2,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 1,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 1,
+                  "number": 1,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 7,
+              "classId": 2,
+              "name": "electronic",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 2,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 1,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 1,
+                  "number": 1,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 8,
+              "classId": 2,
+              "name": "elctrical",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 2,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 1,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 1,
+                  "number": 1,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 9,
+              "classId": 2,
+              "name": "logic lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 2,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 1,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 1,
+                  "number": 1,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 10,
+              "classId": 2,
+              "name": "elctrical lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 2,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 1,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 1,
+                  "number": 1,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 11,
+              "classId": 2,
+              "name": "logic",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 2,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 1,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 1,
+                  "number": 1,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 12,
+              "classId": 1,
+              "name": "english language",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 1,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 1,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 1,
+                  "number": 1,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 13,
+              "classId": 1,
+              "name": "human rights",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 1,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 1,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 1,
+                  "number": 1,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 14,
+              "classId": 1,
+              "name": "algorithms",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 1,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 1,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 1,
+                  "number": 1,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 15,
+              "classId": 1,
+              "name": "programming c++ lab",
+              "isElectronic": true,
+              "isLab": true,
+              "Class": {
+                "id": 1,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 1,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 1,
+                  "number": 1,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 16,
+              "classId": 1,
+              "name": "engineering drawing lab",
+              "isElectronic": true,
+              "isLab": true,
+              "Class": {
+                "id": 1,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 1,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 1,
+                  "number": 1,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 17,
+              "classId": 1,
+              "name": "electronic",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 1,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 1,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 1,
+                  "number": 1,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 18,
+              "classId": 1,
+              "name": "mathematics 1",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 1,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 1,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 1,
+                  "number": 1,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 19,
+              "classId": 1,
+              "name": "logic lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 1,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 1,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 1,
+                  "number": 1,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 20,
+              "classId": 1,
+              "name": "elctrical",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 1,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 1,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 1,
+                  "number": 1,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 21,
+              "classId": 1,
+              "name": "logic",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 1,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 1,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 1,
+                  "number": 1,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 22,
+              "classId": 1,
+              "name": "elctrical lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 1,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 1,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 1,
+                  "number": 1,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 23,
+              "classId": 4,
+              "name": "object oriented",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 4,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 2,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 24,
+              "classId": 4,
+              "name": "fundementals of os",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 4,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 2,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 25,
+              "classId": 4,
+              "name": "digital elctronic 1",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 4,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 2,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 26,
+              "classId": 4,
+              "name": "computer arch",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 4,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 2,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 27,
+              "classId": 4,
+              "name": "os lab",
+              "isElectronic": true,
+              "isLab": true,
+              "Class": {
+                "id": 4,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 2,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 28,
+              "classId": 4,
+              "name": "computer networks",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 4,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 2,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 29,
+              "classId": 4,
+              "name": "digital elctronic lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 4,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 2,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 30,
+              "classId": 4,
+              "name": "digital structure lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 4,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 2,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 31,
+              "classId": 4,
+              "name": "communication 1",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 4,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 2,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 32,
+              "classId": 4,
+              "name": "mathematics 3",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 4,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 2,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 33,
+              "classId": 3,
+              "name": "object oriented",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 3,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 2,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 34,
+              "classId": 3,
+              "name": "information theory",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 3,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 2,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 35,
+              "classId": 3,
+              "name": "computer arch",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 3,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 2,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 36,
+              "classId": 3,
+              "name": "digital elctronic 1",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 3,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 2,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 37,
+              "classId": 3,
+              "name": "os lab",
+              "isElectronic": true,
+              "isLab": true,
+              "Class": {
+                "id": 3,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 2,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 38,
+              "classId": 3,
+              "name": "os 1",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 3,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 2,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 39,
+              "classId": 3,
+              "name": "digital structure lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 3,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 2,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 40,
+              "classId": 3,
+              "name": "digital elctronic lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 3,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 2,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 41,
+              "classId": 3,
+              "name": "mathematics 3",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 3,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 2,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 42,
+              "classId": 3,
+              "name": "communication 1",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 3,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 2,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 43,
+              "classId": 6,
+              "name": "computer graphics",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 6,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 3,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 44,
+              "classId": 6,
+              "name": "advanced computer networks",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 6,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 3,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 45,
+              "classId": 6,
+              "name": "advanced mathematics 1",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 6,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 3,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 46,
+              "classId": 6,
+              "name": "microprocessor",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 6,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 3,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 47,
+              "classId": 6,
+              "name": "microprocessor lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 6,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 3,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 48,
+              "classId": 6,
+              "name": "computer networks lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 6,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 3,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 49,
+              "classId": 6,
+              "name": "signals and systems",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 6,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 3,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 50,
+              "classId": 6,
+              "name": "digital image processing",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 6,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 3,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 51,
+              "classId": 6,
+              "name": "database lab",
+              "isElectronic": true,
+              "isLab": true,
+              "Class": {
+                "id": 6,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 3,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 52,
+              "classId": 6,
+              "name": "java programming",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 6,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 3,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 53,
+              "classId": 5,
+              "name": "computer graphics",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 5,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 3,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 54,
+              "classId": 5,
+              "name": "information systems",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 5,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 3,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 55,
+              "classId": 5,
+              "name": "microprocessor",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 5,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 3,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 56,
+              "classId": 5,
+              "name": "advanced mathematics 1",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 5,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 3,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 57,
+              "classId": 5,
+              "name": "computer networks lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 5,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 3,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 58,
+              "classId": 5,
+              "name": "microprocessor lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 5,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 3,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 59,
+              "classId": 5,
+              "name": "digital image processing",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 5,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 3,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 60,
+              "classId": 5,
+              "name": "signals and systems",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 5,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 3,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 61,
+              "classId": 5,
+              "name": "database lab",
+              "isElectronic": true,
+              "isLab": true,
+              "Class": {
+                "id": 5,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 3,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 62,
+              "classId": 5,
+              "name": "computer networks",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 5,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 3,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 63,
+              "classId": 8,
+              "name": "queuing theory",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 8,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 4,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 64,
+              "classId": 8,
+              "name": "soft computing",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 8,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 4,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 65,
+              "classId": 8,
+              "name": "parallel processing",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 8,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 4,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 66,
+              "classId": 8,
+              "name": "internet programming",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 8,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 4,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 67,
+              "classId": 8,
+              "name": "digital multimedia processing",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 8,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 4,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 68,
+              "classId": 8,
+              "name": "web programming lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 8,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 4,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 69,
+              "classId": 8,
+              "name": "PLC lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 8,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 4,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 70,
+              "classId": 8,
+              "name": "network protocol lab",
+              "isElectronic": true,
+              "isLab": true,
+              "Class": {
+                "id": 8,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 4,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 71,
+              "classId": 8,
+              "name": "network protocol",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 8,
+                "branchId": 2,
+                "programId": 1,
+                "stageId": 4,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 72,
+              "classId": 7,
+              "name": "biometrics",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 7,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 4,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 73,
+              "classId": 7,
+              "name": "parallel processing",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 7,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 4,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 74,
+              "classId": 7,
+              "name": "soft computing",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 7,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 4,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 75,
+              "classId": 7,
+              "name": "digital multimedia processing",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 7,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 4,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 76,
+              "classId": 7,
+              "name": "internet programming",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 7,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 4,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 77,
+              "classId": 7,
+              "name": "PLC lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 7,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 4,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 78,
+              "classId": 7,
+              "name": "web programming lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 7,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 4,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 79,
+              "classId": 7,
+              "name": "digital communication lab",
+              "isElectronic": true,
+              "isLab": true,
+              "Class": {
+                "id": 7,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 4,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 80,
+              "classId": 7,
+              "name": "data mining",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 7,
+                "branchId": 1,
+                "programId": 1,
+                "stageId": 4,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 1,
+                  "name": "Morning"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 103,
+              "classId": 12,
+              "name": "fundementals of os",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 12,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 2,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 104,
+              "classId": 12,
+              "name": "object oriented",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 12,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 2,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 105,
+              "classId": 12,
+              "name": "digital elctronic 1",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 12,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 2,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 106,
+              "classId": 12,
+              "name": "computer arch",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 12,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 2,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 107,
+              "classId": 12,
+              "name": "os lab",
+              "isElectronic": true,
+              "isLab": true,
+              "Class": {
+                "id": 12,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 2,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 108,
+              "classId": 12,
+              "name": "computer networks",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 12,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 2,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 109,
+              "classId": 12,
+              "name": "digital elctronic lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 12,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 2,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 110,
+              "classId": 12,
+              "name": "digital structure lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 12,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 2,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 111,
+              "classId": 12,
+              "name": "communication 1",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 12,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 2,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 112,
+              "classId": 12,
+              "name": "mathematics 3",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 12,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 2,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 113,
+              "classId": 11,
+              "name": "information theory",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 11,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 2,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 114,
+              "classId": 11,
+              "name": "object oriented",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 11,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 2,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 115,
+              "classId": 11,
+              "name": "computer arch",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 11,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 2,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 116,
+              "classId": 11,
+              "name": "digital elctronic 1",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 11,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 2,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 117,
+              "classId": 11,
+              "name": "os lab",
+              "isElectronic": true,
+              "isLab": true,
+              "Class": {
+                "id": 11,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 2,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 118,
+              "classId": 11,
+              "name": "os 1",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 11,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 2,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 119,
+              "classId": 11,
+              "name": "digital structure lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 11,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 2,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 120,
+              "classId": 11,
+              "name": "digital elctronic lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 11,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 2,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 121,
+              "classId": 11,
+              "name": "mathematics 3",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 11,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 2,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 122,
+              "classId": 11,
+              "name": "communication 1",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 11,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 2,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 2,
+                  "number": 2,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 123,
+              "classId": 14,
+              "name": "advanced computer networks",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 14,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 3,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 124,
+              "classId": 14,
+              "name": "computer graphics",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 14,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 3,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 125,
+              "classId": 14,
+              "name": "advanced mathematics 1",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 14,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 3,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 126,
+              "classId": 14,
+              "name": "microprocessor",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 14,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 3,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 127,
+              "classId": 14,
+              "name": "microprocessor lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 14,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 3,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 128,
+              "classId": 14,
+              "name": "computer networks lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 14,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 3,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 129,
+              "classId": 14,
+              "name": "signals and systems",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 14,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 3,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 130,
+              "classId": 14,
+              "name": "digital image processing",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 14,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 3,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 131,
+              "classId": 14,
+              "name": "database lab",
+              "isElectronic": true,
+              "isLab": true,
+              "Class": {
+                "id": 14,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 3,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 132,
+              "classId": 14,
+              "name": "java programming",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 14,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 3,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 133,
+              "classId": 13,
+              "name": "information systems",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 13,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 3,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 134,
+              "classId": 13,
+              "name": "computer graphics",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 13,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 3,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 135,
+              "classId": 13,
+              "name": "microprocessor",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 13,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 3,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 136,
+              "classId": 13,
+              "name": "advanced mathematics 1",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 13,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 3,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 137,
+              "classId": 13,
+              "name": "computer networks lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 13,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 3,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 138,
+              "classId": 13,
+              "name": "microprocessor lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 13,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 3,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 139,
+              "classId": 13,
+              "name": "digital image processing",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 13,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 3,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 140,
+              "classId": 13,
+              "name": "signals and systems",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 13,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 3,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 141,
+              "classId": 13,
+              "name": "database lab",
+              "isElectronic": true,
+              "isLab": true,
+              "Class": {
+                "id": 13,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 3,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 142,
+              "classId": 13,
+              "name": "computer networks",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 13,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 3,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 3,
+                  "number": 3,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 143,
+              "classId": 16,
+              "name": "queuing theory",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 16,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 4,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 144,
+              "classId": 16,
+              "name": "internet programming",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 16,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 4,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 145,
+              "classId": 16,
+              "name": "digital multimedia processing",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 16,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 4,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 146,
+              "classId": 16,
+              "name": "soft computing",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 16,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 4,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 147,
+              "classId": 16,
+              "name": "parallel processing",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 16,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 4,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 148,
+              "classId": 16,
+              "name": "web programming lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 16,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 4,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 149,
+              "classId": 16,
+              "name": "PLC lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 16,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 4,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 150,
+              "classId": 16,
+              "name": "network protocol lab",
+              "isElectronic": true,
+              "isLab": true,
+              "Class": {
+                "id": 16,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 4,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 151,
+              "classId": 16,
+              "name": "network protocol",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 16,
+                "branchId": 2,
+                "programId": 2,
+                "stageId": 4,
+                "branch": {
+                  "id": 2,
+                  "name": "Network",
+                  "maxCapacity": 100
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 152,
+              "classId": 15,
+              "name": "biometrics",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 15,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 4,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 153,
+              "classId": 15,
+              "name": "digital multimedia processing",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 15,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 4,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 154,
+              "classId": 15,
+              "name": "internet programming",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 15,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 4,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 155,
+              "classId": 15,
+              "name": "parallel processing",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 15,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 4,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 156,
+              "classId": 15,
+              "name": "soft computing",
+              "isElectronic": false,
+              "isLab": false,
+              "Class": {
+                "id": 15,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 4,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 157,
+              "classId": 15,
+              "name": "PLC lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 15,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 4,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 158,
+              "classId": 15,
+              "name": "web programming lab",
+              "isElectronic": false,
+              "isLab": true,
+              "Class": {
+                "id": 15,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 4,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 159,
+              "classId": 15,
+              "name": "digital communication lab",
+              "isElectronic": true,
+              "isLab": true,
+              "Class": {
+                "id": 15,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 4,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            },
+            {
+              "id": 160,
+              "classId": 15,
+              "name": "data mining",
+              "isElectronic": true,
+              "isLab": false,
+              "Class": {
+                "id": 15,
+                "branchId": 1,
+                "programId": 2,
+                "stageId": 4,
+                "branch": {
+                  "id": 1,
+                  "name": "nenedne",
+                  "maxCapacity": 60
+                },
+                "program": {
+                  "id": 2,
+                  "name": "Evening"
+                },
+                "stage": {
+                  "id": 4,
+                  "number": 4,
+                  "forbiddenDays": []
+                }
+              }
+            }
+          ]
+        },
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "number"
+            },
+            "classId": {
+              "type": "number"
+            },
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "isElectronic": {
+              "type": "boolean"
+            },
+            "isLab": {
+              "type": "boolean"
+            },
+            "Class": {
+              "type": "object",
+              "required": [
+                "id",
+                "branchId",
+                "programId",
+                "stageId",
+                "branch",
+                "program",
+                "stage"
+              ],
+              "properties": {
+                "id": {
+                  "type": "number"
+                },
+                "branchId": {
+                  "type": "number"
+                },
+                "programId": {
+                  "type": "number"
+                },
+                "stageId": {
+                  "type": "number"
+                },
+                "branch": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "name",
+                    "maxCapacity"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "name": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "maxCapacity": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "program": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "name"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "name": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                },
+                "stage": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "number",
+                    "forbiddenDays"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "number": {
+                      "type": "number"
+                    },
+                    "forbiddenDays": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": [
+            "id",
+            "classId",
+            "name",
+            "isElectronic",
+            "isLab",
+            "Class"
+          ]
         },
         "examples": [
-          {
-            "id": 0,
-            "classId": 0,
-            "name": "string",
-            "isElectronic": true,
-            "isLab": true
-          }
+          [
+            {
+              "id": 0,
+              "classId": 0,
+              "name": "string",
+              "isElectronic": true,
+              "isLab": true,
+              "Class": {
+                "id": 0,
+                "branchId": 0,
+                "programId": 0,
+                "stageId": 0,
+                "branch": {
+                  "id": 0,
+                  "name": "string",
+                  "maxCapacity": 0
+                },
+                "program": {
+                  "id": 0,
+                  "name": "string"
+                },
+                "stage": {
+                  "id": 0,
+                  "number": 0,
+                  "forbiddenDays": [
+                    0
+                  ]
+                }
+              }
+            }
+          ]
         ]
       },
       "inputSubject": {
