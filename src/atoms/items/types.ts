@@ -4,7 +4,7 @@ export type InputItem = {
   description?: string;
   image?: string;
   categoryId?: number;
-  dateReceived?: Date;
+  date?: Date;
 };
 
 export type InputBrokenItem = {
@@ -12,7 +12,7 @@ export type InputBrokenItem = {
   quantity: number;
   description?: string;
   image?: string;
-  dateBroke?: Date;
+  date?: Date;
 };
 
 export type InputExportedItem = {
@@ -20,5 +20,5 @@ export type InputExportedItem = {
   quantity: number;
   description?: string;
   image?: string;
-  dateExported?: Date;
+  date?: Date;
 };
