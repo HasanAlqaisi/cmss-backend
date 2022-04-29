@@ -22,6 +22,7 @@ import warningRoutes from "./atoms/reports/router";
 import absencesRoutes from "./atoms/absences/router";
 import classesRoutes from "./atoms/classes/router";
 import stagesRoutes from "./atoms/stages/router";
+import programsRoutes from "./atoms/programs/router";
 import permissions from "./middlewares/permissions";
 
 const router = Router();
@@ -83,5 +84,7 @@ router.use("/absences", permissions("manage", "Absence"), absencesRoutes);
 router.use("/classes", permissions("manage", "Class"), classesRoutes);
 
 router.use("/stages", permissions("manage", "Stage"), stagesRoutes);
+
+router.use("/programs", permissions("manage", "Program"), programsRoutes);
 
 export default router;
