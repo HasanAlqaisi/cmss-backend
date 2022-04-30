@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import prisma from "../../prisma";
 import generateSchedule from "../../algorithms/genetic-algorithm/generate-schedule";
 
@@ -34,17 +35,17 @@ export default class ScheduleService {
             program: true,
           },
         },
-        day: { select: { id: true, number: true } },
-        hour: { select: { id: true, start: true } },
+        day: { select: { number: true } },
+        hour: { select: { start: true } },
         lecture: {
           select: {
             hall: {
               select: {
-                subject: { select: { id: true, name: true } },
-                room: { select: { id: true, number: true } },
+                subject: { select: { name: true } },
+                room: { select: { number: true } },
               },
             },
-            teacher: { select: { id: true, fullName: true, username: true } },
+            teacher: { select: { fullName: true } },
           },
         },
       },
@@ -64,17 +65,17 @@ export default class ScheduleService {
             program: true,
           },
         },
-        day: { select: { id: true, number: true } },
-        hour: { select: { id: true, start: true } },
+        day: { select: { number: true } },
+        hour: { select: { start: true } },
         lecture: {
           select: {
             hall: {
               select: {
-                subject: { select: { id: true, name: true } },
-                room: { select: { id: true, number: true } },
+                subject: { select: { name: true } },
+                room: { select: { number: true } },
               },
             },
-            teacher: { select: { id: true, fullName: true, username: true } },
+            teacher: { select: { fullName: true } },
           },
         },
       },
@@ -82,3 +83,7 @@ export default class ScheduleService {
     return schedules;
   };
 }
+
+export type ScheduleType = Prisma.PromiseReturnType<
+  typeof ScheduleService.getSchedules
+>;

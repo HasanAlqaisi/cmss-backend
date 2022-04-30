@@ -1,4 +1,4 @@
-import { Hall, Lecture, Stage } from "@prisma/client";
+import { Hall, Lecture, Prisma, Stage } from "@prisma/client";
 
 export class TeacherLectureRoom {
   teacherId: number;
@@ -112,3 +112,11 @@ export type FullLecture = Lecture & {
     };
   };
 };
+
+type Schedule = {
+  subject?: string;
+  room?: number;
+  teacher?: string;
+};
+
+export type Timetable = { title: string; schedules: Schedule[][][] };
