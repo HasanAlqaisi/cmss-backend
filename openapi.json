@@ -8724,6 +8724,14 @@
             "in": "query",
             "name": "classId",
             "description": "Filter by class id"
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "teacherId",
+            "description": "filter by teacher id"
           }
         ],
         "description": "",
