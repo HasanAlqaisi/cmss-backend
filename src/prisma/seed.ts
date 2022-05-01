@@ -2339,6 +2339,66 @@ async function createAbsences() {
   });
 }
 
+async function seedInventory() {
+  await prisma.category.createMany({
+    data: [{ name: "Electronics" }, { name: "Main" }],
+  });
+
+  await prisma.item.createMany({
+    data: [
+      {
+        name: "Item 1",
+        quantity: 10,
+        description: "This is item 1",
+        image:
+          "localhost:3000/public/images/1651418553810Screenshot from 2022-04-22 14-49-47.png",
+        categoryId: 1,
+      },
+      {
+        name: "Item 2",
+        quantity: 5,
+        description: "This is item 2",
+        image:
+          "localhost:3000/public/images/1651418553810Screenshot from 2022-04-22 14-49-47.png",
+        categoryId: 2,
+      },
+    ],
+  });
+
+  await prisma.list.create({
+    data: {
+      responsibleId: 1,
+      roomId: 1,
+      orderImage:
+        "localhost:3000/public/images/1651418553810Screenshot from 2022-04-22 14-49-47.png",
+      items: {
+        connectOrCreate: [
+          {
+            where: { id: 1 },
+            create: {
+              name: "Item 1",
+              quantity: 10,
+              description: "This is item 1",
+              image:
+                "localhost:3000/public/images/1651418553810Screenshot from 2022-04-22 14-49-47.png",
+            },
+          },
+          {
+            where: { id: 2 },
+            create: {
+              name: "Item 2",
+              quantity: 5,
+              description: "This is item 2",
+              image:
+                "localhost:3000/public/images/1651418553810Screenshot from 2022-04-22 14-49-47.png",
+            },
+          },
+        ],
+      },
+    },
+  });
+}
+
 const main = async () => {
   const promises = [
     createRootAccount(),
@@ -2352,6 +2412,7 @@ const main = async () => {
 
   await Promise.all(promises);
   await createLectures(); // TEMP: for testing only - will be deleted later
+  await seedInventory(); // TEMP: for testing only - will be deleted later
   await createRoles();
 };
 
