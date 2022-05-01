@@ -46,8 +46,11 @@ export const deleteAttendance = async (req: Request, res: Response) => {
     throw new NotFoundError();
   }
 
-  if ((req.user as UserWithPermissions).id === attendance.lecture.teacherId)
+  if ((req.user as UserWithPermissions).id === attendance.lecture.teacherId) {
     await AttendanceService.deleteAttendance(idNumber);
+  } else {
+    throw new ForbiddenError();
+  }
 
   return new DeletedResponse("").send(res);
 };
