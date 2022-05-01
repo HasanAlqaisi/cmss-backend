@@ -32,7 +32,7 @@ async function createRoles() {
     permissions: [
       { action: "manage", subject: "Attendance" },
       { action: "manage", subject: "Lecture" },
-      { action: "manage", subject: "Student" },
+      { action: "read", subject: "Student" },
     ],
   };
 
