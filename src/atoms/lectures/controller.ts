@@ -9,11 +9,13 @@ import * as generalValidator from "../../utils/general-validator";
 import LectureService from "./service";
 
 export const getLectures = async (req: Request, res: Response) => {
-  const { classId } = await validator.lectureQuery(req);
+  const { classId, teacherId } = await validator.lectureQuery(req);
 
   let lectures;
   if (classId) {
     lectures = await LectureService.getLecturesForClass(Number(classId));
+  } else if (teacherId) {
+    lectures = await LectureService.getLecturesForTeacher(Number(teacherId));
   } else {
     lectures = await LectureService.getLectures();
   }

@@ -4,6 +4,7 @@ import { z } from "zod";
 export const lectureQuery = async (req: Request) => {
   const schema = z.object({
     classId: z.string().optional(),
+    teacherId: z.string().optional(),
   });
 
   return schema.parseAsync(req.query);

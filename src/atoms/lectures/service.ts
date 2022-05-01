@@ -67,6 +67,14 @@ export default class LectureService {
     return lectures;
   };
 
+  static getLecturesForTeacher = async (teacherId: number) => {
+    const lectures = await prisma.lecture.findMany({
+      where: { teacher: { id: teacherId } },
+      include: includeTeacherAndHall,
+    });
+    return lectures;
+  };
+
   static getLectureById = async (id: number) => {
     const lecture = await prisma.lecture.findUnique({
       where: { id },
