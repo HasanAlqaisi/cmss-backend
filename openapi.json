@@ -7803,7 +7803,7 @@
         ],
         "description": "This endpoint get you every student and his absences at each lecture",
         "tags": [
-          "reports"
+          "warnings"
         ]
       },
       "post": {
@@ -7860,7 +7860,7 @@
         ],
         "description": "This endpoint sends emails to the students that exceed the specified target on absences endpoint",
         "tags": [
-          "reports"
+          "warnings"
         ]
       },
       "parameters": [
