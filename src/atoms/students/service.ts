@@ -3,10 +3,18 @@ import { InputStudent } from "./types";
 
 export default class StudentService {
   static getStudents = async () => {
-    const student = await prisma.student.findMany({
+    const students = await prisma.student.findMany({
       include: { Class: true, channel: true, year: true },
     });
-    return student;
+    return students;
+  };
+
+  static getStudentsForClass = async (classId: number) => {
+    const students = await prisma.student.findMany({
+      where: { Class: { id: classId } },
+      include: { Class: true, channel: true, year: true },
+    });
+    return students;
   };
 
   static createStudent = async (input: InputStudent) => {

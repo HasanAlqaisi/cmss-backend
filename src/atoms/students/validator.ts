@@ -2,6 +2,14 @@ import { Gender } from "@prisma/client";
 import { Request } from "express";
 import { z } from "zod";
 
+export const studentQuery = async (req: Request) => {
+  const schema = z.object({
+    classId: z.string().optional(),
+  });
+
+  return schema.parseAsync(req.query);
+};
+
 // eslint-disable-next-line import/prefer-default-export
 export const upsertStudent = async (req: Request) => {
   const schema = z.object({

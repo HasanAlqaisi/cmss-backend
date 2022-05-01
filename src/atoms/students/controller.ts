@@ -9,8 +9,14 @@ import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
 
 export const getStudents = async (req: Request, res: Response) => {
-  const students = await StudentService.getStudents();
+  const { classId } = await validator.studentQuery(req);
 
+  let students;
+  if (classId) {
+    students = await StudentService.getStudentsForClass(Number(classId));
+  } else {
+    students = await StudentService.getStudents();
+  }
   return new OkResponse(students).send(res);
 };
 
