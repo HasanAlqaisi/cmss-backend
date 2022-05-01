@@ -10556,6 +10556,14 @@
             "in": "header",
             "name": "Authorization",
             "required": true
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "classId",
+            "description": "filter students by class id"
           }
         ],
         "description": "",
