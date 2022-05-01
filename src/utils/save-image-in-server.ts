@@ -9,10 +9,8 @@ export default (req: Request) => {
   if (req.file) {
     const fileName = new Date().getTime().toString() + req.file.originalname;
 
-    imageUrl = path.join(
-      process.env.CLIENT_ORIGIN as string,
-      `public/images/${fileName}`
-    );
+    const fullUrl = `${req.protocol}://${req.get("host")}`;
+    imageUrl = path.join(fullUrl, `public/images/${fileName}`);
 
     const dirPath = path.join(process.cwd(), `src/public/images/${fileName}`);
 
