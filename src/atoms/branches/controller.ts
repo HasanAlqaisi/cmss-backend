@@ -15,7 +15,7 @@ export const getbranches = async (_: Request, res: Response) => {
 };
 
 export const createBranch = async (req: Request, res: Response) => {
-  const { name, max_capacity: maxCapacity } = await validator.upsertBranch(req);
+  const { name, maxCapacity } = await validator.upsertBranch(req);
 
   const branch = await BranchService.createBranch(name, maxCapacity);
 
@@ -34,7 +34,7 @@ export const deleteBranch = async (req: Request, res: Response) => {
 
 export const updateBranch = async (req: Request, res: Response) => {
   const { id } = await generalValidator.id(req);
-  const { name, max_capacity: maxCapacity } = await validator.upsertBranch(req);
+  const { name, maxCapacity } = await validator.upsertBranch(req);
 
   const idNumber = Number(id);
 

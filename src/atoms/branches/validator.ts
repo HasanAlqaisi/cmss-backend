@@ -5,7 +5,7 @@ import { z } from "zod";
 export const upsertBranch = async (req: Request) => {
   const schema = z.object({
     name: z.string(),
-    max_capacity: z.number().positive(),
+    maxCapacity: z.number().positive(),
   });
 
   return schema.parseAsync(req.body);
