@@ -20,7 +20,9 @@ export const validateQuantityOnCreate = async (
     return onValid(updatedOriginalItem);
   }
 
-  throw new BadRequestError("quantity can not be less than 0");
+  throw new BadRequestError(
+    "specified quantity should be less or equal the current item quantity"
+  );
 };
 
 export const validateQuantityOnUpdate = async (
@@ -36,7 +38,9 @@ export const validateQuantityOnUpdate = async (
   if (inputItem.quantity > oldItem.quantity) {
     newOriginalQuantity -= inputItem.quantity - oldItem!.quantity;
     if (newOriginalQuantity < 0) {
-      throw new BadRequestError("quantity can not be less than 0");
+      throw new BadRequestError(
+        "specified quantity should be less or equal the current item quantity"
+      );
     }
   }
 
