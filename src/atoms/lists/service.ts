@@ -12,7 +12,7 @@ export class ListService {
   ) => {
     const list = prisma.list.create({
       data: {
-        Room: { connect: { id: inputList.roomId } },
+        room: { connect: { id: inputList.roomId } },
         responsible: { connect: { id: inputList.responsibleId } },
         orderImage,
         dateInuse: inputList.dateInUse,
@@ -20,7 +20,7 @@ export class ListService {
           create: listItems,
         },
       },
-      include: { items: true, responsible: true, Room: true },
+      include: { items: true, responsible: true, room: true },
     });
 
     updateOriginalItemsQUantity.push(list as any);
@@ -37,7 +37,7 @@ export class ListService {
   static getlists = async (order: Prisma.SortOrder) => {
     const lists = await prisma.list.findMany({
       orderBy: [{ dateInuse: order }],
-      include: { items: true, responsible: true, Room: true },
+      include: { items: true, responsible: true, room: true },
     });
 
     return lists;
@@ -45,7 +45,7 @@ export class ListService {
 
   static getRoomLists = async (roomId: number, order: Prisma.SortOrder) => {
     const lists = await prisma.list.findMany({
-      where: { Room: { id: roomId } },
+      where: { room: { id: roomId } },
       include: {
         items: true,
         responsible: true,
@@ -63,7 +63,7 @@ export class ListService {
       where: { responsible: { id: responsibleId } },
       include: {
         items: true,
-        Room: true,
+        room: true,
       },
       orderBy: [{ dateInuse: order }],
     });
@@ -74,7 +74,7 @@ export class ListService {
   static getList = async (listId: number) => {
     const list = await prisma.list.findUnique({
       where: { id: listId },
-      include: { items: true, Room: true, responsible: true },
+      include: { items: true, room: true, responsible: true },
     });
     return list;
   };

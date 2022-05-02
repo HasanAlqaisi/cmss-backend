@@ -332,7 +332,7 @@ model List {
   responsible   User       @relation(fields: [responsibleId], references: [id], onDelete: Cascade)
   dateInuse     DateTime   @default(now())
   items         ListItem[]
-  Room          Room       @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  room          Room       @relation(fields: [roomId], references: [id], onDelete: Cascade)
   roomId        Int
   orderImage    String?
 }
