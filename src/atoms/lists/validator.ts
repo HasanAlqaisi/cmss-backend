@@ -14,9 +14,7 @@ export const createList = async (req: Request) => {
     }, z.date().optional()),
     items: z.array(
       z.object({
-        name: z.string(),
-        image: z.string().optional(),
-        description: z.string().optional(),
+        id: zodPositiveNumberForm(),
         quantity: zodPositiveNumberForm(),
       })
     ),

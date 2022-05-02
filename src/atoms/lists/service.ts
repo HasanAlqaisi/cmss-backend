@@ -1,10 +1,12 @@
 import { Prisma } from "@prisma/client";
 import prisma from "../../prisma";
-import { InputList } from "./types";
+import { InputList, ListItems } from "./types";
 
-export default class ListService {
+// eslint-disable-next-line import/prefer-default-export
+export class ListService {
   static createList = async (
     inputList: InputList,
+    listItems: ListItems[],
     updateOriginalItemsQUantity: Prisma.Prisma__ItemClient<any>[],
     orderImage?: string
   ) => {
@@ -15,7 +17,7 @@ export default class ListService {
         orderImage,
         dateInuse: inputList.dateInUse,
         items: {
-          create: inputList.items,
+          create: listItems,
         },
       },
       include: { items: true, responsible: true, Room: true },

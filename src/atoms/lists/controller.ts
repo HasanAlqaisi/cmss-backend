@@ -1,11 +1,11 @@
+/* eslint-disable no-restricted-syntax */
 import { Request, Response } from "express";
-import { List } from "@prisma/client";
+import { List, ListItem } from "@prisma/client";
 import {
   CreatedResponse,
   DeletedResponse,
   OkResponse,
 } from "../../utils/api/api-response";
-import ListService from "./service";
 import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
 import ItemService from "../items/service";
@@ -14,6 +14,8 @@ import { BadRequestError } from "../../utils/api/api-error";
 import { reshapeData } from "../../utils/reshape-data";
 import saveImageInServer from "../../utils/save-image-in-server";
 import deleteImageFromServer from "../../utils/delete-image-from-server";
+import { ListItems } from "./types";
+import { ListService } from "./service";
 
 export const getLists = async (req: Request, res: Response) => {
   const listQuery = await validator.getLists(req);
@@ -65,19 +67,39 @@ export const createList = async (req: Request, res: Response) => {
 
   const imageUrl = saveImageInServer(req);
 
-  // eslint-disable-next-line no-restricted-syntax
-  for await (const item of inputList.items) {
-    const originalItem = await ItemService.findItemByName(item.name);
-    if (!originalItem)
-      throw new BadRequestError(`couldn't find item ${item.name}`);
+  const getItems = inputList.items.map((item) => ItemService.getItem(item.id));
+
+  const originalItems = await Promise.all(getItems);
+
+  const itemsInList: ListItems[] = [];
+
+  for await (const originalItem of originalItems) {
+    if (!originalItem) throw new BadRequestError(`couldn't find item `);
+
+    for (const inputItem of inputList.items) {
+      if (inputItem.id === originalItem.id) {
+        itemsInList.push({
+          name: originalItem.name,
+          image: originalItem.image ?? undefined,
+          description: originalItem.description ?? undefined,
+          quantity: inputItem.quantity,
+        });
+
+        break;
+      }
+    }
 
     prismaOperations.push(
-      validateQuantityOnCreate(item.quantity, originalItem!)
+      validateQuantityOnCreate(
+        itemsInList[itemsInList.length - 1].quantity,
+        originalItem
+      )
     );
   }
 
   const list = await ListService.createList(
     inputList,
+    itemsInList,
     prismaOperations,
     imageUrl
   );

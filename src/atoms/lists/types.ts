@@ -1,12 +1,14 @@
 export type InputList = {
   roomId: number;
   responsibleId: number;
-  items: {
-    name: string;
-    description?: string;
-    image?: string;
-    quantity: number;
-  }[];
+  items: { id: number; quantity: number }[];
   orderImage?: string;
   dateInUse?: Date;
+};
+
+export type ListItems = {
+  name: string;
+  image?: string,
+  description?: string,
+  quantity: number,
 };
