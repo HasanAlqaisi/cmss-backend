@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { Hour } from "@prisma/client";
-import { Chromosome, Gene } from "../../../atoms/schedules/types";
+import { Chromosome } from "../../../atoms/schedules/types";
 import getRandomInt from "../../../utils/get-random-int";
 import { hoursLength } from "../utils/constants";
 

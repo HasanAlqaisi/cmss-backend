@@ -1,9 +1,8 @@
 import { AbilityBuilder, AbilityClass } from "@casl/ability";
 import { PrismaAbility } from "@casl/prisma";
-import { Prisma, User } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import Mustache from "mustache";
 import { UserWithPermissions } from "../atoms/users/types";
-import logger from "./config/logger";
 
 type AppAbilityType = PrismaAbility<[string, Prisma.ModelName | "all"]>;
 

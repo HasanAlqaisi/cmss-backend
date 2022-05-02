@@ -6,7 +6,6 @@ import multer from "multer";
 import {
   ApiError,
   BadRequestError,
-  BadTokenError,
   ForbiddenError,
   InternalError,
 } from "./api/api-error";

@@ -4,7 +4,7 @@ import zodErrorMapper from "../utils/zod-error-mapper";
 
 const setZodErrors = async (
   req: Request,
-  res: Response,
+  _: Response,
   next: NextFunction
 ) => {
   const em: z.ZodErrorMap = (issue, ctx) => zodErrorMapper(issue, ctx, req);

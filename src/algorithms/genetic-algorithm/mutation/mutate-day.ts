@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
-import { Day, Hour } from "@prisma/client";
+import { Day } from "@prisma/client";
 // import { mutationRate } from "../utils/constants";
-import { Chromosome, Gene } from "../../../atoms/schedules/types";
+import { Chromosome } from "../../../atoms/schedules/types";
 import getRandomInt from "../../../utils/get-random-int";
 import { daysLength } from "../utils/constants";
 

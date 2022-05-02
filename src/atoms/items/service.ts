@@ -1,8 +1,7 @@
 import { BrokenItem, ExportedItem, Item, Prisma } from "@prisma/client";
 import { isNaN } from "lodash";
 import prisma from "../../prisma";
-import { BadRequestError, NotFoundError } from "../../utils/api/api-error";
-import logger from "../../utils/config/logger";
+import { BadRequestError } from "../../utils/api/api-error";
 import {
   validateQuantityOnCreate,
   validateQuantityOnDelete,

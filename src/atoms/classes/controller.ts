@@ -11,7 +11,7 @@ import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
 
 // eslint-disable-next-line import/prefer-default-export
-export const getClasses = async (req: Request, res: Response) => {
+export const getClasses = async (_: Request, res: Response) => {
   const classes = await ClassService.getClasses();
 
   const reshapedClasses = reshapeData(classes, [

@@ -4,7 +4,7 @@ import { reshapeTimetable } from "./helpers";
 import ScheduleService from "./service";
 import * as validator from "./validator";
 
-export const createSchedule = async (req: Request, res: Response) => {
+export const createSchedule = async (_: Request, res: Response) => {
   const result = await ScheduleService.createSchedule();
 
   const timetable = reshapeTimetable(result.schedules);

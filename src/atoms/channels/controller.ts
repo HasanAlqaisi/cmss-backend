@@ -8,7 +8,7 @@ import ChannelService from "./service";
 import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
 
-export const getChannels = async (req: Request, res: Response) => {
+export const getChannels = async (_: Request, res: Response) => {
   const channels = await ChannelService.getChannels();
 
   return new OkResponse(channels).send(res);

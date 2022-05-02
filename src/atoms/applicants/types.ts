@@ -1,4 +1,4 @@
-import { Gender, Prisma } from "@prisma/client";
+import { Gender } from "@prisma/client";
 
 export type InputApplicant = {
   name: string;

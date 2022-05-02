@@ -66,7 +66,7 @@ export const loginPost = async (req: Request, res: Response) => {
   return new OkResponse({ token, user: reshapedUser }).send(res);
 };
 
-export const logoutPost = async (req: Request, res: Response) => {
+export const logoutPost = async (_: Request, res: Response) => {
   res.clearCookie("access-token");
   res.clearCookie("user");
   return new OkResponse("Logged out").send(res);
@@ -188,7 +188,7 @@ export const getUserProfile = async (req: Request, res: Response) => {
   return new OkResponse(reshapedUser).send(res);
 };
 
-export const getUsers = async (req: Request, res: Response) => {
+export const getUsers = async (_: Request, res: Response) => {
   const users = await UserService.findAll();
 
   const reshapedUsers = reshapeData(users, ["password", "roleId"]) as User[];

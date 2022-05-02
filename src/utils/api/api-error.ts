@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import logger from "../config/logger";
 import { translate } from "../i18n";
 import {
   AuthFailureResponse,

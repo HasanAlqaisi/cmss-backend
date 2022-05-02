@@ -9,7 +9,6 @@ import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
 import saveImageInServer from "../../utils/save-image-in-server";
 import deleteImageFromServer from "../../utils/delete-image-from-server";
-import logger from "../../utils/config/logger";
 
 export const getItems = async (req: Request, res: Response) => {
   const itemQuery = await validator.itemsQuery(req);

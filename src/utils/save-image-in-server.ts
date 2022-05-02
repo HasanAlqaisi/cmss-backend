@@ -1,7 +1,6 @@
 import { Request } from "express";
 import path from "path";
 import fs from "fs";
-import logger from "./config/logger";
 
 export default (req: Request) => {
   let imageUrl: string | undefined;

@@ -1,5 +1,4 @@
 import { Request } from "express";
-import logger from "../config/logger";
 import translations from "./translations";
 
 function translate(

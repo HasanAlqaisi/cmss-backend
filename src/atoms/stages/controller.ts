@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { DeletedResponse, OkResponse } from "../../utils/api/api-response";
+import { OkResponse } from "../../utils/api/api-response";
 import StageService from "./service";
 import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
 
-export const getStages = async (req: Request, res: Response) => {
+export const getStages = async (_: Request, res: Response) => {
   const stages = await StageService.getStages();
 
   return new OkResponse(stages).send(res);

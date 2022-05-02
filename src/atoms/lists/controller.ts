@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-syntax */
 import { Request, Response } from "express";
-import { List, ListItem } from "@prisma/client";
+import { List } from "@prisma/client";
 import {
   CreatedResponse,
   DeletedResponse,

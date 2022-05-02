@@ -8,7 +8,7 @@ import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
 import RoleService from "./service";
 
-export const getRoles = async (req: Request, res: Response) => {
+export const getRoles = async (_: Request, res: Response) => {
   const roles = await RoleService.getRoles();
 
   return new OkResponse(roles).send(res);
