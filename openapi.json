@@ -1,5 +1,5 @@
 {
-  "openapi": "3.1.0",
+  "openapi": "3.0.0",
   "info": {
     "title": "CMSS API",
     "version": "1.0",
@@ -59,10 +59,7 @@
                     },
                     "role": {
                       "type": "object",
-                      "required": [
-                        "id",
-                        "name"
-                      ],
+                      "required": ["id", "name"],
                       "properties": {
                         "id": {
                           "type": "number"
@@ -74,15 +71,8 @@
                       }
                     },
                     "room": {
-                      "type": [
-                        "object",
-                        "null"
-                      ],
-                      "required": [
-                        "id",
-                        "number",
-                        "name"
-                      ],
+                      "type": ["object", "null"],
+                      "required": ["id", "number", "name"],
                       "properties": {
                         "id": {
                           "type": "number"
@@ -92,10 +82,7 @@
                           "minLength": 1
                         },
                         "name": {
-                          "type": [
-                            "string",
-                            "null"
-                          ]
+                          "type": ["string", "null"]
                         }
                       }
                     }
@@ -147,14 +134,10 @@
                           "minLength": 1
                         }
                       },
-                      "required": [
-                        "email"
-                      ]
+                      "required": ["email"]
                     }
                   },
-                  "required": [
-                    "errors"
-                  ],
+                  "required": ["errors"],
                   "x-examples": {
                     "example-1": {
                       "errors": {
@@ -171,9 +154,7 @@
                           "validation": "regex",
                           "code": "invalid_string",
                           "message": "sholud be at least 5 characters and from this set (a-z,0-9,_) ",
-                          "path": [
-                            "username"
-                          ]
+                          "path": ["username"]
                         }
                       ],
                       "name": "ZodError"
@@ -273,9 +254,7 @@
           },
           "description": ""
         },
-        "tags": [
-          "users"
-        ]
+        "tags": ["users"]
       }
     },
     "/users/login": {
@@ -343,10 +322,7 @@
                         },
                         "role": {
                           "type": "object",
-                          "required": [
-                            "id",
-                            "name"
-                          ],
+                          "required": ["id", "name"],
                           "properties": {
                             "id": {
                               "type": "number"
@@ -358,15 +334,8 @@
                           }
                         },
                         "room": {
-                          "type": [
-                            "object",
-                            "null"
-                          ],
-                          "required": [
-                            "id",
-                            "number",
-                            "name"
-                          ],
+                          "type": ["object", "null"],
+                          "required": ["id", "number", "name"],
                           "properties": {
                             "id": {
                               "type": "number"
@@ -375,10 +344,7 @@
                               "type": "number"
                             },
                             "name": {
-                              "type": [
-                                "string",
-                                "null"
-                              ],
+                              "type": ["string", "null"],
                               "minLength": 1
                             }
                           }
@@ -386,10 +352,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "token",
-                    "user"
-                  ]
+                  "required": ["token", "user"]
                 },
                 "examples": {
                   "example-1": {
@@ -434,9 +397,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "details"
-                  ]
+                  "required": ["details"]
                 },
                 "examples": {
                   "example-1": {
@@ -471,10 +432,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "email",
-                  "password"
-                ]
+                "required": ["email", "password"]
               },
               "examples": {
                 "example-1": {
@@ -496,9 +454,7 @@
             "name": "jwt"
           }
         ],
-        "tags": [
-          "users"
-        ]
+        "tags": ["users"]
       }
     },
     "/users/forget-password": {
@@ -523,9 +479,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "details"
-                  ]
+                  "required": ["details"]
                 },
                 "examples": {
                   "example-1": {
@@ -556,16 +510,12 @@
                     "format": "email"
                   }
                 },
-                "required": [
-                  "email"
-                ]
+                "required": ["email"]
               }
             }
           }
         },
-        "tags": [
-          "users"
-        ]
+        "tags": ["users"]
       }
     },
     "/users/reset-password/{id}": {
@@ -626,10 +576,7 @@
                     },
                     "role": {
                       "type": "object",
-                      "required": [
-                        "id",
-                        "name"
-                      ],
+                      "required": ["id", "name"],
                       "properties": {
                         "id": {
                           "type": "number"
@@ -641,15 +588,8 @@
                       }
                     },
                     "room": {
-                      "type": [
-                        "object",
-                        "null"
-                      ],
-                      "required": [
-                        "id",
-                        "number",
-                        "name"
-                      ],
+                      "type": ["object", "null"],
+                      "required": ["id", "number", "name"],
                       "properties": {
                         "id": {
                           "type": "number"
@@ -658,10 +598,7 @@
                           "type": "number"
                         },
                         "name": {
-                          "type": [
-                            "string",
-                            "null"
-                          ],
+                          "type": ["string", "null"],
                           "minLength": 1
                         }
                       }
@@ -715,9 +652,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "details"
-                  ]
+                  "required": ["details"]
                 }
               }
             }
@@ -750,10 +685,7 @@
                     "format": "password"
                   }
                 },
-                "required": [
-                  "new_password",
-                  "confirm_password"
-                ]
+                "required": ["new_password", "confirm_password"]
               }
             }
           },
@@ -768,18 +700,14 @@
             "name": "jwt"
           }
         ],
-        "tags": [
-          "users"
-        ]
+        "tags": ["users"]
       }
     },
     "/users/": {
       "parameters": [],
       "get": {
         "summary": "",
-        "tags": [
-          "users"
-        ],
+        "tags": ["users"],
         "responses": {
           "200": {
             "description": "OK",
@@ -844,10 +772,7 @@
                       },
                       "role": {
                         "type": "object",
-                        "required": [
-                          "id",
-                          "name"
-                        ],
+                        "required": ["id", "name"],
                         "properties": {
                           "id": {
                             "type": "number"
@@ -859,15 +784,8 @@
                         }
                       },
                       "room": {
-                        "type": [
-                          "object",
-                          "null"
-                        ],
-                        "required": [
-                          "id",
-                          "number",
-                          "name"
-                        ],
+                        "type": ["object", "null"],
+                        "required": ["id", "number", "name"],
                         "properties": {
                           "id": {
                             "type": "number"
@@ -876,10 +794,7 @@
                             "type": "number"
                           },
                           "name": {
-                            "type": [
-                              "string",
-                              "null"
-                            ],
+                            "type": ["string", "null"],
                             "minLength": 1
                           }
                         }
@@ -1000,10 +915,7 @@
                     },
                     "role": {
                       "type": "object",
-                      "required": [
-                        "id",
-                        "name"
-                      ],
+                      "required": ["id", "name"],
                       "properties": {
                         "id": {
                           "type": "number"
@@ -1015,15 +927,8 @@
                       }
                     },
                     "room": {
-                      "type": [
-                        "object",
-                        "null"
-                      ],
-                      "required": [
-                        "id",
-                        "number",
-                        "name"
-                      ],
+                      "type": ["object", "null"],
+                      "required": ["id", "number", "name"],
                       "properties": {
                         "id": {
                           "type": "number"
@@ -1032,10 +937,7 @@
                           "type": "number"
                         },
                         "name": {
-                          "type": [
-                            "string",
-                            "null"
-                          ],
+                          "type": ["string", "null"],
                           "minLength": 1
                         }
                       }
@@ -1090,9 +992,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "string"
@@ -1170,18 +1070,14 @@
             }
           }
         },
-        "tags": [
-          "users"
-        ]
+        "tags": ["users"]
       }
     },
     "/users/profile": {
       "parameters": [],
       "get": {
         "summary": "",
-        "tags": [
-          "users"
-        ],
+        "tags": ["users"],
         "responses": {
           "200": {
             "description": "OK",
@@ -1217,10 +1113,7 @@
                           "minLength": 1
                         }
                       },
-                      "required": [
-                        "id",
-                        "name"
-                      ]
+                      "required": ["id", "name"]
                     },
                     "room": {
                       "type": "object",
@@ -1236,11 +1129,7 @@
                           "minLength": 1
                         }
                       },
-                      "required": [
-                        "id",
-                        "number",
-                        "name"
-                      ]
+                      "required": ["id", "number", "name"]
                     }
                   },
                   "required": [
@@ -1327,9 +1216,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "Logged out"
@@ -1352,17 +1239,13 @@
             "name": "jwt"
           }
         ],
-        "tags": [
-          "users"
-        ]
+        "tags": ["users"]
       }
     },
     "/roles": {
       "get": {
         "summary": "",
-        "tags": [
-          "roles"
-        ],
+        "tags": ["roles"],
         "responses": {
           "200": {
             "description": "OK",
@@ -1434,13 +1317,8 @@
                               "minLength": 1
                             },
                             "conditions": {
-                              "type": [
-                                "object",
-                                "null"
-                              ],
-                              "required": [
-                                "id"
-                              ],
+                              "type": ["object", "null"],
+                              "required": ["id"],
                               "properties": {
                                 "id": {
                                   "type": "string"
@@ -1461,11 +1339,7 @@
                         }
                       }
                     },
-                    "required": [
-                      "id",
-                      "name",
-                      "permissions"
-                    ]
+                    "required": ["id", "name", "permissions"]
                   }
                 }
               }
@@ -1552,10 +1426,7 @@
                             "minLength": 1
                           },
                           "conditions": {
-                            "type": [
-                              "object",
-                              "null"
-                            ],
+                            "type": ["object", "null"],
                             "properties": {
                               "id": {
                                 "type": "string",
@@ -1567,20 +1438,11 @@
                             "type": "number"
                           }
                         },
-                        "required": [
-                          "id",
-                          "action",
-                          "subject",
-                          "roleId"
-                        ]
+                        "required": ["id", "action", "subject", "roleId"]
                       }
                     }
                   },
-                  "required": [
-                    "id",
-                    "name",
-                    "permissions"
-                  ]
+                  "required": ["id", "name", "permissions"]
                 },
                 "examples": {
                   "example-1": {
@@ -1674,21 +1536,14 @@
                               "example": "{{id}}"
                             }
                           },
-                          "required": [
-                            "id"
-                          ]
+                          "required": ["id"]
                         }
                       },
-                      "required": [
-                        "action",
-                        "subject"
-                      ]
+                      "required": ["action", "subject"]
                     }
                   }
                 },
-                "required": [
-                  "roleName"
-                ]
+                "required": ["roleName"]
               },
               "examples": {
                 "example-1": {
@@ -1709,9 +1564,7 @@
             }
           }
         },
-        "tags": [
-          "roles"
-        ]
+        "tags": ["roles"]
       }
     },
     "/roles/{id}": {
@@ -1749,12 +1602,7 @@
                       "uniqueItems": true,
                       "minItems": 1,
                       "items": {
-                        "required": [
-                          "id",
-                          "action",
-                          "subject",
-                          "roleId"
-                        ],
+                        "required": ["id", "action", "subject", "roleId"],
                         "properties": {
                           "id": {
                             "type": "number"
@@ -1775,9 +1623,7 @@
                                 "minLength": 1
                               }
                             },
-                            "required": [
-                              "id"
-                            ]
+                            "required": ["id"]
                           },
                           "roleId": {
                             "type": "number"
@@ -1786,11 +1632,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "id",
-                    "name",
-                    "permissions"
-                  ],
+                  "required": ["id", "name", "permissions"],
                   "x-examples": {
                     "example-1": {
                       "id": 2,
@@ -1844,9 +1686,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "string"
@@ -1863,9 +1703,7 @@
             "description": "Forbidden"
           }
         },
-        "tags": [
-          "roles"
-        ],
+        "tags": ["roles"],
         "parameters": [
           {
             "schema": {
@@ -1918,9 +1756,7 @@
                         },
                         "conditions": {
                           "type": "object",
-                          "required": [
-                            "id"
-                          ],
+                          "required": ["id"],
                           "properties": {
                             "id": {
                               "type": "string",
@@ -1930,16 +1766,11 @@
                           }
                         }
                       },
-                      "required": [
-                        "action",
-                        "subject"
-                      ]
+                      "required": ["action", "subject"]
                     }
                   }
                 },
-                "required": [
-                  "roleName"
-                ]
+                "required": ["roleName"]
               }
             }
           }
@@ -1965,9 +1796,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "string"
@@ -1984,9 +1813,7 @@
             "description": "Forbidden"
           }
         },
-        "tags": [
-          "roles"
-        ],
+        "tags": ["roles"],
         "parameters": [
           {
             "schema": {
@@ -2060,12 +1887,7 @@
                         "type": "number"
                       }
                     },
-                    "required": [
-                      "id",
-                      "name",
-                      "minAvg",
-                      "isDependent"
-                    ]
+                    "required": ["id", "name", "minAvg", "isDependent"]
                   }
                 },
                 "examples": {
@@ -2101,9 +1923,7 @@
             "name": "jwt"
           }
         ],
-        "tags": [
-          "specialties"
-        ]
+        "tags": ["specialties"]
       },
       "post": {
         "summary": "",
@@ -2142,12 +1962,7 @@
                       "type": "number"
                     }
                   },
-                  "required": [
-                    "id",
-                    "name",
-                    "minAvg",
-                    "isDependent"
-                  ]
+                  "required": ["id", "name", "minAvg", "isDependent"]
                 },
                 "examples": {
                   "example-1": {
@@ -2176,9 +1991,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "name is already exists"
@@ -2234,10 +2047,7 @@
                     "default": 0
                   }
                 },
-                "required": [
-                  "name",
-                  "minAvg"
-                ]
+                "required": ["name", "minAvg"]
               },
               "examples": {
                 "example-1": {
@@ -2262,9 +2072,7 @@
             "name": "jwt"
           }
         ],
-        "tags": [
-          "specialties"
-        ]
+        "tags": ["specialties"]
       },
       "parameters": []
     },
@@ -2316,12 +2124,7 @@
                       "type": "number"
                     }
                   },
-                  "required": [
-                    "id",
-                    "name",
-                    "minAvg",
-                    "isDependent"
-                  ]
+                  "required": ["id", "name", "minAvg", "isDependent"]
                 },
                 "examples": {
                   "example-1": {
@@ -2350,9 +2153,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "name is already exists"
@@ -2408,10 +2209,7 @@
                     "default": 0
                   }
                 },
-                "required": [
-                  "name",
-                  "minAvg"
-                ]
+                "required": ["name", "minAvg"]
               },
               "examples": {
                 "example-1": {
@@ -2426,9 +2224,7 @@
             }
           }
         },
-        "tags": [
-          "specialties"
-        ]
+        "tags": ["specialties"]
       },
       "delete": {
         "summary": "",
@@ -2450,9 +2246,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "one of provided ids does not exist"
@@ -2470,9 +2264,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "Record to delete does not exist."
@@ -2498,17 +2290,13 @@
             "name": "jwt"
           }
         ],
-        "tags": [
-          "specialties"
-        ]
+        "tags": ["specialties"]
       }
     },
     "/years": {
       "get": {
         "summary": "",
-        "tags": [
-          "years"
-        ],
+        "tags": ["years"],
         "responses": {
           "200": {
             "description": "OK",
@@ -2521,10 +2309,7 @@
                   "uniqueItems": true,
                   "items": {
                     "type": "object",
-                    "required": [
-                      "id",
-                      "range"
-                    ],
+                    "required": ["id", "range"],
                     "properties": {
                       "id": {
                         "type": "number"
@@ -2667,9 +2452,7 @@
     "/branches": {
       "get": {
         "summary": "",
-        "tags": [
-          "branches"
-        ],
+        "tags": ["branches"],
         "responses": {
           "200": {
             "description": "OK",
@@ -2709,11 +2492,7 @@
                         "description": "How many applicants this branch will accept"
                       }
                     },
-                    "required": [
-                      "id",
-                      "name",
-                      "maxCapacity"
-                    ]
+                    "required": ["id", "name", "maxCapacity"]
                   }
                 },
                 "examples": {
@@ -2771,11 +2550,7 @@
                       "type": "number"
                     }
                   },
-                  "required": [
-                    "id",
-                    "name",
-                    "maxCapacity"
-                  ],
+                  "required": ["id", "name", "maxCapacity"],
                   "x-examples": {
                     "example-1": {
                       "id": 4,
@@ -2809,9 +2584,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "name is already exists"
@@ -2857,10 +2630,7 @@
                     "minimum": 1
                   }
                 },
-                "required": [
-                  "name",
-                  "maxCapacity"
-                ]
+                "required": ["name", "maxCapacity"]
               },
               "examples": {
                 "example-1": {
@@ -2882,9 +2652,7 @@
             "name": "jwt"
           }
         ],
-        "tags": [
-          "branches"
-        ]
+        "tags": ["branches"]
       },
       "parameters": []
     },
@@ -2922,11 +2690,7 @@
                       "type": "number"
                     }
                   },
-                  "required": [
-                    "id",
-                    "name",
-                    "maxCapacity"
-                  ],
+                  "required": ["id", "name", "maxCapacity"],
                   "x-examples": {
                     "example-1": {
                       "id": 1,
@@ -2960,9 +2724,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "name is already exists"
@@ -3010,10 +2772,7 @@
                     "minimum": 1
                   }
                 },
-                "required": [
-                  "name",
-                  "maxCapacity"
-                ]
+                "required": ["name", "maxCapacity"]
               },
               "examples": {
                 "example-1": {
@@ -3026,9 +2785,7 @@
             }
           }
         },
-        "tags": [
-          "branches"
-        ]
+        "tags": ["branches"]
       },
       "delete": {
         "summary": "",
@@ -3050,9 +2807,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "one of provided ids does not exist"
@@ -3070,9 +2825,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "Record to delete does not exist."
@@ -3098,17 +2851,13 @@
             "name": "jwt"
           }
         ],
-        "tags": [
-          "branches"
-        ]
+        "tags": ["branches"]
       }
     },
     "/materials": {
       "get": {
         "summary": "",
-        "tags": [
-          "materials"
-        ],
+        "tags": ["materials"],
         "responses": {
           "200": {
             "description": "OK",
@@ -3253,12 +3002,7 @@
                         }
                       }
                     },
-                    "required": [
-                      "id",
-                      "name",
-                      "customPercentage",
-                      "specialty"
-                    ]
+                    "required": ["id", "name", "customPercentage", "specialty"]
                   }
                 },
                 "examples": {
@@ -3371,12 +3115,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "id",
-                    "name",
-                    "customPercentage",
-                    "specialty"
-                  ]
+                  "required": ["id", "name", "customPercentage", "specialty"]
                 },
                 "examples": {
                   "example-1": {
@@ -3409,9 +3148,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "name is already exists"
@@ -3463,17 +3200,14 @@
                     "type": "number"
                   }
                 },
-                "required": [
-                  "name",
-                  "specialtyId"
-                ]
+                "required": ["name", "specialtyId"]
               },
               "examples": {
                 "example-1": {
                   "value": {
-                    "name": "فرنسي",
-                    "custom_percentage": 8,
-                    "specialty_id": 2
+                    "name": "string",
+                    "customPercentage": 0,
+                    "specialtyId": 0
                   }
                 }
               }
@@ -3489,9 +3223,7 @@
             "name": "jwt"
           }
         ],
-        "tags": [
-          "materials"
-        ]
+        "tags": ["materials"]
       },
       "parameters": []
     },
@@ -3570,12 +3302,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "id",
-                    "name",
-                    "customPercentage",
-                    "specialty"
-                  ]
+                  "required": ["id", "name", "customPercentage", "specialty"]
                 },
                 "examples": {
                   "example-1": {
@@ -3608,9 +3335,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "name is already exists"
@@ -3661,26 +3386,21 @@
                     "type": "number"
                   }
                 },
-                "required": [
-                  "name",
-                  "specialtyId"
-                ]
+                "required": ["name", "specialtyId"]
               },
               "examples": {
                 "example-1": {
                   "value": {
                     "name": "string",
-                    "custom_percentage": 0,
-                    "specialty_id": 0
+                    "customPercentage": 0,
+                    "specialtyId": 0
                   }
                 }
               }
             }
           }
         },
-        "tags": [
-          "materials"
-        ]
+        "tags": ["materials"]
       },
       "delete": {
         "summary": "",
@@ -3702,9 +3422,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "one of provided ids does not exist"
@@ -3722,9 +3440,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "Record to delete does not exist."
@@ -3750,17 +3466,13 @@
             "name": "jwt"
           }
         ],
-        "tags": [
-          "materials"
-        ]
+        "tags": ["materials"]
       }
     },
     "/channels": {
       "get": {
         "summary": "",
-        "tags": [
-          "channels"
-        ],
+        "tags": ["channels"],
         "responses": {
           "200": {
             "description": "OK",
@@ -3773,10 +3485,7 @@
                   "uniqueItems": true,
                   "items": {
                     "type": "object",
-                    "required": [
-                      "id",
-                      "name"
-                    ],
+                    "required": ["id", "name"],
                     "properties": {
                       "id": {
                         "type": "number"
@@ -3851,10 +3560,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "id",
-                    "name"
-                  ],
+                  "required": ["id", "name"],
                   "x-examples": {
                     "example-1": {
                       "id": 4,
@@ -3886,9 +3592,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "name is already exists"
@@ -3924,9 +3628,7 @@
                     "minLength": 1
                   }
                 },
-                "required": [
-                  "name"
-                ],
+                "required": ["name"],
                 "x-examples": {
                   "example-1": {
                     "name": "القناة الزايدة "
@@ -3952,9 +3654,7 @@
             "name": "jwt"
           }
         ],
-        "tags": [
-          "channels"
-        ]
+        "tags": ["channels"]
       },
       "parameters": []
     },
@@ -3989,10 +3689,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "id",
-                    "name"
-                  ],
+                  "required": ["id", "name"],
                   "x-examples": {
                     "example-1": {
                       "id": 5,
@@ -4024,9 +3721,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "name is already exists"
@@ -4064,9 +3759,7 @@
                     "minLength": 1
                   }
                 },
-                "required": [
-                  "name"
-                ],
+                "required": ["name"],
                 "x-examples": {
                   "example-1": {
                     "name": "القناة العامة"
@@ -4083,9 +3776,7 @@
             }
           }
         },
-        "tags": [
-          "channels"
-        ]
+        "tags": ["channels"]
       },
       "delete": {
         "summary": "",
@@ -4107,9 +3798,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "one of provided ids does not exist"
@@ -4127,9 +3816,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "Record to delete does not exist."
@@ -4155,17 +3842,13 @@
             "name": "jwt"
           }
         ],
-        "tags": [
-          "channels"
-        ]
+        "tags": ["channels"]
       }
     },
     "/applicants": {
       "get": {
         "summary": "",
-        "tags": [
-          "applicants"
-        ],
+        "tags": ["applicants"],
         "responses": {
           "200": {
             "description": "OK",
@@ -4300,10 +3983,7 @@
                       },
                       "year": {
                         "type": "object",
-                        "required": [
-                          "id",
-                          "range"
-                        ],
+                        "required": ["id", "range"],
                         "properties": {
                           "id": {
                             "type": "number"
@@ -4316,12 +3996,7 @@
                       },
                       "specialty": {
                         "type": "object",
-                        "required": [
-                          "id",
-                          "name",
-                          "capacity",
-                          "isDependent"
-                        ],
+                        "required": ["id", "name", "capacity", "isDependent"],
                         "properties": {
                           "id": {
                             "type": "number"
@@ -4392,10 +4067,7 @@
                       },
                       "channel": {
                         "type": "object",
-                        "required": [
-                          "id",
-                          "name"
-                        ],
+                        "required": ["id", "name"],
                         "properties": {
                           "id": {
                             "type": "number"
@@ -4439,11 +4111,7 @@
                                   "type": "number"
                                 }
                               },
-                              "required": [
-                                "id",
-                                "name",
-                                "maxCapacity"
-                              ]
+                              "required": ["id", "name", "maxCapacity"]
                             }
                           },
                           "required": [
@@ -4456,11 +4124,7 @@
                       },
                       "acceptedBranch": {
                         "type": "object",
-                        "required": [
-                          "id",
-                          "name",
-                          "maxCapacity"
-                        ],
+                        "required": ["id", "name", "maxCapacity"],
                         "properties": {
                           "id": {
                             "type": "number"
@@ -4683,10 +4347,7 @@
                           "minLength": 1
                         }
                       },
-                      "required": [
-                        "id",
-                        "range"
-                      ]
+                      "required": ["id", "range"]
                     },
                     "specialty": {
                       "type": "object",
@@ -4705,12 +4366,7 @@
                           "type": "boolean"
                         }
                       },
-                      "required": [
-                        "id",
-                        "name",
-                        "capacity",
-                        "isDependent"
-                      ]
+                      "required": ["id", "name", "capacity", "isDependent"]
                     },
                     "degrees": {
                       "type": "array",
@@ -4774,10 +4430,7 @@
                           "minLength": 1
                         }
                       },
-                      "required": [
-                        "id",
-                        "name"
-                      ]
+                      "required": ["id", "name"]
                     },
                     "selectedBranches": {
                       "type": "array",
@@ -4817,11 +4470,7 @@
                                 "type": "number"
                               }
                             },
-                            "required": [
-                              "id",
-                              "name",
-                              "maxCapacity"
-                            ]
+                            "required": ["id", "name", "maxCapacity"]
                           }
                         }
                       }
@@ -5002,9 +4651,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "name is already exists"
@@ -5041,10 +4688,7 @@
                     "channelId": 4,
                     "daor": 1,
                     "specialtyId": 2,
-                    "selectedBranches": [
-                      2,
-                      1
-                    ],
+                    "selectedBranches": [2, 1],
                     "acceptedBranch": 1,
                     "totalDegree": 659,
                     "average": 94,
@@ -5100,10 +4744,7 @@
                           "type": "number"
                         }
                       },
-                      "required": [
-                        "materialId",
-                        "score"
-                      ]
+                      "required": ["materialId", "score"]
                     }
                   },
                   "acceptedBranch": {
@@ -5120,10 +4761,7 @@
                   },
                   "gender": {
                     "type": "string",
-                    "enum": [
-                      "MALE",
-                      "FEMALE"
-                    ]
+                    "enum": ["MALE", "FEMALE"]
                   },
                   "email": {
                     "type": "string",
@@ -5165,9 +4803,7 @@
                     "channelId": 0,
                     "daor": 0,
                     "specialtyId": 0,
-                    "selectedBranches": [
-                      0
-                    ],
+                    "selectedBranches": [0],
                     "totalDegree": 0,
                     "average": 0,
                     "degrees": [
@@ -5202,9 +4838,7 @@
             "name": "jwt"
           }
         ],
-        "tags": [
-          "applicants"
-        ]
+        "tags": ["applicants"]
       },
       "parameters": [],
       "delete": {
@@ -5238,9 +4872,7 @@
             "name": "jwt"
           }
         ],
-        "tags": [
-          "applicants"
-        ]
+        "tags": ["applicants"]
       }
     },
     "/applicants/{id}": {
@@ -5323,10 +4955,7 @@
                           "minLength": 1
                         }
                       },
-                      "required": [
-                        "id",
-                        "range"
-                      ]
+                      "required": ["id", "range"]
                     },
                     "specialty": {
                       "type": "object",
@@ -5345,12 +4974,7 @@
                           "type": "boolean"
                         }
                       },
-                      "required": [
-                        "id",
-                        "name",
-                        "capacity",
-                        "isDependent"
-                      ]
+                      "required": ["id", "name", "capacity", "isDependent"]
                     },
                     "degrees": {
                       "type": "array",
@@ -5414,10 +5038,7 @@
                           "minLength": 1
                         }
                       },
-                      "required": [
-                        "id",
-                        "name"
-                      ]
+                      "required": ["id", "name"]
                     },
                     "selectedBranches": {
                       "type": "array",
@@ -5457,11 +5078,7 @@
                                 "type": "number"
                               }
                             },
-                            "required": [
-                              "id",
-                              "name",
-                              "maxCapacity"
-                            ]
+                            "required": ["id", "name", "maxCapacity"]
                           }
                         }
                       }
@@ -5626,9 +5243,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "name is already exists"
@@ -5667,9 +5282,7 @@
                     "channelId": 0,
                     "daor": 0,
                     "specialtyId": 0,
-                    "selectedBranches": [
-                      0
-                    ],
+                    "selectedBranches": [0],
                     "totalDegree": 0,
                     "average": 0,
                     "degrees": [
@@ -5735,10 +5348,7 @@
                           "type": "number"
                         }
                       },
-                      "required": [
-                        "materialId",
-                        "score"
-                      ]
+                      "required": ["materialId", "score"]
                     }
                   },
                   "acceptedBranch": {
@@ -5758,10 +5368,7 @@
                   "gender": {
                     "type": "string",
                     "minLength": 1,
-                    "enum": [
-                      "MALE",
-                      "FEMALE"
-                    ]
+                    "enum": ["MALE", "FEMALE"]
                   },
                   "email": {
                     "type": "string",
@@ -5803,9 +5410,7 @@
             }
           }
         },
-        "tags": [
-          "applicants"
-        ]
+        "tags": ["applicants"]
       },
       "delete": {
         "summary": "",
@@ -5827,9 +5432,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "one of provided ids does not exist"
@@ -5847,9 +5450,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "Record to delete does not exist."
@@ -5875,9 +5476,7 @@
             "name": "jwt"
           }
         ],
-        "tags": [
-          "applicants"
-        ]
+        "tags": ["applicants"]
       }
     },
     "/acceptances/{channelId}": {
@@ -5909,9 +5508,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "detail"
-                  ],
+                  "required": ["detail"],
                   "x-examples": {
                     "example-1": {
                       "detail": "string"
@@ -5944,9 +5541,7 @@
             "name": "jwt"
           }
         ],
-        "tags": [
-          "acceptances"
-        ]
+        "tags": ["acceptances"]
       }
     },
     "/categories": {
@@ -5994,9 +5589,7 @@
             "required": true
           }
         ],
-        "tags": [
-          "categories"
-        ]
+        "tags": ["categories"]
       },
       "post": {
         "summary": "",
@@ -6030,9 +5623,7 @@
             "description": "Forbidden"
           }
         },
-        "tags": [
-          "categories"
-        ],
+        "tags": ["categories"],
         "parameters": [
           {
             "schema": {
@@ -6108,9 +5699,7 @@
             }
           }
         },
-        "tags": [
-          "categories"
-        ]
+        "tags": ["categories"]
       },
       "delete": {
         "summary": "",
@@ -6139,9 +5728,7 @@
             "required": true
           }
         ],
-        "tags": [
-          "categories"
-        ]
+        "tags": ["categories"]
       }
     },
     "/items": {
@@ -6222,10 +5809,7 @@
           {
             "schema": {
               "type": "string",
-              "enum": [
-                "asc",
-                "desc"
-              ],
+              "enum": ["asc", "desc"],
               "format": "order",
               "default": "asc"
             },
@@ -6243,9 +5827,7 @@
           }
         ],
         "description": "for (exported, broken) query params, the priority is for exported, then broken.\nIf you don't pass any of them, then items of inventory will be returned.\nFor response body, exported and broken don't have category",
-        "tags": [
-          "items"
-        ]
+        "tags": ["items"]
       },
       "post": {
         "summary": "",
@@ -6323,9 +5905,7 @@
           "description": ""
         },
         "description": "for query params, the priority is for exported, then broken.\nIf you don't pass any of them, then will create an inventory item.\nFor request and response body, exported and broken don't have category",
-        "tags": [
-          "items"
-        ]
+        "tags": ["items"]
       },
       "parameters": []
     },
@@ -6415,9 +5995,7 @@
           }
         },
         "description": "for query params, the priority is for exported, then broken.\nIf you don't pass any of them, then will update inventory item",
-        "tags": [
-          "items"
-        ]
+        "tags": ["items"]
       },
       "delete": {
         "summary": "",
@@ -6461,9 +6039,7 @@
           }
         ],
         "description": "for query params, the priority is for exported, then broken.\nIf you don't pass any of them, then will delete inventory item",
-        "tags": [
-          "items"
-        ]
+        "tags": ["items"]
       },
       "get": {
         "summary": "",
@@ -6531,9 +6107,7 @@
             "name": "broken"
           }
         ],
-        "tags": [
-          "items"
-        ]
+        "tags": ["items"]
       }
     },
     "/lists": {
@@ -6608,10 +6182,7 @@
           {
             "schema": {
               "type": "string",
-              "enum": [
-                "asc",
-                "desc"
-              ],
+              "enum": ["asc", "desc"],
               "format": "order",
               "default": "asc"
             },
@@ -6635,9 +6206,7 @@
           }
         ],
         "description": "For (responsible, room) query params, the priority for responsible then rooms. Ff none specified, then all lists will be returned",
-        "tags": [
-          "lists"
-        ]
+        "tags": ["lists"]
       },
       "post": {
         "summary": "",
@@ -6734,9 +6303,7 @@
           }
         },
         "description": "",
-        "tags": [
-          "lists"
-        ]
+        "tags": ["lists"]
       },
       "parameters": []
     },
@@ -6768,9 +6335,7 @@
             "description": "Forbidden"
           }
         },
-        "tags": [
-          "lists"
-        ],
+        "tags": ["lists"],
         "parameters": [
           {
             "schema": {
@@ -6851,17 +6416,13 @@
             "required": true
           }
         ],
-        "tags": [
-          "lists"
-        ]
+        "tags": ["lists"]
       }
     },
     "/absences": {
       "get": {
         "summary": "",
-        "tags": [
-          "absences"
-        ],
+        "tags": ["absences"],
         "responses": {
           "200": {
             "description": "OK",
@@ -6969,9 +6530,7 @@
             "required": true
           }
         ],
-        "tags": [
-          "absences"
-        ]
+        "tags": ["absences"]
       }
     },
     "/attendances": {
@@ -7105,9 +6664,7 @@
             "required": true
           }
         ],
-        "tags": [
-          "attendances"
-        ]
+        "tags": ["attendances"]
       },
       "post": {
         "summary": "",
@@ -7192,9 +6749,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "name is already exists"
@@ -7248,9 +6803,7 @@
           }
         ],
         "description": "",
-        "tags": [
-          "attendances"
-        ]
+        "tags": ["attendances"]
       },
       "parameters": []
     },
@@ -7348,9 +6901,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "name is already exists"
@@ -7396,9 +6947,7 @@
             }
           }
         },
-        "tags": [
-          "attendances"
-        ]
+        "tags": ["attendances"]
       },
       "delete": {
         "summary": "",
@@ -7420,9 +6969,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "one of provided ids does not exist"
@@ -7440,9 +6987,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "Record to delete does not exist."
@@ -7469,9 +7014,7 @@
             "required": true
           }
         ],
-        "tags": [
-          "attendances"
-        ]
+        "tags": ["attendances"]
       }
     },
     "/warnings/{classId}": {
@@ -7541,9 +7084,7 @@
           }
         ],
         "description": "This endpoint get you every student and his absences at each lecture",
-        "tags": [
-          "warnings"
-        ]
+        "tags": ["warnings"]
       },
       "post": {
         "summary": "",
@@ -7561,9 +7102,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "detail"
-                  ],
+                  "required": ["detail"],
                   "x-examples": {
                     "example-1": {
                       "detail": ""
@@ -7598,9 +7137,7 @@
           }
         ],
         "description": "This endpoint sends emails to the students that exceed the specified target on absences endpoint",
-        "tags": [
-          "warnings"
-        ]
+        "tags": ["warnings"]
       },
       "parameters": [
         {
@@ -7672,9 +7209,7 @@
             "required": true
           }
         ],
-        "tags": [
-          "rooms"
-        ],
+        "tags": ["rooms"],
         "description": ""
       },
       "post": {
@@ -7713,9 +7248,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "name is already exists"
@@ -7766,9 +7299,7 @@
           }
         ],
         "description": "",
-        "tags": [
-          "rooms"
-        ]
+        "tags": ["rooms"]
       },
       "parameters": []
     },
@@ -7819,9 +7350,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "name is already exists"
@@ -7864,9 +7393,7 @@
             }
           }
         },
-        "tags": [
-          "rooms"
-        ]
+        "tags": ["rooms"]
       },
       "delete": {
         "summary": "",
@@ -7888,9 +7415,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "one of provided ids does not exist"
@@ -7908,9 +7433,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "Record to delete does not exist."
@@ -7937,9 +7460,7 @@
             "required": true
           }
         ],
-        "tags": [
-          "rooms"
-        ]
+        "tags": ["rooms"]
       }
     },
     "/subjects": {
@@ -7996,9 +7517,7 @@
                             "stage": {
                               "id": 0,
                               "number": 0,
-                              "forbiddenDays": [
-                                0
-                              ]
+                              "forbiddenDays": [0]
                             }
                           }
                         }
@@ -8036,9 +7555,7 @@
           }
         ],
         "description": "",
-        "tags": [
-          "subjects"
-        ]
+        "tags": ["subjects"]
       },
       "post": {
         "summary": "",
@@ -8077,9 +7594,7 @@
                           "stage": {
                             "id": 0,
                             "number": 0,
-                            "forbiddenDays": [
-                              0
-                            ]
+                            "forbiddenDays": [0]
                           }
                         }
                       }
@@ -8102,9 +7617,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "name is already exists"
@@ -8158,9 +7671,7 @@
           }
         ],
         "description": "",
-        "tags": [
-          "subjects"
-        ]
+        "tags": ["subjects"]
       },
       "parameters": []
     },
@@ -8212,9 +7723,7 @@
                           "stage": {
                             "id": 0,
                             "number": 0,
-                            "forbiddenDays": [
-                              0
-                            ]
+                            "forbiddenDays": [0]
                           }
                         }
                       }
@@ -8237,9 +7746,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "name is already exists"
@@ -8285,9 +7792,7 @@
             }
           }
         },
-        "tags": [
-          "subjects"
-        ]
+        "tags": ["subjects"]
       },
       "delete": {
         "summary": "",
@@ -8309,9 +7814,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "one of provided ids does not exist"
@@ -8329,9 +7832,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "Record to delete does not exist."
@@ -8358,9 +7859,7 @@
             "required": true
           }
         ],
-        "tags": [
-          "subjects"
-        ]
+        "tags": ["subjects"]
       }
     },
     "/lectures": {
@@ -8422,9 +7921,7 @@
                               "stage": {
                                 "id": 0,
                                 "number": 0,
-                                "forbiddenDays": [
-                                  0
-                                ]
+                                "forbiddenDays": [0]
                               }
                             },
                             "name": "string",
@@ -8474,9 +7971,7 @@
           }
         ],
         "description": "",
-        "tags": [
-          "lectures"
-        ]
+        "tags": ["lectures"]
       },
       "post": {
         "summary": "",
@@ -8520,9 +8015,7 @@
                             "stage": {
                               "id": 0,
                               "number": 0,
-                              "forbiddenDays": [
-                                0
-                              ]
+                              "forbiddenDays": [0]
                             }
                           },
                           "name": "string",
@@ -8549,9 +8042,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "name is already exists"
@@ -8604,9 +8095,7 @@
           }
         ],
         "description": "",
-        "tags": [
-          "lectures"
-        ]
+        "tags": ["lectures"]
       },
       "parameters": []
     },
@@ -8663,9 +8152,7 @@
                             "stage": {
                               "id": 0,
                               "number": 0,
-                              "forbiddenDays": [
-                                0
-                              ]
+                              "forbiddenDays": [0]
                             }
                           },
                           "name": "string",
@@ -8692,9 +8179,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "name is already exists"
@@ -8739,9 +8224,7 @@
             }
           }
         },
-        "tags": [
-          "lectures"
-        ]
+        "tags": ["lectures"]
       },
       "delete": {
         "summary": "",
@@ -8763,9 +8246,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "one of provided ids does not exist"
@@ -8783,9 +8264,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "Record to delete does not exist."
@@ -8812,9 +8291,7 @@
             "required": true
           }
         ],
-        "tags": [
-          "lectures"
-        ]
+        "tags": ["lectures"]
       }
     },
     "/schedules": {
@@ -8882,9 +8359,7 @@
           }
         ],
         "description": "Generate a timetable for all classes",
-        "tags": [
-          "schedules"
-        ]
+        "tags": ["schedules"]
       },
       "parameters": [],
       "get": {
@@ -8935,9 +8410,7 @@
             "description": "Forbidden"
           }
         },
-        "tags": [
-          "schedules"
-        ],
+        "tags": ["schedules"],
         "parameters": [
           {
             "schema": {
@@ -9263,9 +8736,7 @@
                       {
                         "id": 0,
                         "number": 0,
-                        "forbiddenDays": [
-                          0
-                        ]
+                        "forbiddenDays": [0]
                       }
                     ]
                   }
@@ -9290,9 +8761,7 @@
             "required": true
           }
         ],
-        "tags": [
-          "stages"
-        ]
+        "tags": ["stages"]
       }
     },
     "/programs": {
@@ -9312,10 +8781,7 @@
                   "uniqueItems": true,
                   "items": {
                     "type": "object",
-                    "required": [
-                      "id",
-                      "name"
-                    ],
+                    "required": ["id", "name"],
                     "properties": {
                       "id": {
                         "type": "number"
@@ -9369,9 +8835,7 @@
             "required": true
           }
         ],
-        "tags": [
-          "programs"
-        ]
+        "tags": ["programs"]
       }
     },
     "/stages/{id}": {
@@ -9403,9 +8867,7 @@
                       {
                         "id": 0,
                         "number": 0,
-                        "forbiddenDays": [
-                          0
-                        ]
+                        "forbiddenDays": [0]
                       }
                     ]
                   },
@@ -9425,11 +8887,7 @@
                         }
                       }
                     },
-                    "required": [
-                      "id",
-                      "number",
-                      "forbiddenDays"
-                    ]
+                    "required": ["id", "number", "forbiddenDays"]
                   }
                 },
                 "examples": {
@@ -9438,9 +8896,7 @@
                       {
                         "id": 0,
                         "number": 0,
-                        "forbiddenDays": [
-                          0
-                        ]
+                        "forbiddenDays": [0]
                       }
                     ]
                   }
@@ -9461,9 +8917,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "name is already exists"
@@ -9498,11 +8952,7 @@
                 "type": "object",
                 "x-examples": {
                   "example-1": {
-                    "forbiddenDays": [
-                      1,
-                      2,
-                      3
-                    ]
+                    "forbiddenDays": [1, 2, 3]
                   }
                 },
                 "properties": {
@@ -9513,25 +8963,19 @@
                     }
                   }
                 },
-                "required": [
-                  "forbiddenDays"
-                ]
+                "required": ["forbiddenDays"]
               },
               "examples": {
                 "example-1": {
                   "value": {
-                    "forbiddenDays": [
-                      0
-                    ]
+                    "forbiddenDays": [0]
                   }
                 }
               }
             }
           }
         },
-        "tags": [
-          "stages"
-        ]
+        "tags": ["stages"]
       }
     },
     "/classes": {
@@ -9833,11 +9277,7 @@
                       },
                       "branch": {
                         "type": "object",
-                        "required": [
-                          "id",
-                          "name",
-                          "maxCapacity"
-                        ],
+                        "required": ["id", "name", "maxCapacity"],
                         "properties": {
                           "id": {
                             "type": "number"
@@ -9853,10 +9293,7 @@
                       },
                       "program": {
                         "type": "object",
-                        "required": [
-                          "id",
-                          "name"
-                        ],
+                        "required": ["id", "name"],
                         "properties": {
                           "id": {
                             "type": "number"
@@ -9869,11 +9306,7 @@
                       },
                       "stage": {
                         "type": "object",
-                        "required": [
-                          "id",
-                          "number",
-                          "forbiddenDays"
-                        ],
+                        "required": ["id", "number", "forbiddenDays"],
                         "properties": {
                           "id": {
                             "type": "number"
@@ -9890,12 +9323,7 @@
                         }
                       }
                     },
-                    "required": [
-                      "id",
-                      "branch",
-                      "program",
-                      "stage"
-                    ]
+                    "required": ["id", "branch", "program", "stage"]
                   }
                 },
                 "examples": {
@@ -9915,9 +9343,7 @@
                         "stage": {
                           "id": 0,
                           "number": 0,
-                          "forbiddenDays": [
-                            0
-                          ]
+                          "forbiddenDays": [0]
                         }
                       }
                     ]
@@ -9933,9 +9359,7 @@
             "description": "Forbidden"
           }
         },
-        "tags": [
-          "classes"
-        ],
+        "tags": ["classes"],
         "parameters": [
           {
             "schema": {
@@ -9973,9 +9397,7 @@
                       "stage": {
                         "id": 0,
                         "number": 0,
-                        "forbiddenDays": [
-                          0
-                        ]
+                        "forbiddenDays": [0]
                       }
                     }
                   },
@@ -9985,11 +9407,7 @@
                     },
                     "branch": {
                       "type": "object",
-                      "required": [
-                        "id",
-                        "name",
-                        "maxCapacity"
-                      ],
+                      "required": ["id", "name", "maxCapacity"],
                       "properties": {
                         "id": {
                           "type": "number"
@@ -10005,10 +9423,7 @@
                     },
                     "program": {
                       "type": "object",
-                      "required": [
-                        "id",
-                        "name"
-                      ],
+                      "required": ["id", "name"],
                       "properties": {
                         "id": {
                           "type": "number"
@@ -10021,11 +9436,7 @@
                     },
                     "stage": {
                       "type": "object",
-                      "required": [
-                        "id",
-                        "number",
-                        "forbiddenDays"
-                      ],
+                      "required": ["id", "number", "forbiddenDays"],
                       "properties": {
                         "id": {
                           "type": "number"
@@ -10042,12 +9453,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "id",
-                    "branch",
-                    "program",
-                    "stage"
-                  ]
+                  "required": ["id", "branch", "program", "stage"]
                 },
                 "examples": {
                   "example-1": {
@@ -10065,9 +9471,7 @@
                       "stage": {
                         "id": 0,
                         "number": 0,
-                        "forbiddenDays": [
-                          {}
-                        ]
+                        "forbiddenDays": [{}]
                       }
                     }
                   }
@@ -10085,9 +9489,7 @@
             "description": "Forbidden"
           }
         },
-        "tags": [
-          "classes"
-        ],
+        "tags": ["classes"],
         "parameters": [
           {
             "schema": {
@@ -10114,11 +9516,7 @@
                     "type": "number"
                   }
                 },
-                "required": [
-                  "branchId",
-                  "stageId",
-                  "programId"
-                ]
+                "required": ["branchId", "stageId", "programId"]
               },
               "examples": {
                 "example-1": {
@@ -10165,9 +9563,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "one of provided ids does not exist"
@@ -10185,9 +9581,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "Record to delete does not exist."
@@ -10214,9 +9608,7 @@
             "required": true
           }
         ],
-        "tags": [
-          "classes"
-        ]
+        "tags": ["classes"]
       }
     },
     "/students": {
@@ -10306,9 +9698,7 @@
           }
         ],
         "description": "",
-        "tags": [
-          "students"
-        ]
+        "tags": ["students"]
       },
       "post": {
         "summary": "",
@@ -10365,9 +9755,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "name is already exists"
@@ -10424,9 +9812,7 @@
           }
         ],
         "description": "",
-        "tags": [
-          "students"
-        ]
+        "tags": ["students"]
       },
       "parameters": []
     },
@@ -10496,9 +9882,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "name is already exists"
@@ -10547,9 +9931,7 @@
             }
           }
         },
-        "tags": [
-          "students"
-        ]
+        "tags": ["students"]
       },
       "delete": {
         "summary": "",
@@ -10571,9 +9953,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "one of provided ids does not exist"
@@ -10591,9 +9971,7 @@
                       "minLength": 1
                     }
                   },
-                  "required": [
-                    "details"
-                  ],
+                  "required": ["details"],
                   "x-examples": {
                     "example-1": {
                       "details": "Record to delete does not exist."
@@ -10620,9 +9998,7 @@
             "required": true
           }
         ],
-        "tags": [
-          "students"
-        ]
+        "tags": ["students"]
       }
     }
   },
@@ -10640,10 +10016,7 @@
             "minLength": 1
           }
         },
-        "required": [
-          "id",
-          "name"
-        ],
+        "required": ["id", "name"],
         "x-examples": {
           "example-1": {
             "id": 1,
@@ -10667,9 +10040,7 @@
             "minLength": 1
           }
         },
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "x-examples": {
           "example-1": {
             "name": "كهربائيات"
@@ -10727,10 +10098,7 @@
           },
           "category": {
             "type": "object",
-            "required": [
-              "id",
-              "name"
-            ],
+            "required": ["id", "name"],
             "properties": {
               "id": {
                 "type": "number"
@@ -10792,10 +10160,7 @@
           },
           "image": {}
         },
-        "required": [
-          "name",
-          "quantity"
-        ],
+        "required": ["name", "quantity"],
         "examples": [
           {
             "name": "string",
@@ -10918,22 +10283,12 @@
                   "type": "number"
                 }
               },
-              "required": [
-                "id",
-                "listId",
-                "name",
-                "quantity"
-              ]
+              "required": ["id", "listId", "name", "quantity"]
             }
           },
           "responsible": {
             "type": "object",
-            "required": [
-              "id",
-              "email",
-              "username",
-              "fullName"
-            ],
+            "required": ["id", "email", "username", "fullName"],
             "properties": {
               "id": {
                 "type": "number"
@@ -10957,10 +10312,7 @@
           },
           "Room": {
             "type": "object",
-            "required": [
-              "id",
-              "number"
-            ],
+            "required": ["id", "number"],
             "properties": {
               "id": {
                 "type": "number"
@@ -11041,18 +10393,11 @@
                   "minimum": 1
                 }
               },
-              "required": [
-                "id",
-                "quantity"
-              ]
+              "required": ["id", "quantity"]
             }
           }
         },
-        "required": [
-          "roomId",
-          "responsibleId",
-          "items"
-        ]
+        "required": ["roomId", "responsibleId", "items"]
       },
       "OutputAbsence": {
         "description": "",
@@ -11071,12 +10416,7 @@
             "type": "number"
           }
         },
-        "required": [
-          "id",
-          "firstWarning",
-          "secondWarning",
-          "thirdWarning"
-        ],
+        "required": ["id", "firstWarning", "secondWarning", "thirdWarning"],
         "x-examples": {
           "example-1": {
             "id": 1,
@@ -11108,11 +10448,7 @@
             "type": "number"
           }
         },
-        "required": [
-          "firstWarning",
-          "secondWarning",
-          "thirdWarning"
-        ],
+        "required": ["firstWarning", "secondWarning", "thirdWarning"],
         "x-examples": {
           "example-1": {
             "firstWarning": 3,
@@ -11249,12 +10585,7 @@
               },
               "Class": {
                 "type": "object",
-                "required": [
-                  "id",
-                  "branchId",
-                  "programId",
-                  "stageId"
-                ],
+                "required": ["id", "branchId", "programId", "stageId"],
                 "properties": {
                   "id": {
                     "type": "number"
@@ -11274,12 +10605,7 @@
           },
           "lecture": {
             "type": "object",
-            "required": [
-              "id",
-              "hallId",
-              "teacherId",
-              "hall"
-            ],
+            "required": ["id", "hallId", "teacherId", "hall"],
             "properties": {
               "id": {
                 "type": "number"
@@ -11292,13 +10618,7 @@
               },
               "hall": {
                 "type": "object",
-                "required": [
-                  "id",
-                  "roomId",
-                  "subjectId",
-                  "room",
-                  "subject"
-                ],
+                "required": ["id", "roomId", "subjectId", "room", "subject"],
                 "properties": {
                   "id": {
                     "type": "number"
@@ -11311,10 +10631,7 @@
                   },
                   "room": {
                     "type": "object",
-                    "required": [
-                      "id",
-                      "number"
-                    ],
+                    "required": ["id", "number"],
                     "properties": {
                       "id": {
                         "type": "number"
@@ -11356,12 +10673,7 @@
                       },
                       "Class": {
                         "type": "object",
-                        "required": [
-                          "id",
-                          "branchId",
-                          "programId",
-                          "stageId"
-                        ],
+                        "required": ["id", "branchId", "programId", "stageId"],
                         "properties": {
                           "id": {
                             "type": "number"
@@ -11413,12 +10725,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "lectureId",
-          "studentId",
-          "note",
-          "attended"
-        ],
+        "required": ["lectureId", "studentId", "note", "attended"],
         "x-examples": {
           "example-1": {
             "lectureId": 1,
@@ -11456,11 +10763,7 @@
             "uniqueItems": true,
             "minItems": 1,
             "items": {
-              "required": [
-                "id",
-                "name",
-                "absence"
-              ],
+              "required": ["id", "name", "absence"],
               "properties": {
                 "id": {
                   "type": "number"
@@ -11476,12 +10779,7 @@
             }
           }
         },
-        "required": [
-          "id",
-          "name",
-          "email",
-          "lectures"
-        ],
+        "required": ["id", "name", "email", "lectures"],
         "x-examples": {
           "example-1": {
             "id": 1,
@@ -11531,11 +10829,7 @@
             "minLength": 1
           }
         },
-        "required": [
-          "id",
-          "number",
-          "name"
-        ],
+        "required": ["id", "number", "name"],
         "x-examples": {
           "example-1": {
             "id": 0,
@@ -11560,9 +10854,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "number"
-        ],
+        "required": ["number"],
         "examples": [
           {
             "number": 0,
@@ -15350,11 +14642,7 @@
                 },
                 "branch": {
                   "type": "object",
-                  "required": [
-                    "id",
-                    "name",
-                    "maxCapacity"
-                  ],
+                  "required": ["id", "name", "maxCapacity"],
                   "properties": {
                     "id": {
                       "type": "number"
@@ -15370,10 +14658,7 @@
                 },
                 "program": {
                   "type": "object",
-                  "required": [
-                    "id",
-                    "name"
-                  ],
+                  "required": ["id", "name"],
                   "properties": {
                     "id": {
                       "type": "number"
@@ -15386,11 +14671,7 @@
                 },
                 "stage": {
                   "type": "object",
-                  "required": [
-                    "id",
-                    "number",
-                    "forbiddenDays"
-                  ],
+                  "required": ["id", "number", "forbiddenDays"],
                   "properties": {
                     "id": {
                       "type": "number"
@@ -15443,9 +14724,7 @@
                 "stage": {
                   "id": 0,
                   "number": 0,
-                  "forbiddenDays": [
-                    0
-                  ]
+                  "forbiddenDays": [0]
                 }
               }
             }
@@ -15470,12 +14749,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "classId",
-          "name",
-          "isElectronic",
-          "isLab"
-        ],
+        "required": ["classId", "name", "isElectronic", "isLab"],
         "x-examples": {
           "example-1": {
             "classId": 2,
@@ -15558,9 +14832,7 @@
                   "stage": {
                     "id": 0,
                     "number": 0,
-                    "forbiddenDays": [
-                      0
-                    ]
+                    "forbiddenDays": [0]
                   }
                 },
                 "name": "string",
@@ -15582,11 +14854,7 @@
           },
           "teacher": {
             "type": "object",
-            "required": [
-              "email",
-              "username",
-              "fullName"
-            ],
+            "required": ["email", "username", "fullName"],
             "properties": {
               "email": {
                 "type": "string",
@@ -15604,13 +14872,7 @@
           },
           "hall": {
             "type": "object",
-            "required": [
-              "id",
-              "roomId",
-              "subjectId",
-              "room",
-              "subject"
-            ],
+            "required": ["id", "roomId", "subjectId", "room", "subject"],
             "properties": {
               "id": {
                 "type": "number"
@@ -15623,9 +14885,7 @@
               },
               "room": {
                 "type": "object",
-                "required": [
-                  "number"
-                ],
+                "required": ["number"],
                 "properties": {
                   "name": {
                     "type": "string"
@@ -15637,12 +14897,7 @@
               },
               "subject": {
                 "type": "object",
-                "required": [
-                  "Class",
-                  "name",
-                  "isElectronic",
-                  "isLab"
-                ],
+                "required": ["Class", "name", "isElectronic", "isLab"],
                 "properties": {
                   "Class": {
                     "type": "object",
@@ -15669,9 +14924,7 @@
                       },
                       "program": {
                         "type": "object",
-                        "required": [
-                          "name"
-                        ],
+                        "required": ["name"],
                         "properties": {
                           "name": {
                             "type": "string",
@@ -15681,11 +14934,7 @@
                       },
                       "stage": {
                         "type": "object",
-                        "required": [
-                          "id",
-                          "number",
-                          "forbiddenDays"
-                        ],
+                        "required": ["id", "number", "forbiddenDays"],
                         "properties": {
                           "id": {
                             "type": "number"
@@ -15718,13 +14967,7 @@
             }
           }
         },
-        "required": [
-          "id",
-          "hallId",
-          "teacherId",
-          "teacher",
-          "hall"
-        ]
+        "required": ["id", "hallId", "teacherId", "teacher", "hall"]
       },
       "InputLecture": {
         "description": "",
@@ -15754,11 +14997,7 @@
             "type": "number"
           }
         },
-        "required": [
-          "teacherId",
-          "roomId",
-          "subjectId"
-        ]
+        "required": ["teacherId", "roomId", "subjectId"]
       },
       "POSTSchedule": {
         "description": "",
@@ -16317,13 +15556,7 @@
                     [],
                     []
                   ],
-                  [
-                    [],
-                    [],
-                    [],
-                    [],
-                    []
-                  ],
+                  [[], [], [], [], []],
                   [
                     [
                       {
@@ -16594,13 +15827,7 @@
                     [],
                     []
                   ],
-                  [
-                    [],
-                    [],
-                    [],
-                    [],
-                    []
-                  ]
+                  [[], [], [], [], []]
                 ]
               },
               {
@@ -16913,13 +16140,7 @@
                     ],
                     []
                   ],
-                  [
-                    [],
-                    [],
-                    [],
-                    [],
-                    []
-                  ],
+                  [[], [], [], [], []],
                   [
                     [],
                     [
@@ -17011,13 +16232,7 @@
                     ],
                     []
                   ],
-                  [
-                    [],
-                    [],
-                    [],
-                    [],
-                    []
-                  ],
+                  [[], [], [], [], []],
                   [
                     [],
                     [],
@@ -17185,13 +16400,7 @@
                     ],
                     []
                   ],
-                  [
-                    [],
-                    [],
-                    [],
-                    [],
-                    []
-                  ]
+                  [[], [], [], [], []]
                 ]
               },
               {
@@ -17590,13 +16799,7 @@
                     [],
                     []
                   ],
-                  [
-                    [],
-                    [],
-                    [],
-                    [],
-                    []
-                  ],
+                  [[], [], [], [], []],
                   [
                     [],
                     [
@@ -17708,11 +16911,7 @@
                                     "type": "string"
                                   }
                                 },
-                                "required": [
-                                  "subject",
-                                  "room",
-                                  "teacher"
-                                ]
+                                "required": ["subject", "room", "teacher"]
                               }
                             }
                           }
@@ -17722,16 +16921,11 @@
                   }
                 }
               },
-              "required": [
-                "title"
-              ]
+              "required": ["title"]
             }
           }
         },
-        "required": [
-          "conflicts",
-          "timetable"
-        ],
+        "required": ["conflicts", "timetable"],
         "examples": [
           {
             "conflicts": 0,
@@ -17785,11 +16979,7 @@
                         "uniqueItems": true,
                         "minItems": 1,
                         "items": {
-                          "required": [
-                            "subject",
-                            "room",
-                            "teacher"
-                          ],
+                          "required": ["subject", "room", "teacher"],
                           "properties": {
                             "subject": {
                               "type": "string",
@@ -17812,10 +17002,7 @@
             }
           }
         },
-        "required": [
-          "title",
-          "schedules"
-        ],
+        "required": ["title", "schedules"],
         "x-examples": {
           "example-1": {
             "title": "string",
@@ -17882,10 +17069,7 @@
           "gender": {
             "type": "string",
             "minLength": 1,
-            "enum": [
-              "MALE",
-              "FEMALE"
-            ]
+            "enum": ["MALE", "FEMALE"]
           },
           "email": {
             "type": "string",
@@ -17972,12 +17156,7 @@
                 "type": "number"
               }
             },
-            "required": [
-              "id",
-              "branchId",
-              "programId",
-              "stageId"
-            ]
+            "required": ["id", "branchId", "programId", "stageId"]
           },
           "channel": {
             "type": "object",
@@ -17990,10 +17169,7 @@
                 "minLength": 1
               }
             },
-            "required": [
-              "id",
-              "name"
-            ]
+            "required": ["id", "name"]
           },
           "year": {
             "type": "object",
@@ -18006,10 +17182,7 @@
                 "minLength": 1
               }
             },
-            "required": [
-              "id",
-              "range"
-            ]
+            "required": ["id", "range"]
           }
         },
         "required": [
