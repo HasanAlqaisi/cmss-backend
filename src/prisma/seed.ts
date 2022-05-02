@@ -2317,12 +2317,34 @@ async function createYears() {
   });
 }
 
-async function createSpecialties() {
+async function createSpecialtiesAndMaterials() {
   await prisma.specialty.createMany({
     data: [
       { name: "احيائي", minAvg: 70, isDependent: false },
       { name: "تطبيقي", minAvg: 70, isDependent: false },
       { name: "مهني", minAvg: 70, isDependent: true },
+    ],
+  });
+
+  await prisma.material.createMany({
+    data: [
+      { name: "Islamic", customPercentage: 0, specialtyId: 1 },
+      { name: "Arabic", customPercentage: 0, specialtyId: 1 },
+      { name: "English", customPercentage: 0, specialtyId: 1 },
+      { name: "Math", customPercentage: 0, specialtyId: 1 },
+      { name: "Chemistry", customPercentage: 0, specialtyId: 1 },
+      { name: "Physics", customPercentage: 0, specialtyId: 1 },
+      { name: "Biology", customPercentage: 0, specialtyId: 1 },
+      { name: "France", customPercentage: 8, specialtyId: 1 },
+
+      { name: "Islamic", customPercentage: 0, specialtyId: 2 },
+      { name: "Arabic", customPercentage: 0, specialtyId: 2 },
+      { name: "English", customPercentage: 0, specialtyId: 2 },
+      { name: "Math", customPercentage: 0, specialtyId: 2 },
+      { name: "Chemistry", customPercentage: 0, specialtyId: 2 },
+      { name: "Physics", customPercentage: 0, specialtyId: 2 },
+      { name: "Economy", customPercentage: 0, specialtyId: 2 },
+      { name: "France", customPercentage: 8, specialtyId: 2 },
     ],
   });
 }
@@ -2400,7 +2422,7 @@ const main = async () => {
     createClasses(),
     createDaysAndHours(),
     createYears(),
-    createSpecialties(),
+    createSpecialtiesAndMaterials(),
     createChannels(),
     createAbsences(),
   ];
