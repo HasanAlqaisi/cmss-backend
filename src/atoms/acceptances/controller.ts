@@ -87,5 +87,5 @@ export const computeAcceptances = async (req: Request, res: Response) => {
     }
   });
 
-  return new OkResponse(applicants).send(res);
+  return new OkResponse("The operation is completed successfully").send(res);
 };
