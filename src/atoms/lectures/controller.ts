@@ -7,6 +7,7 @@ import {
 import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
 import LectureService from "./service";
+import { reshapeLecturesForTeacher } from "./helpers";
 
 export const getLectures = async (req: Request, res: Response) => {
   const { classId, teacherId } = await validator.lectureQuery(req);
@@ -15,7 +16,11 @@ export const getLectures = async (req: Request, res: Response) => {
   if (classId) {
     lectures = await LectureService.getLecturesForClass(Number(classId));
   } else if (teacherId) {
-    lectures = await LectureService.getLecturesForTeacher(Number(teacherId));
+    const result = await LectureService.getLecturesForTeacher(
+      Number(teacherId)
+    );
+
+    lectures = reshapeLecturesForTeacher(result);
   } else {
     lectures = await LectureService.getLectures();
   }

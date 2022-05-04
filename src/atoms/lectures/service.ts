@@ -16,6 +16,7 @@ const includeTeacherAndHall = {
               programId: true,
               program: { select: { name: true } },
               stage: true,
+              branch: true,
             },
           },
           name: true,
@@ -134,3 +135,8 @@ export default class LectureService {
     return rooms;
   };
 }
+
+type ThenArg<T> = T extends PromiseLike<infer U> ? U : T;
+export type LecturesForTeacher = ThenArg<
+  ReturnType<typeof LectureService.getLecturesForTeacher>
+>;
