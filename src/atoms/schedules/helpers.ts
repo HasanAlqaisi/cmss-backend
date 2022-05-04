@@ -1,3 +1,4 @@
+import mapStageNumberToString from "../../utils/map-stage-number-to-string";
 import { ScheduleType } from "./service";
 import { Timetable } from "./types";
 
@@ -6,12 +7,6 @@ export const reshapeTimetable = (result: ScheduleType) => {
   const timetable: Timetable[] = [];
 
   let currentIndex = -1;
-
-  const stages = new Map<number, string>();
-  stages.set(1, "First");
-  stages.set(2, "Second");
-  stages.set(3, "Third");
-  stages.set(4, "Fourth");
 
   const hours = new Map<string, number>();
   hours.set("8:30", 0);
@@ -25,7 +20,8 @@ export const reshapeTimetable = (result: ScheduleType) => {
       timetable.find((t, i) => {
         const klassInfo = t.title.split(" - ");
         if (
-          klassInfo[0] === stages.get(schedule.class.stage.number) &&
+          klassInfo[0] ===
+            mapStageNumberToString(schedule.class.stage.number) &&
           klassInfo[1] === schedule.class.program.name &&
           klassInfo[2] === schedule.class.branch.name
         ) {
@@ -44,7 +40,7 @@ export const reshapeTimetable = (result: ScheduleType) => {
       });
     } else {
       const len = timetable.push({
-        title: `${stages.get(schedule.class.stage.number)} - ${
+        title: `${mapStageNumberToString(schedule.class.stage.number)} - ${
           schedule.class.program.name
         } - ${schedule.class.branch.name}`,
         schedules: [
