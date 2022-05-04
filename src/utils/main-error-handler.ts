@@ -44,7 +44,7 @@ export default (err: any, req: Request, res: Response, _next: NextFunction) => {
   }
 
   if (err instanceof ZodError) {
-    return ApiError.handle(new BadRequestError(err), req, res);
+    return ApiError.handle(new BadRequestError(err.flatten()), req, res);
   }
 
   return ApiError.handle(new InternalError(err.message), req, res);
