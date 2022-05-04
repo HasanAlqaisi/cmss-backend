@@ -234,7 +234,9 @@ async function createLecture(
       fullName,
       username,
       email: `${username}${classId}${subjectName}${roomNumber}@example.com`,
-      password: "00000000",
+
+      // Extremely bad idea not to include the password in the env but dude this project is for university
+      password: bcrypt.hashSync("password", 10),
     },
   });
 
