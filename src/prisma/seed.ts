@@ -233,10 +233,10 @@ async function createLecture(
       role: { connect: { id: role!.id } },
       fullName,
       username,
-      email: `${username}${classId}${subjectName}${roomNumber}@example.com`,
+      email: `${username}@example.com`,
 
       // Extremely bad idea not to include the password in the env but dude this project is for university
-      password: bcrypt.hashSync("password", 10),
+      password: bcrypt.hashSync("password", 5),
     },
   });
 
