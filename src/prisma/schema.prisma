@@ -207,11 +207,13 @@ model Specialty {
 
 model Material {
   id               Int       @id @default(autoincrement())
-  name             String    @unique
+  name             String
   customPercentage Int       @default(0)
   specialtyId      Int
   specialty        Specialty @relation(fields: [specialtyId], references: [id], onDelete: Cascade)
   degress          Degree[]
+
+  @@unique([name, specialtyId])
 }
 
 enum Gender {
