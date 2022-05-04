@@ -2362,6 +2362,19 @@ async function createAbsences() {
     data: {},
   });
 }
+async function seedStudents() {
+  await prisma.student.createMany({
+    data: [
+      { name: "Hasan", classId: 1, dateAcceptedId: 1, chnnaelId: 1 },
+      { name: "Ali", classId: 1, dateAcceptedId: 1, chnnaelId: 1 },
+      { name: "Raghad", classId: 1, dateAcceptedId: 1, chnnaelId: 1 },
+
+      { name: "Hasan2", classId: 2, dateAcceptedId: 2, chnnaelId: 1 },
+      { name: "Ali2", classId: 2, dateAcceptedId: 2, chnnaelId: 1 },
+      { name: "Raghad2", classId: 2, dateAcceptedId: 2, chnnaelId: 1 },
+    ],
+  });
+}
 
 async function seedInventory() {
   await prisma.category.createMany({
@@ -2432,6 +2445,7 @@ const main = async () => {
   await Promise.all(promises);
   await createLectures(); // TEMP: for testing only - will be deleted later
   await seedInventory(); // TEMP: for testing only - will be deleted later
+  await seedStudents(); // TEMP: for testing only - will be deleted later
   await createRoles();
 };
 
