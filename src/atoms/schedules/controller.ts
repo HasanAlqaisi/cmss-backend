@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import * as Converter from "json-2-csv";
 import { CreatedResponse, OkResponse } from "../../utils/api/api-response";
 import { reshapeTimetable } from "./helpers";
 import ScheduleService from "./service";
@@ -26,4 +27,17 @@ export const getSchedules = async (req: Request, res: Response) => {
   const timetable = reshapeTimetable(result);
 
   return new OkResponse(timetable).send(res);
+};
+
+export const convertScheduleToXls = async (_: Request, res: Response) => {
+  const result = await ScheduleService.getSchedules();
+
+  const timetable = reshapeTimetable(result);
+
+  const csv = await Converter.json2csvAsync(timetable);
+
+  res.set("Content-Type", "text/csv");
+  res.set("Content-Disposition", 'attachment; filename="schedule.csv"');
+
+  res.send(csv);
 };

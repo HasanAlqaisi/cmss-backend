@@ -7,4 +7,6 @@ router.post("/", controller.createSchedule);
 
 router.get("/", controller.getSchedules);
 
+router.get("/csv", controller.convertScheduleToXls);
+
 export default router;
