@@ -2376,6 +2376,169 @@ async function seedStudents() {
   });
 }
 
+async function seedApplicants() {
+  const degrees = [
+    { score: 100, materialId: 1 },
+    { score: 90, materialId: 2 },
+    { score: 88, materialId: 3 },
+    { score: 87, materialId: 4 },
+    { score: 95, materialId: 5 },
+    { score: 99, materialId: 6 },
+    { score: 92, materialId: 7 },
+    { score: 91, materialId: 8 },
+  ];
+
+  await prisma.applicant.create({
+    data: {
+      name: "Hasan",
+      daor: 1,
+      channel: { connect: { id: 1 } },
+      specialty: { connect: { id: 1 } },
+      year: { connect: { id: 1 } },
+      selectedBranches: {
+        create: [
+          {
+            branch: { connect: { id: 1 } },
+            priority: 1,
+          },
+          {
+            branch: { connect: { id: 2 } },
+            priority: 2,
+          },
+        ],
+      },
+      degrees: {
+        create: degrees,
+      },
+    },
+  });
+
+  await prisma.applicant.create({
+    data: {
+      name: "Raghad",
+      daor: 1,
+      channel: { connect: { id: 1 } },
+      specialty: { connect: { id: 1 } },
+      year: { connect: { id: 1 } },
+      selectedBranches: {
+        create: [
+          {
+            branch: { connect: { id: 1 } },
+            priority: 1,
+          },
+          {
+            branch: { connect: { id: 2 } },
+            priority: 2,
+          },
+        ],
+      },
+      degrees: {
+        create: degrees,
+      },
+    },
+  });
+
+  await prisma.applicant.create({
+    data: {
+      name: "Ali",
+      daor: 1,
+      channel: { connect: { id: 1 } },
+      specialty: { connect: { id: 1 } },
+      year: { connect: { id: 1 } },
+      selectedBranches: {
+        create: [
+          {
+            branch: { connect: { id: 1 } },
+            priority: 1,
+          },
+          {
+            branch: { connect: { id: 2 } },
+            priority: 2,
+          },
+        ],
+      },
+      degrees: {
+        create: degrees,
+      },
+    },
+  });
+
+  await prisma.applicant.create({
+    data: {
+      name: "Hasan2",
+      daor: 1,
+      channel: { connect: { id: 1 } },
+      specialty: { connect: { id: 1 } },
+      year: { connect: { id: 1 } },
+      selectedBranches: {
+        create: [
+          {
+            branch: { connect: { id: 2 } },
+            priority: 1,
+          },
+          {
+            branch: { connect: { id: 1 } },
+            priority: 2,
+          },
+        ],
+      },
+      degrees: {
+        create: degrees,
+      },
+    },
+  });
+
+  await prisma.applicant.create({
+    data: {
+      name: "Raghad2",
+      daor: 1,
+      channel: { connect: { id: 1 } },
+      specialty: { connect: { id: 1 } },
+      year: { connect: { id: 1 } },
+      selectedBranches: {
+        create: [
+          {
+            branch: { connect: { id: 2 } },
+            priority: 1,
+          },
+          {
+            branch: { connect: { id: 1 } },
+            priority: 2,
+          },
+        ],
+      },
+      degrees: {
+        create: degrees,
+      },
+    },
+  });
+
+  await prisma.applicant.create({
+    data: {
+      name: "Ali2",
+      daor: 2,
+      channel: { connect: { id: 1 } },
+      specialty: { connect: { id: 1 } },
+      year: { connect: { id: 1 } },
+      selectedBranches: {
+        create: [
+          {
+            branch: { connect: { id: 2 } },
+            priority: 1,
+          },
+          {
+            branch: { connect: { id: 1 } },
+            priority: 2,
+          },
+        ],
+      },
+      degrees: {
+        create: degrees,
+      },
+    },
+  });
+}
+
 async function seedInventory() {
   await prisma.category.createMany({
     data: [{ name: "Electronics" }, { name: "Main" }],
@@ -2446,6 +2609,7 @@ const main = async () => {
   await createLectures(); // TEMP: for testing only - will be deleted later
   await seedInventory(); // TEMP: for testing only - will be deleted later
   await seedStudents(); // TEMP: for testing only - will be deleted later
+  await seedApplicants(); // TEMP: for testing only - will be deleted later
   await createRoles();
 };
 
