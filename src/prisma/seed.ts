@@ -1,5 +1,6 @@
 import { Role } from "@prisma/client";
 import bcrypt from "bcrypt";
+import { faker } from "@faker-js/faker";
 import prisma from ".";
 import RoleService from "../atoms/roles/service";
 import UserService from "../atoms/users/service";
@@ -2363,34 +2364,31 @@ async function createAbsences() {
   });
 }
 async function seedStudents() {
-  await prisma.student.createMany({
-    data: [
-      { name: "Hasan", classId: 1, dateAcceptedId: 1, chnnaelId: 1 },
-      { name: "Ali", classId: 1, dateAcceptedId: 1, chnnaelId: 1 },
-      { name: "Raghad", classId: 1, dateAcceptedId: 1, chnnaelId: 1 },
+  const data = [];
+  for (let index = 0; index < 100; index++) {
+    data.push({
+      name: faker.name.findName(),
+      classId: faker.datatype.number({ min: 1, max: 16 }),
+      dateAcceptedId: 1,
+      chnnaelId: 1,
+    });
+  }
 
-      { name: "Hasan2", classId: 2, dateAcceptedId: 2, chnnaelId: 1 },
-      { name: "Ali2", classId: 2, dateAcceptedId: 2, chnnaelId: 1 },
-      { name: "Raghad2", classId: 2, dateAcceptedId: 2, chnnaelId: 1 },
-    ],
-  });
+  await Promise.all(
+    data.map((piece) =>
+      prisma.student.create({
+        data: piece,
+      })
+    )
+  );
 }
 
 async function seedApplicants() {
-  const degrees = [
-    { score: 100, materialId: 1 },
-    { score: 90, materialId: 2 },
-    { score: 88, materialId: 3 },
-    { score: 87, materialId: 4 },
-    { score: 95, materialId: 5 },
-    { score: 99, materialId: 6 },
-    { score: 92, materialId: 7 },
-    { score: 91, materialId: 8 },
-  ];
+  const data = [];
 
-  await prisma.applicant.create({
-    data: {
-      name: "Hasan",
+  for (let index = 0; index < 20; index++) {
+    data.push({
+      name: faker.name.findName(),
       daor: 1,
       channel: { connect: { id: 1 } },
       specialty: { connect: { id: 1 } },
@@ -2399,144 +2397,56 @@ async function seedApplicants() {
         create: [
           {
             branch: { connect: { id: 1 } },
-            priority: 1,
+            priority: faker.datatype.number({ min: 1, max: 2 }),
           },
           {
             branch: { connect: { id: 2 } },
-            priority: 2,
+            priority: faker.datatype.number({ min: 1, max: 2 }),
           },
         ],
       },
       degrees: {
-        create: degrees,
-      },
-    },
-  });
-
-  await prisma.applicant.create({
-    data: {
-      name: "Raghad",
-      daor: 1,
-      channel: { connect: { id: 1 } },
-      specialty: { connect: { id: 1 } },
-      year: { connect: { id: 1 } },
-      selectedBranches: {
         create: [
           {
-            branch: { connect: { id: 1 } },
-            priority: 1,
+            score: faker.datatype.number({ min: 50, max: 100 }),
+            materialId: 1,
           },
           {
-            branch: { connect: { id: 2 } },
-            priority: 2,
+            score: faker.datatype.number({ min: 50, max: 100 }),
+            materialId: 2,
+          },
+          {
+            score: faker.datatype.number({ min: 50, max: 100 }),
+            materialId: 3,
+          },
+          {
+            score: faker.datatype.number({ min: 50, max: 100 }),
+            materialId: 4,
+          },
+          {
+            score: faker.datatype.number({ min: 50, max: 100 }),
+            materialId: 5,
+          },
+          {
+            score: faker.datatype.number({ min: 50, max: 100 }),
+            materialId: 6,
+          },
+          {
+            score: faker.datatype.number({ min: 50, max: 100 }),
+            materialId: 7,
+          },
+          {
+            score: faker.datatype.number({ min: 50, max: 100 }),
+            materialId: 8,
           },
         ],
       },
-      degrees: {
-        create: degrees,
-      },
-    },
-  });
+    });
+  }
 
-  await prisma.applicant.create({
-    data: {
-      name: "Ali",
-      daor: 1,
-      channel: { connect: { id: 1 } },
-      specialty: { connect: { id: 1 } },
-      year: { connect: { id: 1 } },
-      selectedBranches: {
-        create: [
-          {
-            branch: { connect: { id: 1 } },
-            priority: 1,
-          },
-          {
-            branch: { connect: { id: 2 } },
-            priority: 2,
-          },
-        ],
-      },
-      degrees: {
-        create: degrees,
-      },
-    },
-  });
-
-  await prisma.applicant.create({
-    data: {
-      name: "Hasan2",
-      daor: 1,
-      channel: { connect: { id: 1 } },
-      specialty: { connect: { id: 1 } },
-      year: { connect: { id: 1 } },
-      selectedBranches: {
-        create: [
-          {
-            branch: { connect: { id: 2 } },
-            priority: 1,
-          },
-          {
-            branch: { connect: { id: 1 } },
-            priority: 2,
-          },
-        ],
-      },
-      degrees: {
-        create: degrees,
-      },
-    },
-  });
-
-  await prisma.applicant.create({
-    data: {
-      name: "Raghad2",
-      daor: 1,
-      channel: { connect: { id: 1 } },
-      specialty: { connect: { id: 1 } },
-      year: { connect: { id: 1 } },
-      selectedBranches: {
-        create: [
-          {
-            branch: { connect: { id: 2 } },
-            priority: 1,
-          },
-          {
-            branch: { connect: { id: 1 } },
-            priority: 2,
-          },
-        ],
-      },
-      degrees: {
-        create: degrees,
-      },
-    },
-  });
-
-  await prisma.applicant.create({
-    data: {
-      name: "Ali2",
-      daor: 2,
-      channel: { connect: { id: 1 } },
-      specialty: { connect: { id: 1 } },
-      year: { connect: { id: 1 } },
-      selectedBranches: {
-        create: [
-          {
-            branch: { connect: { id: 2 } },
-            priority: 1,
-          },
-          {
-            branch: { connect: { id: 1 } },
-            priority: 2,
-          },
-        ],
-      },
-      degrees: {
-        create: degrees,
-      },
-    },
-  });
+  await Promise.all(
+    data.map((piece) => prisma.applicant.create({ data: piece }))
+  );
 }
 
 async function seedInventory() {
