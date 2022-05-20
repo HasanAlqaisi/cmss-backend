@@ -14,6 +14,8 @@ import mainRoute from "./index";
 import specs from "../openapi.json";
 import setZodErrors from "./middlewares/set-zod-errors";
 
+const json2xls = require("json2xls");
+
 const app: Application = express();
 
 app.use(
@@ -25,6 +27,9 @@ app.use(
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Convert JSON to XLS
+app.use(json2xls.middleware);
 
 app.use(cookieParser());
 
@@ -43,6 +48,10 @@ if (process.env.NODE_ENV === "development") {
 app.use("/public", express.static(path.join(__dirname, "public")));
 
 app.use(setZodErrors);
+
+app.get("/xls", (req, res) => {
+  (res as any).xls("schedule.xlsx", req.body);
+});
 
 // Main app route
 app.use("/", mainRoute);
