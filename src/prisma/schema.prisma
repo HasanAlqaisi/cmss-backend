@@ -237,7 +237,7 @@ model Applicant {
   channel          Channel           @relation(fields: [channelId], references: [id], onDelete: SetNull)
   daor             Int
   totalDegree      Float?
-  average          Float?
+  average          Decimal?          @db.Decimal(4, 2)
   note             String?
   gender           Gender?
   email            String?           @unique

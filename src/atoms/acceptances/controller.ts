@@ -14,12 +14,15 @@ export const computeAcceptances = async (req: Request, res: Response) => {
 
   const channelIdNumber = Number(channelId);
 
-  const applicants = await ApplicantService.getApplicants(channelIdNumber);
+  let applicants = await ApplicantService.getApplicants(channelIdNumber);
 
   // Save applicants of dependent branches in separate array
   const applicantsOfDependent: FullApplicant[] = [];
 
-  // To know the number of accepted of each branch
+  // To know the number of accepted dependent applicants of each branch
+  const acceptedCountDependentApplicants = new Map<number, number>();
+
+  // To know the total number of accepted of each branch
   const acceptedCountBranches = new Map<number, number>();
 
   const countForEachBranch =
@@ -30,13 +33,20 @@ export const computeAcceptances = async (req: Request, res: Response) => {
     acceptedCountBranches.set(branch.id, branch._count.acceptedApplicants);
   });
 
-  applicants.forEach((applicant) => {
+  // eslint-disable-next-line no-restricted-syntax
+  for (const applicant of applicants) {
     if (!applicant.average) {
-      computeAverage(applicant);
+      // eslint-disable-next-line no-await-in-loop
+      await computeAverage(applicant);
     }
+  }
 
-    for (let index = 0; index < applicant.selectedBranches.length; index++) {
-      const selectedBranch = applicant.selectedBranches[index].branch;
+  applicants = await ApplicantService.getApplicants(channelIdNumber);
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const applicant of applicants) {
+    for (let j = 0; j < applicant.selectedBranches.length; j++) {
+      const selectedBranch = applicant.selectedBranches[j].branch;
 
       if (applicant.specialty.isDependent) {
         applicantsOfDependent.push(applicant);
@@ -46,9 +56,13 @@ export const computeAcceptances = async (req: Request, res: Response) => {
       if (
         selectedBranch.maxCapacity >
           acceptedCountBranches.get(selectedBranch.id)! &&
-        applicant.average! >= applicant.specialty.minAvg
+        applicant.average?.toNumber()! >= applicant.specialty.minAvg
       ) {
-        AcceptancesService.acceptApplicant(applicant.id, selectedBranch.id);
+        // eslint-disable-next-line no-await-in-loop
+        await AcceptancesService.acceptApplicant(
+          applicant.id,
+          selectedBranch.id
+        );
 
         const incrementAccepted =
           acceptedCountBranches.get(selectedBranch.id)! + 1;
@@ -57,14 +71,15 @@ export const computeAcceptances = async (req: Request, res: Response) => {
         break;
       }
     }
-  });
+  }
 
   let acceptedCount = 0;
   acceptedCountBranches.forEach((count) => {
     acceptedCount += count;
   });
 
-  applicantsOfDependent.forEach((applicant) => {
+  // eslint-disable-next-line no-restricted-syntax
+  for (const applicant of applicants) {
     for (let index = 0; index < applicant.selectedBranches.length; index++) {
       const selectedBranch = applicant.selectedBranches[index];
       const acceptCapacity = Math.trunc(
@@ -74,18 +89,33 @@ export const computeAcceptances = async (req: Request, res: Response) => {
       if (
         selectedBranch.branch.maxCapacity >
           acceptedCountBranches.get(selectedBranch.id)! &&
-        acceptCapacity > acceptedCountBranches.get(selectedBranch.id)!
+        acceptCapacity >
+          acceptedCountDependentApplicants.get(selectedBranch.id)! &&
+        applicant.average?.toNumber()! >= applicant.specialty.minAvg
       ) {
-        AcceptancesService.acceptApplicant(applicant.id, selectedBranch.id);
+        // eslint-disable-next-line no-await-in-loop
+        await AcceptancesService.acceptApplicant(
+          applicant.id,
+          selectedBranch.id
+        );
 
-        const incrementAccepted =
+        let incrementAccepted =
           acceptedCountBranches.get(selectedBranch.id)! + 1;
 
         acceptedCountBranches.set(selectedBranch.id, incrementAccepted);
+
+        incrementAccepted =
+          acceptedCountDependentApplicants.get(selectedBranch.id)! + 1;
+
+        acceptedCountDependentApplicants.set(
+          selectedBranch.id,
+          incrementAccepted
+        );
+
         break;
       }
     }
-  });
+  }
 
   return new OkResponse("The operation is completed successfully").send(res);
 };
