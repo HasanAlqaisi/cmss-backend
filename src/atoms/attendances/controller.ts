@@ -10,6 +10,7 @@ import * as generalValidator from "../../utils/general-validator";
 import { UserWithPermissions } from "../users/types";
 import { ForbiddenError, NotFoundError } from "../../utils/api/api-error";
 import { canTeacherManageAttendance } from "./helpers";
+import StudentService from "../students/service";
 
 export const getAttendances = async (req: Request, res: Response) => {
   const query = await validator.getAttendances(req);
@@ -23,13 +24,17 @@ export const getAttendances = async (req: Request, res: Response) => {
   return new OkResponse(attendances).send(res);
 };
 
-export const createAttendance = async (req: Request, res: Response) => {
-  const input = await validator.upsertAttendance(req);
+export const startAttendanceSession = async (req: Request, res: Response) => {
+  const input = await validator.startSessionAttendance(req);
 
   if (await canTeacherManageAttendance(req, input.lectureId)) {
-    const attendance = await AttendanceService.createAttendance(input);
+  const studentsClass = await StudentService.getStudentsForClass(input.classId);
 
-    return new CreatedResponse(attendance).send(res);
+  const studentsIds = studentsClass.map((student) => student.id);
+
+  await AttendanceService.createAttendances(input.lectureId, studentsIds);
+
+  return new CreatedResponse("Session started successfully").send(res);
   }
 
   throw new ForbiddenError();
@@ -61,11 +66,35 @@ export const updateAttendance = async (req: Request, res: Response) => {
 
   const idNumber = Number(id);
 
-  // if (await canTeacherManageAttendance(req, input.lectureId)) {
-  const attendance = await AttendanceService.updateAttendance(idNumber, input);
+  if (await canTeacherManageAttendance(req, input.lectureId)) {
+    const attendance = await AttendanceService.updateAttendance(
+      idNumber,
+      input
+    );
 
-  return new OkResponse(attendance).send(res);
-  // }
+    return new OkResponse(attendance).send(res);
+  }
 
-  // throw new ForbiddenError();
+  throw new ForbiddenError();
+};
+
+export const toggleAttendance = async (req: Request, res: Response) => {
+  const input = await validator.toggleAttendance(req);
+
+  if (await canTeacherManageAttendance(req, input.lectureId)) {
+  const currentAttendance = await AttendanceService.getAttendance(undefined, {
+    lectureId: input.lectureId,
+    studentId: input.studentId,
+    date: input.date || new Date(),
+  });
+
+  const updatedAttendance = await AttendanceService.toggleAttendance(
+    input,
+    currentAttendance?.attended || false
+  );
+
+  return new CreatedResponse(updatedAttendance).send(res);
+  }
+
+  throw new ForbiddenError();
 };

@@ -1,7 +1,28 @@
 import { Request } from "express";
 import { z } from "zod";
 
-// eslint-disable-next-line import/prefer-default-export
+export const toggleAttendance = async (req: Request) => {
+  const schema = z.object({
+    lectureId: z.number(),
+    studentId: z.number(),
+    date: z.preprocess((arg) => {
+      if (typeof arg === "string" || arg instanceof Date) return new Date(arg);
+      return arg;
+    }, z.date().optional()),
+  });
+
+  return schema.parseAsync(req.body);
+};
+
+export const startSessionAttendance = async (req: Request) => {
+  const schema = z.object({
+    lectureId: z.number(),
+    classId: z.number(),
+  });
+
+  return schema.parseAsync(req.body);
+};
+
 export const upsertAttendance = async (req: Request) => {
   const schema = z.object({
     lectureId: z.number(),

@@ -5,7 +5,9 @@ const router = Router();
 
 router.get("/", controller.getAttendances);
 
-router.post("/", controller.createAttendance);
+router.post("/start-session", controller.startAttendanceSession);
+
+router.post("/toggle", controller.toggleAttendance);
 
 router.patch("/:id", controller.updateAttendance);
 
