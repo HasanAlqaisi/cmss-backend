@@ -35,9 +35,7 @@ export const reshapeStudentsWithAttendances = (
         attend.date.getDay() === date.getDay()
     );
 
-    if (attendance) {
-      result.push({ student, attendend: attendance?.attended || false });
-    }
+    result.push({ student, attendend: attendance?.attended || false });
   }
 
   return result;
