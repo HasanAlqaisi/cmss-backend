@@ -61,14 +61,11 @@ export const updateAttendance = async (req: Request, res: Response) => {
 
   const idNumber = Number(id);
 
-  if (await canTeacherManageAttendance(req, input.lectureId)) {
-    const attendance = await AttendanceService.updateAttendance(
-      idNumber,
-      input
-    );
+  // if (await canTeacherManageAttendance(req, input.lectureId)) {
+  const attendance = await AttendanceService.updateAttendance(idNumber, input);
 
-    return new OkResponse(attendance).send(res);
-  }
+  return new OkResponse(attendance).send(res);
+  // }
 
-  throw new ForbiddenError();
+  // throw new ForbiddenError();
 };
