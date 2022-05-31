@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import prisma from "../../prisma";
 import logger from "../../utils/config/logger";
 import { InputAttendance } from "./types";
@@ -101,3 +102,7 @@ export default class AttendanceService {
     return attendance;
   };
 }
+
+export type GetAttendancesType = Prisma.PromiseReturnType<
+  typeof AttendanceService.getAttendances
+>;

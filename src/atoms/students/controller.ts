@@ -7,13 +7,21 @@ import {
 import StudentService from "./service";
 import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
+import AttendanceService from "../attendances/service";
+import { reshapeStudentsWithAttendances } from "./helpers";
 
 export const getStudents = async (req: Request, res: Response) => {
-  const { classId } = await validator.studentQuery(req);
+  const { classId, lectureId } = await validator.studentQuery(req);
 
   let students;
-  if (classId) {
+  if (classId && lectureId) {
+    const attendances = await AttendanceService.getAttendances(
+      Number(lectureId)
+    );
+
     students = await StudentService.getStudentsForClass(Number(classId));
+
+    students = reshapeStudentsWithAttendances(attendances, students);
   } else {
     students = await StudentService.getStudents();
   }

@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import prisma from "../../prisma";
 import { InputStudent } from "./types";
 
@@ -66,3 +67,7 @@ export default class StudentService {
     return student;
   };
 }
+
+export type GetStudentsType = Prisma.PromiseReturnType<
+  typeof StudentService.getStudents
+>;
