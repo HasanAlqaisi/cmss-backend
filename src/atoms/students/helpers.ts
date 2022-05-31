@@ -36,7 +36,7 @@ export const reshapeStudentsWithAttendances = (
     );
 
     if (attendance) {
-      result.push({ student, attendend: attendance.attended });
+      result.push({ student, attendend: attendance?.attended || false });
     }
   }
 
