@@ -1,6 +1,7 @@
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["fullTextSearch"]
+  binaryTargets   = ["native"]
 }
 
 datasource db {
@@ -236,8 +237,8 @@ model Applicant {
   channelId        Int
   channel          Channel           @relation(fields: [channelId], references: [id], onDelete: SetNull)
   daor             Int
-  totalDegree      Float?
-  average          Decimal?          @db.Decimal(4, 2)
+  totalDegree      Float             @default(0)
+  average          Decimal           @default(0) @db.Decimal(4, 2)
   note             String?
   gender           Gender?
   email            String?           @unique

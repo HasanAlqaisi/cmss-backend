@@ -35,7 +35,7 @@ export const computeAcceptances = async (req: Request, res: Response) => {
 
   // eslint-disable-next-line no-restricted-syntax
   for (const applicant of applicants) {
-    if (!applicant.average) {
+    if (applicant.average.toNumber() === 0) {
       // eslint-disable-next-line no-await-in-loop
       await computeAverage(applicant);
     }
