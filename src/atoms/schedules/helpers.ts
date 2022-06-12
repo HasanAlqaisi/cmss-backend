@@ -36,7 +36,7 @@ export const reshapeTimetable = (result: ScheduleType) => {
       ].push({
         subject: schedule.lecture.hall.subject.name,
         room: schedule.lecture.hall.room.number,
-        teacher: schedule.lecture.teacher.fullName,
+        teacher: schedule.lecture.teacher.username,
       });
     } else {
       const len = timetable.push({
@@ -63,3 +63,59 @@ export const reshapeTimetable = (result: ScheduleType) => {
   });
   return timetable;
 };
+
+export const reshapeTimetableForCsv = (timetables: Timetable[]) => {
+  const hours = new Map<number, string>();
+  hours.set(0, "8:30");
+  hours.set(1, "10:30");
+  hours.set(2, "12:30");
+  hours.set(3, "2:30");
+  hours.set(4, "4:30");
+
+  const days = new Map<number, string>();
+  days.set(0, "Saturday");
+  days.set(1, "Sunday");
+  days.set(2, "Monday");
+  days.set(3, "Tuesday");
+  days.set(4, "Wednesday");
+  days.set(5, "Thursday");
+
+  return timetables.map((timetable) => ({
+    title: timetable.title,
+    schedule: timetable.schedules.map((day, index1) => ({
+      days: days.get(index1),
+      hours: day.map((time, index2) => {
+        const hour = hours.get(index2)!;
+        const subjects = time.map(
+          (subject) =>
+            `${subject.subject} - ${subject.room} - ${subject.teacher}`
+        );
+        return {
+          [hour]: subjects.join("\n"),
+        };
+      }),
+    })),
+  }));
+};
+// Day, time, subject
+/*
+[
+   {
+      "Days": "Sat",
+      "hours": [
+         {
+            "8:30": "skop | SAMI | 304"
+         },
+         {
+            "10:30": "skop2"
+         },
+         {
+            "12:30": "skop3"
+         },
+         {
+            "2:30": "sko4"
+         }
+      ]
+   },
+]
+*/
