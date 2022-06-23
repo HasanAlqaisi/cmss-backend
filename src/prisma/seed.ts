@@ -278,8 +278,8 @@ async function createLectures() {
 
   await createLecture(
     attendnceManagerRole!,
-    "...",
-    "dotsdots",
+    "unkown",
+    "unknown",
     1000,
     2,
     "english language",
@@ -409,8 +409,8 @@ async function createLectures() {
 
   await createLecture(
     attendnceManagerRole!,
-    "...",
-    "dotsdots",
+    "unkown",
+    "unknown",
     1000,
     1,
     "english language",
@@ -1288,8 +1288,8 @@ async function createLectures() {
   );
   await createLecture(
     attendnceManagerRole!,
-    "...",
-    "dotsdots",
+    "unkown",
+    "unknown",
     1000,
     10,
     "english language",
@@ -1419,8 +1419,8 @@ async function createLectures() {
   );
   await createLecture(
     attendnceManagerRole!,
-    "...",
-    "dotsdots",
+    "unkown",
+    "unknown",
     1000,
     9,
     "english language",
@@ -2354,7 +2354,12 @@ async function createSpecialtiesAndMaterials() {
 
 async function createChannels() {
   await prisma.channel.createMany({
-    data: [{ name: "القناة العامة" }, { name: "قناة اوائل المعهد" }],
+    data: [
+      { name: "القناة العامة" },
+      { name: "قناة اوائل المعهد" },
+      { name: "قناة قانون 15" },
+      { name: "قناة ذوي الشهداء" },
+    ],
   });
 }
 
@@ -2390,6 +2395,8 @@ async function seedApplicants() {
     data.push({
       name: faker.name.findName(),
       daor: 1,
+      schoolName: Math.random() > 0.5 ? faker.address.streetName() : undefined,
+      examNumber: Math.random() > 0.5 ? faker.random.numeric(5) : undefined,
       channel: { connect: { id: 1 } },
       specialty: { connect: { id: 1 } },
       year: { connect: { id: 1 } },
@@ -2460,14 +2467,14 @@ async function seedInventory() {
         name: "Item 1",
         quantity: 10,
         description: "This is item 1",
-        image: `http://localhost:${process.env.PORT}/public/images/1651418553810Screenshot from 2022-04-22 14-49-47.png`,
+        image: `http://localhost:${process.env.PORT}/public/images/163470211225362.jpg`,
         categoryId: 1,
       },
       {
         name: "Item 2",
         quantity: 5,
         description: "This is item 2",
-        image: `http://localhost:${process.env.PORT}/public/images/1651418553810Screenshot from 2022-04-22 14-49-47.png`,
+        image: `http://localhost:${process.env.PORT}/public/images/163470211225362.jpg`,
         categoryId: 2,
       },
     ],
@@ -2477,7 +2484,7 @@ async function seedInventory() {
     data: {
       responsibleId: 1,
       roomId: 1,
-      orderImage: `http://localhost:${process.env.PORT}/public/images/1651418553810Screenshot from 2022-04-22 14-49-47.png`,
+      orderImage: `http://localhost:${process.env.PORT}/public/images/163470211225362.jpg`,
       items: {
         connectOrCreate: [
           {
@@ -2486,7 +2493,7 @@ async function seedInventory() {
               name: "Item 1",
               quantity: 10,
               description: "This is item 1",
-              image: `http://localhost:${process.env.PORT}/public/images/1651418553810Screenshot from 2022-04-22 14-49-47.png`,
+              image: `http://localhost:${process.env.PORT}/public/images/163470211225362.jpg`,
             },
           },
           {
@@ -2495,7 +2502,7 @@ async function seedInventory() {
               name: "Item 2",
               quantity: 5,
               description: "This is item 2",
-              image: `http://localhost:${process.env.PORT}/public/images/1651418553810Screenshot from 2022-04-22 14-49-47.png`,
+              image: `http://localhost:${process.env.PORT}/public/images/163470211225362.jpg`,
             },
           },
         ],
