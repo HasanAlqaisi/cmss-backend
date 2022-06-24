@@ -202,7 +202,7 @@ async function createRoles() {
   const timetableManager: RoleWithPermissions = {
     name: "Timetable Manager",
     permissions: [
-      { action: "read", subject: "Class" },
+      { action: "manage", subject: "Class" },
       { action: "manage", subject: "Schedule" },
       { action: "manage", subject: "Lecture" },
       { action: "manage", subject: "Room" },
@@ -215,7 +215,7 @@ async function createRoles() {
     permissions: [
       { action: "manage", subject: "Attendance" },
       { action: "manage", subject: "Lecture" },
-      { action: "read", subject: "Student" },
+      { action: "manage", subject: "Student" },
     ],
   };
 
@@ -233,8 +233,8 @@ async function createRoles() {
   const inventoryManager: RoleWithPermissions = {
     name: "Inventory Manager",
     permissions: [
-      { action: "read", subject: "User" },
-      { action: "read", subject: "Room" },
+      { action: "manage", subject: "User" },
+      { action: "manage", subject: "Room" },
       { action: "manage", subject: "Item" },
       { action: "manage", subject: "ExportedItem" },
       { action: "manage", subject: "BrokenItem" },
