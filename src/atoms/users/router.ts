@@ -25,7 +25,6 @@ router.post(
 router.patch(
   "/change-password/:id",
   passport.authenticate("jwt", { session: false }),
-  permissions("update", "User"),
   controller.changePassPut
 );
 

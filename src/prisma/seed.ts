@@ -16,9 +16,191 @@ async function createRootAccount() {
   );
 }
 
+async function createِAttendance() {
+  // 3 absences
+  await prisma.attendance.create({
+    data: {
+      student: {
+        connectOrCreate: {
+          where: { id: 101 },
+          create: {
+            name: "Alhassan Rifaat",
+            email: "hasan.alqaisi2000@gmail.com",
+            Class: { connect: { id: 1 } },
+            channel: { connect: { id: 1 } },
+            year: { connect: { id: 1 } },
+          },
+        },
+      },
+      lecture: { connect: { id: 1 } },
+      date: new Date("01/07/2022"),
+      attended: false,
+    },
+  });
+
+  await prisma.attendance.create({
+    data: {
+      student: {
+        connect: {
+          id: 101,
+        },
+      },
+      lecture: { connect: { id: 1 } },
+      date: new Date("01/14/2022"),
+      attended: false,
+    },
+  });
+
+  await prisma.attendance.create({
+    data: {
+      student: {
+        connect: {
+          id: 101,
+        },
+      },
+      lecture: { connect: { id: 1 } },
+      date: new Date("01/21/2022"),
+      attended: false,
+    },
+  });
+
+  // 4 absences
+  await prisma.attendance.create({
+    data: {
+      student: {
+        connectOrCreate: {
+          where: { id: 101 },
+          create: {
+            name: "Raghad Moaed",
+            email: "hasan.alqaisi2000@gmail.com",
+            Class: { connect: { id: 1 } },
+            channel: { connect: { id: 1 } },
+            year: { connect: { id: 1 } },
+          },
+        },
+      },
+      lecture: { connect: { id: 2 } },
+      date: new Date("01/07/2022"),
+      attended: false,
+    },
+  });
+
+  await prisma.attendance.create({
+    data: {
+      student: {
+        connect: {
+          id: 101,
+        },
+      },
+      lecture: { connect: { id: 2 } },
+      date: new Date("01/14/2022"),
+      attended: false,
+    },
+  });
+
+  await prisma.attendance.create({
+    data: {
+      student: {
+        connect: {
+          id: 101,
+        },
+      },
+      lecture: { connect: { id: 2 } },
+      date: new Date("01/21/2022"),
+      attended: false,
+    },
+  });
+
+  await prisma.attendance.create({
+    data: {
+      student: {
+        connect: {
+          id: 101,
+        },
+      },
+      lecture: { connect: { id: 2 } },
+      date: new Date("01/28/2022"),
+      attended: false,
+    },
+  });
+
+  // 5 absences
+  await prisma.attendance.create({
+    data: {
+      student: {
+        connectOrCreate: {
+          where: { id: 101 },
+          create: {
+            name: "Ali Mehasin",
+            email: "hasan.alqaisi2000@gmail.com",
+            Class: { connect: { id: 1 } },
+            channel: { connect: { id: 1 } },
+            year: { connect: { id: 1 } },
+          },
+        },
+      },
+      lecture: { connect: { id: 3 } },
+      date: new Date("01/07/2022"),
+      attended: false,
+    },
+  });
+
+  await prisma.attendance.create({
+    data: {
+      student: {
+        connect: {
+          id: 101,
+        },
+      },
+      lecture: { connect: { id: 3 } },
+      date: new Date("01/14/2022"),
+      attended: false,
+    },
+  });
+
+  await prisma.attendance.create({
+    data: {
+      student: {
+        connect: {
+          id: 101,
+        },
+      },
+      lecture: { connect: { id: 3 } },
+      date: new Date("01/21/2022"),
+      attended: false,
+    },
+  });
+
+  await prisma.attendance.create({
+    data: {
+      student: {
+        connect: {
+          id: 101,
+        },
+      },
+      lecture: { connect: { id: 3 } },
+      date: new Date("01/28/2022"),
+      attended: false,
+    },
+  });
+
+  await prisma.attendance.create({
+    data: {
+      student: {
+        connect: {
+          id: 101,
+        },
+      },
+      lecture: { connect: { id: 3 } },
+      date: new Date("02/05/2022"),
+      attended: false,
+    },
+  });
+}
+
 async function createRoles() {
   const timetableManager: RoleWithPermissions = {
-    name: "timetableManager",
+    name: "Timetable Manager",
     permissions: [
       { action: "read", subject: "Class" },
       { action: "manage", subject: "Schedule" },
@@ -29,7 +211,7 @@ async function createRoles() {
   };
 
   const attendanceManager: RoleWithPermissions = {
-    name: "attendanceManager",
+    name: "Attendance Manager",
     permissions: [
       { action: "manage", subject: "Attendance" },
       { action: "manage", subject: "Lecture" },
@@ -38,7 +220,7 @@ async function createRoles() {
   };
 
   const registrationManager: RoleWithPermissions = {
-    name: "registrationManager",
+    name: "Registration Manager",
     permissions: [
       { action: "manage", subject: "Applicant" },
       { action: "manage", subject: "Material" },
@@ -49,7 +231,7 @@ async function createRoles() {
   };
 
   const inventoryManager: RoleWithPermissions = {
-    name: "inventoryManager",
+    name: "Inventory Manager",
     permissions: [
       { action: "read", subject: "User" },
       { action: "read", subject: "Room" },
@@ -273,7 +455,7 @@ async function createLecture(
 
 async function createLectures() {
   const attendnceManagerRole = await prisma.role.findFirst({
-    where: { name: "root" },
+    where: { name: "Attendance Manager" },
   });
 
   await createLecture(
@@ -2514,6 +2696,7 @@ async function seedInventory() {
 const main = async () => {
   const promises = [
     createRootAccount(),
+    createRoles(),
     createClasses(),
     createDaysAndHours(),
     createYears(),
@@ -2527,7 +2710,7 @@ const main = async () => {
   await seedInventory(); // TEMP: for testing only - will be deleted later
   await seedStudents(); // TEMP: for testing only - will be deleted later
   await seedApplicants(); // TEMP: for testing only - will be deleted later
-  await createRoles();
+  await createِAttendance();
 };
 
 main()

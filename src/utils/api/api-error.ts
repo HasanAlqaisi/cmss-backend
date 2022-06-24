@@ -21,24 +21,32 @@ export abstract class ApiError extends Error {
     super(message);
   }
 
-  public static handle(err: ApiError, req: Request, res: Response): Response {
+  public static handle(
+    err: ApiError,
+    req: Request,
+    res: Response,
+    type: string
+  ): Response {
     let { message } = err;
     switch (err.type) {
       case ErrorType.BAD_TOKEN:
-        return new AuthFailureResponse(translate(req, "loginFailed")).send(res);
+        return new AuthFailureResponse(
+          translate(req, "loginFailed"),
+          type
+        ).send(res);
       case ErrorType.INTERNAL:
-        return new InternalErrorResponse(message).send(res);
+        return new InternalErrorResponse(message, type).send(res);
       case ErrorType.NOT_FOUND:
-        return new NotFoundResponse(message).send(res);
+        return new NotFoundResponse(message, type).send(res);
       case ErrorType.BAD_REQUEST:
-        return new BadRequestResponse(message).send(res);
+        return new BadRequestResponse(message, type).send(res);
       case ErrorType.FORBIDDEN:
-        return new ForbiddenResponse(message).send(res);
+        return new ForbiddenResponse(message, type).send(res);
       default: {
         if (process.env.NODE_ENV === "production")
           message = translate(req, "serverError");
 
-        return new InternalErrorResponse(message).send(res);
+        return new InternalErrorResponse(message, type).send(res);
       }
     }
   }

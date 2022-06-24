@@ -12,8 +12,15 @@ enum StatusResponse {
 }
 
 abstract class ApiResponse {
-  constructor(protected statusCode: StatusResponse, protected json: Object) {
-    if (typeof this.json === "string") this.json = { detail: this.json };
+  constructor(
+    protected statusCode: StatusResponse,
+    protected json: Object,
+    type: string | undefined
+  ) {
+    if (typeof this.json === "string")
+      this.json = { detail: this.json, _type: type };
+    // eslint-disable-next-line no-underscore-dangle
+    if (typeof this.json === "object") (this.json as any)._type = type;
   }
 
   send(res: Response) {
@@ -22,49 +29,49 @@ abstract class ApiResponse {
 }
 
 export class AuthFailureResponse extends ApiResponse {
-  constructor(json: Object) {
-    super(StatusResponse.UNAUTHORIZED, json);
+  constructor(json: Object, type: string) {
+    super(StatusResponse.UNAUTHORIZED, json, type);
   }
 }
 
 export class NotFoundResponse extends ApiResponse {
-  constructor(json: Object) {
-    super(StatusResponse.NOT_FOUND, json);
+  constructor(json: Object, type: string) {
+    super(StatusResponse.NOT_FOUND, json, type);
   }
 }
 
 export class ForbiddenResponse extends ApiResponse {
-  constructor(json: Object) {
-    super(StatusResponse.FORBIDDEN, json);
+  constructor(json: Object, type: string) {
+    super(StatusResponse.FORBIDDEN, json, type);
   }
 }
 
 export class BadRequestResponse extends ApiResponse {
-  constructor(json: Object) {
-    super(StatusResponse.BAD_REQUEST, json);
+  constructor(json: Object, type: string) {
+    super(StatusResponse.BAD_REQUEST, json, type);
   }
 }
 
 export class InternalErrorResponse extends ApiResponse {
-  constructor(json: Object) {
-    super(StatusResponse.INTERNAL_ERROR, json);
+  constructor(json: Object, type: string) {
+    super(StatusResponse.INTERNAL_ERROR, json, type);
   }
 }
 
 export class OkResponse extends ApiResponse {
   constructor(json: Object) {
-    super(StatusResponse.OK, json);
+    super(StatusResponse.OK, json, undefined);
   }
 }
 
 export class CreatedResponse extends ApiResponse {
   constructor(json: Object) {
-    super(StatusResponse.CREATED, json);
+    super(StatusResponse.CREATED, json, undefined);
   }
 }
 
 export class DeletedResponse extends ApiResponse {
   constructor(json: Object) {
-    super(StatusResponse.DELETED, json);
+    super(StatusResponse.DELETED, json, undefined);
   }
 }

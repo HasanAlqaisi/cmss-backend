@@ -4,7 +4,6 @@ import { Applicant } from "@prisma/client";
 import {
   CreatedResponse,
   DeletedResponse,
-  NotFoundResponse,
   OkResponse,
 } from "../../utils/api/api-response";
 import ApplicantService from "./service";
@@ -12,6 +11,7 @@ import * as validator from "./validator";
 import * as generalValidator from "../../utils/general-validator";
 import { reshapeData } from "../../utils/reshape-data";
 import { reshapeBranches } from "./helpers";
+import { NotFoundError } from "../../utils/api/api-error";
 
 export const getApplicants = async (req: Request, res: Response) => {
   const { channelId, name } = await validator.getApplicants(req);
@@ -49,7 +49,7 @@ export const getApplicant = async (req: Request, res: Response) => {
     return new OkResponse(reshapedApplicant).send(res);
   }
 
-  return new NotFoundResponse("Applicant not found").send(res);
+  throw new NotFoundError("Applicant not found");
 };
 
 export const createApplicant = async (req: Request, res: Response) => {
