@@ -35,25 +35,25 @@ export const createReport = async (req: Request, res: Response) => {
       if (lec.absence >= absence.thirdWarning) {
         sendEmail(
           result.email,
-          "فصل",
-          `لقد تعدت غياباتك الحد المسموح في الدرس ${lec.name} وتم فصلك`,
-          "الغيابات"
+          "انذار ثالث",
+          `مرحبا <strong>${result.name}</strong> .\n <br>لديك انذار غياب نهائي في مادة ال <strong>${lec.name}</strong>`,
+          "انذار غياب ثالث"
         );
       }
       if (lec.absence === absence.secondWarning) {
         sendEmail(
           result.email,
           "انذار ثاني",
-          `لقد تعدت غياباتك الحد المسموح في الدرس ${lec.name}`,
-          "الغيابات"
+          `مرحبا <strong>${result.name}</strong> .\n <br>لديك انذار غياب ثانوي في مادة ال <strong>${lec.name}</strong>`,
+          "انذار غياب ثاني"
         );
       }
       if (lec.absence === absence.firstWarning) {
         sendEmail(
           result.email,
           "انذار اول",
-          `لقد تعدت غياباتك الحد المسموح في الدرس ${lec.name}`,
-          "الغيابات"
+          `مرحبا <strong>${result.name}</strong> .\n <br>لديك انذار غياب اولي في مادة ال <strong>${lec.name}</strong>`,
+          "انذار غياب اولي"
         );
       }
     });
