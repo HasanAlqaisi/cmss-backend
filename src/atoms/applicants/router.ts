@@ -5,6 +5,8 @@ const router = Router();
 
 router.get("/", controller.getApplicants);
 
+router.get("/:id", controller.getApplicant);
+
 router.post("/", controller.createApplicant);
 
 router.patch("/:id", controller.updateApplicant);

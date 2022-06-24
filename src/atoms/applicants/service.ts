@@ -26,6 +26,24 @@ export default class ApplicantService {
     return applicants;
   };
 
+  static getApplicant = async (id: number) => {
+    const applicants = await prisma.applicant.findUnique({
+      where: { id },
+      include: {
+        year: true,
+        specialty: true,
+        degrees: { include: { material: true } },
+        channel: true,
+        selectedBranches: {
+          include: { branch: true },
+          orderBy: { priority: "asc" },
+        },
+        acceptedBranch: true,
+      },
+    });
+    return applicants;
+  };
+
   static searchForApplicant = async (query: string) => {
     const applicants = await prisma.applicant.findMany({
       where: { name: { search: query?.split(" ").join(" & ") } },

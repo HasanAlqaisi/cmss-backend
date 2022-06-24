@@ -4,6 +4,7 @@ import { Applicant } from "@prisma/client";
 import {
   CreatedResponse,
   DeletedResponse,
+  NotFoundResponse,
   OkResponse,
 } from "../../utils/api/api-response";
 import ApplicantService from "./service";
@@ -29,6 +30,26 @@ export const getApplicants = async (req: Request, res: Response) => {
   ]) as Applicant[];
 
   return new OkResponse(reshapedApplicants).send(res);
+};
+
+export const getApplicant = async (req: Request, res: Response) => {
+  const { id } = await generalValidator.id(req);
+
+  const idNumber = Number(id);
+
+  const applicant = await ApplicantService.getApplicant(idNumber);
+
+  if (applicant) {
+    const reshapedApplicant = reshapeData(applicant, [
+      "highSchoolYearId",
+      "specialtyId",
+      "channelId",
+    ]) as Applicant;
+
+    return new OkResponse(reshapedApplicant).send(res);
+  }
+
+  return new NotFoundResponse("Applicant not found").send(res);
 };
 
 export const createApplicant = async (req: Request, res: Response) => {
