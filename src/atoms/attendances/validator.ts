@@ -9,6 +9,7 @@ export const toggleAttendance = async (req: Request) => {
       if (typeof arg === "string" || arg instanceof Date) return new Date(arg);
       return arg;
     }, z.date().optional()),
+    note: z.string().optional(),
   });
 
   return schema.parseAsync(req.body);
