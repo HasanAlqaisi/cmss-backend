@@ -2547,7 +2547,11 @@ async function createChannels() {
 
 async function createAbsences() {
   await prisma.absence.create({
-    data: {},
+    data: {
+      firstWarning: 1,
+      secondWarning: 2,
+      thirdWarning: 3,
+    },
   });
 }
 async function seedStudents() {
