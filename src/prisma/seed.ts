@@ -2666,7 +2666,7 @@ async function seedInventory() {
     data: {
       responsibleId: 1,
       roomId: 1,
-      orderImage: `http://localhost:${process.env.PORT}/public/images/163470211225362.jpg`,
+      orderImage: `http://localhost:${process.env.PORT}/public/images/White Bordered Photo Release Form Permission Slip.png`,
       items: {
         connectOrCreate: [
           {
