@@ -51,7 +51,17 @@ export const loginPost = async (req: Request, res: Response) => {
 
   const reshapedUser = reshapeData(user, ["password", "roleId"]) as User;
 
- 
+  // Set user cookie
+  res.cookie("user", JSON.stringify(reshapedUser), {
+    path: "/",
+    httpOnly: false,
+  });
+
+  // Set access-token cookie
+  res.cookie("access-token", token, {
+    path: "/",
+    httpOnly: true,
+  });
 
   return new OkResponse({ token, user: reshapedUser }).send(res);
 };

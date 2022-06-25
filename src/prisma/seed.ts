@@ -24,8 +24,8 @@ async function createِAttendance() {
         connectOrCreate: {
           where: { id: 101 },
           create: {
-            name: "Alhassan Rifaat",
-            email: "hasan.alqaisi2000@gmail.com",
+            name: "Raghad Moaed",
+            email: "ce.18.026@student.uotechnology.edu.iq",
             Class: { connect: { id: 1 } },
             channel: { connect: { id: 1 } },
             year: { connect: { id: 1 } },
@@ -72,7 +72,7 @@ async function createِAttendance() {
           where: { id: 101 },
           create: {
             name: "Raghad Moaed",
-            email: "hasan.alqaisi2000@gmail.com",
+            email: "ce.18.026@student.uotechnology.edu.iq",
             Class: { connect: { id: 1 } },
             channel: { connect: { id: 1 } },
             year: { connect: { id: 1 } },
@@ -131,8 +131,8 @@ async function createِAttendance() {
         connectOrCreate: {
           where: { id: 101 },
           create: {
-            name: "Ali Mehasin",
-            email: "hasan.alqaisi2000@gmail.com",
+            name: "Raghad Moaed",
+            email: "ce.18.026@student.uotechnology.edu.iq",
             Class: { connect: { id: 1 } },
             channel: { connect: { id: 1 } },
             year: { connect: { id: 1 } },
