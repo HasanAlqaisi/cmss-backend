@@ -1,6 +1,5 @@
 import { Router } from "express";
 import passport from "passport";
-import faker from "@faker-js/faker";
 import usersRoutes from "./atoms/users/router";
 import rolesRoutes from "./atoms/roles/router";
 import subjectsRoutes from "./atoms/subjects/router";
@@ -29,8 +28,6 @@ import permissions from "./middlewares/permissions";
 const router = Router();
 
 router.use("/users", usersRoutes);
-
-faker.setLocale("ar");
 
 router.use(passport.authenticate("jwt", { session: false }));
 

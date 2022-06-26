@@ -2581,7 +2581,6 @@ async function seedApplicants() {
     data.push({
       name: faker.name.findName(),
       daor: 1,
-      schoolName: Math.random() > 0.5 ? faker.address.streetName() : undefined,
       examNumber: Math.random() > 0.5 ? faker.random.numeric(5) : undefined,
       channel: { connect: { id: 1 } },
       specialty: { connect: { id: 1 } },
@@ -2698,6 +2697,8 @@ async function seedInventory() {
 }
 
 const main = async () => {
+  faker.setLocale("ar");
+
   const promises = [
     createRootAccount(),
     createRoles(),
